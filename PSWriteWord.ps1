@@ -246,11 +246,12 @@ function Add-WordTableTitle ($Table, $Titles, $MaximumColumns) {
         }
     }
 }
-function Add-WordTableCellValue ($Table, $Row, $Column, $Value) {
+function Add-WordTableCellValue ($Table, $Row, $Column, $Value, $Paragraph = 0) {
     #Write-Debug "Add-CellValue: $Row $Column $Value"
     #Write-Color "Add-CellValue: $Row $Column $Value" -Color Yellow
-    $Table.Rows[$Row].Cells[$Column].Paragraphs[0].Append($Value) | Out-Null
+    $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value) | Out-Null
 }
+
 function Add-WordTable {
     param (
         $WordDocument,
@@ -258,36 +259,45 @@ function Add-WordTable {
         $Design = "ColorfulList",
         $MaximumColumns = 5
     )
-
     <# Table.Design
-Custom, TableNormal, TableGrid, LightShading, LightShadingAccent1, LightShadingAccent2, LightShadingAccent3, LightShadingAccent4, LightShadingAccent5, LightShadingAccent6, LightList, LightListAccent1
-, LightListAccent2, LightListAccent3, LightListAccent4, LightListAccent5, LightListAccent6, LightGrid, LightGridAccent1, LightGridAccent2, LightGridAccent3, LightGridAccent4, LightGridAccent5, LightG
-ridAccent6, MediumShading1, MediumShading1Accent1, MediumShading1Accent2, MediumShading1Accent3, MediumShading1Accent4, MediumShading1Accent5, MediumShading1Accent6, MediumShading2, MediumShading2Acc
-ent1, MediumShading2Accent2, MediumShading2Accent3, MediumShading2Accent4, MediumShading2Accent5, MediumShading2Accent6, MediumList1, MediumList1Accent1, MediumList1Accent2, MediumList1Accent3, Mediu
-mList1Accent4, MediumList1Accent5, MediumList1Accent6, MediumList2, MediumList2Accent1, MediumList2Accent2, MediumList2Accent3, MediumList2Accent4, MediumList2Accent5, MediumList2Accent6, MediumGrid1
-, MediumGrid1Accent1, MediumGrid1Accent2, MediumGrid1Accent3, MediumGrid1Accent4, MediumGrid1Accent5, MediumGrid1Accent6, MediumGrid2, MediumGrid2Accent1, MediumGrid2Accent2, MediumGrid2Accent3, Medi
-umGrid2Accent4, MediumGrid2Accent5, MediumGrid2Accent6, MediumGrid3, MediumGrid3Accent1, MediumGrid3Accent2, MediumGrid3Accent3, MediumGrid3Accent4, MediumGrid3Accent5, MediumGrid3Accent6, DarkList,
-DarkListAccent1, DarkListAccent2, DarkListAccent3, DarkListAccent4, DarkListAccent5, DarkListAccent6, ColorfulShading, ColorfulShadingAccent1, ColorfulShadingAccent2, ColorfulShadingAccent3, Colorful
-ShadingAccent4, ColorfulShadingAccent5, ColorfulShadingAccent6, ColorfulList, ColorfulListAccent1, ColorfulListAccent2, ColorfulListAccent3, ColorfulListAccent4, ColorfulListAccent5, ColorfulListAcce
-nt6, ColorfulGrid, ColorfulGridAccent1, ColorfulGridAccent2, ColorfulGridAccent3, ColorfulGridAccent4, ColorfulGridAccent5, ColorfulGridAccent6, None
-#>
-    $Table.Count
-    if ($Table.Count -eq $null) {
+        Custom, TableNormal, TableGrid, LightShading, LightShadingAccent1, LightShadingAccent2, LightShadingAccent3, LightShadingAccent4, LightShadingAccent5, LightShadingAccent6, LightList, LightListAccent1
+        , LightListAccent2, LightListAccent3, LightListAccent4, LightListAccent5, LightListAccent6, LightGrid, LightGridAccent1, LightGridAccent2, LightGridAccent3, LightGridAccent4, LightGridAccent5, LightG
+        ridAccent6, MediumShading1, MediumShading1Accent1, MediumShading1Accent2, MediumShading1Accent3, MediumShading1Accent4, MediumShading1Accent5, MediumShading1Accent6, MediumShading2, MediumShading2Acc
+        ent1, MediumShading2Accent2, MediumShading2Accent3, MediumShading2Accent4, MediumShading2Accent5, MediumShading2Accent6, MediumList1, MediumList1Accent1, MediumList1Accent2, MediumList1Accent3, Mediu
+        mList1Accent4, MediumList1Accent5, MediumList1Accent6, MediumList2, MediumList2Accent1, MediumList2Accent2, MediumList2Accent3, MediumList2Accent4, MediumList2Accent5, MediumList2Accent6, MediumGrid1
+        , MediumGrid1Accent1, MediumGrid1Accent2, MediumGrid1Accent3, MediumGrid1Accent4, MediumGrid1Accent5, MediumGrid1Accent6, MediumGrid2, MediumGrid2Accent1, MediumGrid2Accent2, MediumGrid2Accent3, Medi
+        umGrid2Accent4, MediumGrid2Accent5, MediumGrid2Accent6, MediumGrid3, MediumGrid3Accent1, MediumGrid3Accent2, MediumGrid3Accent3, MediumGrid3Accent4, MediumGrid3Accent5, MediumGrid3Accent6, DarkList,
+        DarkListAccent1, DarkListAccent2, DarkListAccent3, DarkListAccent4, DarkListAccent5, DarkListAccent6, ColorfulShading, ColorfulShadingAccent1, ColorfulShadingAccent2, ColorfulShadingAccent3, Colorful
+        ShadingAccent4, ColorfulShadingAccent5, ColorfulShadingAccent6, ColorfulList, ColorfulListAccent1, ColorfulListAccent2, ColorfulListAccent3, ColorfulListAccent4, ColorfulListAccent5, ColorfulListAcce
+        nt6, ColorfulGrid, ColorfulGridAccent1, ColorfulGridAccent2, ColorfulGridAccent3, ColorfulGridAccent4, ColorfulGridAccent5, ColorfulGridAccent6, None
+    #>
+    #Write-Color 'Table count: ', $Table.Count -Color White, Yellow
+    #$Table.GetType()
+    Write-Color "GetType1: ", $Table.GetType().Name -Color Yellow, White
+    $Table = $Table | Select-Object *
+    Write-Color "GetType2: ", $Table.GetType().Name -Color Yellow, White
+    if ($Table.GetType().Name -eq 'PSCustomObject') {
         $Titles = Get-ObjectTitles -Object $Table
 
-        $NumberRows = $Titles.Count
-        $NumberColumns = 3
+        $NumberRows = $Titles.Count + 1
+        $NumberColumns = 2
 
         $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
         $WordTable.Design = $Design
 
-
-        $Columns = 'Name', 'Value', 'Comment'
+        $Columns = 'Name', 'Value'
 
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
-
+        $Row = 1
         foreach ($Title in $Titles) {
-            Get-ObjectData -Object $Table -Title $Title
+            $Value = Get-ObjectData -Object $Table -Title $Title -DoNotAddTitles
+
+            $ColumnTitle = 0
+            $ColumnData = 1
+            Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnTitle -Value $Title
+            Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnData -Value $Value
+            $Row++
+            Write-Color 'Title: ', $Title, ' Value: ', $Value, ' Row: ', $Row -Color Yellow, White, Yellow, White
         }
 
     } else {
@@ -340,22 +350,21 @@ function Get-ObjectTitles($Object) {
     return $ArrayList
 }
 
-function Get-ObjectData($Object, $Title) {
+function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
     $ArrayList = New-Object System.Collections.ArrayList
     $Values = $Object.$Title
     Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', $Values.Count -Color Yellow, White, Green, White, Yellow
-    if ($Values.Count -eq 1) {
+    if ($Values.Count -eq 1 -and $DoNotAddTitles -eq $false) {
         $ArrayList.Add("$Title - $Values") | Out-Null
     } else {
-        $ArrayList.Add($Title) | Out-Null
+        if ($DoNotAddTitles -eq $false) { $ArrayList.Add($Title) | Out-Null }
         foreach ($Value in $Values) {
-            $ArrayList.Add($Value) | Out-Null
+            $ArrayList.Add("$Value") | Out-Null
         }
     }
     Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', $ArrayList.Count -Color Yellow, White, Green, White, Yellow
     return $ArrayList
 }
-
 function Add-List {
     param (
         $WordDocument,
@@ -381,6 +390,7 @@ function Add-List {
         $Titles = Get-ObjectTitles -Object $Object
         foreach ($Title in $Titles) {
             $Values = Get-ObjectData -Object $Object -Title $Title
+
             $IsFirstValue = $True
             foreach ($Value in $Values) {
                 if ($IsFirstTitle -eq $True) {
@@ -397,8 +407,9 @@ function Add-List {
                 $IsFirstValue = $false
             }
         }
+        $WordDocument.InsertList($List) | Out-Null
     }
-    $WordDocument.InsertList($List) | Out-Null
+
 
     <#
         foreach ($item in $HashData.GetEnumerator()) {
@@ -455,9 +466,15 @@ function RunMe($ADSnapshot) {
 
     ### AD Export via Table
     Add-Section -WordDocument $WordDocument -PageBreak
+    $p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
+    $p = $WordDocument.InsertParagraph("")
     Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
-    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
-    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
+    $p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
+    $p = $WordDocument.InsertParagraph("")
+    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
+    $p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
+    $p = $WordDocument.InsertParagraph("")
+    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
 
     <#
         $t = $WordDocument.InsertTable(10, 2)
@@ -474,9 +491,9 @@ function RunMe($ADSnapshot) {
     #>
 
     ### DocX Eample
-    #Add-Section -WordDocument $WordDocument -PageBreak
-    #$Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
-    #Add-WordTable -WordDocument $WordDocument -Table $Object1  #-Design "LightShading"
+    Add-Section -WordDocument $WordDocument -PageBreak
+    $Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
+    Add-WordTable -WordDocument $WordDocument -Table $Object1  #-Design "LightShading"
 
     #$Object2 = Get-PSDrive
     #Add-WordTable -WordDocument $WordDocument -Table $Object2 -Design "LightShading"
@@ -553,11 +570,9 @@ function RunMeAD() {
             UPNSuffixes
         #>
 
-        $Info | Select-Object DomainNamingMaster, Domains, ForestMode
+        $Info | Select-Object DomainNamingMaster, Domains, ForestMode, Sites
     )
-    $ADSnapshot.DomainInformation = $(Get-ADDomain
-
-    )
+    $ADSnapshot.DomainInformation = $(Get-ADDomain)
     $ADSnapshot.DomainControllers = $(Get-ADDomainController -Filter *)
     $ADSnapshot.DomainTrusts = (Get-ADTrust -Filter *)
     $ADSnapshot.DefaultPassWordPoLicy = $(Get-ADDefaultDomainPasswordPolicy)
