@@ -230,17 +230,25 @@ function Save-WordDocument ($WordDocument, $FilePath = "") {
 }
 
 function Add-WordTableTitle ($Table, $Titles, $MaximumColumns) {
-    Write-Debug "Title Count $($Title.Count) "
-    for ($a = 0; $a -lt $Title.Count; $a++) {
-        $ColumnName = $Title[$a].Name
-        Add-CellValue -Table $Table -Row 0 -Column $a -Value $ColumnName
+    #Write-Debug "Title Count $($Titles.Count) "
+    #Write-Color "Title Count $($Titles.Count) " -Color Yellow
+    for ($a = 0; $a -lt $Titles.Count; $a++) {
+        if ($Titles[$a] -is [string]) {
+            #$Titles[$a].GetType()
+            $ColumnName = $Titles[$a]
+        } else {
+            $ColumnName = $Titles[$a].Name
+        }
+        #Write-Color "Column Name: $ColumnName" -Color DarkBlue
+        Add-WordTableCellValue -Table $Table -Row 0 -Column $a -Value $ColumnName
         if ($a -eq $($MaximumColumns - 1)) {
             break;
         }
     }
 }
 function Add-WordTableCellValue ($Table, $Row, $Column, $Value) {
-    Write-Debug "Add-CellValue: $Row $Column $Value"
+    #Write-Debug "Add-CellValue: $Row $Column $Value"
+    #Write-Color "Add-CellValue: $Row $Column $Value" -Color Yellow
     $Table.Rows[$Row].Cells[$Column].Paragraphs[0].Append($Value) | Out-Null
 }
 function Add-WordTable {
@@ -263,12 +271,23 @@ DarkListAccent1, DarkListAccent2, DarkListAccent3, DarkListAccent4, DarkListAcce
 ShadingAccent4, ColorfulShadingAccent5, ColorfulShadingAccent6, ColorfulList, ColorfulListAccent1, ColorfulListAccent2, ColorfulListAccent3, ColorfulListAccent4, ColorfulListAccent5, ColorfulListAcce
 nt6, ColorfulGrid, ColorfulGridAccent1, ColorfulGridAccent2, ColorfulGridAccent3, ColorfulGridAccent4, ColorfulGridAccent5, ColorfulGridAccent6, None
 #>
-
+    $Table.Count
     if ($Table.Count -eq $null) {
         $Titles = Get-ObjectTitles -Object $Table
 
+        $NumberRows = $Titles.Count
+        $NumberColumns = 3
+
+        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        $WordTable.Design = $Design
+
+
+        $Columns = 'Name', 'Value', 'Comment'
+
+        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+
         foreach ($Title in $Titles) {
-            Get-ObjectData -Object $Object $Table -Title $Title
+            Get-ObjectData -Object $Table -Title $Title
         }
 
     } else {
@@ -281,15 +300,15 @@ nt6, ColorfulGrid, ColorfulGridAccent1, ColorfulGridAccent2, ColorfulGridAccent3
         Write-Debug "Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        $Table = $WordDocument.InsertTable($NumberRows, $NumberColumns)
-        $Table.Design = $Design
+        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        $WordTable.Design = $Design
 
-        Add-WordTableTitle -Title $Columns -Table $Table -MaximumColumns $MaximumColumns
+        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
 
         for ($b = 1; $b -lt $NumberRows; $b++) {
             $a = 0
             foreach ($Title in $Columns.Name) {
-                Add-WordTableCellValue -Table $Table -Row $b -Column $a -Value $Table[$b].$Title
+                Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
 
@@ -324,7 +343,7 @@ function Get-ObjectTitles($Object) {
 function Get-ObjectData($Object, $Title) {
     $ArrayList = New-Object System.Collections.ArrayList
     $Values = $Object.$Title
-    #Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', $Values.Count -Color Yellow, White, Green, White, Yellow
+    Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', $Values.Count -Color Yellow, White, Green, White, Yellow
     if ($Values.Count -eq 1) {
         $ArrayList.Add("$Title - $Values") | Out-Null
     } else {
@@ -333,7 +352,7 @@ function Get-ObjectData($Object, $Title) {
             $ArrayList.Add($Value) | Out-Null
         }
     }
-    #Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', $ArrayList.Count -Color Yellow, White, Green, White, Yellow
+    Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', $ArrayList.Count -Color Yellow, White, Green, White, Yellow
     return $ArrayList
 }
 
@@ -424,19 +443,19 @@ function RunMe($ADSnapshot) {
 
 
     ### AD Export via Bulleted
-    Add-Section -WordDocument $WordDocument -PageBreak
-    $ListType = 'Bulleted' #'Numbered' #
-    $p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
-    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.RootDSE
-    $p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
-    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.ForestInformation
-    $p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
-    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
+    #Add-Section -WordDocument $WordDocument -PageBreak
+    #$ListType = 'Bulleted' #'Numbered' #
+    #$p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
+    #Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.RootDSE
+    #$p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
+    #Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.ForestInformation
+    #$p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
+    #Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
 
 
     ### AD Export via Table
     Add-Section -WordDocument $WordDocument -PageBreak
-    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
+    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
     #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
     #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
 
