@@ -265,8 +265,11 @@ nt6, ColorfulGrid, ColorfulGridAccent1, ColorfulGridAccent2, ColorfulGridAccent3
 #>
 
     if ($Table.Count -eq $null) {
-        $Titles = Get-HashTitles -Hash $Table
-        $Titles
+        $Titles = Get-ObjectTitles -Object $Table
+
+        foreach ($Title in $Titles) {
+            Get-ObjectData -Object $Object $Table -Title $Title
+        }
 
     } else {
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
@@ -423,21 +426,19 @@ function RunMe($ADSnapshot) {
     ### AD Export via Bulleted
     Add-Section -WordDocument $WordDocument -PageBreak
     $ListType = 'Bulleted' #'Numbered' #
-
+    $p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
     Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.RootDSE
-    $p = $WordDocument.InsertParagraph("This is another text").FontSize(15)
+    $p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
     Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.ForestInformation
-    $p = $WordDocument.InsertParagraph("This is another text").FontSize(15)
+    $p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
     Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
 
 
-
-
     ### AD Export via Table
-    #Add-Section -WordDocument $WordDocument -PageBreak
+    Add-Section -WordDocument $WordDocument -PageBreak
     #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
-
-
+    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
+    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
 
     <#
         $t = $WordDocument.InsertTable(10, 2)
