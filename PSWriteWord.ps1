@@ -171,6 +171,112 @@ Add-WordPicture
 
 #>
 
+
+Enum TableDesign {
+    Custom
+    TableNormal
+    TableGrid
+    LightShading
+    LightShadingAccent1
+    LightShadingAccent2
+    LightShadingAccent3
+    LightShadingAccent4
+    LightShadingAccent5
+    LightShadingAccent6
+    LightList
+    LightListAccent1
+    LightListAccent2
+    LightListAccent3
+    LightListAccent4
+    LightListAccent5
+    LightListAccent6
+    LightGrid
+    LightGridAccent1
+    LightGridAccent2
+    LightGridAccent3
+    LightGridAccent4
+    LightGridAccent5
+    LightGridAccent6
+    MediumShading1
+    MediumShading1Accent1
+    MediumShading1Accent2
+    MediumShading1Accent3
+    MediumShading1Accent4
+    MediumShading1Accent5
+    MediumShading1Accent6
+    MediumShading2
+    MediumShading2Accent1
+    MediumShading2Accent2
+    MediumShading2Accent3
+    MediumShading2Accent4
+    MediumShading2Accent5
+    MediumShading2Accent6
+    MediumList1
+    MediumList1Accent1
+    MediumList1Accent2
+    MediumList1Accent3
+    MediumList1Accent4
+    MediumList1Accent5
+    MediumList1Accent6
+    MediumList2
+    MediumList2Accent1
+    MediumList2Accent2
+    MediumList2Accent3
+    MediumList2Accent4
+    MediumList2Accent5
+    MediumList2Accent6
+    MediumGrid1
+    MediumGrid1Accent1
+    MediumGrid1Accent2
+    MediumGrid1Accent3
+    MediumGrid1Accent4
+    MediumGrid1Accent5
+    MediumGrid1Accent6
+    MediumGrid2
+    MediumGrid2Accent1
+    MediumGrid2Accent2
+    MediumGrid2Accent3
+    MediumGrid2Accent4
+    MediumGrid2Accent5
+    MediumGrid2Accent6
+    MediumGrid3
+    MediumGrid3Accent1
+    MediumGrid3Accent2
+    MediumGrid3Accent3
+    MediumGrid3Accent4
+    MediumGrid3Accent5
+    MediumGrid3Accent6
+    DarkList
+    DarkListAccent1
+    DarkListAccent2
+    DarkListAccent3
+    DarkListAccent4
+    DarkListAccent5
+    DarkListAccent6
+    ColorfulShading
+    ColorfulShadingAccent1
+    ColorfulShadingAccent2
+    ColorfulShadingAccent3
+    ColorfulShadingAccent4
+    ColorfulShadingAccent5
+    ColorfulShadingAccent6
+    ColorfulList
+    ColorfulListAccent1
+    ColorfulListAccent2
+    ColorfulListAccent3
+    ColorfulListAccent4
+    ColorfulListAccent5
+    ColorfulListAccent6
+    ColorfulGrid
+    ColorfulGridAccent1
+    ColorfulGridAccent2
+    ColorfulGridAccent3
+    ColorfulGridAccent4
+    ColorfulGridAccent5
+    ColorfulGridAccent6
+    None
+}
+Set-StrictMode -Version Latest
 Clear-Host
 $VerbosePreference = "SilentlyContinue"
 $DebugPreference = "SilentlyContinue"
@@ -251,7 +357,6 @@ function Add-WordTableCellValue ($Table, $Row, $Column, $Value, $Paragraph = 0) 
     #Write-Color "Add-CellValue: $Row $Column $Value" -Color Yellow
     $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value) | Out-Null
 }
-
 function Add-WordTable {
     param (
         $WordDocument,
@@ -259,18 +364,6 @@ function Add-WordTable {
         $Design = "ColorfulList",
         $MaximumColumns = 5
     )
-    <# Table.Design
-        Custom, TableNormal, TableGrid, LightShading, LightShadingAccent1, LightShadingAccent2, LightShadingAccent3, LightShadingAccent4, LightShadingAccent5, LightShadingAccent6, LightList, LightListAccent1
-        , LightListAccent2, LightListAccent3, LightListAccent4, LightListAccent5, LightListAccent6, LightGrid, LightGridAccent1, LightGridAccent2, LightGridAccent3, LightGridAccent4, LightGridAccent5, LightG
-        ridAccent6, MediumShading1, MediumShading1Accent1, MediumShading1Accent2, MediumShading1Accent3, MediumShading1Accent4, MediumShading1Accent5, MediumShading1Accent6, MediumShading2, MediumShading2Acc
-        ent1, MediumShading2Accent2, MediumShading2Accent3, MediumShading2Accent4, MediumShading2Accent5, MediumShading2Accent6, MediumList1, MediumList1Accent1, MediumList1Accent2, MediumList1Accent3, Mediu
-        mList1Accent4, MediumList1Accent5, MediumList1Accent6, MediumList2, MediumList2Accent1, MediumList2Accent2, MediumList2Accent3, MediumList2Accent4, MediumList2Accent5, MediumList2Accent6, MediumGrid1
-        , MediumGrid1Accent1, MediumGrid1Accent2, MediumGrid1Accent3, MediumGrid1Accent4, MediumGrid1Accent5, MediumGrid1Accent6, MediumGrid2, MediumGrid2Accent1, MediumGrid2Accent2, MediumGrid2Accent3, Medi
-        umGrid2Accent4, MediumGrid2Accent5, MediumGrid2Accent6, MediumGrid3, MediumGrid3Accent1, MediumGrid3Accent2, MediumGrid3Accent3, MediumGrid3Accent4, MediumGrid3Accent5, MediumGrid3Accent6, DarkList,
-        DarkListAccent1, DarkListAccent2, DarkListAccent3, DarkListAccent4, DarkListAccent5, DarkListAccent6, ColorfulShading, ColorfulShadingAccent1, ColorfulShadingAccent2, ColorfulShadingAccent3, Colorful
-        ShadingAccent4, ColorfulShadingAccent5, ColorfulShadingAccent6, ColorfulList, ColorfulListAccent1, ColorfulListAccent2, ColorfulListAccent3, ColorfulListAccent4, ColorfulListAccent5, ColorfulListAcce
-        nt6, ColorfulGrid, ColorfulGridAccent1, ColorfulGridAccent2, ColorfulGridAccent3, ColorfulGridAccent4, ColorfulGridAccent5, ColorfulGridAccent6, None
-    #>
     #Write-Color 'Table count: ', $Table.Count -Color White, Yellow
     #$Table.GetType()
     Write-Color "GetType1: ", $Table.GetType().Name -Color Yellow, White
@@ -328,6 +421,117 @@ function Add-WordTable {
 }
 function Add-Paragraph($WordDocument) {
 
+    <#
+       public static void SimpleFormattedParagraphs()
+    {
+      Console.WriteLine( "\tSimpleFormattedParagraphs()" );
+
+      // Create a new document.
+      using( DocX document = DocX.Create( ParagraphSample.ParagraphSampleOutputDirectory + @"SimpleFormattedParagraphs.docx" ) )
+      {
+        // Add a title
+        document.InsertParagraph( "Formatted paragraphs" ).FontSize( 15d ).SpacingAfter( 50d ).Alignment = Alignment.center;
+
+        // Insert a Paragraph into this document.
+        var p = document.InsertParagraph();
+
+        // Append some text and add formatting.
+        p.Append( "This is a simple formatted red bold paragraph" )
+        .Font( new Font( "Arial" ) )
+        .FontSize( 25 )
+        .Color( Color.Red )
+        .Bold()
+        .Append( " containing a blue italic text." ).Font( new Font( "Times New Roman" ) ).Color( Color.Blue ).Italic()
+        .SpacingAfter( 40 );
+
+        // Insert another Paragraph into this document.
+        var p2 = document.InsertParagraph();
+
+        // Append some text and add formatting.
+        p2.Append( "This is a formatted paragraph using spacing," )
+        .Font( new Font( "Courier New" ) )
+        .FontSize( 10 )
+        .Italic()
+        .Spacing( 5 )
+        .Append( "highlight" ).Highlight( Highlight.yellow ).UnderlineColor( Color.Blue ).CapsStyle( CapsStyle.caps )
+        .Append( " and strike through." ).StrikeThrough( StrikeThrough.strike );
+
+        // Save this document to disk.
+        document.Save();
+        Console.WriteLine( "\tCreated: SimpleFormattedParagraphs.docx\n" );
+      }
+    }
+
+    /// <summary>
+    /// Create a document and add a paragraph with all its lines on a single page.
+    /// </summary>
+    public static void ForceParagraphOnSinglePage()
+    {
+      Console.WriteLine( "\tForceParagraphOnSinglePage()" );
+
+      // Create a new document.
+      using( DocX document = DocX.Create( ParagraphSample.ParagraphSampleOutputDirectory + @"ForceParagraphOnSinglePage.docx" ) )
+      {
+        // Add a title
+        document.InsertParagraph( "Prevent paragraph split" ).FontSize( 15d ).SpacingAfter( 50d ).Alignment = Alignment.center;
+
+        // Create a Paragraph that will appear on 1st page.
+        var p = document.InsertParagraph( "This is a paragraph on first page.\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10\nLine11\nLine12\nLine13\nLine14\nLine15\nLine16\nLine17\nLine18\nLine19\nLine20\nLine21\nLine22\nLine23\nLine24\nLine25\n" );
+        p.FontSize(15).SpacingAfter( 30 );
+
+        // Create a Paragraph where all its lines will appear on a same page.
+        var p2 = document.InsertParagraph( "This is a paragraph where all its lines are on the same page. The paragraph does not split on 2 pages.\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10" );
+        p2.SpacingAfter( 30 );
+
+        // Indicate that all the paragraph's lines will be on the same page
+        p2.KeepLinesTogether();
+
+        // Create a Paragraph that will appear on 2nd page.
+        var p3 = document.InsertParagraph( "This is a paragraph on second page.\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10" );
+
+        // Save this document to disk.
+        document.Save();
+        Console.WriteLine( "\tCreated: ForceParagraphOnSinglePage.docx\n" );
+      }
+    }
+
+    /// <summary>
+    /// Create a document and add a paragraph with all its lines on the same page as the next paragraph.
+    /// </summary>
+    public static void ForceMultiParagraphsOnSinglePage()
+    {
+      Console.WriteLine( "\tForceMultiParagraphsOnSinglePage()" );
+
+      // Create a new document.
+      using( DocX document = DocX.Create( ParagraphSample.ParagraphSampleOutputDirectory + @"ForceMultiParagraphsOnSinglePage.docx" ) )
+      {
+        // Add a title.
+        document.InsertParagraph( "Keeps Paragraphs on same page" ).FontSize( 15d ).SpacingAfter( 50d ).Alignment = Alignment.center;
+
+        // Create a Paragraph that will appear on 1st page.
+        var p = document.InsertParagraph( "This is a paragraph on first page.\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10\nLine11\nLine12\nLine13\nLine14\nLine15\nLine16\nLine17\nLine18\nLine19\nLine20\nLine21\nLine22\n" );
+        p.FontSize( 15 ).SpacingAfter( 30 );
+
+        // Create a Paragraph where all its lines will appear on a same page as the next paragraph.
+        var p2 = document.InsertParagraph( "This is a paragraph where all its lines are on the same page as the next paragraph.\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10" );
+        p2.SpacingAfter( 30 );
+
+        // Indicate that this paragraph will be on the same page as the next paragraph.
+        p2.KeepWithNextParagraph();
+
+        // Create a Paragraph that will appear on 2nd page.
+        var p3 = document.InsertParagraph( "This is a paragraph on second page.\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10" );
+
+        // Indicate that all this paragraph's lines will be on the same page.
+        p3.KeepLinesTogether();
+
+        // Save this document to disk.
+        document.Save();
+        Console.WriteLine( "\tCreated: ForceMultiParagraphsOnSinglePage.docx\n" );
+      }
+    }
+    #>
+
 }
 function Add-Section {
     param (
@@ -340,7 +544,6 @@ function Add-Section {
         $WordDocument.InsertSection()
     }
 }
-
 function Get-ObjectTitles($Object) {
     $ArrayList = New-Object System.Collections.ArrayList
     $Titles = $Object | Get-Member | Where-Object { $_.MemberType -eq 'Property' -or $_.MemberType -eq 'NoteProperty' }
@@ -349,11 +552,12 @@ function Get-ObjectTitles($Object) {
     }
     return $ArrayList
 }
-
 function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
     $ArrayList = New-Object System.Collections.ArrayList
     $Values = $Object.$Title
-    Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', $Values.Count -Color Yellow, White, Green, White, Yellow
+
+    # $values
+    #Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', $Values.Count -Color Yellow, White, Green, White, Yellow
     if ($Values.Count -eq 1 -and $DoNotAddTitles -eq $false) {
         $ArrayList.Add("$Title - $Values") | Out-Null
     } else {
@@ -362,7 +566,7 @@ function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
             $ArrayList.Add("$Value") | Out-Null
         }
     }
-    Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', $ArrayList.Count -Color Yellow, White, Green, White, Yellow
+    #Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', $ArrayList.Count -Color Yellow, White, Green, White, Yellow
     return $ArrayList
 }
 function Add-List {
@@ -386,11 +590,12 @@ function Add-List {
         }
     }
     if ($Object -ne $null) {
+
         $IsFirstTitle = $True
         $Titles = Get-ObjectTitles -Object $Object
         foreach ($Title in $Titles) {
             $Values = Get-ObjectData -Object $Object -Title $Title
-
+            $Values
             $IsFirstValue = $True
             foreach ($Value in $Values) {
                 if ($IsFirstTitle -eq $True) {
@@ -427,6 +632,37 @@ function Add-List {
           $WordDocument.InsertList($List) | Out-Null
           #>
 }
+function RunMeLoad($FilePath = "C:\Users\pklys\Desktop\File1.docx") {
+    $Word = [Xceed.Words.NET.DocX]
+    $WordOutput = $Word::Load($FilePath)
+    foreach ($p in   $WordOutput.Paragraphs) {
+        Write-COlor "Paragraph " -Color Yellow
+        $p
+    }
+
+
+
+    #$WordOutput.Text.FontSize
+    #$WordOutput.Alignment
+    #$WordOutput.Tables
+}
+
+function Get-ParagraphForList($ListID) {
+    $IDs = @()
+    foreach ($p in $WordDocument.Paragraphs) {
+        #Write-Color "testtting " -Color Yellow
+        if ($p.ParagraphNumberProperties -ne $null) {
+            $ListNumber = $p.ParagraphNumberProperties.LastNode.LastAttribute.Value
+            if ($ListNumber -eq $ListID) {
+                $IDs += $p
+            }
+        }
+        #
+
+        #$p.StyleName = 'Heading1'
+    }
+    return $Ids
+}
 
 function RunMe($ADSnapshot) {
     # Install-Module -Name ISEScriptingGeek -Force -Verbose -AllowClobber
@@ -436,11 +672,12 @@ function RunMe($ADSnapshot) {
     $WordDocument = New-WordDocument -FilePath $WordDocumentPath
 
 
-    #$WordDocument.InsertTableOfContents("Teams", 0);
+    $toc = $WordDocument.InsertTableOfContents("Table of content", 1)
+    #$toc
 
 
-    $p = $WordDocument.InsertParagraph("This is my text")
-    $p = $WordDocument.InsertParagraph("This is another text").FontSize(15)
+    # $p = $WordDocument.InsertParagraph("This is my text")
+    # $p = $WordDocument.InsertParagraph("This is another text").FontSize(15)
 
 
 
@@ -455,7 +692,7 @@ function RunMe($ADSnapshot) {
 
     ### AD Export via Bulleted
     #Add-Section -WordDocument $WordDocument -PageBreak
-    #$ListType = 'Bulleted' #'Numbered' #
+    $ListType = 'Bulleted' #'Numbered' #
     #$p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
     #Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.RootDSE
     #$p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
@@ -463,18 +700,74 @@ function RunMe($ADSnapshot) {
     #$p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
     #Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
 
+    #$p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
+    #$p1 = $WordDocument.InsertParagraph('1. This is text')
+    #$p1.StyleName = "Heading1"
+    #$p1.Alignment = "left"
+    #$p1.ListItemType = 'Numbered'
+
+    #$p2 = $WordDocument.InsertParagraph()
+    #$p2.StyleName = "Heading1"
+    #$p2.AddItem
+
+    $numberList = $WordDocument.AddList("Test", 0, 'Numbered' )
+    $WordDocument.AddListItem($numberList, 'Test2');
+
+    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
+
+    $WordDocument.AddListItem($numberList, 'Test3');
+
+    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
+
+
+    $heading1 = $WordDocument.InsertList($numberList)
+    $Paragraphs = Get-ParagraphForList $heading1.NumID
+    foreach ($p in $Paragraphs) {
+        $p.StyleName = 'Heading1'
+    }
+
+    #$numberList1 = $WordDocument.AddList("Test1", 0, 'Numbered' )
+    #$heading2 = $WordDocument.InsertList($numberList1)
+    #$heading2.NumID
+
+    # $heading
+    # $numberList
+    #  $p3 = $WordDocument.InsertParagraph(0, "test", $true)
+    #$p3
+
+    #$WordDocument.Paragraphs
+
+
+    # Paragraph InsertParagraph()
+    # Paragraph InsertParagraph( int index, string text, bool trackChanges )
+    # Paragraph InsertParagraph( Paragraph p )
+    # Paragraph InsertParagraph( int index, Paragraph p )
+    # Paragraph InsertParagraph( int index, string text, bool trackChanges, Formatting formatting )
+    # Paragraph InsertParagraph( string text )
+    # Paragraph InsertParagraph( string text, bool trackChanges )
+    # Paragraph InsertParagraph( string text, bool trackChanges, Formatting formatting )
+
+    #$t1 = $WordDocument.AddItem()
+    #$t1
+    #$t1.StyleName = 'Heading1'
+    #$t1.InsertParagraph("Test")
+
+
+    #.Heading("Heading2")
+    #$p.Heading = 'Heading1'
 
     ### AD Export via Table
-    Add-Section -WordDocument $WordDocument -PageBreak
-    $p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
-    $p = $WordDocument.InsertParagraph("")
-    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
-    $p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
-    $p = $WordDocument.InsertParagraph("")
-    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
-    $p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
-    $p = $WordDocument.InsertParagraph("")
-    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
+
+    #Add-Section -WordDocument $WordDocument -PageBreak
+    ##$p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
+    #$p = $WordDocument.InsertParagraph("")
+    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
+    #$p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
+    #$p = $WordDocument.InsertParagraph("")
+    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
+    #$p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
+    #$p = $WordDocument.InsertParagraph("")
+    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
 
     <#
         $t = $WordDocument.InsertTable(10, 2)
@@ -491,9 +784,9 @@ function RunMe($ADSnapshot) {
     #>
 
     ### DocX Eample
-    Add-Section -WordDocument $WordDocument -PageBreak
-    $Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
-    Add-WordTable -WordDocument $WordDocument -Table $Object1  #-Design "LightShading"
+    #Add-Section -WordDocument $WordDocument -PageBreak
+    #$Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
+    #Add-WordTable -WordDocument $WordDocument -Table $Object1  #-Design "LightShading"
 
     #$Object2 = Get-PSDrive
     #Add-WordTable -WordDocument $WordDocument -Table $Object2 -Design "LightShading"
@@ -596,8 +889,10 @@ function RunMeAD() {
 
 
 $ADSnapshot = RunMeAD
-
 RunMe -ADSnapshot $ADSnapshot
+$ADSnapshot.RootDSE
+
+#RunMeLoad
 
 #$ADSnapshot.RootDSE
 #$ADSnapshot.ForestInformation #| Where { $_.Key -ne 'CrossForestReferences' }
