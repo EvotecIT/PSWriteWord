@@ -555,10 +555,8 @@ function Get-ObjectTitles($Object) {
 function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
     $ArrayList = New-Object System.Collections.ArrayList
     $Values = $Object.$Title
-
-    # $values
-    #Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', $Values.Count -Color Yellow, White, Green, White, Yellow
-    if ($Values.Count -eq 1 -and $DoNotAddTitles -eq $false) {
+    Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', (Get-ObjectCount $Values) -Color Yellow, White, Green, White, Yellow
+    if ((Get-ObjectCount $values) -eq 1 -and $DoNotAddTitles -eq $false) {
         $ArrayList.Add("$Title - $Values") | Out-Null
     } else {
         if ($DoNotAddTitles -eq $false) { $ArrayList.Add($Title) | Out-Null }
@@ -566,8 +564,11 @@ function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
             $ArrayList.Add("$Value") | Out-Null
         }
     }
-    #Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', $ArrayList.Count -Color Yellow, White, Green, White, Yellow
+    Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', (Get-ObjectCount $ArrayList) -Color Yellow, White, Green, White, Yellow
     return $ArrayList
+}
+function Get-ObjectCount($Object) {
+    return $($Object | Measure-Object).Count
 }
 function Add-List {
     param (
@@ -595,7 +596,7 @@ function Add-List {
         $Titles = Get-ObjectTitles -Object $Object
         foreach ($Title in $Titles) {
             $Values = Get-ObjectData -Object $Object -Title $Title
-            $Values
+            #$Values
             $IsFirstValue = $True
             foreach ($Value in $Values) {
                 if ($IsFirstTitle -eq $True) {
@@ -710,17 +711,28 @@ function RunMe($ADSnapshot) {
     #$p2.StyleName = "Heading1"
     #$p2.AddItem
 
-    $numberList = $WordDocument.AddList("Test", 0, 'Numbered' )
-    $WordDocument.AddListItem($numberList, 'Test2');
+    $numberList = $WordDocument.AddList("Test1", 0, 'Numbered' )
+    $heading1 = $WordDocument.InsertList($numberList)
 
-    #Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
-
-    $WordDocument.AddListItem($numberList, 'Test3');
-
-    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
+    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.ForestInformation
 
 
     $heading1 = $WordDocument.InsertList($numberList)
+    $WordDocument.AddListItem($numberList, 'Test2');
+
+    Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
+
+    $heading1 = $WordDocument.InsertList($numberList)
+    $WordDocument.AddListItem($numberList, 'Test3');
+
+    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.RootDSE
+
+    $heading1 = $WordDocument.InsertList($numberList)
+    $WordDocument.AddListItem($numberList, 'Test4');
+
+    Add-List -WordDocument $WordDocument -ListType $ListType -Object $ADSnapshot.DomainInformation
+
+    #$heading1 = $WordDocument.InsertList($numberList)
     $Paragraphs = Get-ParagraphForList $heading1.NumID
     foreach ($p in $Paragraphs) {
         $p.StyleName = 'Heading1'
