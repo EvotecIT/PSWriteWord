@@ -13,7 +13,8 @@ $ADSnapshot.RootDSE = $(
     forestFunctionality, supportedLDAPPolicies, subschemaSubentry, supportedLDAPVersion, supportedSASLMechanisms
 )
 $ADSnapshot.ForestInformation = $(
-    $Info = Get-ADForest | Select-Object DomainNamingMaster, Domains, ForestMode, Sites
+    Get-ADForest | Select-Object DomainNamingMaster, Domains, ForestMode, Sites
+
 )
 $ADSnapshot.DomainInformation = $(Get-ADDomain)
 # Get basic Ad information end
@@ -25,14 +26,14 @@ $WordDocument = New-WordDocument $FilePath
 Add-Section -WordDocument $WordDocument -PageBreak
 $p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
 $p = $WordDocument.InsertParagraph("")
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design "LightShading"
+Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design LightShading -Verbose
 Add-Section -WordDocument $WordDocument -PageBreak
 $p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
 $p = $WordDocument.InsertParagraph("")
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design "LightShading"
+Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design LightShading -Verbose
 Add-Section -WordDocument $WordDocument -PageBreak
 $p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
 $p = $WordDocument.InsertParagraph("")
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design "LightShading"
+Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design LightShading -Verbose
 
 Save-WordDocument $WordDocument

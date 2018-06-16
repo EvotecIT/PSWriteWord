@@ -1,6 +1,7 @@
 Import-Module PSWriteWord -Force
 
-$FilePath = "C:\Users\pklys\Desktop\File1.docx"
+### Before running this script make sure to run Example-CreateWord first
+$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord.docx"
 
 $WordDocument = Get-WordDocument -FilePath $FilePath
 $WordDocument.Paragraphs
