@@ -1,0 +1,4 @@
+enum ListItemType {
+    Bulleted
+    Numbered
+}

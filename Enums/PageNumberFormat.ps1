@@ -1,0 +1,4 @@
+enum PageNumberFormat {
+    normal
+    roman
+}
