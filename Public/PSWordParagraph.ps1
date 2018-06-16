@@ -1,0 +1,8 @@
+# Paragraph InsertParagraph()
+# Paragraph InsertParagraph( int index, string text, bool trackChanges )
+# Paragraph InsertParagraph( Paragraph p )
+# Paragraph InsertParagraph( int index, Paragraph p )
+# Paragraph InsertParagraph( int index, string text, bool trackChanges, Formatting formatting )
+# Paragraph InsertParagraph( string text )
+# Paragraph InsertParagraph( string text, bool trackChanges )
+# Paragraph InsertParagraph( string text, bool trackChanges, Formatting formatting )
