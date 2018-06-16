@@ -4,8 +4,7 @@
 /// source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellborders.aspx
 /// </summary>
 #>
-public enum TableCellBorderType
-{
+enum TableCellBorderType {
     Top
     Bottom
     Left

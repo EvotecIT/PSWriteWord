@@ -1,0 +1,5 @@
+
+enum Direction {
+    LeftToRight
+    RightToLeft
+};

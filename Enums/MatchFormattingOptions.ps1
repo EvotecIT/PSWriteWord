@@ -1,0 +1,4 @@
+enum MatchFormattingOptions {
+    ExactMatch
+    SubsetMatch
+}

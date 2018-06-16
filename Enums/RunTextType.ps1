@@ -1,0 +1,5 @@
+
+enum RunTextType {
+    Text
+    DelText
+}

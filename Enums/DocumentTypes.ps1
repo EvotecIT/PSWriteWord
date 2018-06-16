@@ -1,0 +1,5 @@
+
+enum DocumentTypes {
+    Document
+    Template
+}
