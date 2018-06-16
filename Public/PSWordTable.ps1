@@ -24,8 +24,8 @@ function Add-WordTable {
     param (
         $WordDocument,
         $Table,
-        $Design = "ColorfulList",
-        $MaximumColumns = 5
+        $Design = 'ColorfulList',
+        [int] $MaximumColumns = 5
     )
     #Write-Color 'Table count: ', $Table.Count -Color White, Yellow
     #$Table.GetType()
