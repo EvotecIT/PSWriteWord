@@ -79,7 +79,7 @@ function Add-WordText {
             $p = $p.StrikeThrough($StrikeThrough[$i])
         }
         if ($HeadingType[$i] -ne $null) {
-            $p = $p.HeadingType($HeadingType[$i])
+            $p = $p.StyleName = $HeadingType[$i]
         }
     }
 
