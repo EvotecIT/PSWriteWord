@@ -2,7 +2,7 @@ Import-Module PSWriteWord -Force
 Clear-Host
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-TableOfContent4.docx"
 $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
-$ListOfHeaders = @('This is 1st section', 'This is 2nd section', 'This is 3rd section')
+$ListOfHeaders = @('This is 1st section', 'This is 2nd section', 'This is 3rd section', 'This is 4th section', 'This is 5th section')
 
 $WordDocument = New-WordDocument -FilePath $FilePath
 $toc = $WordDocument.InsertTableOfContents("Table of content", 1)
@@ -24,7 +24,7 @@ $paragraph2 = Add-WordText -WordDocument $WordDocument `
 $paragraph2 = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph2 -Text 'This will continue getting added to that section... of course colored as red' -Color Red -Supress $false
 $paragraph2 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Paragraph2 `
-    -Text 'You need to use', 'Supress ', '$false', 'to get paragraph values...', '' `
+    -Text 'You need to use', ' Supress ', '$false ', 'to get paragraph values...', '' `
     -Color Black, Green, Red, Black -Supress $false
 $paragraph2 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Paragraph2 `
@@ -32,4 +32,11 @@ $paragraph2 = Add-WordText -WordDocument $WordDocument `
     -Color Black, Green, Red `
     -Supress $false # important...
 
+$paragraph4 = Add-WordText -WordDocument $WordDocument `
+    -Paragraph $Headings[4] -Text 'This is a text that will be added to ', ' 4th ', 'section' `
+    -Color Black, Red, Black -Supress $false
+
+$paragraph1 = Add-WordText -WordDocument $WordDocument `
+    -Paragraph $Headings[1] -Text 'This is a text that will be added to ', ' 1st ', 'section' `
+    -Color Black, Red, Black -Supress $false
 Save-WordDocument $WordDocument
