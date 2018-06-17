@@ -39,4 +39,5 @@ $paragraph4 = Add-WordText -WordDocument $WordDocument `
 $paragraph1 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Headings[1] -Text 'This is a text that will be added to ', ' 1st ', 'section' `
     -Color Black, Red, Black -Supress $false
+
 Save-WordDocument $WordDocument
