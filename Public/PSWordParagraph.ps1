@@ -25,22 +25,18 @@ function Add-WordText {
         [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
         [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
         [alias ("HT")] [HeadingType[]] $HeadingType = @(),
-        #  [int] $StartTab = 0,
-        #  [int] $LinesBefore = 0,
-        #  [int] $LinesAfter = 0,
-        #  [alias ("L")] [string] $LogFile = "",
-        [string] $TimeFormat = "yyyy-MM-dd HH:mm:ss",
-        [switch] $ShowTime,
-        [switch] $NoNewLine,
+        [bool[]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph
     )
-    #$WordDocument.GetType()
     $p = $WordDocument.InsertParagraph()
     for ($i = 0; $i -lt $Text.Length; $i++) {
-        # Write-Host $Text[$i] -ForegroundColor $Color[$i] -NoNewLine
-        $p = $p.Append($Text[$i])
-
+        if ($NewLine[$i] -ne $null -and $NewLine[$i] -eq $true) {
+            if ($i -gt 0) { $p = $WordDocument.InsertParagraph() }
+            $p = $p.Append($Text[$i])
+        } else {
+            $p = $p.Append($Text[$i])
+        }
         if ($Color[$i] -ne $null) {
             $p = $p.Color($Color[$i])
         }
@@ -48,7 +44,7 @@ function Add-WordText {
             $p = $p.FontSize($FontSize[$i])
         }
         if ($FontName[$i] -ne $null) {
-            $p = $p.FontName($FontSize[$i])
+            $p = $p.Font($FontName[$i])
         }
         if ($Bold[$i] -ne $null -and $Bold[$i] -eq $true) {
             $p = $p.Bold()
@@ -56,9 +52,35 @@ function Add-WordText {
         if ($Italic[$i] -ne $null -and $Italic[$i] -eq $true) {
             $p = $p.Italic()
         }
-
-
+        if ($UnderlineStyle[$i] -ne $null) {
+            $p = $p.UnderlineStyle($UnderlineStyle[$i])
+        }
+        if ($SpacingAfter[$i] -ne $null) {
+            $p = $p.SpacingAfter($SpacingAfter[$i])
+        }
+        if ($SpacingBefore[$i] -ne $null) {
+            $p = $p.SpacingBefore($SpacingBefore[$i])
+        }
+        if ($SpacingBefore[$i] -ne $null) {
+            $p = $p.SpacingBefore($SpacingBefore[$i])
+        }
+        if ($Spacing[$i] -ne $null) {
+            $p = $p.Spacing($Spacing[$i])
+        }
+        if ($Highlight[$i] -ne $null) {
+            $p = $p.Highlight($Highlight[$i])
+        }
+        if ($CapsStyle[$i] -ne $null) {
+            $p = $p.CapsStyle($CapsStyle[$i])
+        }
+        if ($StrikeThrough[$i] -ne $null) {
+            $p = $p.StrikeThrough($StrikeThrough[$i])
+        }
+        if ($HeadingType[$i] -ne $null) {
+            $p = $p.HeadingType($HeadingType[$i])
+        }
     }
+
 
 
     #$DefaultColor = $Color[0]
