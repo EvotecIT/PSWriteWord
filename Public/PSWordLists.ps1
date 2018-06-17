@@ -1,7 +1,7 @@
 function Add-List {
     param (
         $WordDocument,
-        [ValidateSet('Numbered', 'Bulleted')] $ListType,
+        [ListItemType]$ListType,
         [string[]] $ListData = $null,
         $Object = $null
     )

@@ -1,6 +1,6 @@
 Import-Module PSWriteWord -Force
 
-$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord.docx"
+$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord1.docx"
 
 $WordDocument = New-WordDocument $FilePath
 $WordDocument.InsertParagraph("This is a text").FontSize("10") | Out-Null
