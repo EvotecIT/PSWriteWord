@@ -4,7 +4,8 @@ function Add-List {
         [Xceed.Words.NET.Container] $WordDocument,
         [ListItemType]$ListType,
         [string[]] $ListData = $null,
-        $Object = $null
+        $Object = $null,
+        $Supress = $true
     )
     $LevelPrimary = 0
     $LevelSecondary = 1
@@ -14,9 +15,9 @@ function Add-List {
         If ($ListCount -gt 0) {
             $List = $WordDocument.AddList($ListData[0], 0, $ListType)
             for ($i = 1; $i -lt $ListData.Count; $i++ ) {
-                $WordDocument.AddListItem($List, $ListData[$i]) | Out-Null
+                $WordDocument.AddListItem($List, $ListData[$i]) > $null
             }
-            $WordDocument.InsertList($List) | Out-Null
+            $data = $WordDocument.InsertList($List)
         }
     }
     if ($Object -ne $null) {
@@ -33,32 +34,38 @@ function Add-List {
                 } else {
                     #Write-Color 'Value IsFirstTitle ', $IsFirstTitle, ' Value IsFirstValue ', $IsFirstValue, ' Count ', $Values.Count, ' Value: ', $Value -Color Yellow, Green, Yellow, Green, White, Yellow
                     if ($IsFirstValue -eq $True) {
-                        $WordDocument.AddListItem($List, $Value, $LevelPrimary) | Out-Null
+                        $WordDocument.AddListItem($List, $Value, $LevelPrimary) > $null
                     } else {
-                        $WordDocument.AddListItem($List, $Value, $LevelSecondary) | Out-Null
+                        $WordDocument.AddListItem($List, $Value, $LevelSecondary) > $null
                     }
                 }
                 $IsFirstTitle = $false
                 $IsFirstValue = $false
             }
         }
-        $WordDocument.InsertList($List) | Out-Null
+        $data = $WordDocument.InsertList($List) #| Out-Null
     }
 
+    if ($supress -eq $false) {
+        return $data
+    } else {
+        return
+    }
+}
 
-    <#
-        foreach ($item in $HashData.GetEnumerator()) {
-            #$item.Key
-            #$item.value
-            $entry = "$($item.Key) - $($item.Value)"
-            if ($count -eq 0) {
-                $List = $WordDocument.AddList($entry, 0, $ListType)
-            } else {
-                $WordDocument.AddListItem($List, $entry) | Out-Null
-            }
-
-            $count++
-        }
-          $WordDocument.InsertList($List) | Out-Null
-          #>
+function Convert-ListToHeadings {
+    [CmdletBinding()]
+    param(
+        [Xceed.Words.NET.Container] $WordDocument,
+        $List,
+        [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1
+    )
+    $Headings = New-ArrayList
+    $List.GetType()
+    $Paragraphs = Get-ParagraphForList $WordDocument $List.NumID
+    foreach ($p in $Paragraphs) {
+        $p.StyleName = $HeadingType
+        Add-ToArray -List $Headings -Element $p
+    }
+    return $Headings
 }
