@@ -1,4 +1,8 @@
-function Get-ObjectTitles($Object) {
+function Get-ObjectTitles {
+    [CmdletBinding()]
+    param(
+        $Object
+    )
     $ArrayList = New-Object System.Collections.ArrayList
     $Titles = $Object | Get-Member | Where-Object { $_.MemberType -eq 'Property' -or $_.MemberType -eq 'NoteProperty' }
     foreach ($Title in $Titles) {
@@ -6,7 +10,13 @@ function Get-ObjectTitles($Object) {
     }
     return $ArrayList
 }
-function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
+function Get-ObjectData {
+    [CmdletBinding()]
+    param(
+        $Object,
+        $Title,
+        [switch] $DoNotAddTitles
+    )
     $ArrayList = New-Object System.Collections.ArrayList
     $Values = $Object.$Title
     #Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', (Get-ObjectCount $Values) -Color Yellow, White, Green, White, Yellow
@@ -21,10 +31,19 @@ function Get-ObjectData($Object, $Title, [switch] $DoNotAddTitles) {
     #Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', (Get-ObjectCount $ArrayList) -Color Yellow, White, Green, White, Yellow
     return $ArrayList
 }
-function Get-ObjectCount($Object) {
+function Get-ObjectCount {
+    [CmdletBinding()]
+    param(
+        $Object
+    )
     return $($Object | Measure-Object).Count
 }
-function Get-ParagraphForList($WordDocument, $ListID) {
+function Get-ParagraphForList {
+    [CmdletBinding()]
+    param(
+        [Xceed.Words.NET.Container] $WordDocument,
+        $ListID
+    )
     $IDs = @()
     foreach ($p in $WordDocument.Paragraphs) {
         #Write-Color "testtting " -Color Yellow
@@ -40,7 +59,11 @@ function Get-ParagraphForList($WordDocument, $ListID) {
     }
     return $Ids
 }
-function Get-Paragraphs($WordDocument) {
+function Get-Paragraphs {
+    [CmdletBinding()]
+    param(
+        [Xceed.Words.NET.Container] $WordDocument
+    )
     $IDs = @()
     foreach ($p in $WordDocument.Paragraphs) {
         $p

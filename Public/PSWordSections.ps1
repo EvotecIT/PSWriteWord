@@ -1,6 +1,7 @@
 function Add-Section {
+    [CmdletBinding()]
     param (
-        $WordDocument,
+        [Xceed.Words.NET.Container] $WordDocument,
         [switch] $PageBreak
     )
     if ($PageBreak) {

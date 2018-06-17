@@ -1,6 +1,7 @@
 function Add-List {
+    [CmdletBinding()]
     param (
-        $WordDocument,
+        [Xceed.Words.NET.Container] $WordDocument,
         [ListItemType]$ListType,
         [string[]] $ListData = $null,
         $Object = $null
