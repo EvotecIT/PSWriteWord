@@ -2,6 +2,7 @@ function Add-List {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container] $WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [ListItemType]$ListType,
         [string[]] $ListData = $null,
         $Object = $null,
@@ -14,10 +15,16 @@ function Add-List {
         $ListCount = ($ListData | Measure-Object).Count
         If ($ListCount -gt 0) {
             $List = $WordDocument.AddList($ListData[0], 0, $ListType)
+            Write-Verbose "AddList - Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
             for ($i = 1; $i -lt $ListData.Count; $i++ ) {
-                $WordDocument.AddListItem($List, $ListData[$i]) > $null
+                $ListItem = $WordDocument.AddListItem($List, $ListData[$i])
+                Write-Verbose "AddList - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
             }
-            $data = $WordDocument.InsertList($List)
+            if ($Paragraph -ne $null) {
+                $data = $Paragraph.InsertList($List)
+            } else {
+                $data = $WordDocument.InsertList($List)
+            }
         }
     }
     if ($Object -ne $null) {
@@ -31,21 +38,28 @@ function Add-List {
             foreach ($Value in $Values) {
                 if ($IsFirstTitle -eq $True) {
                     $List = $WordDocument.AddList($Value, $LevelPrimary, $ListType)
+                    Write-Verbose "AddList (Object) - Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
                 } else {
                     #Write-Color 'Value IsFirstTitle ', $IsFirstTitle, ' Value IsFirstValue ', $IsFirstValue, ' Count ', $Values.Count, ' Value: ', $Value -Color Yellow, Green, Yellow, Green, White, Yellow
                     if ($IsFirstValue -eq $True) {
-                        $WordDocument.AddListItem($List, $Value, $LevelPrimary) > $null
+                        $ListItem = $WordDocument.AddListItem($List, $Value, $LevelPrimary) #> $null
+                        Write-Verbose "AddList (Object) - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
                     } else {
-                        $WordDocument.AddListItem($List, $Value, $LevelSecondary) > $null
+                        $ListItem = $WordDocument.AddListItem($List, $Value, $LevelSecondary) # > $null
+                        Write-Verbose "AddList (Object) - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
                     }
                 }
                 $IsFirstTitle = $false
                 $IsFirstValue = $false
             }
         }
-        $data = $WordDocument.InsertList($List) #| Out-Null
+        if ($Paragraph -ne $null) {
+            $data = $Paragraph.InsertList($List)
+        } else {
+            $data = $WordDocument.InsertList($List) #| Out-Null
+        }
     }
-
+    Write-Verbose "AddList - Name: $($data.GetType().Name) - BaseType: $($data.GetType().BaseType)"
     if ($supress -eq $false) {
         return $data
     } else {
