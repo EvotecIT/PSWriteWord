@@ -11,6 +11,7 @@ function Add-WordText {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [alias ("T")] [String[]]$Text,
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
@@ -31,10 +32,24 @@ function Add-WordText {
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
+
+    #if ($Paragraph -eq $null) {
+
+    #}
     $p = $WordDocument.InsertParagraph()
+    if ($Paragraph -ne $null) {
+        $p = $Paragraph.InsertParagraphAfterSelf($p)
+    }
+
     for ($i = 0; $i -lt $Text.Length; $i++) {
         if ($NewLine[$i] -ne $null -and $NewLine[$i] -eq $true) {
-            if ($i -gt 0) { $p = $WordDocument.InsertParagraph() }
+            if ($i -gt 0) {
+                if ($Paragraph -ne $null) {
+                    $p = $p.InsertParagraphAfterSelf()
+                } else {
+                    $p = $WordDocument.InsertParagraph()
+                }
+            }
             $p = $p.Append($Text[$i])
         } else {
             $p = $p.Append($Text[$i])
