@@ -1,3 +1,4 @@
+<#
 [Flags]
   public enum TableOfContentsSwitches
   {
@@ -51,3 +52,5 @@
     [Description("\\z")]
     Z = 1 << 15
   }
+
+#>

@@ -3,8 +3,7 @@
 /// Text alignment of a Paragraph.
 /// </summary>
 #>
-public enum Alignment
-{
+enum Alignment {
     <#
     /// <summary>
     /// Align Paragraph to the left.
