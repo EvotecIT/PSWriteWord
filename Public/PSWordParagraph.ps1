@@ -15,10 +15,11 @@ function Add-WordText {
         [alias ("T")] [String[]]$Text,
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
-        [alias ("N")] [string[]] $FontName = @(),
+        [alias ("FontName")] [string[]] $FontFamily = @(),
         [alias ("B")] [bool[]] $Bold = @(),
         [alias ("I")] [bool[]] $Italic = @(),
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ('UC')] [System.Drawin.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
         [alias ("SB")] [double[]] $SpacingBefore = @(),
         [alias ("SP")] [double[]] $Spacing = @(),
@@ -26,6 +27,12 @@ function Add-WordText {
         [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
         [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
         [alias ("HT")] [HeadingType[]] $HeadingType = @(),
+        $PercentageScale, # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        $Misc,
+        $Language,
+        $Kerning, # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        $Hidden,
+        $Position, #  "Value must be in the range -1585 - 1585"
         [bool[]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
@@ -60,8 +67,8 @@ function Add-WordText {
         if ($FontSize[$i] -ne $null) {
             $p = $p.FontSize($FontSize[$i])
         }
-        if ($FontName[$i] -ne $null) {
-            $p = $p.Font($FontName[$i])
+        if ($FontFamily[$i] -ne $null) {
+            $p = $p.Font($FontFamily[$i])
         }
         if ($Bold[$i] -ne $null -and $Bold[$i] -eq $true) {
             $p = $p.Bold()
@@ -71,6 +78,9 @@ function Add-WordText {
         }
         if ($UnderlineStyle[$i] -ne $null) {
             $p = $p.UnderlineStyle($UnderlineStyle[$i])
+        }
+        if ($UnderlineColor[$i] -ne $null) {
+            $p = $p.UnderlineColor($UnderlineColor[$i])
         }
         if ($SpacingAfter[$i] -ne $null) {
             $p = $p.SpacingAfter($SpacingAfter[$i])
@@ -95,6 +105,9 @@ function Add-WordText {
         }
         if ($HeadingType[$i] -ne $null) {
             $p = $p.StyleName = $HeadingType[$i]
+        }
+        if ($PercentageScale[$i] -ne $null) {
+            $p = $p.PercentageScale($PercentageScale[$i])
         }
     }
 
