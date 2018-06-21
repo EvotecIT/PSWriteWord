@@ -11,7 +11,6 @@ $list = Add-List -WordDocument $WordDocument -ListType Bulleted -ListData $ListO
 #$List.AddItem
 
 $Data = $WordDocument.AddListItem($list, 'test 20')
-$Data.Items.Add()
 #$List.AddItemWithStartValue(
 #$list.AddItem($p1)
 
