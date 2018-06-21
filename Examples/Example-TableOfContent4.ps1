@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 Clear-Host
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-TableOfContent4.docx"
 $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
@@ -40,7 +40,7 @@ $paragraph1 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Headings[1] -Text 'This is a text that will be added to ', ' 1st ', 'section' `
     -Color Black, Red, Black -Supress $false
 
-$Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
+$Object1 = Get-Process | Select-Object ProcessName, Site, StartTime
 $paragraph1 = Add-WordTable -WordDocument $WordDocument -Paragraph $paragraph1 -Table $Object1 -Design 'ColorfulList' #-Verbose
 
 Save-WordDocument $WordDocument
