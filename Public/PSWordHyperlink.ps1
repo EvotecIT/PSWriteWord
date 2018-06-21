@@ -45,8 +45,28 @@
       }
 #>
 
-function Add-WordHyperlink {
-    param(
-
+function Add-WordHyperLink {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [string] $UrlText,
+        [string] $UrlLink,
+        [bool] $Supress = $true
     )
+    $Url = New-Object -TypeName Uri -ArgumentList $UrlLink
+
+    return $WordDocument.AddHyperlink( $UrlText, $Url )
+}
+function Set-WordHyperLink {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [Xceed.Words.NET.DocXElement] $Value,
+        [bool] $Supress = $true
+    )
+    $Data = $Paragraph.InsertHyperlink($Value)
+
+    if ($Supress -eq $false) { return $Data } else { return }
+
 }

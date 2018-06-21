@@ -44,6 +44,14 @@ PackagePart               : System.IO.Packaging.ZipPackagePart
 #$Formatting = [Xceed.Words.NET.Formatting]
 #$Formatting.Attributes.
 
+Function Add-WordParagraph {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument
+    )
+    $WordDocument.InsertParagraph()
+}
+
 Function Set-WordParagraph {
     [CmdletBinding()]
     param (
