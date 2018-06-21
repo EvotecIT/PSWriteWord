@@ -22,8 +22,8 @@ $paragraph2 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Headings[2] -Text 'This is a text that will be added to ', ' 2nd ', 'section' `
     -Color Black, Red, Black -Supress $false
 $paragraph2 = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph2 -Text 'This will continue getting added to that section... of course colored as red' -Color Red -Supress $false
-$paragraph2 = Add-WordText -WordDocument $WordDocument `
-    -Paragraph $Paragraph2 `
+
+$paragraph2 = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph2 `
     -Text 'You need to use', ' Supress ', '$false ', 'to get paragraph values...', '' `
     -Color Black, Green, Red, Black -Supress $false
 $paragraph2 = Add-WordText -WordDocument $WordDocument `
@@ -39,5 +39,8 @@ $paragraph4 = Add-WordText -WordDocument $WordDocument `
 $paragraph1 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Headings[1] -Text 'This is a text that will be added to ', ' 1st ', 'section' `
     -Color Black, Red, Black -Supress $false
+
+$Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
+$paragraph1 = Add-WordTable -WordDocument $WordDocument -Paragraph $paragraph1 -Table $Object1 -Design 'ColorfulList' #-Verbose
 
 Save-WordDocument $WordDocument
