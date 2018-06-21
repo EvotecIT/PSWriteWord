@@ -43,3 +43,17 @@ PackagePart               : System.IO.Packaging.ZipPackagePart
 
 #$Formatting = [Xceed.Words.NET.Formatting]
 #$Formatting.Attributes.
+
+Function Set-WordParagraph {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [Alignment] $Alignment
+    )
+    if ($Paragraph -ne $null) {
+        if ($Alignment -ne $null) {
+            $Paragraph.Alignment = $Alignment
+        }
+    }
+}
