@@ -1,0 +1,5 @@
+function Add-WordFooter {
+    param (
+
+    )
+}

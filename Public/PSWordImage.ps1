@@ -1,0 +1,5 @@
+function Add-WordImage {
+    param(
+
+    )
+}
