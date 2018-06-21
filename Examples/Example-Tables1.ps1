@@ -22,7 +22,6 @@ $ADSnapshot.DomainInformation = $(Get-ADDomain)
 
 Clear-Host
 $WordDocument = New-WordDocument $FilePath
-
 Add-Section -WordDocument $WordDocument -PageBreak
 $p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
 $p = $WordDocument.InsertParagraph("")

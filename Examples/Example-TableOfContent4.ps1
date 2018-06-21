@@ -5,9 +5,7 @@ $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
 $ListOfHeaders = @('This is 1st section', 'This is 2nd section', 'This is 3rd section', 'This is 4th section', 'This is 5th section')
 
 $WordDocument = New-WordDocument -FilePath $FilePath
-$toc = $WordDocument.InsertTableOfContents("Table of content", 1)
-
-#Add-WordText -WordDocument $WordDocument -Text 'This is my first title' -HeadingType Heading1
+Add-WordToc -WordDocument $WordDocument -Title 'Table of content' -Switches C, A -RightTabPos 15 -HeaderStyle Heading1
 
 ### This list will be converted into Headings for Numbered Table of Contents
 $ListHeaders = Add-List -WordDocument $WordDocument -ListType Numbered -ListData $ListOfHeaders -Supress $false
