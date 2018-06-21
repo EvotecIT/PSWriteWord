@@ -46,7 +46,13 @@ function Add-WordTable {
         $NumberRows = $Titles.Count + 1
         $NumberColumns = 2
 
-        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        if ($Paragraph -eq $null) {
+            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        } else {
+            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
+            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
+        }
+
         $WordTable.Design = $Design
 
         $Columns = 'Name', 'Value'
@@ -75,7 +81,12 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        if ($Paragraph -eq $null) {
+            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        } else {
+            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
+            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
+        }
         $WordTable.Design = $Design
 
         Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns
@@ -99,7 +110,12 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        if ($Paragraph -eq $null) {
+            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        } else {
+            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
+            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
+        }
         $WordTable.Design = $Design
 
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
