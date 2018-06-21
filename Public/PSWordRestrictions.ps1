@@ -2,7 +2,12 @@ function Add-WordProtection {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
-        [EditRestrictions] $EditRestrictions
+        [EditRestrictions] $EditRestrictions,
+        [string] $Password
     )
-    $WordDocument.AddProtection($EditRestrictions)
+    if ($Password -eq $null) {
+        $WordDocument.AddProtection($EditRestrictions)
+    } else {
+        $WordDocument.AddPasswordProtection($EditRestrictions, $Password)
+    }
 }

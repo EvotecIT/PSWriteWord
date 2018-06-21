@@ -1,6 +1,6 @@
 Import-Module PSWriteWord #-Force
 
-$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddProtection.docx"
+$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddProtection2.docx"
 
 $WordDocument = New-WordDocument $FilePath
 Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size of 15', ' and this is font size of 10 ', ' while this will be 12.' `
@@ -9,6 +9,6 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
     -Bold $true, $false, $true `
     -Italic $true, $true
 
-Add-WordProtection -WordDocument $WordDocument -EditRestrictions readOnly
+Add-WordProtection -WordDocument $WordDocument -EditRestrictions readOnly -Password '12345678'
 
 Save-WordDocument $WordDocument
