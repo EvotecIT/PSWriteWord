@@ -104,7 +104,7 @@ function Add-WordText {
             $p = $p.StrikeThrough($StrikeThrough[$i])
         }
         if ($HeadingType[$i] -ne $null) {
-            $p = $p.StyleName = $HeadingType[$i]
+            $p.StyleName = $HeadingType[$i]
         }
         if ($PercentageScale[$i] -ne $null) {
             $p = $p.PercentageScale($PercentageScale[$i])
