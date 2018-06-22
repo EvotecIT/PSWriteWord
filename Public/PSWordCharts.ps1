@@ -2,6 +2,7 @@ function Add-WordPieChart {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
@@ -15,7 +16,11 @@ function Add-WordPieChart {
     $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
     $chart.AddSeries($Series)
 
-    $WordDocument.InsertChart($chart)
+    if ($Paragraph -eq $null) {
+        $WordDocument.InsertChart($chart)
+    } else {
+        $WordDocument.InsertChartAfterParagraph($chart, $paragraph)
+    }
 
 }
 
@@ -23,6 +28,7 @@ function Add-WordLineChart {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
@@ -40,13 +46,18 @@ function Add-WordLineChart {
     foreach ($series in $ChartSeries) {
         $chart.AddSeries($Series)
     }
-    $WordDocument.InsertChart($chart)
+    if ($Paragraph -eq $null) {
+        $WordDocument.InsertChart($chart)
+    } else {
+        $WordDocument.InsertChartAfterParagraph($chart, $paragraph)
+    }
 }
 
 function Add-WordBarChart {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
@@ -70,9 +81,12 @@ function Add-WordBarChart {
     foreach ($series in $ChartSeries) {
         $chart.AddSeries($Series)
     }
-    $WordDocument.InsertChart($chart)
+    if ($Paragraph -eq $null) {
+        $WordDocument.InsertChart($chart)
+    } else {
+        $WordDocument.InsertChartAfterParagraph($chart, $paragraph)
+    }
 }
-
 function Add-WordChartSeries {
     param (
         [string] $ChartName = 'Legend',
