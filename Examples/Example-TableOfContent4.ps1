@@ -16,7 +16,7 @@ $List2 = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $
 $Headings = Convert-ListToHeadings -WordDocument $WordDocument -List $ListHeaders
 
 ### Notice how this gets added under Test2 in 1st numbered list... essentially putting $List2 to the end.
-$paragraph2 = Add-WordWordText -WordDocument $WordDocument `
+$paragraph2 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Headings[2] -Text 'This is a text that will be added to ', ' 2nd ', 'section' `
     -Color Black, Red, Black -Supress $false
 $paragraph2 = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph2 -Text 'This will continue getting added to that section... of course colored as red' -Color Red -Supress $false

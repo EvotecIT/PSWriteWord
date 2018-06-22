@@ -4,21 +4,10 @@ $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-TableOfContent1.docx"
 
 $WordDocument = New-WordDocument -FilePath $FilePath
 
-$toc = $WordDocument.InsertTableOfContents("Table of content", 1)
-
-$p1 = $WordDocument.InsertParagraph("First")
-$p1.StyleName = [HeadingType]::Heading1
-$p1.Alignment = "left"
-$p1.ListItemType = 'Numbered'
-
-Add-Section -WordDocument $WordDocument -PageBreak
-
-$p2 = $WordDocument.InsertParagraph("Second")
-$p2.StyleName = [HeadingType]::Heading2
-
-Add-Section -WordDocument $WordDocument -PageBreak
-
-$p3 = $WordDocument.InsertParagraph("Third")
-$p3.StyleName = [HeadingType]::Heading2
-
+$Toc = Add-WordTOC -WordDocument $WordDocument -Title 'Table of content' -Switches S
+Add-WordText -WordDocument $WordDocument -HeadingType Heading1 -Text 'First'
+Add-WordSection -WordDocument $WordDocument -PageBreak
+Add-WordText -WordDocument $WordDocument -HeadingType Heading2 -Text 'Second'
+Add-WordSection -WordDocument $WordDocument -PageBreak
+Add-WordText -WordDocument $WordDocument -HeadingType Heading1 -Text 'Third'
 Save-WordDocument $WordDocument

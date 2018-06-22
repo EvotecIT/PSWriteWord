@@ -14,7 +14,6 @@ $ADSnapshot.RootDSE = $(
 )
 $ADSnapshot.ForestInformation = $(
     Get-ADForest | Select-Object DomainNamingMaster, Domains, ForestMode, Sites
-
 )
 $ADSnapshot.DomainInformation = $(Get-ADDomain)
 # Get basic Ad information end
@@ -23,16 +22,16 @@ $ADSnapshot.DomainInformation = $(Get-ADDomain)
 Clear-Host
 $WordDocument = New-WordDocument $FilePath
 Add-WordSection -WordDocument $WordDocument -PageBreak
-$p = $WordDocument.InsertParagraph("Active Directory Root DSE").FontSize(15)
-$p = $WordDocument.InsertParagraph("")
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design LightShading -Verbose
+Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design LightShading # -Verbose
 Add-WordSection -WordDocument $WordDocument -PageBreak
-$p = $WordDocument.InsertParagraph("Active Directory Forest Information").FontSize(15)
-$p = $WordDocument.InsertParagraph("")
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design LightShading -Verbose
+Add-WordText -WordDocument $WordDocument -Text "Active Directory Forest Information" -FontSize 15
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design LightShading #-Verbose
 Add-WordSection -WordDocument $WordDocument -PageBreak
-$p = $WordDocument.InsertParagraph("Active Directory Domain Information").FontSize(15)
-$p = $WordDocument.InsertParagraph("")
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design LightShading -Verbose
+Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information" -FontSize 15
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design LightShading #-Verbose
 
 Save-WordDocument $WordDocument

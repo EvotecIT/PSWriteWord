@@ -5,20 +5,12 @@ $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
 
 $WordDocument = New-WordDocument $FilePath
 
-$p = $WordDocument.InsertParagraph("This is text after which will be bulleted list").FontSize(15)
-$list = Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $ListOfItems -Supress $false -Verbose
-#$list.GetType()
-#$List.AddItem
-
-$Data = $WordDocument.AddListItem($list, 'test 20')
-#$List.AddItemWithStartValue(
-#$list.AddItem($p1)
-
-#$p.AddItem('test')
+Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be bulleted list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
+Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $ListOfItems
 
 Add-WordSection -WordDocument $WordDocument -PageBreak
 
-$p = $WordDocument.InsertParagraph("This is another text, after which will be numbered list").FontSize(15)
+Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be numbered list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
 Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems
 
 Save-WordDocument $WordDocument

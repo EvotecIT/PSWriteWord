@@ -3,17 +3,9 @@ Import-Module PSWriteWord #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord4.docx"
 
 $WordDocument = New-WordDocument $FilePath
-$p1 = $WordDocument.InsertParagraph("This is a text").FontSize("10").SpacingAfter(50).UnderlineStyle([UnderlineStyle]::singleLine)
-$p1.Alignment = 'center'
 
-
-$p2 = $WordDocument.InsertParagraph("Like me like i do").FontSize("21").SpacingBefore(15).Bold()
-$p2.Alignment = 'left'
-$p2.Direction = [Direction]::RightToLeft # 'RightToLeft'
-#$p2
-
-$p3 = $WordDocument.InsertParagraph("Process").FontSize("15").Color([System.Drawing.Color]::Brown).Font('Arial').Italic()
-$p3.Direction = [Direction]::RightToLeft
-$p3.Alignment = 'both'
+Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -SpacingBefore 50 -UnderlineStyle singleLine -Supress $True
+Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -SpacingBefore 15 -Bold $true -Supress $True
+Add-WordText -WordDocument $WordDocument -Text 'This is a text with Heading type 3' -FontSize 15 -HeadingType Heading3 -FontFamily 'Arial' -Italic $true
 
 Save-WordDocument $WordDocument
