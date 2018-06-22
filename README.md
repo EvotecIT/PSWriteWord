@@ -2,6 +2,8 @@
 PSWriteWord is powershell module to create Microsoft Word documents without Microsoft Word installed...
 
 ###### Dedicated word functions
+
+```
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
 Function        Add-WordBarChart                                   0.3        PSWriteWord
@@ -33,8 +35,13 @@ Function        Save-WordDocument                                  0.3        PS
 Function        Set-WordHyperLink                                  0.3        PSWriteWord
 Function        Set-WordMargins                                    0.3        PSWriteWord
 Function        Set-WordParagraph                                  0.3        PSWriteWord
+```
 
 ###### Support functions
+
+```
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
 Function        Add-ToArray                                        0.2        PSWriteWord
 Function        Convert-ListToHeadings                             0.3        PSWriteWord
 Function        Get-ObjectCount                                    0.3        PSWriteWord
@@ -42,3 +49,5 @@ Function        Get-ObjectData                                     0.3        PS
 Function        Get-ObjectTitles                                   0.3        PSWriteWord
 Function        New-ArrayList                                      0.2        PSWriteWord
 Function        Remove-FromArray                                   0.2        PSWriteWord
+
+```
