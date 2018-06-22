@@ -57,11 +57,18 @@ Function Set-WordParagraph {
     param (
         [Xceed.Words.NET.Container]$WordDocument,
         [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [Alignment] $Alignment
+        [Alignment] $Alignment,
+        [Direction] $Direction
     )
     if ($Paragraph -ne $null) {
+        Write-Verbose "Set-WordParagraph - Paragraph is not null"
         if ($Alignment -ne $null) {
+            Write-Verbose "Set-WordParagraph - Setting Alignment to $Alignment"
             $Paragraph.Alignment = $Alignment
+        }
+        if ($Direction -ne $null) {
+            Write-Verbose "Set-WordParagraph - Setting Direction to $Direction"
+            $Paragraph.Direction = $Direction
         }
     }
 }
