@@ -43,6 +43,7 @@ function Add-WordTable {
         [ValidateNotNullOrEmpty()]$Table,
         [TableDesign] $Design = [TableDesign]::ColorfulList,
         [int] $MaximumColumns = 5,
+        [string[]]$Columns = ('Name', 'Value'),
         [bool] $Supress = $true
     )
 
@@ -71,7 +72,7 @@ function Add-WordTable {
 
         $WordTable.Design = $Design
 
-        $Columns = 'Name', 'Value'
+        ### Uses $Columns from $top
 
         $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
         $Row = 1
