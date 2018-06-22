@@ -1,4 +1,4 @@
-function Add-Section {
+function Add-WordSection {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container] $WordDocument,

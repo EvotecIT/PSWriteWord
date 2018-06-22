@@ -8,15 +8,15 @@ $WordDocument = New-WordDocument -FilePath $FilePath
 Add-WordToc -WordDocument $WordDocument -Title 'Table of content' -Switches C, A -RightTabPos 15 -HeaderStyle Heading1
 
 ### This list will be converted into Headings for Numbered Table of Contents
-$ListHeaders = Add-List -WordDocument $WordDocument -ListType Numbered -ListData $ListOfHeaders -Supress $false
+$ListHeaders = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfHeaders -Supress $false
 ### This list will be added added but....it will appear in the end... since we will use Add-WordText with $Paragraph
-$List2 = Add-List -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $false
+$List2 = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $false
 
 ### Converts List into numbered Headings for Table of Content
 $Headings = Convert-ListToHeadings -WordDocument $WordDocument -List $ListHeaders
 
 ### Notice how this gets added under Test2 in 1st numbered list... essentially putting $List2 to the end.
-$paragraph2 = Add-WordText -WordDocument $WordDocument `
+$paragraph2 = Add-WordWordText -WordDocument $WordDocument `
     -Paragraph $Headings[2] -Text 'This is a text that will be added to ', ' 2nd ', 'section' `
     -Color Black, Red, Black -Supress $false
 $paragraph2 = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph2 -Text 'This will continue getting added to that section... of course colored as red' -Color Red -Supress $false

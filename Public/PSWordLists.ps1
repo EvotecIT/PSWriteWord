@@ -1,4 +1,4 @@
-function Add-List {
+function Add-WordList {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container] $WordDocument,
@@ -76,7 +76,7 @@ function Convert-ListToHeadings {
     )
     $Headings = New-ArrayList
     $List.GetType()
-    $Paragraphs = Get-ParagraphForList $WordDocument $List.NumID
+    $Paragraphs = Get-WordParagraphForList $WordDocument $List.NumID
     foreach ($p in $Paragraphs) {
         $p.StyleName = $HeadingType
         Add-ToArray -List $Headings -Element $p
