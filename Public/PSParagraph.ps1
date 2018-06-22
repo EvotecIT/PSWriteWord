@@ -47,9 +47,11 @@ PackagePart               : System.IO.Packaging.ZipPackagePart
 Function Add-WordParagraph {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument
+        [Xceed.Words.NET.Container]$WordDocument,
+        [bool] $Supress = $true
     )
-    $WordDocument.InsertParagraph()
+    $Data = $WordDocument.InsertParagraph()
+    if ($Supress -eq $true) { return } else { return $Data }
 }
 
 Function Set-WordParagraph {

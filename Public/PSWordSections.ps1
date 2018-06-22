@@ -2,11 +2,13 @@ function Add-WordSection {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container] $WordDocument,
-        [switch] $PageBreak
+        [switch] $PageBreak,
+        [bool] $Supress
     )
     if ($PageBreak) {
-        $WordDocument.InsertSectionPageBreak()
+        $Data = $WordDocument.InsertSectionPageBreak()
     } else {
-        $WordDocument.InsertSection()
+        $Data = $WordDocument.InsertSection()
     }
+    if ($Supress -eq $true) { return } else {return $Data}
 }

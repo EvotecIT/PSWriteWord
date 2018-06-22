@@ -1,4 +1,10 @@
-function Add-WordTableTitle ($Table, $Titles, $MaximumColumns) {
+function Add-WordTableTitle {
+    [CmdletBinding()]
+    param(
+        $Table,
+        $Titles,
+        $MaximumColumns
+    )
     #Write-Debug "Title Count $($Titles.Count) "
     #Write-Color "Title Count $($Titles.Count) " -Color Yellow
     for ($a = 0; $a -lt $Titles.Count; $a++) {
@@ -9,16 +15,25 @@ function Add-WordTableTitle ($Table, $Titles, $MaximumColumns) {
             $ColumnName = $Titles[$a].Name
         }
         #Write-Color "Column Name: $ColumnName" -Color DarkBlue
-        Add-WordTableCellValue -Table $Table -Row 0 -Column $a -Value $ColumnName
+        Add-WordTableCellValue -Table $Table -Row 0 -Column $a -Value $ColumnName -Supress $Supress
         if ($a -eq $($MaximumColumns - 1)) {
             break;
         }
     }
 }
-function Add-WordTableCellValue ($Table, $Row, $Column, $Value, $Paragraph = 0) {
-    #Write-Debug "Add-CellValue: $Row $Column $Value"
-    #Write-Color "Add-CellValue: $Row $Column $Value" -Color Yellow
-    $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value) | Out-Null
+function Add-WordTableCellValue {
+    [CmdletBinding()]
+    param(
+        $Table,
+        $Row,
+        $Column,
+        $Value,
+        $Paragraph = 0,
+        [bool] $Supress = $true
+    )
+    Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value"
+    $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
+    if ($Supress -eq $true) { return } else { return $Data }
 }
 function Add-WordTable {
     [CmdletBinding()]
@@ -27,7 +42,8 @@ function Add-WordTable {
         [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [ValidateNotNullOrEmpty()]$Table,
         [TableDesign] $Design = [TableDesign]::ColorfulList,
-        [int] $MaximumColumns = 5
+        [int] $MaximumColumns = 5,
+        [bool] $Supress = $true
     )
 
     ### Verbose Information START
@@ -57,15 +73,15 @@ function Add-WordTable {
 
         $Columns = 'Name', 'Value'
 
-        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
         $Row = 1
         foreach ($Title in $Titles) {
             $Value = Get-ObjectData -Object $Table -Title $Title -DoNotAddTitles
 
             $ColumnTitle = 0
             $ColumnData = 1
-            Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnTitle -Value $Title
-            Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnData -Value $Value
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnTitle -Value $Title
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnData -Value $Value
             Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $Row -Color"
             $Row++
 
@@ -94,7 +110,7 @@ function Add-WordTable {
         for ($b = 1; $b -lt $NumberRows; $b++) {
             $a = 0
             foreach ($Title in $Titles) {
-                Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
             }
@@ -118,12 +134,12 @@ function Add-WordTable {
         }
         $WordTable.Design = $Design
 
-        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
 
         for ($b = 1; $b -lt $NumberRows; $b++) {
             $a = 0
             foreach ($Title in $Columns.Name) {
-                Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
 
@@ -132,4 +148,5 @@ function Add-WordTable {
         }
 
     }
+    if ($Supress -eq $false) { return $WordTable } else { return }
 }
