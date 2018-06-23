@@ -29,7 +29,7 @@ function Add-WordText {
         [alias ("HT")] [HeadingType[]] $HeadingType = @(),
         $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
         $Misc = @(),
-        $Language = @(),
+        [string[]] $Language = @(),
         $Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         $Hidden = @(),
         $Position = @(), #  "Value must be in the range -1585 - 1585"
@@ -103,26 +103,28 @@ function Add-WordText {
         if ($StrikeThrough[$i] -ne $null) {
             $p = $p.StrikeThrough($StrikeThrough[$i])
         }
-        if ($HeadingType[$i] -ne $null) {
-            $p.StyleName = $HeadingType[$i]
-        }
         if ($PercentageScale[$i] -ne $null) {
             $p = $p.PercentageScale($PercentageScale[$i])
         }
         if ($Language[$i] -ne $null) {
-            $p.Culture($Language[$i])
+            Write-Verbose "Add-WriteText - Setting language $($Language[$i])"
+            $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language[$i])
+            $p = $p.Culture($Culture)
         }
         if ($Kerning[$i] -ne $null) {
-            $p.Kerning($Kerning[$i])
+            $p = $p.Kerning($Kerning[$i])
         }
         if ($PercentageScale[$i] -ne $null) {
-            $p.PercentageScale($PercentageScale[$i])
+            $p = $p.PercentageScale($PercentageScale[$i])
         }
         if ($Misc[$i] -ne $null) {
-            $p.Misc($Misc[$i])
+            $p = $p.Misc($Misc[$i])
         }
         if ($Position[$i] -ne $null) {
-            $p.Position($Position[$i])
+            $p = $p.Position($Position[$i])
+        }
+        if ($HeadingType[$i] -ne $null) {
+            $p.StyleName = $HeadingType[$i]
         }
     }
 

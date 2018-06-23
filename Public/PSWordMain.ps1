@@ -22,9 +22,19 @@ function Save-WordDocument {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container] $WordDocument,
-        [string] $FilePath = ''
+        [string] $FilePath,
+        [string] $Language
     )
-    if ($FilePath -eq '') {
+
+    if (-not [string]::IsNullOrEmpty($Language)) {
+        Write-Verbose "Save-WordDocument - Setting Language to $Language"
+        $Paragraphs = Get-WordParagraphs -WordDocument $WordDocument
+        foreach ($p in $Paragraphs) {
+            Set-WordParagraph -Paragraph $p -Language $Language
+        }
+    }
+
+    if ([string]::IsNullOrEmpty($FilePath)) {
         $WordDocument.Save()
     } else {
         $WordDocument.SaveAs($FilePath)

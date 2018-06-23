@@ -60,7 +60,8 @@ Function Set-WordParagraph {
         [Xceed.Words.NET.Container]$WordDocument,
         [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Alignment] $Alignment,
-        [Direction] $Direction
+        [Direction] $Direction,
+        [string] $Language
     )
     if ($Paragraph -ne $null) {
         Write-Verbose "Set-WordParagraph - Paragraph is not null"
@@ -71,6 +72,10 @@ Function Set-WordParagraph {
         if ($Direction -ne $null) {
             Write-Verbose "Set-WordParagraph - Setting Direction to $Direction"
             $Paragraph.Direction = $Direction
+        }
+        if ($Language -ne $null) {
+            $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language)
+            $Paragraph = $Paragraph.Culture($Culture)
         }
     }
 }
