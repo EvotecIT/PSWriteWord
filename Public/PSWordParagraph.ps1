@@ -36,6 +36,9 @@ function Add-WordText {
         [bool[]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
+        [single[]] $IndentationFirstLine = @(),
+        [single[]] $IndentationHanging = @(),
+        [Alignment[]] $Alignment = @(),
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
@@ -125,6 +128,15 @@ function Add-WordText {
         }
         if ($HeadingType[$i] -ne $null) {
             $p.StyleName = $HeadingType[$i]
+        }
+        if ($Alignment[$i] -ne $null) {
+            $p.Alignment = $Alignment[$i]
+        }
+        if ($IndentationFirstLine[$i] -ne $null) {
+            $p.IndentationFirstLine = $IndentationFirstLine[$i]
+        }
+        if ($IndentationHanging[$i] -ne $null) {
+            $p.IndentationHanging = $IndentationHanging[$i]
         }
     }
 
