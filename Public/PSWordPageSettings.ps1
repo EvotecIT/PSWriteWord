@@ -1,4 +1,4 @@
-function Set-WordMargins {
+function Set-WordPageSettings {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
@@ -6,7 +6,9 @@ function Set-WordMargins {
         [nullable[single]] $MarginRight,
         [nullable[single]] $MarginTop,
         [nullable[single]] $MarginBottom,
-        [nullable[single]] $PageWidth
+        [nullable[single]] $PageWidth,
+        [nullable[single]] $PageHeight,
+        [alias ("PageLayout")][Orientation] $Orientation
     )
 
     if ($MarginLeft -ne $null) {
@@ -17,4 +19,6 @@ function Set-WordMargins {
     if ($MarginTop -ne $null) {$WordDocument.MarginTop = $MarginTop }
     if ($MarginBottom -ne $null) {$WordDocument.MarginBottom = $MarginBottom }
     if ($PageWidth -ne $null) {$WordDocument.PageWidth = $PageWidth }
+    if ($PageHeight -ne $null) {$WordDocument.PageHeight = $PageHeight }
+    if ($Orientation -ne $null) { $WordDocument.PageLayout = $Orientation }
 }
