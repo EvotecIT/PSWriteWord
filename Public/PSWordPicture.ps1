@@ -1,0 +1,30 @@
+function Add-WordPicture {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [string] $ImagePath,
+        [int] $Rotation,
+        [switch] $FlipHorizontal,
+        [switch] $FlipVertical,
+        [int] $ImageWidth,
+        [int] $ImageHeight,
+        [string] $Description,
+        [bool] $Supress = $false
+    )
+    if ([string]::IsNullOrEmpty($Paragraph)) {
+        $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $false
+    }
+    $Image = $WordDocument.AddImage($FilePathImage )
+
+    $Picture = $Image.CreatePicture()
+    if ($Rotation -ne 0) { $Picture.Rotation = $Rotation }
+    if ($FlipHorizontal -ne $false) { $Picture.FlipHorizontal = $FlipHorizontal }
+    if ($FlipVertical -ne $false) { $Picture.FlipVertical = $FlipVertical }
+    if (-not [string]::IsNullOrEmpty($Description)) { $Picture.Description = $Description }
+    if ($ImageWidth -ne 0) { $Picture.Width = $ImageWidth }
+    if ($ImageHeight -ne 0) { $Picture.Height = $ImageHeight }
+    $data = $Paragraph.AppendPicture($Picture)
+
+    if ($Supress) { return $data } else { return }
+}
