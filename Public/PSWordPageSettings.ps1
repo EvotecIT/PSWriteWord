@@ -7,8 +7,8 @@ function Set-WordPageSettings {
         [nullable[single]] $MarginTop,
         [nullable[single]] $MarginBottom,
         [nullable[single]] $PageWidth,
-        [nullable[single]] $PageHeight,
-        [alias ("PageLayout")][Orientation] $Orientation
+        [nullable[single]] $PageHeight
+        #[alias ("PageLayout")][Orientation] $Orientation
     )
 
     if ($MarginLeft -ne $null) {
@@ -20,5 +20,7 @@ function Set-WordPageSettings {
     if ($MarginBottom -ne $null) {$WordDocument.MarginBottom = $MarginBottom }
     if ($PageWidth -ne $null) {$WordDocument.PageWidth = $PageWidth }
     if ($PageHeight -ne $null) {$WordDocument.PageHeight = $PageHeight }
-    if ($Orientation -ne $null) { $WordDocument.PageLayout = $Orientation }
+    #if ($Orientation -ne $null) { $WordDocument.Orientation = $Orientation }
+
+
 }
