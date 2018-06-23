@@ -1,14 +1,15 @@
 Import-Module PSWriteWord -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture2.docx"
-$FilePathImage = "$PSScriptRoot\Images\Logo-Evotec-Small.jpg"
+$FilePathImage1 = "$PSScriptRoot\Images\Logo-Evotec-Small.png"
+$FilePathImage2 = "$PSScriptRoot\Images\Logo-Evotec-Small.jpg"
 
 $WordDocument = New-WordDocument $FilePath
 
 Add-WordText -WordDocument $WordDocument -Text 'Adding a picture...'
-Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage -Verbose
+Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage1 -Verbose
 Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... with rotation'
-Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage -Rotation 25
+Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage2 -Rotation 25
 
 $PlaceToAddPicture = Add-WordText -WordDocument $WordDocument -Text 'Adding a picture...' -Supress $false
 
