@@ -109,6 +109,21 @@ function Add-WordText {
         if ($PercentageScale[$i] -ne $null) {
             $p = $p.PercentageScale($PercentageScale[$i])
         }
+        if ($Language[$i] -ne $null) {
+            $p.Culture($Language[$i])
+        }
+        if ($Kerning[$i] -ne $null) {
+            $p.Kerning($Kerning[$i])
+        }
+        if ($PercentageScale[$i] -ne $null) {
+            $p.PercentageScale($PercentageScale[$i])
+        }
+        if ($Misc[$i] -ne $null) {
+            $p.Misc($Misc[$i])
+        }
+        if ($Position[$i] -ne $null) {
+            $p.Position($Position[$i])
+        }
     }
 
     if ($Supress) { return } else { return $p }
