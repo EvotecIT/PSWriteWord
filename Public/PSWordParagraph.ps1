@@ -39,6 +39,7 @@ function Add-WordText {
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
         [Alignment[]] $Alignment = @(),
+        [Direction[]] $Direction = @(),
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
@@ -137,6 +138,9 @@ function Add-WordText {
         }
         if ($IndentationHanging[$i] -ne $null) {
             $p.IndentationHanging = $IndentationHanging[$i]
+        }
+        if ($Direction[$i] -ne $null) {
+            $p.Direction = $Direction[$i]
         }
     }
 
