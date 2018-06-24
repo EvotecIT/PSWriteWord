@@ -8,4 +8,7 @@ Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -Sp
 Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -SpacingBefore 15 -Bold $true -Supress $True
 Add-WordText -WordDocument $WordDocument -Text 'This is a text with Heading type 3' -FontSize 15 -HeadingType Heading3 -FontFamily 'Arial' -Italic $true
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Language 'en-US'
+
+### Start Word with file
+Invoke-Item $FilePath

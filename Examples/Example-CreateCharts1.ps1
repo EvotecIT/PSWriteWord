@@ -17,4 +17,7 @@ Add-WordText -WordDocument $WordDocument -Text 'Pie Chart Example #2' `
 
 Add-WordPieChart -WordDocument $WordDocument -ChartName 'My finances' -Names 'Today', 'Yesterday' -Values  2000, 20000 -ChartLegendPosition Left -ChartLegendOverlay $true
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Language 'en-US'
+
+### Start Word with file
+Invoke-Item $FilePath

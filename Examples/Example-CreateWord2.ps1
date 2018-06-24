@@ -15,3 +15,6 @@ Set-WordParagraph -Paragraph $p1 -Alignment Both -Direction LeftToRight
 Add-WordText -WordDocument $WordDocument -Text 'But you can actually just use one line to do Alingment and direction at same time' -FontSize 10 -Alignment Center -Direction LeftToRight
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath

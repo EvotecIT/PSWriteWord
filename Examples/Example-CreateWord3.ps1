@@ -8,3 +8,6 @@ Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -Su
 Add-WordText -WordDocument $WordDocument -Text 'This is a text with Heading type 3' -FontSize 10 -HeadingType Heading3
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath
