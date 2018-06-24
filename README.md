@@ -1,6 +1,8 @@
 ### PSWriteWord - PowerShell Module
 PSWriteWord is powershell module to create Microsoft Word documents without Microsoft Word installed...
 
+Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
+
 ###### Dedicated word functions
 
 ```
