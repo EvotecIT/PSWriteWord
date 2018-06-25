@@ -11,7 +11,7 @@ function New-WordDocument {
 function Get-WordDocument {
     [CmdletBinding()]
     param(
-        $FilePath
+        [string] $FilePath
     )
     $Word = [Xceed.Words.NET.DocX]
     $WordDocument = $Word::Load($FilePath)
@@ -21,7 +21,7 @@ function Get-WordDocument {
 function Save-WordDocument {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [string] $FilePath,
         [string] $Language
     )
