@@ -47,7 +47,7 @@ PackagePart               : System.IO.Packaging.ZipPackagePart
 Function Add-WordParagraph {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [bool] $Supress = $true
     )
     $Data = $WordDocument.InsertParagraph()
@@ -57,8 +57,8 @@ Function Add-WordParagraph {
 Function Set-WordParagraph {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Alignment] $Alignment,
         [Direction] $Direction,
         [string] $Language
@@ -82,7 +82,7 @@ Function Set-WordParagraph {
 function Get-WordParagraphForList {
     [CmdletBinding()]
     param(
-        [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         $ListID
     )
     $IDs = @()
@@ -103,7 +103,7 @@ function Get-WordParagraphForList {
 function Get-WordParagraphs {
     [CmdletBinding()]
     param(
-        [Xceed.Words.NET.Container] $WordDocument
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument
     )
     $IDs = @()
     foreach ($p in $WordDocument.Paragraphs) {

@@ -1,8 +1,8 @@
 function Add-WordPicture {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.DocXElement] $Picture,
         [string] $ImagePath,
         [int] $Rotation,
@@ -35,8 +35,8 @@ function Add-WordPicture {
 function Get-WordPicture {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [switch] $ListParagraphs,
         [int] $PictureID
     )

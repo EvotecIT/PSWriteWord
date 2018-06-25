@@ -38,8 +38,8 @@ function Add-WordTableCellValue {
 function Add-WordTable {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container] $WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [ValidateNotNullOrEmpty()]$Table,
         [TableDesign] $Design = [TableDesign]::ColorfulList,
         [int] $MaximumColumns = 5,

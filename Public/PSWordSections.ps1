@@ -1,7 +1,7 @@
 function Add-WordSection {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [switch] $PageBreak,
         [bool] $Supress
     )

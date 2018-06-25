@@ -1,7 +1,7 @@
 function Add-WordProtection {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [EditRestrictions] $EditRestrictions,
         [string] $Password
     )

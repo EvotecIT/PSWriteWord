@@ -1,8 +1,8 @@
 function Add-WordList {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container] $WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [ListItemType]$ListType,
         [string[]] $ListData = $null,
         $Object = $null,

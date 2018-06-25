@@ -1,8 +1,8 @@
 function Add-WordPieChart {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
@@ -27,8 +27,8 @@ function Add-WordPieChart {
 function Add-WordLineChart {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
@@ -56,8 +56,8 @@ function Add-WordLineChart {
 function Add-WordBarChart {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,

@@ -48,7 +48,7 @@
 function Add-WordHyperLink {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [string] $UrlText,
         [string] $UrlLink,
         [bool] $Supress = $true
@@ -60,8 +60,8 @@ function Add-WordHyperLink {
 function Set-WordHyperLink {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.DocXElement] $Value,
         [bool] $Supress = $true
     )

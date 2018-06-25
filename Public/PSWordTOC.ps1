@@ -1,8 +1,8 @@
 function Add-WordTOC {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container] $WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $BeforeParagraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $BeforeParagraph,
         [string] $Title = 'Table of contents',
         [TableOfContentsSwitches[]] $Switches = @(),
         [HeadingType] $HeaderStyle = [HeadingType]::Heading1,

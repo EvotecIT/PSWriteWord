@@ -1,7 +1,7 @@
 function Set-WordPageSettings {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [nullable[single]] $MarginLeft,
         [nullable[single]] $MarginRight,
         [nullable[single]] $MarginTop,
