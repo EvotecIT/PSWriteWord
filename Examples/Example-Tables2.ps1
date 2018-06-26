@@ -22,3 +22,6 @@ Add-WordTable -WordDocument $WordDocument -Table $Object3 -Design 'ColorfulList'
 
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath
