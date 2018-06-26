@@ -19,7 +19,7 @@ function Get-ObjectData {
     )
     $ArrayList = New-Object System.Collections.ArrayList
     $Values = $Object.$Title
-    #Write-Color 'Get-ObjectData1: Title', ' ', $Title, ' Values: ', (Get-ObjectCount $Values) -Color Yellow, White, Green, White, Yellow
+    Write-Verbose "Get-ObjectData1: Title $Title Values: $Values"
     if ((Get-ObjectCount $values) -eq 1 -and $DoNotAddTitles -eq $false) {
         $ArrayList.Add("$Title - $Values") | Out-Null
     } else {
@@ -28,6 +28,7 @@ function Get-ObjectData {
             $ArrayList.Add("$Value") | Out-Null
         }
     }
+    Write-Verbose "Get-ObjectData2: Title $Title Values: $(Get-ObjectCount $ArrayList)"
     #Write-Color 'Get-ObjectData2: Title', ' ', $Title, ' ArrayList: ', (Get-ObjectCount $ArrayList) -Color Yellow, White, Green, White, Yellow
     return $ArrayList
 }
