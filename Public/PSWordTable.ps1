@@ -5,7 +5,7 @@ function Add-WordTableTitle {
         $Titles,
         $MaximumColumns
     )
-    #Write-Debug "Title Count $($Titles.Count) "
+    Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) "
     #Write-Color "Title Count $($Titles.Count) " -Color Yellow
     for ($a = 0; $a -lt $Titles.Count; $a++) {
         if ($Titles[$a] -is [string]) {
@@ -14,7 +14,7 @@ function Add-WordTableTitle {
         } else {
             $ColumnName = $Titles[$a].Name
         }
-        #Write-Color "Column Name: $ColumnName" -Color DarkBlue
+        Write-Verbose "Add-WordTableTitle - Column Name: $ColumnName"
         Add-WordTableCellValue -Table $Table -Row 0 -Column $a -Value $ColumnName -Supress $Supress
         if ($a -eq $($MaximumColumns - 1)) {
             break;
@@ -43,15 +43,20 @@ function Add-WordTable {
         [ValidateNotNullOrEmpty()]$Table,
         [TableDesign] $Design = [TableDesign]::ColorfulList,
         [int] $MaximumColumns = 5,
-        [string[]]$Columns = ('Name', 'Value'),
+        [string[]]$Columns = @('Name', 'Value'),
         [bool] $Supress = $true
     )
 
+    if ($Table.GetType().BaseType.Name -eq 'Array' -and $Table.GetType().Name -eq 'Object[]') {
+        Write-Verbose 'Add-WordTable - Converting Array of Objects'
+        $Table = $Table.ForEach( {[PSCustomObject]$_})
+    }
     ### Verbose Information START
-    #$Table.GetType()
     #$Table | Get-Member | ft -a
     ### Verbose Information END
     Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $table)"
+    Write-Verbose "Add-WordTable - Name: $($Table.GetType().Name)"
+    Write-Verbose "Add-WordTable - BaseType.Name: $($Table.GetType().BaseType.Name)"
     Write-Verbose "Add-WordTable - GetType Before Conversion:  $($Table.GetType().Name)"
     $Table = $Table | Select-Object *
     Write-Verbose "Add-WordTable - GetType After Conversion:  $($Table.GetType().Name)"
@@ -60,6 +65,7 @@ function Add-WordTable {
         Write-Verbose 'Add-WordTable - Option 1'
         $Titles = Get-ObjectTitles -Object $Table
         #$Titles
+
         $NumberRows = $Titles.Count + 1
         $NumberColumns = 2
 
@@ -73,8 +79,10 @@ function Add-WordTable {
         $WordTable.Design = $Design
 
         ### Uses $Columns from $top
+        #$Columns = 'Name', 'Value'
 
-        $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        Write-Verbose "Add-WordTable - Titles: $Columns"
         $Row = 1
         foreach ($Title in $Titles) {
             $Value = Get-ObjectData -Object $Table -Title $Title -DoNotAddTitles
@@ -83,12 +91,12 @@ function Add-WordTable {
             $ColumnData = 1
             $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnTitle -Value $Title
             $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnData -Value $Value
-            Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $Row -Color"
+            Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $Row "
             $Row++
 
         }
     } elseif ($Table.GetType().Name -eq 'Object[]') {
-        write-verbose 'Add-WordTable - option 3'
+        write-verbose 'Add-WordTable - option 2'
 
         $Titles = Get-ObjectTitles -Object $Table
 
@@ -117,7 +125,7 @@ function Add-WordTable {
             }
         }
     } else {
-        Write-Verbose 'Add-WordTable - Option 2'
+        Write-Verbose 'Add-WordTable - Option 3'
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
         $Columns = ($Table | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
         #$Columns
