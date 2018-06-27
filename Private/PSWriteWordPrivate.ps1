@@ -4,10 +4,21 @@ function Get-ObjectTitles {
         $Object
     )
     $ArrayList = New-Object System.Collections.ArrayList
-    $Titles = $Object | Get-Member | Where-Object { $_.MemberType -eq 'Property' -or $_.MemberType -eq 'NoteProperty' }
-    foreach ($Title in $Titles) {
+    #$Object | ft -a
+    #$Object.Name  |ft -a
+
+    #$Object.PSObject | ft -AutoSize
+
+
+    #$Object.PSObject.Properties | ft -AutoSize
+
+    #$Object.PSObject.BaseObject | Get-Member | ft -a
+    #$Titles = $Object | Get-Member | Where-Object { $_.MemberType -eq 'Property' -or $_.MemberType -eq 'NoteProperty' }
+    #$Titles.Name
+    foreach ($Title in $Object.PSObject.Properties) {
         $ArrayList.Add($Title.Name) | Out-Null
     }
+    # $ArrayList | ft -AutoSize
     return $ArrayList
 }
 function Get-ObjectData {
