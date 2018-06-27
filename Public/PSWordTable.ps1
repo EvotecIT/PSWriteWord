@@ -111,12 +111,7 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
 
-        if ($Paragraph -eq $null) {
-            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
-        } else {
-            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
-            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
-        }
+        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns
 
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
         $Row = 1
@@ -143,13 +138,7 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        if ($Paragraph -eq $null) {
-            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
-        } else {
-            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
-            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
-        }
-
+        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns
 
         Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns
 
@@ -172,13 +161,7 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        if ($Paragraph -eq $null) {
-            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
-        } else {
-            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
-            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
-        }
-
+        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns
 
         $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
 
@@ -225,12 +208,20 @@ function Set-WordTableBorder {
 }
 
 function New-WordTable {
-
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [int] $NrRows,
+        [int] $NrColumns,
+        [bool] $Supress = $true
+    )
 
     if ($Paragraph -eq $null) {
-        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        $WordTable = $WordDocument.InsertTable($NrRows, $NrColumns)
     } else {
-        $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
+        $TableDefinition = $WordDocument.AddTable($NrRows, $NrColumns)
         $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
     }
+    if ($Supress) { return } else { return $WordTable }
 }
