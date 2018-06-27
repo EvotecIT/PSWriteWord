@@ -200,12 +200,44 @@ function Set-WordTableBorder {
         [TableBorderType] $TableBorderType,
         $Border
     )
-    #$Border.GetType()
-    if ($Table -eq $null) {
-        throw 'Table is $null - make sure to use $Supress = $False on Table Creation'
-        return
+    if ($Table -ne $null -and $TableBorderType -ne $null -and $Border -ne $null) {
+        $Table.SetBorder($TableBorderType, $Border)
     }
-    $Table.SetBorder($TableBorderType, $Border)
+}
+function Set-WordTableDirection {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [Direction] $Direction
+    )
+    if ($Table -ne $null -and $Direction -ne $null) {
+        $Table.SetDirection($Direction)
+    }
+}
+
+function Set-WordTable {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [Direction] $Direction,
+        [TableBorderType] $TableBorderType,
+        $Border
+    )
+
+
+    Set-WordTableDirection -Table $Table -Direction $Direction
+    Set-WordTableBorder -Table $Table -TableBorderType $TableBorderType -Border $Border
+}
+
+function Remove-WordTable {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table
+    )
+    if ($Table -ne $null) {
+        $Table.Remove()
+    }
+
 }
 
 function New-WordTable {
