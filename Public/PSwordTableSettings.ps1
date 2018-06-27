@@ -14,19 +14,41 @@ function New-WordTableBorder {
 function Set-WordTableBorder {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [TableBorderType] $TableBorderType,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [nullable[TableBorderType]] $TableBorderType,
         $Border
     )
     if ($Table -ne $null -and $TableBorderType -ne $null -and $Border -ne $null) {
         $Table.SetBorder($TableBorderType, $Border)
     }
 }
+function Set-WordTableAutoFit {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [nullable[AutoFit]] $AutoFit
+    )
+    if ($Table -ne $null -and $AutoFit -ne $null) {
+        $Table.AutoFit = $AutoFit
+    }
+}
+
+function Set-WordTableDesign {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [nullable[TableDesign]] $Design
+    )
+    if ($Table -ne $null -and $Design -ne $null) {
+        $Table.Design = $Design
+    }
+}
+
 function Set-WordTableDirection {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [Direction] $Direction
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [nullable[Direction]] $Direction
     )
     if ($Table -ne $null -and $Direction -ne $null) {
         $Table.SetDirection($Direction)
@@ -36,7 +58,7 @@ function Set-WordTableDirection {
 function Set-WordTablePageBreak {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [switch] $AfterTable,
         [switch] $BeforeTable
     )
@@ -53,13 +75,20 @@ function Set-WordTablePageBreak {
 function Set-WordTable {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [Direction] $Direction,
-        [TableBorderType] $TableBorderType,
-        $Border
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [nullable[TableBorderType]] $TableBorderType,
+        $Border,
+        [nullable[AutoFit]] $AutoFit,
+        [nullable[TableDesign]] $Design,
+        [nullable[Direction]] $Direction,
+        [switch] $BreakPageAfterTable,
+        [switch] $BreakPageBeforeTable
     )
-
-
-    Set-WordTableDirection -Table $Table -Direction $Direction
-    Set-WordTableBorder -Table $Table -TableBorderType $TableBorderType -Border $Border
+    if ($Table -ne $null) {
+        $table | Set-WordTableDesign -Design $Design
+        $table | Set-WordTableDirection -Direction $Direction
+        $table | Set-WordTableBorder -TableBorderType $TableBorderType -Border $Border
+        $table | Set-WordTablePageBreak -AfterTable:$BreakPageAfterTable -BeforeTable:$BreakPageBeforeTable
+        $table | Set-WordTableAutoFit -AutoFit $AutoFit
+    }
 }

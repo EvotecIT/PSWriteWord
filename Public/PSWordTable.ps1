@@ -1,11 +1,15 @@
 function Add-WordTable {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [Xceed.Words.NET.InsertBeforeOrAfter]$Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [ValidateNotNullOrEmpty()]$DataTable,
+        [AutoFit] $AutoFit,
         [TableDesign] $Design,
+        [Direction] $Direction,
+        [switch] $BreakPageAfterTable,
+        [switch] $BreakPageBeforeTable,
         [int] $MaximumColumns = 5,
         [string[]]$Columns = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
@@ -129,9 +133,11 @@ function Add-WordTable {
         }
 
     }
-    if ($WordTable -ne $null -and $Design -ne $null) {
-        $WordTable.Design = $Design
-    }
+    $WordTable | Set-WordTable -Direction $Direction `
+        -AutoFit $AutoFit `
+        -Design $Design `
+        -BreakPageAfterTable:$BreakPageAfterTable `
+        -BreakPageBeforeTable:$BreakPageBeforeTable `
 
     if ($Supress -eq $false) { return $WordTable } else { return }
 }
