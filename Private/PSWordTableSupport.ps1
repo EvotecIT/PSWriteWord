@@ -61,12 +61,23 @@ function Convert-ObjectToProcess {
     Write-Verbose "Convert-ObjectToProcess - Object Type: $ObjectType"
     Write-Verbose "Convert-ObjectToProcess - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
     Write-Verbose "Convert-ObjectToProcess - GetType Before Final Conversion: $ObjectType"
-
-    If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-        Write-Verbose 'Convert-ObjectToProcess - Skipping select for Hashtable / OrderedDictionary'
+    If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary' -or $ObjectType -eq 'PSCustomObject') {
+        Write-Verbose 'Convert-ObjectToProcess - Skipping select for Hashtable / OrderedDictionary / PSCustomObject'
     } else {
-        Write-Verbose 'Convert-ObjectToProcess - Selecting all objects'
-        $DataTable = [array] ($DataTable | Select-Object *)
+        #if ($ObjectType -eq 'PSCustomObject') {
+        #    Write-Verbose 'Convert-ObjectToProcess - Skipping all objects'
+        #$DataTable = [rray] ($DataTable | Select-Object *)
+        #} else {
+
+
+        if ($ObjectType -eq 'Collection`1' -and $(Get-ObjectCount $DataTable) -eq 1) {
+            Write-Verbose 'Convert-ObjectToProcess - Selecting all objects, returning array'
+            $DataTable = [array] ($DataTable | Select-Object *)
+        } else {
+            Write-Verbose 'Convert-ObjectToProcess - Selecting all objects'
+            $DataTable = ($DataTable | Select-Object *)
+        }
+        #}
     }
 
     $ObjectType = $DataTable.GetType().Name

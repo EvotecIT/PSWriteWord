@@ -12,6 +12,7 @@ function Add-WordTable {
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
+    #$DataTable
     $ObjectType = $DataTable.GetType().Name
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
