@@ -1,0 +1,41 @@
+function Add-WordTableColumn {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [int] $Count = 1,
+        [nullable[int]] $Index,
+        [ValidateSet('Left', 'Right')] $Direction = 'Left'
+    )
+    if ($Direction -eq 'Left') { $ColumnSide = $false} else { $ColumnSide = $true}
+
+    if ($Table -ne $null) {
+        if ($Index -ne $null) {
+            for ($i = 0; $i -lt $Count; $i++) {
+                $Table.InsertColumn($Index + $i, $ColumnSide)
+            }
+        } else {
+            for ($i = 0; $i -lt $Count; $i++) {
+                $Table.InsertColumn()
+            }
+        }
+    }
+}
+function Remove-WordTableColumn {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [int] $Count = 1,
+        [nullable[int]] $Index
+    )
+    if ($Table -ne $null) {
+        if ($Index -ne $null) {
+            for ($i = 0; $i -lt $Count; $i++) {
+                $Table.RemoveColumn($Index + $i)
+            }
+        } else {
+            for ($i = 0; $i -lt $Count; $i++) {
+                $Table.RemoveColumn()
+            }
+        }
+    }
+}
