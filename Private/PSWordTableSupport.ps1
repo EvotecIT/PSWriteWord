@@ -44,24 +44,33 @@ function Convert-ObjectToProcess {
     param (
         $DataTable
     )
-    if ($DataTable.GetType().BaseType.Name -eq 'Array' -and $DataTable.GetType().Name -eq 'Object[]') {
-        Write-Verbose 'Add-WordTable - Converting Array of Objects'
-        $DataTable = $DataTable.ForEach( {[PSCustomObject]$_})
-    }
     $ObjectType = $DataTable.GetType().Name
-    Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $DataTable)"
-    Write-Verbose "Add-WordTable - Object Type: $ObjectType"
-    Write-Verbose "Add-WordTable - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
-    Write-Verbose "Add-WordTable - GetType Before Conversion: $ObjectType"
+    Write-Verbose "Convert-ObjectToProcess - GetType Before Conversion: $ObjectType"
+    #$($DataTable.GetType().BaseType.Name)
+    #$($DataTable.GetType().Name)
+    if ($($DataTable.GetType().BaseType.Name) -eq 'Array' -and $($DataTable.GetType().Name) -eq 'Object[]') {
+        Write-Verbose 'Convert-ObjectToProcess - Converting Array of Objects'
+        #if ($DataTable.Count -gt 1) {
+        $DataTable = $DataTable.ForEach( {[PSCustomObject]$_})
+        #}
+
+    }
+
+    $ObjectType = $DataTable.GetType().Name
+    Write-Verbose "Convert-ObjectToProcess - Table row count: $(Get-ObjectCount $DataTable)"
+    Write-Verbose "Convert-ObjectToProcess - Object Type: $ObjectType"
+    Write-Verbose "Convert-ObjectToProcess - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
+    Write-Verbose "Convert-ObjectToProcess - GetType Before Final Conversion: $ObjectType"
 
     If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-
+        Write-Verbose 'Convert-ObjectToProcess - Skipping select for Hashtable / OrderedDictionary'
     } else {
-        $DataTable = $DataTable | Select-Object *
+        Write-Verbose 'Convert-ObjectToProcess - Selecting all objects'
+        $DataTable = [array] ($DataTable | Select-Object *)
     }
 
     $ObjectType = $DataTable.GetType().Name
 
-    Write-Verbose "Add-WordTable - GetType After Conversion: $ObjectType"
-    return $DataTable
+    Write-Verbose "Convert-ObjectToProcess - GetType After Conversion: $ObjectType"
+    return , $DataTable
 }
