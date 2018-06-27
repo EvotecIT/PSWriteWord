@@ -57,21 +57,54 @@ function Add-WordTable {
     ### Verbose Information START
     #$Table | Get-Member | ft -a
     ### Verbose Information END
+    $ObjectType = $Table.GetType().Name
     Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $table)"
-    Write-Verbose "Add-WordTable - Name: $($Table.GetType().Name)"
+    Write-Verbose "Add-WordTable - Object Type: $ObjectType"
     Write-Verbose "Add-WordTable - BaseType.Name: $($Table.GetType().BaseType.Name)"
-    Write-Verbose "Add-WordTable - GetType Before Conversion:  $($Table.GetType().Name)"
+    Write-Verbose "Add-WordTable - GetType Before Conversion: $ObjectType"
     #$Table | ft -a
-    $Table = $Table | Select-Object *
-    #Write-Verbose "Check1"
-    #$table | ft -a
 
-    Write-Verbose "Add-WordTable - GetType After Conversion:  $($Table.GetType().Name)"
+    If ($ObjectType -eq 'Hashtable') {
 
-    if ($Table.GetType().Name -eq 'PSCustomObject') {
+    } else {
+        $Table = $Table | Select-Object *
+    }
+
+    $ObjectType = $Table.GetType().Name
+
+    Write-Verbose "Add-WordTable - GetType After Conversion: $ObjectType"
+
+    if ($ObjectType -eq 'Hashtable') {
         Write-Verbose 'Add-WordTable - Option 1'
-        $Titles = Get-ObjectTitles -Object $Table
+        $NumberRows = $Table.Count + 1
+        $NumberColumns = 2
 
+        Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
+        Write-Verbose "Add-WordTable - Titles: $([string] $Columns)"
+
+        if ($Paragraph -eq $null) {
+            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+        } else {
+            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
+            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
+        }
+
+        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        $Row = 1
+        foreach ($TableEntry in $Table.GetEnumerator()) {
+            $ColumnNrForTitle = 0
+            $ColumnNrForData = 1
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnNrForTitle -Value $TableEntry.Name
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnNrForData -Value $TableEntry.Value
+            Write-Verbose "Add-WordTable - RowNr: $Row / ColumnNr: $ColumnTitle Name: $($TableEntry.Name) Value: $($TableEntry.Value)"
+            $Row++
+
+        }
+    } elseif ($ObjectType -eq 'PSCustomObject') {
+        Write-Verbose 'Add-WordTable - Option 2'
+
+        $Titles = Get-ObjectTitles -Object $Table[0]
+        $Titles
         $NumberRows = $Titles.Count + 1
         $NumberColumns = 2
 
@@ -84,14 +117,8 @@ function Add-WordTable {
             $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
             $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
         }
-        #$WordTable.GetType()
-        $WordTable.Design = $Design
-
-        ### Uses $Columns from $top
-        #$Columns = 'Name', 'Value'
 
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
-        Write-Verbose "Add-WordTable - Titles: $Columns"
         $Row = 1
         foreach ($Title in $Titles) {
             $Value = Get-ObjectData -Object $Table -Title $Title -DoNotAddTitles
@@ -105,10 +132,9 @@ function Add-WordTable {
 
         }
     } elseif ($Table.GetType().Name -eq 'Object[]') {
-        write-verbose 'Add-WordTable - option 2'
+        write-verbose 'Add-WordTable - option 3'
 
         $Titles = Get-ObjectTitles -Object $Table[0]
-
 
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
         $NumberRows = $Table.Count + 1
@@ -123,7 +149,7 @@ function Add-WordTable {
             $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
             $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
         }
-        $WordTable.Design = $Design
+
 
         Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns
 
@@ -136,7 +162,7 @@ function Add-WordTable {
             }
         }
     } else {
-        Write-Verbose 'Add-WordTable - Option 3'
+        Write-Verbose 'Add-WordTable - Option 4'
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
         $Columns = ($Table | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
         #$Columns
@@ -152,7 +178,7 @@ function Add-WordTable {
             $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
             $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
         }
-        $WordTable.Design = $Design
+
 
         $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
 
@@ -168,6 +194,10 @@ function Add-WordTable {
         }
 
     }
+
+    $WordTable.Design = $Design
+
+
     if ($Supress -eq $false) { return $WordTable } else { return }
 }
 
@@ -192,4 +222,15 @@ function Set-WordTableBorder {
         [Border] $Border
     )
     $Table.SetBorder($TableBorderType, $Border)
+}
+
+function New-WordTable {
+
+
+    if ($Paragraph -eq $null) {
+        $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
+    } else {
+        $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
+        $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
+    }
 }
