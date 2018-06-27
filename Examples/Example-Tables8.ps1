@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePathDocumentWithTable = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables3.docx"
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables8.docx"
