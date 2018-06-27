@@ -38,3 +38,30 @@ function Add-WordTableCellValue {
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
     if ($Supress -eq $true) { return } else { return $Data }
 }
+
+function Convert-ObjectToProcess {
+    [CmdletBinding()]
+    param (
+        $DataTable
+    )
+    if ($DataTable.GetType().BaseType.Name -eq 'Array' -and $DataTable.GetType().Name -eq 'Object[]') {
+        Write-Verbose 'Add-WordTable - Converting Array of Objects'
+        $DataTable = $DataTable.ForEach( {[PSCustomObject]$_})
+    }
+    $ObjectType = $DataTable.GetType().Name
+    Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $DataTable)"
+    Write-Verbose "Add-WordTable - Object Type: $ObjectType"
+    Write-Verbose "Add-WordTable - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
+    Write-Verbose "Add-WordTable - GetType Before Conversion: $ObjectType"
+
+    If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
+
+    } else {
+        $DataTable = $DataTable | Select-Object *
+    }
+
+    $ObjectType = $DataTable.GetType().Name
+
+    Write-Verbose "Add-WordTable - GetType After Conversion: $ObjectType"
+    return $DataTable
+}
