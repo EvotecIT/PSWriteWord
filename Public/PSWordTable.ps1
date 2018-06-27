@@ -215,6 +215,23 @@ function Set-WordTableDirection {
     }
 }
 
+function Set-WordTablePageBreak {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [switch] $AfterTable,
+        [switch] $BeforeTable
+    )
+    if ($Table -ne $null) {
+        if ($BeforeTable) {
+            $Table.InsertPageBreakBeforeSelf()
+        }
+        if ($AfterTable) {
+            $Table.InsertPageBreakAfterSelf()
+        }
+    }
+}
+
 function Set-WordTable {
     [CmdletBinding()]
     param (
@@ -303,10 +320,22 @@ function Add-WordTableColumn {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [int] $Count = 1
+        [int] $Count = 1,
+        [nullable[int]] $Index,
+        [ValidateSet('Left', 'Right')] $Direction = 'Left'
     )
-    for ($i = 0; $i -le $Count; $i++) {
-        $Table.InsertColumn()
+    if ($Direction -eq 'Left') { $ColumnSide = $false} else { $ColumnSide = $true}
+
+    if ($Table -ne $null) {
+        if ($Index -ne $null) {
+            for ($i = 0; $i -lt $Count; $i++) {
+                $Table.InsertColumn($Index + $i, $ColumnSide)
+            }
+        } else {
+            for ($i = 0; $i -lt $Count; $i++) {
+                $Table.InsertColumn()
+            }
+        }
     }
 }
 
