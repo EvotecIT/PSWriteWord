@@ -4,8 +4,9 @@ function Get-ObjectTitles {
         $Object
     )
     $ArrayList = New-Object System.Collections.ArrayList
-    #$Object | ft -a
-    #$Object.Name  |ft -a
+    Write-Verbose "Get-ObjectTitles - ObjectType $($Object.GetType())"
+
+    #$Object |ft -a
 
     #$Object.PSObject | ft -AutoSize
 
