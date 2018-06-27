@@ -1,5 +1,5 @@
 ### prepare data
-$hash = @{}
+$hash = [ordered] @{}
 $hash.add("HQ-1", "5.54.546")
 $hash.add("EUR-1", "6.0.0.1")
 $hash.add("HQ-2", "5.6")
@@ -27,11 +27,11 @@ $myObject3 | Add-Member -type NoteProperty -name Memory -Value "2.5 GB"
 $myArray = @($obj, $myobject2, $myObject3)
 ### prepare data end
 
-Import-Module PSWriteWord #-Force
+Import-Module PSWriteWord -Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables6.docx"
 
 $WordDocument = New-WordDocument $FilePath
-Add-WordTable -WordDocument $WordDocument -Table $hash -Design 'ColorfulList' #-Verbose
+Add-WordTable -WordDocument $WordDocument -Table $hash -Design 'ColorfulList' -Verbose
 Add-WordParagraph -WordDocument $WordDocument
 Add-WordTable -WordDocument $WordDocument -Table $myArray -Design 'ColorfulList' #-Verbose
 
