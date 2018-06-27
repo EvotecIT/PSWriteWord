@@ -10,26 +10,7 @@ function Add-WordTable {
         [string[]]$Columns = @('Name', 'Value'),
         [bool] $Supress = $true
     )
-
-    if ($DataTable.GetType().BaseType.Name -eq 'Array' -and $DataTable.GetType().Name -eq 'Object[]') {
-        Write-Verbose 'Add-WordTable - Converting Array of Objects'
-        $DataTable = $DataTable.ForEach( {[PSCustomObject]$_})
-    }
-    $ObjectType = $DataTable.GetType().Name
-    Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $DataTable)"
-    Write-Verbose "Add-WordTable - Object Type: $ObjectType"
-    Write-Verbose "Add-WordTable - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
-    Write-Verbose "Add-WordTable - GetType Before Conversion: $ObjectType"
-
-    If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-
-    } else {
-        $DataTable = $DataTable | Select-Object *
-    }
-
-    $ObjectType = $DataTable.GetType().Name
-
-    Write-Verbose "Add-WordTable - GetType After Conversion: $ObjectType"
+    $DataTable = Convert-ObjectToProcess -DataTable $DataTable
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
