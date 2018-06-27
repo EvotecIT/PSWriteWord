@@ -314,9 +314,16 @@ function Copy-WordTableRow {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        $Row
+        $Row,
+        [nullable[int]] $Index
     )
-    $Table.InsertRow($Row)
+    if ($Table -ne $null) {
+        if ($Index -eq $null) {
+            $Table.InsertRow($Row)
+        } else {
+            $Table.InsertRow($Row, $Index)
+        }
+    }
 }
 
 
