@@ -54,17 +54,13 @@ function Add-WordTable {
         Write-Verbose 'Add-WordTable - Converting Array of Objects'
         $Table = $Table.ForEach( {[PSCustomObject]$_})
     }
-    ### Verbose Information START
-    #$Table | Get-Member | ft -a
-    ### Verbose Information END
     $ObjectType = $Table.GetType().Name
     Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $table)"
     Write-Verbose "Add-WordTable - Object Type: $ObjectType"
     Write-Verbose "Add-WordTable - BaseType.Name: $($Table.GetType().BaseType.Name)"
     Write-Verbose "Add-WordTable - GetType Before Conversion: $ObjectType"
-    #$Table | ft -a
 
-    If ($ObjectType -eq 'Hashtable') {
+    If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
 
     } else {
         $Table = $Table | Select-Object *
@@ -74,7 +70,7 @@ function Add-WordTable {
 
     Write-Verbose "Add-WordTable - GetType After Conversion: $ObjectType"
 
-    if ($ObjectType -eq 'Hashtable') {
+    if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
         $NumberRows = $Table.Count + 1
         $NumberColumns = 2
@@ -104,7 +100,7 @@ function Add-WordTable {
         Write-Verbose 'Add-WordTable - Option 2'
 
         $Titles = Get-ObjectTitles -Object $Table[0]
-        $Titles
+
         $NumberRows = $Titles.Count + 1
         $NumberColumns = 2
 
