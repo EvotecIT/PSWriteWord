@@ -51,3 +51,16 @@ function Copy-WordTableRow {
         }
     }
 }
+function Get-WordTableRow {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [switch] $RowsCount
+    )
+
+    if ($Table -ne $null) {
+        if ($RowsCount) {
+            return $Table.Rows.Count
+        }
+    }
+}
