@@ -8,17 +8,17 @@ Add-WordText -WordDocument $WordDocument -Text "This is a text, after which we a
 
 Add-WordSection -WordDocument $WordDocument -PageBreak
 $Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
-Add-WordTable -WordDocument $WordDocument -Table $Object1 -Design 'ColorfulList' #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $Object1 -Design 'ColorfulList' #-Verbose
 
 Add-WordText -WordDocument $WordDocument -Text "Then we do another pagebreak, and add another table" -FontSize 20
 Add-WordSection -WordDocument $WordDocument -PageBreak
 $Object2 = Get-PSDrive
-Add-WordTable -WordDocument $WordDocument -Table $Object2 -Design "LightShading" #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $Object2 -Design "LightShading" #-Verbose
 
 Add-WordText -WordDocument $WordDocument -Text "Then we do another pagebreak, and add another table" -FontSize 20
 Add-WordSection -WordDocument $WordDocument -PageBreak
 $Object3 = $Object1 | Select-Object ProcessName, Site, StartTime
-Add-WordTable -WordDocument $WordDocument -Table $Object3 -Design 'ColorfulList' #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $Object3 -Design 'ColorfulList' #-Verbose
 
 
 Save-WordDocument $WordDocument

@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 Import-Module ActiveDirectory
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables1.docx"
@@ -24,15 +24,15 @@ $WordDocument = New-WordDocument $FilePath
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.RootDSE -Design LightShading  -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE -Design LightShading  -Verbose
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Forest Information" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.ForestInformation -Design LightShading #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.ForestInformation -Design LightShading #-Verbose
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -Table $ADSnapshot.DomainInformation -Design LightShading #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation -Design LightShading #-Verbose
 
 Save-WordDocument $WordDocument
 

@@ -31,9 +31,9 @@ Import-Module PSWriteWord #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables6.docx"
 
 $WordDocument = New-WordDocument $FilePath
-Add-WordTable -WordDocument $WordDocument -Table $hash -Design 'ColorfulList' -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design 'ColorfulList' -Verbose
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -Table $myArray -Design 'ColorfulList' #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design 'ColorfulList' #-Verbose
 
 Save-WordDocument $WordDocument
 Invoke-Item $FilePath

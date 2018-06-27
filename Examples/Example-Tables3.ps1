@@ -34,7 +34,7 @@ $InvoiceData += $InvoiceEntry5
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -FontSize 15 -Alignment center
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -Table $InvoiceData -Design LightShading # -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading # -Verbose
 
 Save-WordDocument $WordDocument
 
