@@ -8,6 +8,7 @@ function Add-WordTable {
         [TableDesign] $Design = [TableDesign]::ColorfulList,
         [int] $MaximumColumns = 5,
         [string[]]$Columns = @('Name', 'Value'),
+        [bool] $DoNotAddTitle = $false,
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
@@ -22,7 +23,7 @@ function Add-WordTable {
 
         $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
 
-        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
         $Row = 1
         foreach ($TableEntry in $DataTable.GetEnumerator()) {
             $ColumnNrForTitle = 0
@@ -46,7 +47,7 @@ function Add-WordTable {
 
         $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
 
-        Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
         $Row = 1
         foreach ($Title in $Titles) {
             $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
@@ -73,7 +74,7 @@ function Add-WordTable {
 
         $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
 
-        Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns
+        if (-not $DoNotAddTitle) {  Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns }
 
         for ($b = 0; $b -lt $NumberRows - 1; $b++) {
             $a = 0
@@ -96,7 +97,7 @@ function Add-WordTable {
 
         $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
 
-        $Titles = Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
+        if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
 
         for ($b = 1; $b -lt $NumberRows; $b++) {
             $a = 0
