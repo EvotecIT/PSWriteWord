@@ -6,6 +6,9 @@ function Add-WordTableTitle {
         $MaximumColumns
     )
     Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) "
+
+    #$Titles
+
     #Write-Color "Title Count $($Titles.Count) " -Color Yellow
     for ($a = 0; $a -lt $Titles.Count; $a++) {
         if ($Titles[$a] -is [string]) {
@@ -58,16 +61,22 @@ function Add-WordTable {
     Write-Verbose "Add-WordTable - Name: $($Table.GetType().Name)"
     Write-Verbose "Add-WordTable - BaseType.Name: $($Table.GetType().BaseType.Name)"
     Write-Verbose "Add-WordTable - GetType Before Conversion:  $($Table.GetType().Name)"
+    #$Table | ft -a
     $Table = $Table | Select-Object *
+    #Write-Verbose "Check1"
+    #$table | ft -a
+
     Write-Verbose "Add-WordTable - GetType After Conversion:  $($Table.GetType().Name)"
 
     if ($Table.GetType().Name -eq 'PSCustomObject') {
         Write-Verbose 'Add-WordTable - Option 1'
         $Titles = Get-ObjectTitles -Object $Table
-        #$Titles
 
         $NumberRows = $Titles.Count + 1
         $NumberColumns = 2
+
+        Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
+        Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
 
         if ($Paragraph -eq $null) {
             $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
@@ -98,12 +107,14 @@ function Add-WordTable {
     } elseif ($Table.GetType().Name -eq 'Object[]') {
         write-verbose 'Add-WordTable - option 2'
 
-        $Titles = Get-ObjectTitles -Object $Table
+        $Titles = Get-ObjectTitles -Object $Table[0]
+
 
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
         $NumberRows = $Table.Count + 1
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
+        Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
         if ($Paragraph -eq $null) {
