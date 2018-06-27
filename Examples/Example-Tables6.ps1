@@ -47,7 +47,7 @@ Add-WordParagraph -WordDocument $WordDocument
 Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulGrid -Columns 'My Name', 'My Value'
 Add-WordParagraph -WordDocument $WordDocument
 
-Add-WordTable -WordDocument $WordDocument -DataTable $hash1 -Design ColorfulGrid -Columns 'My Name', 'My Value'
+Add-WordTable -WordDocument $WordDocument -DataTable $hash1 -Design ColorfulGrid -Columns 'My Name', 'My Value' -AutoFit Window
 Add-WordParagraph -WordDocument $WordDocument
 
 Add-WordTable -WordDocument $WordDocument -DataTable $hash2 -Design ColorfulGrid -Columns 'My Name', 'My Value'

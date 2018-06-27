@@ -17,11 +17,27 @@ $InvoiceData1 += $InvoiceEntry1
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries" -FontSize 15 -Alignment center
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading #-Verbose
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry" -FontSize 15 -Alignment center
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading #-Verbose
+
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - autofit to contents" -FontSize 15 -Alignment center
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -AutoFit Contents #-Verbose
+
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - autofit to window" -FontSize 15 -Alignment center
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -AutoFit Window
+
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - direction right to left" -FontSize 15 -Alignment center
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Direction RightToLeft  #-Verbose
+
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - with break page before table" -FontSize 15 -Alignment center
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -BreakPageBeforeTable
 
 Save-WordDocument $WordDocument -Language 'en-US'
 
