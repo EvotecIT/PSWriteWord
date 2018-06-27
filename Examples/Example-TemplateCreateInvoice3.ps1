@@ -25,25 +25,37 @@ Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientMail'  -Value 'f
 $ParagraphsWithPictures = Get-WordPicture -WordDocument $WordDocument -ListParagraphs
 Set-WordPicture -WordDocument $WordDocument -Paragraph $ParagraphsWithPictures[0] -ImagePath $FilePathImage -ImageWidth 100 -ImageHeight 40
 
-
 $InvoiceEntry1 = @{}
 $InvoiceEntry1.Description = 'IT Services 1'
 $InvoiceEntry1.Amount = '$200'
 
 $InvoiceEntry2 = @{}
-$InvoiceEntry2.Description = 'IT Services 1'
-$InvoiceEntry2.Amount = '$200'
+$InvoiceEntry2.Description = 'IT Services 2'
+$InvoiceEntry2.Amount = '$300'
+
+$InvoiceEntry3 = @{}
+$InvoiceEntry3.Description = 'IT Services 3'
+$InvoiceEntry3.Amount = '$288'
+
+$InvoiceEntry4 = @{}
+$InvoiceEntry4.Description = 'IT Services 4'
+$InvoiceEntry4.Amount = '$301'
+
+$InvoiceEntry5 = @{}
+$InvoiceEntry5.Description = 'IT Services 5'
+$InvoiceEntry5.Amount = '$299'
 
 $InvoiceData = @()
 $InvoiceData += $InvoiceEntry1
 $InvoiceData += $InvoiceEntry2
-
+$InvoiceData += $InvoiceEntry3
+$InvoiceData += $InvoiceEntry4
+$InvoiceData += $InvoiceEntry5
 
 $LastTable = Get-WordTable -WordDocument $WordDocument -LastTable
 $RowsToRemove = $LastTable.Rows.Count - 1
 Remove-WordTableRow -Table $LastTable -Count $RowsToRemove
-
-
+Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Verbose
 
 Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice
 ### Start Word with file
