@@ -1,9 +1,46 @@
 function Add-WordFooter {
+    [CmdletBinding()]
     param (
-
+        [Xceed.Words.NET.Container]$WordDocument,
+        [nullable[bool]] $DifferentFirstPage,
+        [nullable[bool]] $DifferentOddAndEvenPages,
+        [bool] $Supress = $true
     )
+    #$WordDocument.AddFooters()
+
+    if ($DifferentOddAndEvenPages -ne $null ) { $WordDocument.DifferentFirstPage = $DifferentFirstPage }
+    if ($DifferentOddAndEvenPages -ne $null ) { $WordDocument.DifferentOddAndEvenPages = $DifferentOddAndEvenPages }
+
+    if ($Supress) { return } else { return $WordDocument.Footers }
 }
 
+function Add-WordHeader {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [bool] $Supress = $true
+    )
+    $WordDocument.AddHeaders()
+    if ($Supress) { return } else { return $WordDocument.Headers }
+}
+
+function Get-WordHeader {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [bool] $Supress = $true
+    )
+
+}
+
+function Get-WordFooter {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.Container]$WordDocument,
+        [bool] $Supress = $true
+    )
+
+}
 
 <#
     /// <summary>
