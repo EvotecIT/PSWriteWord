@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables7.docx"
 
@@ -14,7 +14,7 @@ $InvoiceData += $InvoiceEntry2
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -Table $InvoiceData -Design LightShading  -Verbose
+Add-WordTable -WordDocument $WordDocument -Table $InvoiceData -Design LightShading #-Verbose
 
 Save-WordDocument $WordDocument
 
