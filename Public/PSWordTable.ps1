@@ -101,7 +101,7 @@ function Add-WordTable {
         $Titles = Get-ObjectTitles -Object $Table
 
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
-        $NumberRows = $Table.Count
+        $NumberRows = $Table.Count + 1
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
@@ -116,10 +116,10 @@ function Add-WordTable {
 
         Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns
 
-        for ($b = 1; $b -lt $NumberRows; $b++) {
+        for ($b = 0; $b -lt $NumberRows - 1; $b++) {
             $a = 0
             foreach ($Title in $Titles) {
-                $Data = Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable -Row $($b + 1) -Column $a -Value $Table[$b].$Title
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
             }
