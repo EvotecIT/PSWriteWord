@@ -10,7 +10,7 @@ $myitems = @(
 
 $WordDocument = New-WordDocument $FilePath
 
-Add-WordTable -WordDocument $WordDocument -Table $myitems -Design 'ColorfulList' #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $myitems -Design 'ColorfulList' #-Verbose
 
 Save-WordDocument $WordDocument
 
