@@ -184,7 +184,7 @@ function Get-WordTable {
         return  $WordDocument.Tables
     }
     if ($TableID -ne $null) {
-        return $WordDocument.Pictures[$TableID]
+        return $WordDocument.Tables[$TableID]
     }
 }
 
