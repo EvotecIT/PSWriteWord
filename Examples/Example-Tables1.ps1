@@ -18,13 +18,13 @@ $ADSnapshot.ForestInformation = $(
 $ADSnapshot.DomainInformation = $(Get-ADDomain)
 # Get basic Ad information end
 
-Clear-Host
+#Clear-Host
 
 $WordDocument = New-WordDocument $FilePath
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE -Design LightShading # -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE -Design LightShading  #-Verbose
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Forest Information" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument

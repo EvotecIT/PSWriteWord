@@ -6,6 +6,16 @@ $hash.add("HQ-2", "5.6")
 $hash.add("EUR-2", "6.1.5")
 $hash.add("EUR-3", "6.2")
 
+$hash1 = @{}
+$hash1.add("HQ-1", "5.54.546")
+$hash1.add("EUR-1", "6.0.0.1")
+$hash1.add("HQ-2", "5.6")
+$hash1.add("EUR-2", "6.1.5")
+$hash1.add("EUR-3", "6.2")
+
+$hash2 = @{}
+$hash2.add("HQ-1", "5.54.546")
+
 $obj = New-Object System.Object
 $obj | Add-Member -type NoteProperty -name Name -Value "Ryan_PC"
 $obj | Add-Member -type NoteProperty -name Manufacturer -Value "Dell"
@@ -35,6 +45,12 @@ Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulList 
 Add-WordParagraph -WordDocument $WordDocument
 
 Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulGrid -Columns 'My Name', 'My Value'
+Add-WordParagraph -WordDocument $WordDocument
+
+Add-WordTable -WordDocument $WordDocument -DataTable $hash1 -Design ColorfulGrid -Columns 'My Name', 'My Value'
+Add-WordParagraph -WordDocument $WordDocument
+
+Add-WordTable -WordDocument $WordDocument -DataTable $hash2 -Design ColorfulGrid -Columns 'My Name', 'My Value'
 Add-WordParagraph -WordDocument $WordDocument
 
 Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulList #-Verbose

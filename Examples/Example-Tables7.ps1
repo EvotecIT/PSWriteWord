@@ -12,9 +12,16 @@ $InvoiceData = @()
 $InvoiceData += $InvoiceEntry1
 $InvoiceData += $InvoiceEntry2
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -FontSize 15
+$InvoiceData1 = @()
+$InvoiceData1 += $InvoiceEntry1
+
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries" -FontSize 15 -Alignment center
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Verbose
+
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry" -FontSize 15 -Alignment center
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -Verbose
 
 Save-WordDocument $WordDocument -Language 'en-US'
 
