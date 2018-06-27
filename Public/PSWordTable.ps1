@@ -5,10 +5,10 @@ function Add-WordTable {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.InsertBeforeOrAfter]$Table,
         [ValidateNotNullOrEmpty()]$DataTable,
-        [TableDesign] $Design = [TableDesign]::ColorfulList,
+        [TableDesign] $Design,
         [int] $MaximumColumns = 5,
         [string[]]$Columns = @('Name', 'Value'),
-        [bool] $DoNotAddTitle = $false,
+        [switch] $DoNotAddTitle,
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
@@ -21,8 +21,12 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Columns)"
 
-        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
-
+        if ($Table -eq $null) {
+            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        } else {
+            $WordTable = $Table
+            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+        }
         if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
         $Row = 1
         foreach ($TableEntry in $DataTable.GetEnumerator()) {
@@ -45,8 +49,12 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
 
-        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
-
+        if ($Table -eq $null) {
+            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        } else {
+            $WordTable = $Table
+            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+        }
         if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
         $Row = 1
         foreach ($Title in $Titles) {
@@ -72,8 +80,12 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
-
+        if ($Table -eq $null) {
+            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        } else {
+            $WordTable = $Table
+            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+        }
         if (-not $DoNotAddTitle) {  Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns }
 
         for ($b = 0; $b -lt $NumberRows - 1; $b++) {
@@ -95,7 +107,12 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
-        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        if ($Table -eq $null) {
+            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        } else {
+            $WordTable = $Table
+            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+        }
 
         if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
 
@@ -111,9 +128,9 @@ function Add-WordTable {
         }
 
     }
-
-    $WordTable.Design = $Design
-
+    if ($Design -ne $null) {
+        $WordTable.Design = $Design
+    }
 
     if ($Supress -eq $false) { return $WordTable } else { return }
 }
@@ -138,7 +155,6 @@ function New-WordTable {
         [int] $NrColumns,
         [bool] $Supress = $true
     )
-
     if ($Paragraph -eq $null) {
         $WordTable = $WordDocument.InsertTable($NrRows, $NrColumns)
     } else {
