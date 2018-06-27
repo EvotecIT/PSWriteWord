@@ -75,7 +75,7 @@ function Add-WordTable {
             $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
             $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
         }
-
+        #$WordTable.GetType()
         $WordTable.Design = $Design
 
         ### Uses $Columns from $top
@@ -158,4 +158,27 @@ function Add-WordTable {
 
     }
     if ($Supress -eq $false) { return $WordTable } else { return }
+}
+
+function New-WordTableBorder {
+    [CmdletBinding()]
+    param (
+        [BorderStyle] $BorderStyle,
+        [BorderSize] $BorderSize,
+        [int] $BorderSpace,
+        [System.Drawing.Color] $BorderColor
+    )
+
+    $Border = New-Object -TypeName Xceed.Words.NET.Border -ArgumentList $BorderStyle, $BorderSize, $BorderSpace, $BorderColor
+    return $Border
+}
+
+function Set-WordTableBorder {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [TableBorderType] $TableBorderType,
+        [Border] $Border
+    )
+    $Table.SetBorder($TableBorderType, $Border)
 }
