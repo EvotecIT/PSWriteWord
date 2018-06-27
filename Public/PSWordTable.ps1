@@ -240,6 +240,38 @@ function Remove-WordTable {
 
 }
 
+function Add-WordTableRow {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [int] $Count = 1
+    )
+    for ($i = 0; $i -le $Count; $i++) {
+        $Table.InsertRow()
+    }
+}
+
+function Add-WordTableColumn {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [int] $Count = 1
+    )
+    for ($i = 0; $i -le $Count; $i++) {
+        $Table.InsertColumn()
+    }
+}
+
+function Copy-WordTableRow {
+    [CmdletBinding()]
+    param (
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        $Row
+    )
+    $Table.InsertRow($Row)
+}
+
+
 function New-WordTable {
     [CmdletBinding()]
     param (
