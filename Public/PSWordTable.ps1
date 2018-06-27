@@ -3,6 +3,7 @@ function Add-WordTable {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [Xceed.Words.NET.InsertBeforeOrAfter]$Table,
         [ValidateNotNullOrEmpty()]$DataTable,
         [TableDesign] $Design = [TableDesign]::ColorfulList,
         [int] $MaximumColumns = 5,
@@ -38,12 +39,7 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Columns)"
 
-        if ($Paragraph -eq $null) {
-            $WordTable = $WordDocument.InsertTable($NumberRows, $NumberColumns)
-        } else {
-            $TableDefinition = $WordDocument.AddTable($NumberRows, $NumberColumns)
-            $WordTable = $Paragraph.InsertTableAfterSelf($TableDefinition)
-        }
+        $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
 
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
         $Row = 1
