@@ -12,6 +12,7 @@ function Add-WordTable {
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
+    $ObjectType = $DataTable.GetType().Name
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
@@ -100,7 +101,6 @@ function Add-WordTable {
         Write-Verbose 'Add-WordTable - Option 4'
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
         $Columns = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
-        #$Columns
         $NumberColumns = if ($Columns.Count -ge $MaximumColumns) { $MaximumColumns } else { $Columns.Count }
         $NumberRows = $DataTable.Count
 
@@ -128,7 +128,7 @@ function Add-WordTable {
         }
 
     }
-    if ($Design -ne $null) {
+    if ($WordTable -ne $null -and $Design -ne $null) {
         $WordTable.Design = $Design
     }
 
@@ -145,7 +145,6 @@ function Remove-WordTable {
     }
 
 }
-
 function New-WordTable {
     [CmdletBinding()]
     param (
@@ -155,6 +154,8 @@ function New-WordTable {
         [int] $NrColumns,
         [bool] $Supress = $true
     )
+    Write-Verbose "New-WordTable - Paragraph $Paragraph"
+    Write-Verbose "New-WordTable - NrRows $NrRows NrColumns $NrColumns Supress $supress"
     if ($Paragraph -eq $null) {
         $WordTable = $WordDocument.InsertTable($NrRows, $NrColumns)
     } else {
@@ -163,7 +164,6 @@ function New-WordTable {
     }
     if ($Supress) { return } else { return $WordTable }
 }
-
 function Get-WordTable {
     [CmdletBinding()]
     param (
@@ -184,7 +184,6 @@ function Get-WordTable {
         return $WordDocument.Tables[$TableID]
     }
 }
-
 function Copy-WordTable {
     [CmdletBinding()]
     param (
