@@ -43,36 +43,36 @@ function Add-WordTable {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [ValidateNotNullOrEmpty()]$Table,
+        [ValidateNotNullOrEmpty()]$DataTable,
         [TableDesign] $Design = [TableDesign]::ColorfulList,
         [int] $MaximumColumns = 5,
         [string[]]$Columns = @('Name', 'Value'),
         [bool] $Supress = $true
     )
 
-    if ($Table.GetType().BaseType.Name -eq 'Array' -and $Table.GetType().Name -eq 'Object[]') {
+    if ($DataTable.GetType().BaseType.Name -eq 'Array' -and $DataTable.GetType().Name -eq 'Object[]') {
         Write-Verbose 'Add-WordTable - Converting Array of Objects'
-        $Table = $Table.ForEach( {[PSCustomObject]$_})
+        $DataTable = $DataTable.ForEach( {[PSCustomObject]$_})
     }
-    $ObjectType = $Table.GetType().Name
-    Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $table)"
+    $ObjectType = $DataTable.GetType().Name
+    Write-Verbose "Add-WordTable - Table row count: $(Get-ObjectCount $DataTable)"
     Write-Verbose "Add-WordTable - Object Type: $ObjectType"
-    Write-Verbose "Add-WordTable - BaseType.Name: $($Table.GetType().BaseType.Name)"
+    Write-Verbose "Add-WordTable - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
     Write-Verbose "Add-WordTable - GetType Before Conversion: $ObjectType"
 
     If ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
 
     } else {
-        $Table = $Table | Select-Object *
+        $DataTable = $DataTable | Select-Object *
     }
 
-    $ObjectType = $Table.GetType().Name
+    $ObjectType = $DataTable.GetType().Name
 
     Write-Verbose "Add-WordTable - GetType After Conversion: $ObjectType"
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
-        $NumberRows = $Table.Count + 1
+        $NumberRows = $DataTable.Count + 1
         $NumberColumns = 2
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
@@ -87,7 +87,7 @@ function Add-WordTable {
 
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
         $Row = 1
-        foreach ($TableEntry in $Table.GetEnumerator()) {
+        foreach ($TableEntry in $DataTable.GetEnumerator()) {
             $ColumnNrForTitle = 0
             $ColumnNrForData = 1
             $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnNrForTitle -Value $TableEntry.Name
@@ -99,7 +99,7 @@ function Add-WordTable {
     } elseif ($ObjectType -eq 'PSCustomObject') {
         Write-Verbose 'Add-WordTable - Option 2'
 
-        $Titles = Get-ObjectTitles -Object $Table[0]
+        $Titles = Get-ObjectTitles -Object $DataTable[0]
 
         $NumberRows = $Titles.Count + 1
         $NumberColumns = 2
@@ -112,7 +112,7 @@ function Add-WordTable {
         Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns
         $Row = 1
         foreach ($Title in $Titles) {
-            $Value = Get-ObjectData -Object $Table -Title $Title -DoNotAddTitles
+            $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
 
             $ColumnTitle = 0
             $ColumnData = 1
@@ -122,13 +122,13 @@ function Add-WordTable {
             $Row++
 
         }
-    } elseif ($Table.GetType().Name -eq 'Object[]') {
+    } elseif ($DataTable.GetType().Name -eq 'Object[]') {
         write-verbose 'Add-WordTable - option 3'
 
-        $Titles = Get-ObjectTitles -Object $Table[0]
+        $Titles = Get-ObjectTitles -Object $DataTable[0]
 
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
-        $NumberRows = $Table.Count + 1
+        $NumberRows = $DataTable.Count + 1
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
@@ -141,7 +141,7 @@ function Add-WordTable {
         for ($b = 0; $b -lt $NumberRows - 1; $b++) {
             $a = 0
             foreach ($Title in $Titles) {
-                $Data = Add-WordTableCellValue -Table $WordTable -Row $($b + 1) -Column $a -Value $Table[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable -Row $($b + 1) -Column $a -Value $DataTable[$b].$Title
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
             }
@@ -149,10 +149,10 @@ function Add-WordTable {
     } else {
         Write-Verbose 'Add-WordTable - Option 4'
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
-        $Columns = ($Table | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
+        $Columns = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
         #$Columns
         $NumberColumns = if ($Columns.Count -ge $MaximumColumns) { $MaximumColumns } else { $Columns.Count }
-        $NumberRows = $Table.Count
+        $NumberRows = $DataTable.Count
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
@@ -164,7 +164,7 @@ function Add-WordTable {
         for ($b = 1; $b -lt $NumberRows; $b++) {
             $a = 0
             foreach ($Title in $Columns.Name) {
-                $Data = Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $Table[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $DataTable[$b].$Title
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
 
@@ -198,15 +198,20 @@ function Set-WordTableBorder {
     param (
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [TableBorderType] $TableBorderType,
-        [Border] $Border
+        $Border
     )
+    #$Border.GetType()
+    if ($Table -eq $null) {
+        throw 'Table is $null - make sure to use $Supress = $False on Table Creation'
+        return
+    }
     $Table.SetBorder($TableBorderType, $Border)
 }
 
 function New-WordTable {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [int] $NrRows,
         [int] $NrColumns,
@@ -221,3 +226,37 @@ function New-WordTable {
     }
     if ($Supress) { return } else { return $WordTable }
 }
+
+function Get-WordTable {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [switch] $ListTables,
+        [nullable[int]] $TableID
+    )
+
+
+    if ($ListTables) {
+        return  $WordDocument.Tables
+    }
+    if ($TableID -ne $null) {
+        return $WordDocument.Pictures[$TableID]
+    }
+}
+
+function Copy-WordTable {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        $TableFrom
+    )
+}
+
+<#
+public Table AddTable( int rowCount, int columnCount )
+public new Table InsertTable( int rowCount, int columnCount )
+public new Table InsertTable( int index, Table t )
+
+#>
