@@ -27,7 +27,7 @@ $myObject3 | Add-Member -type NoteProperty -name Memory -Value "2.5 GB"
 $myArray = @($obj, $myobject2, $myObject3)
 ### prepare data end
 
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables6.docx"
 
 $WordDocument = New-WordDocument $FilePath
