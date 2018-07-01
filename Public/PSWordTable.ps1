@@ -50,14 +50,24 @@ function Add-WordTable {
                 -Bold $Bold[0] `
                 -Italic $Italic[0]
         }
-        $Row = 1
+        $RowNr = 1
         foreach ($TableEntry in $DataTable.GetEnumerator()) {
             $ColumnNrForTitle = 0
             $ColumnNrForData = 1
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnNrForTitle -Value $TableEntry.Name
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnNrForData -Value $TableEntry.Value
-            Write-Verbose "Add-WordTable - RowNr: $Row / ColumnNr: $ColumnTitle Name: $($TableEntry.Name) Value: $($TableEntry.Value)"
-            $Row++
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNrForTitle -Value $TableEntry.Name `
+                -Color $Color[$RowNr] `
+                -FontSize $FontSize[$RowNr] `
+                -FontFamily $FontFamily[$RowNr] `
+                -Bold $Bold[$RowNr] `
+                -Italic $Italic[$RowNr]
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNrForData -Value $TableEntry.Value `
+                -Color $Color[$RowNr] `
+                -FontSize $FontSize[$RowNr] `
+                -FontFamily $FontFamily[$RowNr] `
+                -Bold $Bold[$RowNr] `
+                -Italic $Italic[$RowNr]
+            Write-Verbose "Add-WordTable - RowNr: $RowNr / ColumnNr: $ColumnTitle Name: $($TableEntry.Name) Value: $($TableEntry.Value)"
+            $RowNr++
 
         }
     } elseif ($ObjectType -eq 'PSCustomObject') {
@@ -87,16 +97,26 @@ function Add-WordTable {
                 -Bold $Bold[0] `
                 -Italic $Italic[0]
         }
-        $Row = 1
+        $RowNr = 1
         foreach ($Title in $Titles) {
             $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
-
             $ColumnTitle = 0
             $ColumnData = 1
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnTitle -Value $Title
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $Row -Column $ColumnData -Value $Value
-            Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $Row "
-            $Row++
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnTitle -Value $Title `
+                -Color $Color[$RowNr] `
+                -FontSize $FontSize[$RowNr] `
+                -FontFamily $FontFamily[$RowNr] `
+                -Bold $Bold[$RowNr] `
+                -Italic $Italic[$RowNr]
+
+            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnData -Value $Value `
+                -Color $Color[$RowNr] `
+                -FontSize $FontSize[$RowNr] `
+                -FontFamily $FontFamily[$RowNr] `
+                -Bold $Bold[$RowNr] `
+                -Italic $Italic[$RowNr]
+            Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $RowNr "
+            $RowNr++
 
         }
     } elseif ($DataTable.GetType().Name -eq 'Object[]') {
@@ -128,11 +148,18 @@ function Add-WordTable {
                 -Italic $Italic[0]
         }
         for ($b = 0; $b -lt $NumberRows - 1; $b++) {
-            $a = 0
+            $ColumnNr = 0
             foreach ($Title in $Titles) {
-                $Data = Add-WordTableCellValue -Table $WordTable -Row $($b + 1) -Column $a -Value $DataTable[$b].$Title
-                if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
-                $a++
+                $RowNr = $($b + 1)
+                $Value = $DataTable[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNr -Value $Value `
+                    -Color $Color[$RowNr] `
+                    -FontSize $FontSize[$RowNr] `
+                    -FontFamily $FontFamily[$RowNr] `
+                    -Bold $Bold[$RowNr] `
+                    -Italic $Italic[$RowNr]
+                if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
+                $ColumnNr++
             }
         }
     } else {
@@ -162,17 +189,22 @@ function Add-WordTable {
                 -Bold $Bold[0] `
                 -Italic $Italic[0]
         }
-        for ($b = 1; $b -lt $NumberRows; $b++) {
-            $a = 0
+        for ($RowNr = 1; $RowNr -lt $NumberRows; $RowNr++) {
+            $ColumnNr = 0
             foreach ($Title in $Columns.Name) {
+                $Value = $DataTable[$RowNr].$Title
                 $Data = Add-WordTableCellValue -Table $WordTable `
-                    -Row $b `
-                    -Column $a `
-                    -Value $DataTable[$b].$Title
+                    -Row $RowNr `
+                    -Column $ColumnNr `
+                    -Value $Value `
+                    -Color $Color[$RowNr] `
+                    -FontSize $FontSize[$RowNr] `
+                    -FontFamily $FontFamily[$RowNr] `
+                    -Bold $Bold[$RowNr] `
+                    -Italic $Italic[$RowNr]
 
-
-                if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
-                $a++
+                if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
+                $ColumnNr++
 
 
             }
