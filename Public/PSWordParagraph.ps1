@@ -65,8 +65,8 @@ function Add-WordText {
         } else {
             $p = $p.Append($Text[$i])
         }
-        $p = $p | Set-WordTextColor -Color $Color
-        $p = $p | Set-WordTextFontSize -FontSize $FontSize
+        $p = Set-WordTextColor -Paragraph $p -Color $Color[$i] -Supress $false
+        $p = Set-WordTextFontSize -Paragraph $p -FontSize $FontSize[$i] -Supress $false
 
         if ($FontFamily[$i] -ne $null) {
             $p = $p.Font($FontFamily[$i])
@@ -184,27 +184,23 @@ function Set-WordText {
 function Set-WordTextFontSize {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [alias ("S")] [double] $FontSize,
+        [alias ("S")] [nullable[double]] $FontSize,
         [bool] $Supress = $true
     )
-    if ($Paragraph -ne $null) {
-        if ($FontSize -ne $null) {
-            $Paragraph = $Paragraph.FontSize($FontSize)
-            if ($Supress) { return } else { return $Paragraph }
-        }
+    if ($Paragraph -ne $null -and $FontSize -ne $null) {
+        $Paragraph = $Paragraph.FontSize($FontSize)
     }
+    if ($Supress) { return } else { return $Paragraph }
 }
 
 function Set-WordTextColor {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [alias ("C")] [System.Drawing.Color] $Color,
+        [alias ("C")] [nullable[System.Drawing.Color]] $Color,
         [bool] $Supress = $true
     )
-    if ($Paragraph -ne $null) {
-        if ($Color -ne $null) {
-            $Paragraph = $Paragraph.Color($Color[$i])
-            if ($Supress) { return } else { return $Paragraph }
-        }
+    if ($Paragraph -ne $null -and $Color -ne $null) {
+        $Paragraph = $Paragraph.Color($Color[$i])
     }
+    if ($Supress) { return } else { return $Paragraph }
 }
