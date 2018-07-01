@@ -27,7 +27,7 @@ function Add-WordTableTitle {
 function Add-WordTableCellValue {
     [CmdletBinding()]
     param(
-        $Table,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         $Row,
         $Column,
         $Value,
