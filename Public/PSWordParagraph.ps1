@@ -171,8 +171,11 @@ function Set-WordText {
         [Direction[]] $Direction = @(),
         [bool] $Supress = $true
     )
-    $Paragraph | Set-WordTextColor -Color $Color
-    $Paragraph | Set-WordTextFontSize -FontSize $FontSize
+    $Paragraph = $Paragraph | Set-WordTextColor -Color $Color -Supress $false
+    $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize -Supress $false
+    $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily -Supress $false
+    $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold -Supress $false
+    $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic -Supress $false
 }
 
 function Set-WordTextFontSize {
