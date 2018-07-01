@@ -3,7 +3,13 @@ function Add-WordTableTitle {
     param(
         $Table,
         $Titles,
-        $MaximumColumns
+        $MaximumColumns,
+        [alias ("C")] [nullable[System.Drawing.Color]]$Color,
+        [alias ("S")] [nullable[double]] $FontSize,
+        [alias ("FontName")] [string] $FontFamily,
+        [alias ("B")] [nullable[bool]] $Bold,
+        [alias ("I")] [nullable[bool]] $Italic,
+        [bool] $Supress = $true
     )
     Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) "
 
@@ -18,7 +24,16 @@ function Add-WordTableTitle {
             $ColumnName = $Titles[$a].Name
         }
         Write-Verbose "Add-WordTableTitle - Column Name: $ColumnName"
-        Add-WordTableCellValue -Table $Table -Row 0 -Column $a -Value $ColumnName -Supress $Supress
+        Add-WordTableCellValue -Table $Table `
+            -Row 0 `
+            -Column $a `
+            -Value $ColumnName `
+            -Color $Color `
+            -FontSize $FontSize `
+            -FontFamily $FontFamily `
+            -Bold $Bold `
+            -Italic $Italic `
+            -Supress $Supress
         if ($a -eq $($MaximumColumns - 1)) {
             break;
         }
@@ -28,14 +43,20 @@ function Add-WordTableCellValue {
     [CmdletBinding()]
     param(
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        $Row,
-        $Column,
+        [int] $Row,
+        [int] $Column,
         $Value,
-        $Paragraph = 0,
+        [int] $Paragraph = 0,
+        [alias ("C")] [nullable[System.Drawing.Color]]$Color,
+        [alias ("S")] [nullable[double]] $FontSize,
+        [alias ("FontName")] [string] $FontFamily,
+        [alias ("B")] [nullable[bool]] $Bold,
+        [alias ("I")] [nullable[bool]] $Italic,
         [bool] $Supress = $true
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value"
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
+    $Data = $Data | Set-WordText -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic -Supress $Supress
     if ($Supress -eq $true) { return } else { return $Data }
 }
 
