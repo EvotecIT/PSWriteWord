@@ -3,6 +3,9 @@ PSWriteWord is powershell module to create Microsoft Word documents without Micr
 
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
+Updates:
+- 0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
+
 ###### Dedicated word functions
 
 ```
