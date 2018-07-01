@@ -20,7 +20,7 @@ $myArray = @($obj, $myobject2, $myObject3)
 ### prepare data end
 
 Import-Module PSWriteWord #-Force
-$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables6.docx"
+$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables10.docx"
 
 $WordDocument = New-WordDocument $FilePath
 Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid
