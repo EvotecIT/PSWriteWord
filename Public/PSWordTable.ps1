@@ -20,6 +20,10 @@ function Add-WordTable {
         [alias ("B")] [bool[]] $Bold = @(),
         [alias ("I")] [bool[]] $Italic = @(),
 
+        [float[]] $ColummnWidth = @(),
+        [nullable[float]] $TableWidth = $null,
+        [bool] $Percentage,
+
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
@@ -212,11 +216,13 @@ function Add-WordTable {
 
     }
 
+    $WordTable | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage
+
     $WordTable | Set-WordTable -Direction $Direction `
         -AutoFit $AutoFit `
         -Design $Design `
         -BreakPageAfterTable:$BreakPageAfterTable `
-        -BreakPageBeforeTable:$BreakPageBeforeTable `
+        -BreakPageBeforeTable:$BreakPageBeforeTable
 
     if ($Supress -eq $false) { return $WordTable } else { return }
 }
