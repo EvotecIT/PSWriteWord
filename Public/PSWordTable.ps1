@@ -13,6 +13,13 @@ function Add-WordTable {
         [int] $MaximumColumns = 5,
         [string[]]$Columns = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
+
+        [alias ("C")] [System.Drawing.Color[]]$Color = @(),
+        [alias ("S")] [double[]] $FontSize = @(),
+        [alias ("FontName")] [string[]] $FontFamily = @(),
+        [alias ("B")] [bool[]] $Bold = @(),
+        [alias ("I")] [bool[]] $Italic = @(),
+
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
@@ -33,7 +40,16 @@ function Add-WordTable {
             $WordTable = $Table
             Add-WordTableRow -Table $WordTable -Count $DataTable.Count
         }
-        if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
+        if (-not $DoNotAddTitle) {
+            Add-WordTableTitle -Title $Columns `
+                -Table $WordTable `
+                -MaximumColumns $MaximumColumns `
+                -Color $Color[0] `
+                -FontSize $FontSize[0] `
+                -FontFamily $FontFamily[0] `
+                -Bold $Bold[0] `
+                -Italic $Italic[0]
+        }
         $Row = 1
         foreach ($TableEntry in $DataTable.GetEnumerator()) {
             $ColumnNrForTitle = 0
@@ -61,7 +77,16 @@ function Add-WordTable {
             $WordTable = $Table
             Add-WordTableRow -Table $WordTable -Count $DataTable.Count
         }
-        if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
+        if (-not $DoNotAddTitle) {
+            Add-WordTableTitle -Title $Columns `
+                -Table $WordTable `
+                -MaximumColumns $MaximumColumns `
+                -Color $Color[0] `
+                -FontSize $FontSize[0] `
+                -FontFamily $FontFamily[0] `
+                -Bold $Bold[0] `
+                -Italic $Italic[0]
+        }
         $Row = 1
         foreach ($Title in $Titles) {
             $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
@@ -92,8 +117,16 @@ function Add-WordTable {
             $WordTable = $Table
             Add-WordTableRow -Table $WordTable -Count $DataTable.Count
         }
-        if (-not $DoNotAddTitle) {  Add-WordTableTitle -Title $Titles -Table $WordTable -MaximumColumns $MaximumColumns }
-
+        if (-not $DoNotAddTitle) {
+            Add-WordTableTitle -Title $Titles `
+                -Table $WordTable `
+                -MaximumColumns $MaximumColumns `
+                -Color $Color[0] `
+                -FontSize $FontSize[0] `
+                -FontFamily $FontFamily[0] `
+                -Bold $Bold[0] `
+                -Italic $Italic[0]
+        }
         for ($b = 0; $b -lt $NumberRows - 1; $b++) {
             $a = 0
             foreach ($Title in $Titles) {
@@ -119,12 +152,25 @@ function Add-WordTable {
             Add-WordTableRow -Table $WordTable -Count $DataTable.Count
         }
 
-        if (-not $DoNotAddTitle) { Add-WordTableTitle -Title $Columns -Table $WordTable -MaximumColumns $MaximumColumns }
-
+        if (-not $DoNotAddTitle) {
+            Add-WordTableTitle -Title $Columns `
+                -Table $WordTable `
+                -MaximumColumns $MaximumColumns `
+                -Color $Color[0] `
+                -FontSize $FontSize[0] `
+                -FontFamily $FontFamily[0] `
+                -Bold $Bold[0] `
+                -Italic $Italic[0]
+        }
         for ($b = 1; $b -lt $NumberRows; $b++) {
             $a = 0
             foreach ($Title in $Columns.Name) {
-                $Data = Add-WordTableCellValue -Table $WordTable -Row $b -Column $a -Value $DataTable[$b].$Title
+                $Data = Add-WordTableCellValue -Table $WordTable `
+                    -Row $b `
+                    -Column $a `
+                    -Value $DataTable[$b].$Title
+
+
                 if ($a -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $a++
 
@@ -133,6 +179,7 @@ function Add-WordTable {
         }
 
     }
+
     $WordTable | Set-WordTable -Direction $Direction `
         -AutoFit $AutoFit `
         -Design $Design `
