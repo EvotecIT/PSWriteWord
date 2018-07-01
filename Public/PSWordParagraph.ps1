@@ -197,7 +197,7 @@ function Set-WordTextColor {
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Color -ne $null) {
-        $Paragraph = $Paragraph.Color($Color[$i])
+        $Paragraph = $Paragraph.Color($Color)
     }
     if ($Supress) { return } else { return $Paragraph }
 }
@@ -229,7 +229,7 @@ function Set-WordTextItalic {
 function Set-WordTextFontFamily {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[string]] $FontFamily,
+        [string] $FontFamily,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $FontFamily -ne $null -and $FontFamily -ne '') {
