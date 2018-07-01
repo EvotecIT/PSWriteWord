@@ -65,18 +65,12 @@ function Add-WordText {
         } else {
             $p = $p.Append($Text[$i])
         }
-        $p = Set-WordTextColor -Paragraph $p -Color $Color[$i] -Supress $false
-        $p = Set-WordTextFontSize -Paragraph $p -FontSize $FontSize[$i] -Supress $false
+        $p = $p | Set-WordTextColor -Color $Color[$i] -Supress $false
+        $p = $p | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
+        $p = $p | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
+        $p = $p | Set-WordTextBold -Bold $Bold[$i] -Supress $false
+        $p = $p | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
 
-        if ($FontFamily[$i] -ne $null) {
-            $p = $p.Font($FontFamily[$i])
-        }
-        if ($Bold[$i] -ne $null -and $Bold[$i] -eq $true) {
-            $p = $p.Bold()
-        }
-        if ($Italic[$i] -ne $null -and $Italic[$i] -eq $true) {
-            $p = $p.Italic()
-        }
         if ($UnderlineStyle[$i] -ne $null) {
             $p = $p.UnderlineStyle($UnderlineStyle[$i])
         }
@@ -201,6 +195,42 @@ function Set-WordTextColor {
     )
     if ($Paragraph -ne $null -and $Color -ne $null) {
         $Paragraph = $Paragraph.Color($Color[$i])
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextBold {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[bool]] $Bold,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Bold -ne $null -and $Bold -eq $true) {
+        $Paragraph = $Paragraph.Bold()
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextItalic {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[bool]] $Italic,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Italic -ne $null -and $Italic -eq $true) {
+        $Paragraph = $Paragraph.Italic()
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextFontFamily {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[string]] $FontFamily,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $FontFamily -ne $null) {
+        $Paragraph = $Paragraph.Font($FontFamily)
     }
     if ($Supress) { return } else { return $Paragraph }
 }
