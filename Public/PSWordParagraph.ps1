@@ -65,12 +65,9 @@ function Add-WordText {
         } else {
             $p = $p.Append($Text[$i])
         }
-        if ($Color[$i] -ne $null) {
-            $p = $p.Color($Color[$i])
-        }
-        if ($FontSize[$i] -ne $null) {
-            $p = $p.FontSize($FontSize[$i])
-        }
+        $p = $p | Set-WordTextColor -Color $Color
+        $p = $p | Set-WordTextFontSize -FontSize $FontSize
+
         if ($FontFamily[$i] -ne $null) {
             $p = $p.Font($FontFamily[$i])
         }
@@ -145,4 +142,69 @@ function Add-WordText {
     }
 
     if ($Supress) { return } else { return $p }
+}
+
+function Set-WordText {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [alias ("T")] [String[]]$Text,
+        [alias ("C")] [System.Drawing.Color[]]$Color,
+        [alias ("S")] [double[]] $FontSize = @(),
+        [alias ("FontName")] [string[]] $FontFamily = @(),
+        [alias ("B")] [bool[]] $Bold = @(),
+        [alias ("I")] [bool[]] $Italic = @(),
+        [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
+        [alias ("SA")] [double[]] $SpacingAfter = @(),
+        [alias ("SB")] [double[]] $SpacingBefore = @(),
+        [alias ("SP")] [double[]] $Spacing = @(),
+        [alias ("H")] [highlight[]] $Highlight = @(),
+        [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
+        [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
+        [alias ("HT")] [HeadingType[]] $HeadingType = @(),
+        $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        $Misc = @(),
+        [string[]] $Language = @(),
+        $Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        $Hidden = @(),
+        $Position = @(), #  "Value must be in the range -1585 - 1585"
+        [bool[]] $NewLine = @(),
+        [switch] $KeepLinesTogether,
+        [switch] $KeepWithNextParagraph,
+        [single[]] $IndentationFirstLine = @(),
+        [single[]] $IndentationHanging = @(),
+        [Alignment[]] $Alignment = @(),
+        [Direction[]] $Direction = @(),
+        [bool] $Supress = $true
+    )
+    $Paragraph | Set-WordTextColor -Color $Color
+    $Paragraph | Set-WordTextFontSize -FontSize $FontSize
+}
+
+function Set-WordTextFontSize {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [alias ("S")] [double] $FontSize,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null) {
+        if ($FontSize -ne $null) {
+            $Paragraph = $Paragraph.FontSize($FontSize)
+            if ($Supress) { return } else { return $Paragraph }
+        }
+    }
+}
+
+function Set-WordTextColor {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [alias ("C")] [System.Drawing.Color] $Color,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null) {
+        if ($Color -ne $null) {
+            $Paragraph = $Paragraph.Color($Color[$i])
+            if ($Supress) { return } else { return $Paragraph }
+        }
+    }
 }
