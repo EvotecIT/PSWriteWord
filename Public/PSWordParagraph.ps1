@@ -141,12 +141,11 @@ function Add-WordText {
 function Set-WordText {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [alias ("T")] [String[]]$Text,
-        [alias ("C")] [System.Drawing.Color[]]$Color,
-        [alias ("S")] [double[]] $FontSize = @(),
-        [alias ("FontName")] [string[]] $FontFamily = @(),
-        [alias ("B")] [bool[]] $Bold = @(),
-        [alias ("I")] [bool[]] $Italic = @(),
+        [alias ("C")] [nullable[System.Drawing.Color]]$Color,
+        [alias ("S")] [nullable[double]] $FontSize,
+        [alias ("FontName")] [string] $FontFamily,
+        [alias ("B")] [nullable[bool]] $Bold,
+        [alias ("I")] [nullable[bool]] $Italic,
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
@@ -171,6 +170,7 @@ function Set-WordText {
         [Direction[]] $Direction = @(),
         [bool] $Supress = $true
     )
+
     $Paragraph = $Paragraph | Set-WordTextColor -Color $Color -Supress $false
     $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize -Supress $false
     $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily -Supress $false
@@ -232,7 +232,7 @@ function Set-WordTextFontFamily {
         [nullable[string]] $FontFamily,
         [bool] $Supress = $true
     )
-    if ($Paragraph -ne $null -and $FontFamily -ne $null) {
+    if ($Paragraph -ne $null -and $FontFamily -ne $null -and $FontFamily -ne '') {
         $Paragraph = $Paragraph.Font($FontFamily)
     }
     if ($Supress) { return } else { return $Paragraph }
