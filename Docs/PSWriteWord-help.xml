@@ -4504,7 +4504,7 @@
       <command:verb>Add</command:verb>
       <command:noun>WordTabStopPosition</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Add a new TabStopPosition in the current paragraph.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -4540,7 +4540,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>HorizontalPosition</maml:name>
           <maml:Description>
-            <maml:para>{{Fill HorizontalPosition Description}}</maml:para>
+            <maml:para>Specifies the horizontal position of the tab stop.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Single</command:parameterValue>
           <dev:type>
@@ -4552,7 +4552,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>TabStopPositionLeader</maml:name>
           <maml:Description>
-            <maml:para>{{Fill TabStopPositionLeader Description}}</maml:para>
+            <maml:para>Specifies the character used to fill in the space created by a tab.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">none</command:parameterValue>
@@ -4570,7 +4570,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>Alignment</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Alignment Description}}</maml:para>
+            <maml:para>Specifies the alignment of the Tab stop.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">left</command:parameterValue>
@@ -4603,7 +4603,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>Alignment</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Alignment Description}}</maml:para>
+          <maml:para>Specifies the alignment of the Tab stop.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Alignment</command:parameterValue>
         <dev:type>
@@ -4615,7 +4615,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>HorizontalPosition</maml:name>
         <maml:Description>
-          <maml:para>{{Fill HorizontalPosition Description}}</maml:para>
+          <maml:para>Specifies the horizontal position of the tab stop.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Single</command:parameterValue>
         <dev:type>
@@ -4651,7 +4651,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>TabStopPositionLeader</maml:name>
         <maml:Description>
-          <maml:para>{{Fill TabStopPositionLeader Description}}</maml:para>
+          <maml:para>Specifies the character used to fill in the space created by a tab.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">TabStopPositionLeader</command:parameterValue>
         <dev:type>
