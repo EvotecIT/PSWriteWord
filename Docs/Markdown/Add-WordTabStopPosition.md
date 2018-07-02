@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-WordTabStopPosition
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Add a new TabStopPosition in the current paragraph.
 
 ## SYNTAX
 
@@ -33,7 +33,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Alignment
-{{Fill Alignment Description}}
+Specifies the alignment of the Tab stop.
 
 ```yaml
 Type: Alignment
@@ -49,7 +49,7 @@ Accept wildcard characters: False
 ```
 
 ### -HorizontalPosition
-{{Fill HorizontalPosition Description}}
+Specifies the horizontal position of the tab stop.
 
 ```yaml
 Type: Single
@@ -94,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -TabStopPositionLeader
-{{Fill TabStopPositionLeader Description}}
+Specifies the character used to fill in the space created by a tab.
 
 ```yaml
 Type: TabStopPositionLeader
