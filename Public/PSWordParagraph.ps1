@@ -44,98 +44,96 @@ function Add-WordText {
     )
     if ($Text.Count -eq 0) { return }
 
-    #if ($Paragraph -eq $null) {
-
-    #}
-    $p = $WordDocument.InsertParagraph()
     if ($Paragraph -ne $null) {
-        $p = $Paragraph.InsertParagraphAfterSelf($p)
+        $Paragraph = $Paragraph.InsertParagraphAfterSelf($Paragraph)
+    } else {
+        if ($WordDocument -ne $null) {
+            $Paragraph = $WordDocument.InsertParagraph()
+        } else {
+            throw 'Both Paragraph and WordDocument are null'
+        }
     }
-
     for ($i = 0; $i -lt $Text.Length; $i++) {
         if ($NewLine[$i] -ne $null -and $NewLine[$i] -eq $true) {
             if ($i -gt 0) {
                 if ($Paragraph -ne $null) {
-                    $p = $p.InsertParagraphAfterSelf()
+                    $Paragraph = $Paragraph.InsertParagraphAfterSelf()
                 } else {
-                    $p = $WordDocument.InsertParagraph()
+                    $Paragraph = $WordDocument.InsertParagraph()
                 }
             }
-            $p = $p.Append($Text[$i])
+            $Paragraph = $Paragraph.Append($Text[$i])
         } else {
-            $p = $p.Append($Text[$i])
+            $Paragraph = $Paragraph.Append($Text[$i])
         }
-        $p = $p | Set-WordTextColor -Color $Color[$i] -Supress $false
-        $p = $p | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
-        $p = $p | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
-        $p = $p | Set-WordTextBold -Bold $Bold[$i] -Supress $false
-        $p = $p | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextColor -Color $Color[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
 
         if ($UnderlineStyle[$i] -ne $null) {
-            $p = $p.UnderlineStyle($UnderlineStyle[$i])
+            $Paragraph = $Paragraph.UnderlineStyle($UnderlineStyle[$i])
         }
         if ($UnderlineColor[$i] -ne $null) {
-            $p = $p.UnderlineColor($UnderlineColor[$i])
+            $Paragraph = $Paragraph.UnderlineColor($UnderlineColor[$i])
         }
         if ($SpacingAfter[$i] -ne $null) {
-            $p = $p.SpacingAfter($SpacingAfter[$i])
+            $Paragraph = $Paragraph.SpacingAfter($SpacingAfter[$i])
         }
         if ($SpacingBefore[$i] -ne $null) {
-            $p = $p.SpacingBefore($SpacingBefore[$i])
+            $Paragraph = $Paragraph.SpacingBefore($SpacingBefore[$i])
         }
         if ($SpacingBefore[$i] -ne $null) {
-            $p = $p.SpacingBefore($SpacingBefore[$i])
+            $Paragraph = $Paragraph.SpacingBefore($SpacingBefore[$i])
         }
         if ($Spacing[$i] -ne $null) {
-            $p = $p.Spacing($Spacing[$i])
+            $Paragraph = $Paragraph.Spacing($Spacing[$i])
         }
         if ($Highlight[$i] -ne $null) {
-            $p = $p.Highlight($Highlight[$i])
+            $Paragraph = $Paragraph.Highlight($Highlight[$i])
         }
         if ($CapsStyle[$i] -ne $null) {
-            $p = $p.CapsStyle($CapsStyle[$i])
+            $Paragraph = $Paragraph.CapsStyle($CapsStyle[$i])
         }
         if ($StrikeThrough[$i] -ne $null) {
-            $p = $p.StrikeThrough($StrikeThrough[$i])
+            $Paragraph = $Paragraph.StrikeThrough($StrikeThrough[$i])
         }
         if ($PercentageScale[$i] -ne $null) {
-            $p = $p.PercentageScale($PercentageScale[$i])
+            $Paragraph = $Paragraph.PercentageScale($PercentageScale[$i])
         }
         if ($Language[$i] -ne $null) {
             Write-Verbose "Add-WriteText - Setting language $($Language[$i])"
             $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language[$i])
-            $p = $p.Culture($Culture)
+            $Paragraph = $Paragraph.Culture($Culture)
         }
         if ($Kerning[$i] -ne $null) {
-            $p = $p.Kerning($Kerning[$i])
-        }
-        if ($PercentageScale[$i] -ne $null) {
-            $p = $p.PercentageScale($PercentageScale[$i])
+            $Paragraph = $Paragraph.Kerning($Kerning[$i])
         }
         if ($Misc[$i] -ne $null) {
-            $p = $p.Misc($Misc[$i])
+            $Paragraph = $Paragraph.Misc($Misc[$i])
         }
         if ($Position[$i] -ne $null) {
-            $p = $p.Position($Position[$i])
+            $Paragraph = $Paragraph.Position($Position[$i])
         }
         if ($HeadingType[$i] -ne $null) {
-            $p.StyleName = $HeadingType[$i]
+            $Paragraph.StyleName = $HeadingType[$i]
         }
         if ($Alignment[$i] -ne $null) {
-            $p.Alignment = $Alignment[$i]
+            $Paragraph.Alignment = $Alignment[$i]
         }
         if ($IndentationFirstLine[$i] -ne $null) {
-            $p.IndentationFirstLine = $IndentationFirstLine[$i]
+            $Paragraph.IndentationFirstLine = $IndentationFirstLine[$i]
         }
         if ($IndentationHanging[$i] -ne $null) {
-            $p.IndentationHanging = $IndentationHanging[$i]
+            $Paragraph.IndentationHanging = $IndentationHanging[$i]
         }
         if ($Direction[$i] -ne $null) {
-            $p.Direction = $Direction[$i]
+            $Paragraph.Direction = $Direction[$i]
         }
     }
 
-    if ($Supress) { return } else { return $p }
+    if ($Supress) { return } else { return $Paragraph }
 }
 
 function Set-WordText {
