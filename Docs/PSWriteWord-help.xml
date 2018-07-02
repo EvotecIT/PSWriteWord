@@ -4500,6 +4500,217 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Add-WordTabStopPosition</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>WordTabStopPosition</command:noun>
+      <maml:description>
+        <maml:para>{{Fill in the Synopsis}}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{Fill in the Description}}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-WordTabStopPosition</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>WordDocument</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill WordDocument Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Container</command:parameterValue>
+          <dev:type>
+            <maml:name>Container</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+          <maml:name>Paragraph</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Paragraph Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">InsertBeforeOrAfter</command:parameterValue>
+          <dev:type>
+            <maml:name>InsertBeforeOrAfter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>HorizontalPosition</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill HorizontalPosition Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Single</command:parameterValue>
+          <dev:type>
+            <maml:name>Single</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>TabStopPositionLeader</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill TabStopPositionLeader Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">none</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">dot</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">underscore</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">hyphen</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">TabStopPositionLeader</command:parameterValue>
+          <dev:type>
+            <maml:name>TabStopPositionLeader</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>Alignment</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Alignment Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">left</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">center</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">right</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">both</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">Alignment</command:parameterValue>
+          <dev:type>
+            <maml:name>Alignment</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>Supress</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Supress Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+          <dev:type>
+            <maml:name>Boolean</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>Alignment</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Alignment Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Alignment</command:parameterValue>
+        <dev:type>
+          <maml:name>Alignment</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>HorizontalPosition</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill HorizontalPosition Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Single</command:parameterValue>
+        <dev:type>
+          <maml:name>Single</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+        <maml:name>Paragraph</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Paragraph Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">InsertBeforeOrAfter</command:parameterValue>
+        <dev:type>
+          <maml:name>InsertBeforeOrAfter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>Supress</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Supress Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>TabStopPositionLeader</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill TabStopPositionLeader Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">TabStopPositionLeader</command:parameterValue>
+        <dev:type>
+          <maml:name>TabStopPositionLeader</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>WordDocument</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill WordDocument Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Container</command:parameterValue>
+        <dev:type>
+          <maml:name>Container</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Xceed.Words.NET.Container</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Xceed.Words.NET.InsertBeforeOrAfter</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Add-WordText</command:name>
       <command:verb>Add</command:verb>
       <command:noun>WordText</command:noun>
