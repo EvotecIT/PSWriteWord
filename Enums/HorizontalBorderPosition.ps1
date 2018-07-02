@@ -1,0 +1,4 @@
+enum HorizontalBorderPosition {
+    top
+    bottom
+}
