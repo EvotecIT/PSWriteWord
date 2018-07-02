@@ -1,0 +1,4 @@
+enum ShadingType {
+    Text
+    Paragraph
+}
