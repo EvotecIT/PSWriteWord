@@ -9798,18 +9798,6 @@
       <command:syntaxItem>
         <maml:name>Set-WordParagraph</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
-          <maml:name>WordDocument</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill WordDocument Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Container</command:parameterValue>
-          <dev:type>
-            <maml:name>Container</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
           <maml:name>Paragraph</maml:name>
           <maml:Description>
             <maml:para>{{Fill Paragraph Description}}</maml:para>
@@ -9821,7 +9809,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Alignment</maml:name>
           <maml:Description>
             <maml:para>{{Fill Alignment Description}}</maml:para>
@@ -9839,7 +9827,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Direction</maml:name>
           <maml:Description>
             <maml:para>{{Fill Direction Description}}</maml:para>
@@ -9855,7 +9843,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Language</maml:name>
           <maml:Description>
             <maml:para>{{Fill Language Description}}</maml:para>
@@ -9867,10 +9855,22 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>Supress</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Supress Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+          <dev:type>
+            <maml:name>Boolean</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Alignment</maml:name>
         <maml:Description>
           <maml:para>{{Fill Alignment Description}}</maml:para>
@@ -9882,7 +9882,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Direction</maml:name>
         <maml:Description>
           <maml:para>{{Fill Direction Description}}</maml:para>
@@ -9894,7 +9894,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>Language</maml:name>
         <maml:Description>
           <maml:para>{{Fill Language Description}}</maml:para>
@@ -9906,7 +9906,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>Paragraph</maml:name>
         <maml:Description>
           <maml:para>{{Fill Paragraph Description}}</maml:para>
@@ -9918,14 +9918,14 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
-        <maml:name>WordDocument</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>Supress</maml:name>
         <maml:Description>
-          <maml:para>{{Fill WordDocument Description}}</maml:para>
+          <maml:para>{{Fill Supress Description}}</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Container</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
         <dev:type>
-          <maml:name>Container</maml:name>
+          <maml:name>Boolean</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>

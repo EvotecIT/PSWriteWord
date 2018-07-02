@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordParagraph [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Alignment] <Alignment>]
- [[-Direction] <Direction>] [[-Language] <String>] [<CommonParameters>]
+Set-WordParagraph [[-Paragraph] <InsertBeforeOrAfter>] [[-Alignment] <Alignment>] [[-Direction] <Direction>]
+ [[-Language] <String>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,7 +41,7 @@ Aliases:
 Accepted values: left, center, right, both
 
 Required: False
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -57,7 +57,7 @@ Aliases:
 Accepted values: LeftToRight, RightToLeft
 
 Required: False
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -72,7 +72,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -87,24 +87,24 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -WordDocument
-{{Fill WordDocument Description}}
+### -Supress
+{{Fill Supress Description}}
 
 ```yaml
-Type: Container
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 4
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
