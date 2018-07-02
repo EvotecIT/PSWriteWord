@@ -57,11 +57,11 @@ Function Add-WordParagraph {
 Function Set-WordParagraph {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Alignment] $Alignment,
         [Direction] $Direction,
-        [string] $Language
+        [string] $Language,
+        [bool] $Supress = $true
     )
     if ($Paragraph -ne $null) {
         Write-Verbose "Set-WordParagraph - Paragraph is not null"
@@ -78,6 +78,7 @@ Function Set-WordParagraph {
             $Paragraph = $Paragraph.Culture($Culture)
         }
     }
+    if ($Supress) { return } else { return $Paragraph }
 }
 function Get-WordParagraphForList {
     [CmdletBinding()]
