@@ -44,3 +44,6 @@ $Series6 = Add-WordChartSeries -ChartName 'Two'  -Names 'Today', 'Yesterday', 'T
 Add-WordBarChart -WordDocument $WordDocument -ChartName 'My finances'-ChartLegendPosition Bottom -ChartLegendOverlay $false -ChartSeries $Series5, $Series6 -BarDirection Column
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath

@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddCustomProperty.docx"
 
@@ -21,3 +21,6 @@ foreach ($custom in $AllCustomProperties) {
 }
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath

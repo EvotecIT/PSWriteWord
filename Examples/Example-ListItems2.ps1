@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-ListItems2.docx"
 $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')

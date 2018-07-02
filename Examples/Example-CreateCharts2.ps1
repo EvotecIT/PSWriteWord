@@ -24,3 +24,6 @@ Add-WordLineChart -WordDocument $WordDocument -ChartName 'My finances'-ChartLege
 
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath

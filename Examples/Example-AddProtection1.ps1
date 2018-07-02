@@ -12,3 +12,6 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
 Add-WordProtection -WordDocument $WordDocument -EditRestrictions readOnly
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath

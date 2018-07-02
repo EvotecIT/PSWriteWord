@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture1.docx"
 $FilePathImage = "$PSScriptRoot\Images\Logo-Evotec-Small.jpg"
@@ -22,3 +22,6 @@ Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... flip horizon
 Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage -FlipVertical -FlipHorizontal
 
 Save-WordDocument $WordDocument -Language 'en-US'
+
+### Start Word with file
+Invoke-Item $FilePath
