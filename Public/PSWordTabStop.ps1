@@ -11,5 +11,7 @@ function Add-WordTabStopPosition {
     if ($Paragraph -eq $null) {
         $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $False
     }
-    $Paragraph.InsertTabStopPosition($Alignment, $HorizontalPosition, $TabStopPositionLeader)
+    $data = $Paragraph.InsertTabStopPosition($Alignment, $HorizontalPosition, $TabStopPositionLeader)
+
+    if ($Supress) { return } else { $data }
 }
