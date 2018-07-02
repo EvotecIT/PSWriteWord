@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordChartSeries [[-ChartName] <String>] [[-Names] <String[]>] [[-Values] <Int32[]>]
+Add-WordChartSeries [[-ChartName] <String>] [[-Names] <String[]>] [[-Values] <Int32[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,10 +75,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### None
-
 
 ## OUTPUTS
 

@@ -13,8 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordLine [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-LineType] <LineType>]
- [[-LineSize] <Int32>] [[-LineSpace] <Int32>] [[-LineColor] <String>] [<CommonParameters>]
+Add-WordLine [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
+ [[-HorizontalBorderPosition] <HorizontalBorderPosition>] [[-LineType] <LineType>] [[-LineSize] <Int32>]
+ [[-LineSpace] <Int32>] [[-LineColor] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,6 +32,22 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -HorizontalBorderPosition
+{{Fill HorizontalBorderPosition Description}}
+
+```yaml
+Type: HorizontalBorderPosition
+Parameter Sets: (All)
+Aliases:
+Accepted values: top, bottom
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -LineColor
 {{Fill LineColor Description}}
 
@@ -40,7 +57,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -55,7 +72,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -70,7 +87,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -86,7 +103,7 @@ Aliases:
 Accepted values: single, double, triple
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -123,14 +140,12 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### Xceed.Words.NET.Container
 Xceed.Words.NET.InsertBeforeOrAfter
-
 
 ## OUTPUTS
 
