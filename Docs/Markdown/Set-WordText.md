@@ -13,15 +13,15 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordText [[-Paragraph] <InsertBeforeOrAfter>] [[-Color] <Color>] [[-FontSize] <Double>]
+Set-WordText [[-Paragraph] <InsertBeforeOrAfter[]>] [[-Color] <Color>] [[-FontSize] <Double>]
  [[-FontFamily] <String>] [[-Bold] <Boolean>] [[-Italic] <Boolean>] [[-UnderlineStyle] <UnderlineStyle[]>]
  [[-UnderlineColor] <Color[]>] [[-SpacingAfter] <Double[]>] [[-SpacingBefore] <Double[]>]
  [[-Spacing] <Double[]>] [[-Highlight] <Highlight[]>] [[-CapsStyle] <CapsStyle[]>]
- [[-StrikeThrough] <StrikeThrough[]>] [[-HeadingType] <HeadingType[]>] [[-PercentageScale] <Object>]
- [[-Misc] <Object>] [[-Language] <String[]>] [[-Kerning] <Object>] [[-Hidden] <Object>] [[-Position] <Object>]
- [[-NewLine] <Boolean[]>] [-KeepLinesTogether] [-KeepWithNextParagraph] [[-IndentationFirstLine] <Single[]>]
- [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>] [[-Direction] <Direction[]>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-StrikeThrough] <StrikeThrough[]>] [[-HeadingType] <HeadingType[]>] [[-PercentageScale] <Int32[]>]
+ [[-Misc] <Misc[]>] [[-Language] <String[]>] [[-Kerning] <Int32[]>] [[-Hidden] <Boolean[]>]
+ [[-Position] <Int32[]>] [[-NewLine] <Boolean[]>] [-KeepLinesTogether] [-KeepWithNextParagraph]
+ [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>]
+ [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -166,7 +166,7 @@ Accept wildcard characters: False
 {{Fill Hidden Description}}
 
 ```yaml
-Type: Object
+Type: Boolean[]
 Parameter Sets: (All)
 Aliases:
 
@@ -272,7 +272,7 @@ Accept wildcard characters: False
 {{Fill Kerning Description}}
 
 ```yaml
-Type: Object
+Type: Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -302,9 +302,10 @@ Accept wildcard characters: False
 {{Fill Misc Description}}
 
 ```yaml
-Type: Object
+Type: Misc[]
 Parameter Sets: (All)
 Aliases:
+Accepted values: none, shadow, outline, outlineShadow, emboss, engrave
 
 Required: False
 Position: 16
@@ -332,7 +333,7 @@ Accept wildcard characters: False
 {{Fill Paragraph Description}}
 
 ```yaml
-Type: InsertBeforeOrAfter
+Type: InsertBeforeOrAfter[]
 Parameter Sets: (All)
 Aliases:
 
@@ -347,7 +348,7 @@ Accept wildcard characters: False
 {{Fill PercentageScale Description}}
 
 ```yaml
-Type: Object
+Type: Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -362,12 +363,28 @@ Accept wildcard characters: False
 {{Fill Position Description}}
 
 ```yaml
-Type: Object
+Type: Int32[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 20
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShadingType
+{{Fill ShadingType Description}}
+
+```yaml
+Type: ShadingType[]
+Parameter Sets: (All)
+Aliases:
+Accepted values: Text, Paragraph
+
+Required: False
+Position: 26
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -443,7 +460,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 26
+Position: 27
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
