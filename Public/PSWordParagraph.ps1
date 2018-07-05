@@ -82,31 +82,16 @@ function Add-WordText {
         #$Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
 
-        if ($Kerning[$i] -ne $null) {
-            $Paragraph = $Paragraph.Kerning($Kerning[$i])
-        }
-        if ($Misc[$i] -ne $null) {
-            $Paragraph = $Paragraph.Misc($Misc[$i])
-        }
-        if ($Position[$i] -ne $null) {
-            $Paragraph = $Paragraph.Position($Position[$i])
-        }
-        if ($HeadingType[$i] -ne $null) {
-            $Paragraph.StyleName = $HeadingType[$i]
-        }
-        if ($Alignment[$i] -ne $null) {
-            $Paragraph.Alignment = $Alignment[$i]
-        }
-        if ($IndentationFirstLine[$i] -ne $null) {
-            $Paragraph.IndentationFirstLine = $IndentationFirstLine[$i]
-        }
-        if ($IndentationHanging[$i] -ne $null) {
-            $Paragraph.IndentationHanging = $IndentationHanging[$i]
-        }
-        if ($Direction[$i] -ne $null) {
-            $Paragraph.Direction = $Direction[$i]
-        }
+        $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextAlignment -Alignment $Alignment[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextDirection -Direction $Direction[$i] -Supress $false
     }
 
     if ($Supress) { return } else { return $Paragraph }
@@ -330,6 +315,112 @@ function Set-WordTextLanguage {
     if ($Paragraph -ne $null -and $Language -ne $null -and $Language -ne '') {
         $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language)
         $Paragraph = $Paragraph.Culture($Culture)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextKerning {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[int]] $Kerning,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Kerning -ne $null) {
+        $Paragraph = $Paragraph.Kerning($Kerning)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextMisc {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        $Misc,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Misc -ne $null) {
+        $Paragraph = $Paragraph.Misc($Misc)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+
+function Set-WordTextPosition {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        $Position,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Position -ne $null) {
+        $Paragraph = $Paragraph.Position($Position)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextHidden {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        $Hidden,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Hidden -ne $null) {
+        $Paragraph = $Paragraph.Hidden($Hidden)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextHeadingType {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[HeadingType]] $HeadingType,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $HeadingType -ne $null) {
+        $Paragraph = $Paragraph.StyleName = $HeadingType
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+function Set-WordTextIndentationFirstLine {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[single]] $IndentationFirstLine,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $IndentationFirstLine -ne $null) {
+        $Paragraph = $Paragraph.IndentationFirstLine = $IndentationFirstLine
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+function Set-WordTextAlignment {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[Alignment]] $Alignment,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Alignment -ne $null) {
+        $Paragraph = $Paragraph.Alignment = $Alignment
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+function Set-WordTextIndentationHanging {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[single]] $IndentationHanging,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $IndentationHanging -ne $null) {
+        $Paragraph = $Paragraph.IndentationHanging = $IndentationHanging
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextDirection {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[Direction]] $Direction,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Direction -ne $null) {
+        $Paragraph = $Paragraph.Direction = $Direction
     }
     if ($Supress) { return } else { return $Paragraph }
 }
