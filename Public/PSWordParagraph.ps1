@@ -72,21 +72,12 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
 
-        if ($UnderlineStyle[$i] -ne $null) {
-            $Paragraph = $Paragraph.UnderlineStyle($UnderlineStyle[$i])
-        }
-        if ($UnderlineColor[$i] -ne $null) {
-            $Paragraph = $Paragraph.UnderlineColor($UnderlineColor[$i])
-        }
-        if ($SpacingAfter[$i] -ne $null) {
-            $Paragraph = $Paragraph.SpacingAfter($SpacingAfter[$i])
-        }
-        if ($SpacingBefore[$i] -ne $null) {
-            $Paragraph = $Paragraph.SpacingBefore($SpacingBefore[$i])
-        }
-        if ($SpacingBefore[$i] -ne $null) {
-            $Paragraph = $Paragraph.SpacingBefore($SpacingBefore[$i])
-        }
+        $Paragraph = $Paragraph | Set-WordTextUnderlineColor -UnderlineColor $UnderlineColor[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextUnderlineStyle -UnderlineStyle $UnderlineStyle[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacingAfter -SpacingAfter $SpacingAfter[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacingBefore -SpacingBefore $SpacingBefore[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+
         if ($Spacing[$i] -ne $null) {
             $Paragraph = $Paragraph.Spacing($Spacing[$i])
         }
@@ -232,6 +223,66 @@ function Set-WordTextFontFamily {
     )
     if ($Paragraph -ne $null -and $FontFamily -ne $null -and $FontFamily -ne '') {
         $Paragraph = $Paragraph.Font($FontFamily)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextUnderlineStyle {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[[UnderlineStyle]] $UnderlineStyle,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $UnderlineStyle -ne $null) {
+        $Paragraph = $Paragraph.UnderlineStyle($UnderlineStyle)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextUnderlineColor {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[System.Drawing.Color]] $UnderlineColor,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $UnderlineColor -ne $null) {
+        $Paragraph = $Paragraph.UnderlineColor($UnderlineColor)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextSpacingAfter {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[[double]] $SpacingAfter,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $SpacingAfter -ne $null) {
+        $Paragraph = $Paragraph.SpacingAfter($SpacingAfter)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextSpacingBefore {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[[double]] $SpacingBefore,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $SpacingBefore -ne $null) {
+        $Paragraph = $Paragraph.SpacingBefore($SpacingBefore)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextSpacing {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[[double]] $Spacing,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Spacing -ne $null) {
+        $Paragraph = $Paragraph.Spacing($Spacing)
     }
     if ($Supress) { return } else { return $Paragraph }
 }
