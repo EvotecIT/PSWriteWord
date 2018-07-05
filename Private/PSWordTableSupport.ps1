@@ -32,7 +32,7 @@ function Add-WordTableTitle {
         [nullable[Script]] $Script ,
         [bool] $Supress = $true
     )
-    Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) "
+    Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) Supress $Supress"
 
     #$Titles
 
@@ -44,7 +44,7 @@ function Add-WordTableTitle {
         } else {
             $ColumnName = $Titles[$a].Name
         }
-        Write-Verbose "Add-WordTableTitle - Column Name: $ColumnName"
+        Write-Verbose "Add-WordTableTitle - Column Name: $ColumnName Supress $Supress"
         Add-WordTableCellValue -Table $Table `
             -Row 0 `
             -Column $a `
@@ -96,14 +96,14 @@ function Add-WordTableCellValue {
         [nullable[Script]] $Script,
         [bool] $Supress = $true
     )
-    Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value"
+    Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
-    $Data = $Data | Set-WordText -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic `
+    $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic `
         -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
         -Highlight $Highlight -CapsStyle $CapsStyle -StrikeThrough $StrikeThrough -HeadingType $HeadingType -PercentageScale $PercentageScale `
         -Misc $Misc -Language $Language -Kerning $Kerning -Position $Position -IndentationFirstLine $IndentationFirstLine `
-        -IndentationHanging $IndentationHanging -Alignment $Alignment -Direction $DirectionFormatting -ShadingType $ShadingType -Script $Script -Supress $Supress
-    #-Hidden $Hidden `
+        -IndentationHanging $IndentationHanging -Alignment $Alignment -Direction $DirectionFormatting -ShadingType $ShadingType -Script $Script -Supress $Supress `
+        -Hidden $Hidden
 
     if ($Supress -eq $true) { return } else { return $Data }
 }

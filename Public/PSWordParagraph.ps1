@@ -103,11 +103,11 @@ function Add-WordText {
 function Set-WordText {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter[]] $Paragraph,
-        [alias ("C")] [nullable[System.Drawing.Color]]$Color,
-        [alias ("S")] [nullable[double]] $FontSize,
-        [alias ("FontName")] [string] $FontFamily,
-        [alias ("B")] [nullable[bool]] $Bold,
-        [alias ("I")] [nullable[bool]] $Italic,
+        [alias ("C")] [System.Drawing.Color[]]$Color = @(),
+        [alias ("S")] [double[]] $FontSize = @(),
+        [alias ("FontName")] [string[]] $FontFamily = @(),
+        [alias ("B")] [bool[]] $Bold = @(),
+        [alias ("I")] [bool[]] $Italic = @(),
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
@@ -134,34 +134,36 @@ function Set-WordText {
         [Script[]] $Script = @(),
         [bool] $Supress = $true
     )
+    Write-Verbose "Set-WordText - Paragraph Count: $($Paragraph.Count)"
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {
-        $Paragraph = $Paragraph | Set-WordTextColor -Color $Color[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextUnderlineColor -UnderlineColor $UnderlineColor[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextUnderlineStyle -UnderlineStyle $UnderlineStyle[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextSpacingAfter -SpacingAfter $SpacingAfter[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextSpacingBefore -SpacingBefore $SpacingBefore[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextScript -Script $Script[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextAlignment -Alignment $Alignment[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextDirection -Direction $Direction[$i] -Supress $false
+        Write-Verbose "Set-WordText - Loop: $($i)"
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextColor -Color $Color[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextBold -Bold $Bold[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextUnderlineColor -UnderlineColor $UnderlineColor[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextUnderlineStyle -UnderlineStyle $UnderlineStyle[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextSpacingAfter -SpacingAfter $SpacingAfter[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextSpacingBefore -SpacingBefore $SpacingBefore[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextLanguage -Language $Language[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextPosition -Position $Position[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextScript -Script $Script[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextAlignment -Alignment $Alignment[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextDirection -Direction $Direction[$i] -Supress $false
     }
 }
 
