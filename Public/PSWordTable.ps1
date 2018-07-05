@@ -13,6 +13,9 @@ function Add-WordTable {
         [int] $MaximumColumns = 5,
         [string[]]$Columns = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
+        [float[]] $ColummnWidth = @(),
+        [nullable[float]] $TableWidth = $null,
+        [bool] $Percentage,
 
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
@@ -43,14 +46,10 @@ function Add-WordTable {
         [Direction[]] $DirectionFormatting = @(),
         [ShadingType[]] $ShadingType = @(),
         [Script[]] $Script = @(),
-        [float[]] $ColummnWidth = @(),
-        [nullable[float]] $TableWidth = $null,
-        [bool] $Percentage,
 
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
-    #$DataTable
     $ObjectType = $DataTable.GetType().Name
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
