@@ -41,6 +41,7 @@ function Add-WordText {
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
+        [Script[]] $Script = @(),
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
@@ -80,7 +81,7 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
-        #$Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
@@ -88,6 +89,7 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextScript -Script $Script[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
@@ -129,6 +131,7 @@ function Set-WordText {
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
+        [Script] $Script = @(),
         [bool] $Supress = $true
     )
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {
@@ -145,7 +148,7 @@ function Set-WordText {
         $Paragraph = $Paragraph | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
-        #$Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
@@ -153,6 +156,7 @@ function Set-WordText {
         $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextScript -Script $Script[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
@@ -332,7 +336,7 @@ function Set-WordTextShadingType {
 function Set-WordTextPercentageScale {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [AllowNull()][ValidateSet( 200, 150, 100, 90, 80, 66, 50, 33)][nullable[int]]$PercentageScale,
+        [nullable[int]]$PercentageScale,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $PercentageScale -ne $null) {
@@ -456,6 +460,17 @@ function Set-WordTextDirection {
     )
     if ($Paragraph -ne $null -and $Direction -ne $null) {
         $Paragraph = $Paragraph.Direction = $Direction
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+function Set-WordTextScript {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[Script]] $Script,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Script -ne $null) {
+        $Paragraph = $Paragraph.Script($Script)
     }
     if ($Supress) { return } else { return $Paragraph }
 }
