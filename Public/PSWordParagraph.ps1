@@ -131,7 +131,7 @@ function Set-WordText {
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
-        [Script] $Script = @(),
+        [Script[]] $Script = @(),
         [bool] $Supress = $true
     )
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {

@@ -91,9 +91,9 @@ function Add-WordTableCellValue {
         [nullable[single]] $IndentationFirstLine ,
         [nullable[single]] $IndentationHanging ,
         [nullable[Alignment]] $Alignment ,
-        [nullable[Direction]] $DirectionFormatting ,
-        [nullable[ShadingType]] $ShadingType ,
-        [nullable[Script]] $Script ,
+        [nullable[Direction]] $DirectionFormatting,
+        [nullable[ShadingType]] $ShadingType,
+        [nullable[Script]] $Script,
         [bool] $Supress = $true
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value"
@@ -101,9 +101,10 @@ function Add-WordTableCellValue {
     $Data = $Data | Set-WordText -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic `
         -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
         -Highlight $Highlight -CapsStyle $CapsStyle -StrikeThrough $StrikeThrough -HeadingType $HeadingType -PercentageScale $PercentageScale `
-        -Misc $Misc -Language $Language -Kerning $Kerning -Hidden $Hidden -Position $Position -IndentationFirstLine $IndentationFirstLine `
-        -IndentationHanging $IndentationHanging -Alignment $Alignment -DirectionFormatting $DirectionFormatting -ShadingType $ShadingType -Script $Script `
-        -Supress $Supress
+        -Misc $Misc -Language $Language -Kerning $Kerning -Position $Position -IndentationFirstLine $IndentationFirstLine `
+        -IndentationHanging $IndentationHanging -Alignment $Alignment -Direction $DirectionFormatting -ShadingType $ShadingType -Script $Script -Supress $Supress
+    #-Hidden $Hidden `
+
     if ($Supress -eq $true) { return } else { return $Data }
 }
 
