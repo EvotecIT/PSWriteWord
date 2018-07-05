@@ -27,7 +27,7 @@ function Add-WordText {
         [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
         [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
         [alias ("HT")] [HeadingType[]] $HeadingType = @(),
-        $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
         $Misc = @(),
         [string[]] $Language = @(),
         $Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
@@ -71,33 +71,18 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
-
         $Paragraph = $Paragraph | Set-WordTextUnderlineColor -UnderlineColor $UnderlineColor[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextUnderlineStyle -UnderlineStyle $UnderlineStyle[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacingAfter -SpacingAfter $SpacingAfter[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacingBefore -SpacingBefore $SpacingBefore[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
 
-        if ($Spacing[$i] -ne $null) {
-            $Paragraph = $Paragraph.Spacing($Spacing[$i])
-        }
-        if ($Highlight[$i] -ne $null) {
-            $Paragraph = $Paragraph.Highlight($Highlight[$i])
-        }
-        if ($CapsStyle[$i] -ne $null) {
-            $Paragraph = $Paragraph.CapsStyle($CapsStyle[$i])
-        }
-        if ($StrikeThrough[$i] -ne $null) {
-            $Paragraph = $Paragraph.StrikeThrough($StrikeThrough[$i])
-        }
-        if ($PercentageScale[$i] -ne $null) {
-            $Paragraph = $Paragraph.PercentageScale($PercentageScale[$i])
-        }
-        if ($Language[$i] -ne $null) {
-            Write-Verbose "Add-WriteText - Setting language $($Language[$i])"
-            $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language[$i])
-            $Paragraph = $Paragraph.Culture($Culture)
-        }
         if ($Kerning[$i] -ne $null) {
             $Paragraph = $Paragraph.Kerning($Kerning[$i])
         }
@@ -230,7 +215,7 @@ function Set-WordTextFontFamily {
 function Set-WordTextUnderlineStyle {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[[UnderlineStyle]] $UnderlineStyle,
+        [nullable[UnderlineStyle]] $UnderlineStyle,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $UnderlineStyle -ne $null) {
@@ -254,7 +239,7 @@ function Set-WordTextUnderlineColor {
 function Set-WordTextSpacingAfter {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[[double]] $SpacingAfter,
+        [nullable[double]] $SpacingAfter,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $SpacingAfter -ne $null) {
@@ -266,7 +251,7 @@ function Set-WordTextSpacingAfter {
 function Set-WordTextSpacingBefore {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[[double]] $SpacingBefore,
+        [nullable[double]] $SpacingBefore,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $SpacingBefore -ne $null) {
@@ -278,11 +263,73 @@ function Set-WordTextSpacingBefore {
 function Set-WordTextSpacing {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[[double]] $Spacing,
+        [nullable[double]] $Spacing,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Spacing -ne $null) {
         $Paragraph = $Paragraph.Spacing($Spacing)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+
+function Set-WordTextHighlight {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[Highlight]] $Highlight,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Highlight -ne $null) {
+        $Paragraph = $Paragraph.Highlight($Highlight)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextCapsStyle {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[CapsStyle]] $CapsStyle,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $CapsStyle -ne $null) {
+        $Paragraph = $Paragraph.CapsStyle($CapsStyle)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextStrikeThrough {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[StrikeThrough]] $StrikeThrough,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $StrikeThrough -ne $null) {
+        $Paragraph = $Paragraph.StrikeThrough($StrikeThrough)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextPercentageScale {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[int]][ValidateRange( 200, 150, 100, 90, 80, 66, 50, 33)] $PercentageScale,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $PercentageScale -ne $null) {
+        $Paragraph = $Paragraph.PercentageScale($PercentageScale)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextLanguage {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [string]$Language,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $Language -ne $null -and $Language -ne '') {
+        $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language)
+        $Paragraph = $Paragraph.Culture($Culture)
     }
     if ($Supress) { return } else { return $Paragraph }
 }
