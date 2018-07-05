@@ -79,7 +79,7 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
+        #$Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
 
@@ -312,7 +312,7 @@ function Set-WordTextStrikeThrough {
 function Set-WordTextPercentageScale {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[int]][ValidateRange( 200, 150, 100, 90, 80, 66, 50, 33)] $PercentageScale,
+        [AllowNull()][ValidateSet( 200, 150, 100, 90, 80, 66, 50, 33)][nullable[int]]$PercentageScale,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $PercentageScale -ne $null) {
