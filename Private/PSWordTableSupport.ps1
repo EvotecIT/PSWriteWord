@@ -9,6 +9,27 @@ function Add-WordTableTitle {
         [alias ("FontName")] [string] $FontFamily,
         [alias ("B")] [nullable[bool]] $Bold,
         [alias ("I")] [nullable[bool]] $Italic,
+        [alias ("U")] [nullable[UnderlineStyle]] $UnderlineStyle,
+        [alias ('UC')] [nullable[System.Drawing.Color]]$UnderlineColor,
+        [alias ("SA")] [nullable[double]] $SpacingAfter,
+        [alias ("SB")] [nullable[double]] $SpacingBefore ,
+        [alias ("SP")] [nullable[double]] $Spacing ,
+        [alias ("H")] [nullable[highlight]] $Highlight ,
+        [alias ("CA")] [nullable[CapsStyle]] $CapsStyle ,
+        [alias ("ST")] [nullable[StrikeThrough]] $StrikeThrough ,
+        [alias ("HT")] [nullable[HeadingType]] $HeadingType ,
+        [nullable[int]] $PercentageScale , # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        [nullable[Misc]] $Misc ,
+        [string] $Language ,
+        [nullable[int]]$Kerning , # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        [nullable[bool]]$Hidden ,
+        [nullable[int]]$Position , #  "Value must be in the range -1585 - 1585"
+        [nullable[single]] $IndentationFirstLine ,
+        [nullable[single]] $IndentationHanging ,
+        [nullable[Alignment]] $Alignment ,
+        [nullable[Direction]] $DirectionFormatting ,
+        [nullable[ShadingType]] $ShadingType ,
+        [nullable[Script]] $Script ,
         [bool] $Supress = $true
     )
     Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) "
@@ -28,11 +49,11 @@ function Add-WordTableTitle {
             -Row 0 `
             -Column $a `
             -Value $ColumnName `
-            -Color $Color `
-            -FontSize $FontSize `
-            -FontFamily $FontFamily `
-            -Bold $Bold `
-            -Italic $Italic `
+            -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic `
+            -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
+            -Highlight $Highlight -CapsStyle $CapsStyle -StrikeThrough $StrikeThrough -HeadingType $HeadingType -PercentageScale $PercentageScale `
+            -Misc $Misc -Language $Language -Kerning $Kerning -Hidden $Hidden -Position $Position -IndentationFirstLine $IndentationFirstLine `
+            -IndentationHanging $IndentationHanging -Alignment $Alignment -DirectionFormatting $DirectionFormatting -ShadingType $ShadingType -Script $Script `
             -Supress $Supress
         if ($a -eq $($MaximumColumns - 1)) {
             break;
@@ -52,11 +73,37 @@ function Add-WordTableCellValue {
         [alias ("FontName")] [string] $FontFamily,
         [alias ("B")] [nullable[bool]] $Bold,
         [alias ("I")] [nullable[bool]] $Italic,
+        [alias ("U")] [nullable[UnderlineStyle]] $UnderlineStyle,
+        [alias ('UC')] [nullable[System.Drawing.Color]]$UnderlineColor,
+        [alias ("SA")] [nullable[double]] $SpacingAfter,
+        [alias ("SB")] [nullable[double]] $SpacingBefore ,
+        [alias ("SP")] [nullable[double]] $Spacing ,
+        [alias ("H")] [nullable[highlight]] $Highlight ,
+        [alias ("CA")] [nullable[CapsStyle]] $CapsStyle ,
+        [alias ("ST")] [nullable[StrikeThrough]] $StrikeThrough ,
+        [alias ("HT")] [nullable[HeadingType]] $HeadingType ,
+        [nullable[int]] $PercentageScale , # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        [nullable[Misc]] $Misc ,
+        [string] $Language ,
+        [nullable[int]]$Kerning , # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        [nullable[bool]]$Hidden ,
+        [nullable[int]]$Position , #  "Value must be in the range -1585 - 1585"
+        [nullable[single]] $IndentationFirstLine ,
+        [nullable[single]] $IndentationHanging ,
+        [nullable[Alignment]] $Alignment ,
+        [nullable[Direction]] $DirectionFormatting ,
+        [nullable[ShadingType]] $ShadingType ,
+        [nullable[Script]] $Script ,
         [bool] $Supress = $true
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value"
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
-    $Data = $Data | Set-WordText -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic -Supress $Supress
+    $Data = $Data | Set-WordText -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic `
+        -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
+        -Highlight $Highlight -CapsStyle $CapsStyle -StrikeThrough $StrikeThrough -HeadingType $HeadingType -PercentageScale $PercentageScale `
+        -Misc $Misc -Language $Language -Kerning $Kerning -Hidden $Hidden -Position $Position -IndentationFirstLine $IndentationFirstLine `
+        -IndentationHanging $IndentationHanging -Alignment $Alignment -DirectionFormatting $DirectionFormatting -ShadingType $ShadingType -Script $Script `
+        -Supress $Supress
     if ($Supress -eq $true) { return } else { return $Data }
 }
 

@@ -34,8 +34,8 @@ function Add-WordText {
         [bool[]]$Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
         [bool[]] $NewLine = @(),
-        [switch] $KeepLinesTogether,
-        [switch] $KeepWithNextParagraph,
+        [switch] $KeepLinesTogether, # not done
+        [switch] $KeepWithNextParagraph, # not done
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
         [Alignment[]] $Alignment = @(),
