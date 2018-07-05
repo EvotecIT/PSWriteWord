@@ -28,11 +28,11 @@ function Add-WordText {
         [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
         [alias ("HT")] [HeadingType[]] $HeadingType = @(),
         [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        $Misc = @(),
+        [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
-        $Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
-        $Hidden = @(),
-        $Position = @(), #  "Value must be in the range -1585 - 1585"
+        [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        [bool[]]$Hidden = @(),
+        [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
         [bool[]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
@@ -40,6 +40,7 @@ function Add-WordText {
         [single[]] $IndentationHanging = @(),
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
+        [ShadingType[]] $ShadingType = @(),
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
@@ -86,7 +87,7 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
-
+        $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
@@ -99,7 +100,7 @@ function Add-WordText {
 
 function Set-WordText {
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter[]] $Paragraph,
         [alias ("C")] [nullable[System.Drawing.Color]]$Color,
         [alias ("S")] [nullable[double]] $FontSize,
         [alias ("FontName")] [string] $FontFamily,
@@ -114,12 +115,12 @@ function Set-WordText {
         [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
         [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
         [alias ("HT")] [HeadingType[]] $HeadingType = @(),
-        $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        $Misc = @(),
+        [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
-        $Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
-        $Hidden = @(),
-        $Position = @(), #  "Value must be in the range -1585 - 1585"
+        [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        [bool[]]$Hidden = @(),
+        [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
         [bool[]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
@@ -127,14 +128,37 @@ function Set-WordText {
         [single[]] $IndentationHanging = @(),
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
+        [ShadingType[]] $ShadingType = @(),
         [bool] $Supress = $true
     )
-
-    $Paragraph = $Paragraph | Set-WordTextColor -Color $Color -Supress $false
-    $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize -Supress $false
-    $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily -Supress $false
-    $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold -Supress $false
-    $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic -Supress $false
+    for ($i = 0; $i -lt $Paragraph.Count; $i++) {
+        $Paragraph = $Paragraph | Set-WordTextColor -Color $Color[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextBold -Bold $Bold[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextItalic -Italic $Italic[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextUnderlineColor -UnderlineColor $UnderlineColor[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextUnderlineStyle -UnderlineStyle $UnderlineStyle[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacingAfter -SpacingAfter $SpacingAfter[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacingBefore -SpacingBefore $SpacingBefore[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextHighlight -Highlight $Highlight[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
+        #$Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextAlignment -Alignment $Alignment[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextDirection -Direction $Direction[$i] -Supress $false
+    }
 }
 
 function Set-WordTextFontSize {
@@ -293,6 +317,17 @@ function Set-WordTextStrikeThrough {
     }
     if ($Supress) { return } else { return $Paragraph }
 }
+function Set-WordTextShadingType {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[ShadingType]] $ShadingType,
+        [bool] $Supress = $true
+    )
+    if ($Paragraph -ne $null -and $ShadingType -ne $null) {
+        $Paragraph = $Paragraph.ShadingType($ShadingType)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
 
 function Set-WordTextPercentageScale {
     param(
@@ -334,7 +369,7 @@ function Set-WordTextKerning {
 function Set-WordTextMisc {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        $Misc,
+        [nullable[Misc]] $Misc,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Misc -ne $null) {
@@ -347,7 +382,7 @@ function Set-WordTextMisc {
 function Set-WordTextPosition {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        $Position,
+        [nullable[int]]$Position,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Position -ne $null) {
@@ -359,7 +394,7 @@ function Set-WordTextPosition {
 function Set-WordTextHidden {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        $Hidden,
+        [nullable[bool]] $Hidden,
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Hidden -ne $null) {
