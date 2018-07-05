@@ -21,7 +21,8 @@ Set-WordText [[-Paragraph] <InsertBeforeOrAfter[]>] [[-Color] <Color>] [[-FontSi
  [[-Misc] <Misc[]>] [[-Language] <String[]>] [[-Kerning] <Int32[]>] [[-Hidden] <Boolean[]>]
  [[-Position] <Int32[]>] [[-NewLine] <Boolean[]>] [-KeepLinesTogether] [-KeepWithNextParagraph]
  [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>]
- [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>] [[-Script] <Script>] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -374,6 +375,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Script
+{{Fill Script Description}}
+
+```yaml
+Type: Script
+Parameter Sets: (All)
+Aliases:
+Accepted values: superscript, subscript, none
+
+Required: False
+Position: 27
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ShadingType
 {{Fill ShadingType Description}}
 
@@ -460,7 +477,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 27
+Position: 28
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

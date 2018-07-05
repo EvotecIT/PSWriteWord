@@ -53,7 +53,6 @@ Accept wildcard characters: False
 Type: Int32
 Parameter Sets: (All)
 Aliases:
-Accepted values: 200, 150, 100, 90, 80, 66, 50, 33
 
 Required: False
 Position: 1
