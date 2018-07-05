@@ -1,9 +1,9 @@
 function Add-WordTableTitle {
     [CmdletBinding()]
     param(
-        $Table,
-        $Titles,
-        $MaximumColumns,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [string[]]$Titles,
+        [int] $MaximumColumns,
         [alias ("C")] [nullable[System.Drawing.Color]]$Color,
         [alias ("S")] [nullable[double]] $FontSize,
         [alias ("FontName")] [string] $FontFamily,
@@ -66,7 +66,7 @@ function Add-WordTableCellValue {
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [int] $Row,
         [int] $Column,
-        $Value,
+        [string] $Value,
         [int] $Paragraph = 0,
         [alias ("C")] [nullable[System.Drawing.Color]]$Color,
         [alias ("S")] [nullable[double]] $FontSize,
