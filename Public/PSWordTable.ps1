@@ -47,6 +47,7 @@ function Add-WordTable {
         [ShadingType[]] $ShadingType = @(),
         [Script[]] $Script = @(),
 
+        [switch]$ContinueFormatting,
         [bool] $Supress = $true
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
