@@ -133,13 +133,55 @@ function Add-WordTable {
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
                 -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr]
+                -Italic $Italic[$RowNr] `
+                -UnderlineStyle $UnderlineStyle[$RowNr]`
+                -UnderlineColor $UnderlineColor[$RowNr]`
+                -SpacingAfter $SpacingAfter[$RowNr] `
+                -SpacingBefore $SpacingBefore[$RowNr] `
+                -Spacing $Spacing[$RowNr] `
+                -Highlight $Highlight[$RowNr] `
+                -CapsStyle $CapsStyle[$RowNr] `
+                -StrikeThrough $StrikeThrough[$RowNr] `
+                -HeadingType $HeadingType[$RowNr] `
+                -PercentageScale $PercentageScale[$RowNr] `
+                -Misc $Misc[$RowNr] `
+                -Language $Language[$RowNr]`
+                -Kerning $Kerning[$RowNr]`
+                -Hidden $Hidden[$RowNr]`
+                -Position $Position[$RowNr]`
+                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                -IndentationHanging $IndentationHanging[$RowNr]`
+                -Alignment $Alignment[$RowNr]`
+                -DirectionFormatting $DirectionFormatting[$RowNr] `
+                -ShadingType $ShadingType[$RowNr]`
+                -Script $Script[$RowNr]
             $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNrForData -Value $TableEntry.Value `
                 -Color $Color[$RowNr] `
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
                 -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr]
+                -Italic $Italic[$RowNr] `
+                -UnderlineStyle $UnderlineStyle[$RowNr]`
+                -UnderlineColor $UnderlineColor[$RowNr]`
+                -SpacingAfter $SpacingAfter[$RowNr] `
+                -SpacingBefore $SpacingBefore[$RowNr] `
+                -Spacing $Spacing[$RowNr] `
+                -Highlight $Highlight[$RowNr] `
+                -CapsStyle $CapsStyle[$RowNr] `
+                -StrikeThrough $StrikeThrough[$RowNr] `
+                -HeadingType $HeadingType[$RowNr] `
+                -PercentageScale $PercentageScale[$RowNr] `
+                -Misc $Misc[$RowNr] `
+                -Language $Language[$RowNr]`
+                -Kerning $Kerning[$RowNr]`
+                -Hidden $Hidden[$RowNr]`
+                -Position $Position[$RowNr]`
+                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                -IndentationHanging $IndentationHanging[$RowNr]`
+                -Alignment $Alignment[$RowNr]`
+                -DirectionFormatting $DirectionFormatting[$RowNr] `
+                -ShadingType $ShadingType[$RowNr]`
+                -Script $Script[$RowNr]
             Write-Verbose "Add-WordTable - RowNr: $RowNr / ColumnNr: $ColumnTitle Name: $($TableEntry.Name) Value: $($TableEntry.Value)"
             $RowNr++
 
@@ -156,14 +198,57 @@ function Add-WordTable {
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
                 -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr]
+                -Italic $Italic[$RowNr] `
+                -UnderlineStyle $UnderlineStyle[$RowNr]`
+                -UnderlineColor $UnderlineColor[$RowNr]`
+                -SpacingAfter $SpacingAfter[$RowNr] `
+                -SpacingBefore $SpacingBefore[$RowNr] `
+                -Spacing $Spacing[$RowNr] `
+                -Highlight $Highlight[$RowNr] `
+                -CapsStyle $CapsStyle[$RowNr] `
+                -StrikeThrough $StrikeThrough[$RowNr] `
+                -HeadingType $HeadingType[$RowNr] `
+                -PercentageScale $PercentageScale[$RowNr] `
+                -Misc $Misc[$RowNr] `
+                -Language $Language[$RowNr]`
+                -Kerning $Kerning[$RowNr]`
+                -Hidden $Hidden[$RowNr]`
+                -Position $Position[$RowNr]`
+                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                -IndentationHanging $IndentationHanging[$RowNr]`
+                -Alignment $Alignment[$RowNr]`
+                -DirectionFormatting $DirectionFormatting[$RowNr] `
+                -ShadingType $ShadingType[$RowNr]`
+                -Script $Script[$RowNr]
 
             $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnData -Value $Value `
                 -Color $Color[$RowNr] `
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
                 -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr]
+                -Italic $Italic[$RowNr] `
+                -UnderlineStyle $UnderlineStyle[$RowNr]`
+                -UnderlineColor $UnderlineColor[$RowNr]`
+                -SpacingAfter $SpacingAfter[$RowNr] `
+                -SpacingBefore $SpacingBefore[$RowNr] `
+                -Spacing $Spacing[$RowNr] `
+                -Highlight $Highlight[$RowNr] `
+                -CapsStyle $CapsStyle[$RowNr] `
+                -StrikeThrough $StrikeThrough[$RowNr] `
+                -HeadingType $HeadingType[$RowNr] `
+                -PercentageScale $PercentageScale[$RowNr] `
+                -Misc $Misc[$RowNr] `
+                -Language $Language[$RowNr]`
+                -Kerning $Kerning[$RowNr]`
+                -Hidden $Hidden[$RowNr]`
+                -Position $Position[$RowNr]`
+                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                -IndentationHanging $IndentationHanging[$RowNr]`
+                -Alignment $Alignment[$RowNr]`
+                -DirectionFormatting $DirectionFormatting[$RowNr] `
+                -ShadingType $ShadingType[$RowNr]`
+                -Script $Script[$RowNr]
+
             Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $RowNr "
             $RowNr++
 
@@ -182,7 +267,29 @@ function Add-WordTable {
                     -FontSize $FontSize[$RowNr] `
                     -FontFamily $FontFamily[$RowNr] `
                     -Bold $Bold[$RowNr] `
-                    -Italic $Italic[$RowNr]
+                    -Italic $Italic[$RowNr] `
+                    -UnderlineStyle $UnderlineStyle[$RowNr]`
+                    -UnderlineColor $UnderlineColor[$RowNr]`
+                    -SpacingAfter $SpacingAfter[$RowNr] `
+                    -SpacingBefore $SpacingBefore[$RowNr] `
+                    -Spacing $Spacing[$RowNr] `
+                    -Highlight $Highlight[$RowNr] `
+                    -CapsStyle $CapsStyle[$RowNr] `
+                    -StrikeThrough $StrikeThrough[$RowNr] `
+                    -HeadingType $HeadingType[$RowNr] `
+                    -PercentageScale $PercentageScale[$RowNr] `
+                    -Misc $Misc[$RowNr] `
+                    -Language $Language[$RowNr]`
+                    -Kerning $Kerning[$RowNr]`
+                    -Hidden $Hidden[$RowNr]`
+                    -Position $Position[$RowNr]`
+                    -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                    -IndentationHanging $IndentationHanging[$RowNr]`
+                    -Alignment $Alignment[$RowNr]`
+                    -DirectionFormatting $DirectionFormatting[$RowNr] `
+                    -ShadingType $ShadingType[$RowNr]`
+                    -Script $Script[$RowNr]
+
                 if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $ColumnNr++
             }
@@ -202,7 +309,28 @@ function Add-WordTable {
                     -FontSize $FontSize[$RowNr] `
                     -FontFamily $FontFamily[$RowNr] `
                     -Bold $Bold[$RowNr] `
-                    -Italic $Italic[$RowNr]
+                    -Italic $Italic[$RowNr] `
+                    -UnderlineStyle $UnderlineStyle[$RowNr]`
+                    -UnderlineColor $UnderlineColor[$RowNr]`
+                    -SpacingAfter $SpacingAfter[$RowNr] `
+                    -SpacingBefore $SpacingBefore[$RowNr] `
+                    -Spacing $Spacing[$RowNr] `
+                    -Highlight $Highlight[$RowNr] `
+                    -CapsStyle $CapsStyle[$RowNr] `
+                    -StrikeThrough $StrikeThrough[$RowNr] `
+                    -HeadingType $HeadingType[$RowNr] `
+                    -PercentageScale $PercentageScale[$RowNr] `
+                    -Misc $Misc[$RowNr] `
+                    -Language $Language[$RowNr]`
+                    -Kerning $Kerning[$RowNr]`
+                    -Hidden $Hidden[$RowNr]`
+                    -Position $Position[$RowNr]`
+                    -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                    -IndentationHanging $IndentationHanging[$RowNr]`
+                    -Alignment $Alignment[$RowNr]`
+                    -DirectionFormatting $DirectionFormatting[$RowNr] `
+                    -ShadingType $ShadingType[$RowNr]`
+                    -Script $Script[$RowNr]
 
                 if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
                 $ColumnNr++
