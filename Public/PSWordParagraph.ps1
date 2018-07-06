@@ -135,12 +135,25 @@ function Set-WordText {
         [Script[]] $Script = @(),
         [bool] $Supress = $true
     )
+
+
     Write-Verbose "Set-WordText - Paragraph Count: $($Paragraph.Count)"
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {
         Write-Verbose "Set-WordText - Loop: $($i)"
         Write-Verbose "Set-WordText - $($Paragraph[$i])"
         Write-Verbose "Set-WordText - $($Paragraph[$i].Text)"
-        $Paragraph[$i] = Set-WordTextColor -Paragraph $Paragraph[$i] -Color $Color[$i] -Supress $false
+        if ($null -eq $Paragraph[$i]) {
+            Write-Color 'Paragraph is null'
+        } else {
+            Write-Color 'Paragraph is not null'
+        }
+
+        if ($null -eq $Color[$i]) {
+            Write-Color 'Color is null'
+        } else {
+            Write-Color 'Color is not null'
+        }
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextColor -Color $Color[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextBold -Bold $Bold[$i] -Supress $false

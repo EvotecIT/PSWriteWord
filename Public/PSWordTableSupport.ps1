@@ -101,13 +101,41 @@ function Add-WordTableCellValue {
     #$bold.GetType()
     Write-Verbose "Add-WordTableCellValue - Bold $Bold"
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
+    <#
     $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Italic $Italic `
         -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
         -Highlight $Highlight -CapsStyle $CapsStyle -StrikeThrough $StrikeThrough -HeadingType $HeadingType -PercentageScale $PercentageScale `
         -Misc $Misc -Language $Language -Kerning $Kerning -Position $Position -IndentationFirstLine $IndentationFirstLine `
         -IndentationHanging $IndentationHanging -Alignment $Alignment -Direction $DirectionFormatting -ShadingType $ShadingType -Script $Script -Supress $Supress `
         -Hidden $Hidden # -Bold $Bold
-
+    #>
+    $Data = $Data | Set-WordTextColor -Color $Color -Supress $false
+    $Data = $Data | Set-WordTextFontSize -FontSize $FontSize -Supress $false
+    $Data = $Data | Set-WordTextFontFamily -FontFamily $FontFamily -Supress $false
+    $Data = $Data | Set-WordTextBold -Bold $Bold -Supress $false
+    $Data = $Data | Set-WordTextItalic -Italic $Italic -Supress $false
+    $Data = $Data | Set-WordTextUnderlineColor -UnderlineColor $UnderlineColor -Supress $false
+    $Data = $Data | Set-WordTextUnderlineStyle -UnderlineStyle $UnderlineStyle -Supress $false
+    $Data = $Data | Set-WordTextSpacingAfter -SpacingAfter $SpacingAfter -Supress $false
+    $Data = $Data | Set-WordTextSpacingBefore -SpacingBefore $SpacingBefore -Supress $false
+    $Data = $Data | Set-WordTextSpacing -Spacing $Spacing -Supress $false
+    $Data = $Data | Set-WordTextHighlight -Highlight $Highlight -Supress $false
+    $Data = $Data | Set-WordTextCapsStyle -CapsStyle $CapsStyle -Supress $false
+    $Data = $Data | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough -Supress $false
+    $Data = $Data | Set-WordTextPercentageScale -PercentageScale $PercentageScale -Supress $false
+    $Data = $Data | Set-WordTextSpacing -Spacing $Spacing -Supress $false
+    $Data = $Data | Set-WordTextLanguage -Language $Language -Supress $false
+    $Data = $Data | Set-WordTextKerning -Kerning $Kerning -Supress $false
+    $Data = $Data | Set-WordTextMisc -Misc $Misc -Supress $false
+    $Data = $Data | Set-WordTextPosition -Position $Position -Supress $false
+    $Data = $Data | Set-WordTextHidden -Hidden $Hidden -Supress $false
+    $Data = $Data | Set-WordTextShadingType -ShadingType $ShadingType -Supress $false
+    $Data = $Data | Set-WordTextScript -Script $Script -Supress $false
+    $Data = $Data | Set-WordTextHeadingType -HeadingType $HeadingType -Supress $false
+    $Data = $Data | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine -Supress $false
+    $Data = $Data | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging -Supress $false
+    $Data = $Data | Set-WordTextAlignment -Alignment $Alignment -Supress $false
+    $Data = $Data | Set-WordTextDirection -Direction $Direction -Supress $false
     if ($Supress -eq $true) { return } else { return $Data }
 }
 

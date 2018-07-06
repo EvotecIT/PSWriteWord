@@ -20,8 +20,8 @@ function Add-WordTable {
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
-        [alias ("B")] $Bold = @(),
-        [alias ("I")] $Italic = @(),
+        [alias ("B")] [nullable[bool][]] $Bold = @(),
+        [alias ("I")] [nullable[bool][]] $Italic = @(),
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
@@ -35,9 +35,9 @@ function Add-WordTable {
         [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
-        $Hidden = @(),
+        [nullable[bool][]]$Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
-        $NewLine = @(),
+        [nullable[bool][]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
         [single[]] $IndentationFirstLine = @(),
@@ -155,7 +155,6 @@ function Add-WordTable {
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
-        #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
         if ($Table -eq $null) {
             $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
