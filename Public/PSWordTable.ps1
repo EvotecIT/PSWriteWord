@@ -98,7 +98,28 @@ function Add-WordTable {
             -FontSize $FontSize[0] `
             -FontFamily $FontFamily[0] `
             -Bold $Bold[0] `
-            -Italic $Italic[0]
+            -Italic $Italic[0] `
+            -UnderlineStyle $UnderlineStyle[0]`
+            -UnderlineColor $UnderlineColor[0]`
+            -SpacingAfter $SpacingAfter[0] `
+            -SpacingBefore $SpacingBefore[0] `
+            -Spacing $Spacing[0] `
+            -Highlight $Highlight[0] `
+            -CapsStyle $CapsStyle[0] `
+            -StrikeThrough $StrikeThrough[0] `
+            -HeadingType $HeadingType[0] `
+            -PercentageScale $PercentageScale[0] `
+            -Misc $Misc[0] `
+            -Language $Language[0]`
+            -Kerning $Kerning[0]`
+            -Hidden $Hidden[0]`
+            -Position $Position[0]`
+            -IndentationFirstLine $IndentationFirstLine[0]`
+            -IndentationHanging $IndentationHanging[0]`
+            -Alignment $Alignment[0]`
+            -DirectionFormatting $DirectionFormatting[0] `
+            -ShadingType $ShadingType[0]`
+            -Script $Script[0]
     }
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
