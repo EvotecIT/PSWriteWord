@@ -76,11 +76,11 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
     } else {
-        Write-Verbose 'Add-WordTable - Option 4'
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
         $Titles = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
         $NumberRows = $DataTable.Count
+        Write-Verbose 'Add-WordTable - Option 4'
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
     }
 
