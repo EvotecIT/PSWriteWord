@@ -16,8 +16,8 @@ function Add-WordText {
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
-        [alias ("B")] $Bold = @(),
-        [alias ("I")] $Italic = @(),
+        [alias ("B")] [nullable[bool][]] $Bold = @(),
+        [alias ("I")] [nullable[bool][]] $Italic = @(),
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
@@ -31,9 +31,9 @@ function Add-WordText {
         [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
-        $Hidden = @(),
+        [nullable[bool][]]$Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
-        $NewLine = @(),
+        [nullable[bool][]]$NewLine = @(),
         [switch] $KeepLinesTogether, # not done
         [switch] $KeepWithNextParagraph, # not done
         [single[]] $IndentationFirstLine = @(),
@@ -107,8 +107,8 @@ function Set-WordText {
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
-        $Bold = @(),
-        $Italic = @(),
+        [alias ("B")] [nullable[bool][]] $Bold = @(),
+        [alias ("I")] [nullable[bool][]] $Italic = @(),
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
@@ -122,9 +122,9 @@ function Set-WordText {
         [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
-        $Hidden = @(),
+        [nullable[bool][]] $Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
-        $NewLine = @(),
+        [nullable[bool][]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
         [single[]] $IndentationFirstLine = @(),
@@ -138,7 +138,9 @@ function Set-WordText {
     Write-Verbose "Set-WordText - Paragraph Count: $($Paragraph.Count)"
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {
         Write-Verbose "Set-WordText - Loop: $($i)"
-        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextColor -Color $Color[$i] -Supress $false
+        Write-Verbose "Set-WordText - $($Paragraph[$i])"
+        Write-Verbose "Set-WordText - $($Paragraph[$i].Text)"
+        $Paragraph[$i] = Set-WordTextColor -Paragraph $Paragraph[$i] -Color $Color[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextBold -Bold $Bold[$i] -Supress $false

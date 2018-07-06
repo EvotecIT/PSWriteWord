@@ -20,8 +20,8 @@ function Add-WordTable {
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
-        [alias ("B")] [bool[]] $Bold = @(),
-        [alias ("I")] [bool[]] $Italic = @(),
+        [alias ("B")] $Bold = @(),
+        [alias ("I")] $Italic = @(),
         [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
@@ -35,9 +35,9 @@ function Add-WordTable {
         [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
-        [bool[]]$Hidden = @(),
+        $Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
-        [bool[]] $NewLine = @(),
+        $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
         [single[]] $IndentationFirstLine = @(),
