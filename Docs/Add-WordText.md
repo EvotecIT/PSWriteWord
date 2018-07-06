@@ -14,12 +14,12 @@ schema: 2.0.0
 
 ```
 Add-WordText [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Text] <String[]>]
- [[-Color] <Color[]>] [[-FontSize] <Double[]>] [[-FontFamily] <String[]>] [[-Bold] <Boolean[]>]
- [[-Italic] <Boolean[]>] [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>]
+ [[-Color] <Color[]>] [[-FontSize] <Double[]>] [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>]
+ [[-Italic] <Nullable`1[]>] [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>]
  [[-SpacingAfter] <Double[]>] [[-SpacingBefore] <Double[]>] [[-Spacing] <Double[]>]
  [[-Highlight] <Highlight[]>] [[-CapsStyle] <CapsStyle[]>] [[-StrikeThrough] <StrikeThrough[]>]
  [[-HeadingType] <HeadingType[]>] [[-PercentageScale] <Int32[]>] [[-Misc] <Misc[]>] [[-Language] <String[]>]
- [[-Kerning] <Int32[]>] [[-Hidden] <Boolean[]>] [[-Position] <Int32[]>] [[-NewLine] <Boolean[]>]
+ [[-Kerning] <Int32[]>] [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>]
  [-KeepLinesTogether] [-KeepWithNextParagraph] [[-IndentationFirstLine] <Single[]>]
  [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>] [[-Direction] <Direction[]>]
  [[-ShadingType] <ShadingType[]>] [[-Script] <Script[]>] [[-Supress] <Boolean>] [<CommonParameters>]
@@ -59,7 +59,7 @@ Accept wildcard characters: False
 {{Fill Bold Description}}
 
 ```yaml
-Type: Boolean[]
+Type: Nullable`1[]
 Parameter Sets: (All)
 Aliases: B
 
@@ -167,7 +167,7 @@ Accept wildcard characters: False
 {{Fill Hidden Description}}
 
 ```yaml
-Type: Boolean[]
+Type: Nullable`1[]
 Parameter Sets: (All)
 Aliases:
 
@@ -228,7 +228,7 @@ Accept wildcard characters: False
 {{Fill Italic Description}}
 
 ```yaml
-Type: Boolean[]
+Type: Nullable`1[]
 Parameter Sets: (All)
 Aliases: I
 
@@ -319,7 +319,7 @@ Accept wildcard characters: False
 {{Fill NewLine Description}}
 
 ```yaml
-Type: Boolean[]
+Type: Nullable`1[]
 Parameter Sets: (All)
 Aliases:
 
