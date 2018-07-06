@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module PSWriteWord -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables5.docx"
 
@@ -20,7 +20,7 @@ Add-WordParagraph -WordDocument $WordDocument
 
 Add-WordTable -WordDocument $WordDocument -DataTable $myitems1 -Design ColorfulList #-Verbose
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Language 'en-US'
 
 ### Start Word with file
 Invoke-Item $FilePath
