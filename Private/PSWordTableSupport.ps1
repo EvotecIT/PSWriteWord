@@ -45,6 +45,7 @@ function Add-WordTableTitle {
             $ColumnName = $Titles[$a].Name
         }
         Write-Verbose "Add-WordTableTitle - Column Name: $ColumnName Supress $Supress"
+        Write-Verbose "Add-WordTableTitle - Bold $Bold"
         Add-WordTableCellValue -Table $Table `
             -Row 0 `
             -Column $a `
@@ -97,13 +98,15 @@ function Add-WordTableCellValue {
         [bool] $Supress = $true
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"
+    #$bold.GetType()
+    Write-Verbose "Add-WordTableCellValue - Bold $Bold"
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
-    $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Bold $Bold -Italic $Italic `
+    $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Italic $Italic `
         -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
         -Highlight $Highlight -CapsStyle $CapsStyle -StrikeThrough $StrikeThrough -HeadingType $HeadingType -PercentageScale $PercentageScale `
         -Misc $Misc -Language $Language -Kerning $Kerning -Position $Position -IndentationFirstLine $IndentationFirstLine `
         -IndentationHanging $IndentationHanging -Alignment $Alignment -Direction $DirectionFormatting -ShadingType $ShadingType -Script $Script -Supress $Supress `
-        -Hidden $Hidden
+        -Hidden $Hidden # -Bold $Bold
 
     if ($Supress -eq $true) { return } else { return $Data }
 }

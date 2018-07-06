@@ -163,7 +163,9 @@ function Add-WordTable {
             $WordTable = $Table
             Add-WordTableRow -Table $WordTable -Count $DataTable.Count
         }
+        Write-Verbose "Add-WordTable - DoNotAddTitle $DoNotAddTitle (Option 3)"
         if (-not $DoNotAddTitle) {
+
             Add-WordTableTitle -Title $Titles `
                 -Table $WordTable `
                 -MaximumColumns $MaximumColumns `
@@ -173,9 +175,11 @@ function Add-WordTable {
                 -Bold $Bold[0] `
                 -Italic $Italic[0]
         }
+        Write-Verbose "Add-WordTable - Process Data (Option3)"
         for ($b = 0; $b -lt $NumberRows - 1; $b++) {
             $ColumnNr = 0
             foreach ($Title in $Titles) {
+
                 $RowNr = $($b + 1)
                 $Value = $DataTable[$b].$Title
                 $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNr -Value $Value `
