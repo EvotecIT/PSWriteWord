@@ -52,6 +52,7 @@ function Add-WordTable {
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
     $ObjectType = $DataTable.GetType().Name
 
+
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
         $NumberRows = $DataTable.Count + 1
@@ -61,14 +62,13 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Titles: $([string] $Columns)"
 
         if ($Table -eq $null) {
-            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+            $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
         } else {
-            $WordTable = $Table
-            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+            Add-WordTableRow -Table $Table -Count $DataTable.Count
         }
         if (-not $DoNotAddTitle) {
             Add-WordTableTitle -Title $Columns `
-                -Table $WordTable `
+                -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
                 -FontSize $FontSize[0] `
@@ -80,13 +80,13 @@ function Add-WordTable {
         foreach ($TableEntry in $DataTable.GetEnumerator()) {
             $ColumnNrForTitle = 0
             $ColumnNrForData = 1
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNrForTitle -Value $TableEntry.Name `
+            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNrForTitle -Value $TableEntry.Name `
                 -Color $Color[$RowNr] `
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
                 -Bold $Bold[$RowNr] `
                 -Italic $Italic[$RowNr]
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNrForData -Value $TableEntry.Value `
+            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNrForData -Value $TableEntry.Value `
                 -Color $Color[$RowNr] `
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
@@ -108,14 +108,13 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
 
         if ($Table -eq $null) {
-            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+            $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
         } else {
-            $WordTable = $Table
-            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+            Add-WordTableRow -Table $Table -Count $DataTable.Count
         }
         if (-not $DoNotAddTitle) {
             Add-WordTableTitle -Title $Columns `
-                -Table $WordTable `
+                -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
                 -FontSize $FontSize[0] `
@@ -128,14 +127,14 @@ function Add-WordTable {
             $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
             $ColumnTitle = 0
             $ColumnData = 1
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnTitle -Value $Title `
+            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnTitle -Value $Title `
                 -Color $Color[$RowNr] `
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
                 -Bold $Bold[$RowNr] `
                 -Italic $Italic[$RowNr]
 
-            $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnData -Value $Value `
+            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnData -Value $Value `
                 -Color $Color[$RowNr] `
                 -FontSize $FontSize[$RowNr] `
                 -FontFamily $FontFamily[$RowNr] `
@@ -157,16 +156,15 @@ function Add-WordTable {
         Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
 
         if ($Table -eq $null) {
-            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+            $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
         } else {
-            $WordTable = $Table
-            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+            Add-WordTableRow -Table $Table -Count $DataTable.Count
         }
         Write-Verbose "Add-WordTable - DoNotAddTitle $DoNotAddTitle (Option 3)"
         if (-not $DoNotAddTitle) {
 
             Add-WordTableTitle -Title $Titles `
-                -Table $WordTable `
+                -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
                 -FontSize $FontSize[0] `
@@ -181,7 +179,7 @@ function Add-WordTable {
 
                 $RowNr = $($b + 1)
                 $Value = $DataTable[$b].$Title
-                $Data = Add-WordTableCellValue -Table $WordTable -Row $RowNr -Column $ColumnNr -Value $Value `
+                $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Value `
                     -Color $Color[$RowNr] `
                     -FontSize $FontSize[$RowNr] `
                     -FontFamily $FontFamily[$RowNr] `
@@ -202,15 +200,14 @@ function Add-WordTable {
         #Write-Color "Column Count ", $NumberColumns, " Rows Count ", $NumberRows -C Yellow, Green, Yellow, Green
 
         if ($Table -eq $null) {
-            $WordTable = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+            $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
         } else {
-            $WordTable = $Table
-            Add-WordTableRow -Table $WordTable -Count $DataTable.Count
+            Add-WordTableRow -Table $Table -Count $DataTable.Count
         }
 
         if (-not $DoNotAddTitle) {
             Add-WordTableTitle -Title $Columns `
-                -Table $WordTable `
+                -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
                 -FontSize $FontSize[0] `
@@ -222,7 +219,7 @@ function Add-WordTable {
             $ColumnNr = 0
             foreach ($Title in $Columns.Name) {
                 $Value = $DataTable[$RowNr].$Title
-                $Data = Add-WordTableCellValue -Table $WordTable `
+                $Data = Add-WordTableCellValue -Table $Table `
                     -Row $RowNr `
                     -Column $ColumnNr `
                     -Value $Value `
@@ -241,15 +238,15 @@ function Add-WordTable {
 
     }
 
-    $WordTable | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage
+    $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage
 
-    $WordTable | Set-WordTable -Direction $Direction `
+    $Table | Set-WordTable -Direction $Direction `
         -AutoFit $AutoFit `
         -Design $Design `
         -BreakPageAfterTable:$BreakPageAfterTable `
         -BreakPageBeforeTable:$BreakPageBeforeTable
 
-    if ($Supress -eq $false) { return $WordTable } else { return }
+    if ($Supress -eq $false) { return $Table } else { return }
 }
 
 function Remove-WordTable {
