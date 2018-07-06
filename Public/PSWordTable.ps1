@@ -112,57 +112,15 @@ function Add-WordTable {
         }
     }
 
-
-    ### process titles
-    if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-        Write-Verbose 'Add-WordTable - Option 1'
-        if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Titles `
-                -Table $Table `
-                -MaximumColumns $MaximumColumns `
-                -Color $Color[0] `
-                -FontSize $FontSize[0] `
-                -FontFamily $FontFamily[0] `
-                -Bold $Bold[0] `
-                -Italic $Italic[0]
-        }
-
-    } elseif ($ObjectType -eq 'PSCustomObject') {
-        Write-Verbose 'Add-WordTable - Option 2'
-        if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Titles `
-                -Table $Table `
-                -MaximumColumns $MaximumColumns `
-                -Color $Color[0] `
-                -FontSize $FontSize[0] `
-                -FontFamily $FontFamily[0] `
-                -Bold $Bold[0] `
-                -Italic $Italic[0]
-        }
-    } elseif ($DataTable.GetType().Name -eq 'Object[]') {
-        write-verbose 'Add-WordTable - option 3'
-        if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Titles `
-                -Table $Table `
-                -MaximumColumns $MaximumColumns `
-                -Color $Color[0] `
-                -FontSize $FontSize[0] `
-                -FontFamily $FontFamily[0] `
-                -Bold $Bold[0] `
-                -Italic $Italic[0]
-        }
-    } else {
-        Write-Verbose 'Add-WordTable - Option 4'
-        if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Titles `
-                -Table $Table `
-                -MaximumColumns $MaximumColumns `
-                -Color $Color[0] `
-                -FontSize $FontSize[0] `
-                -FontFamily $FontFamily[0] `
-                -Bold $Bold[0] `
-                -Italic $Italic[0]
-        }
+    if (-not $DoNotAddTitle) {
+        Add-WordTableTitle -Title $Titles `
+            -Table $Table `
+            -MaximumColumns $MaximumColumns `
+            -Color $Color[0] `
+            -FontSize $FontSize[0] `
+            -FontFamily $FontFamily[0] `
+            -Bold $Bold[0] `
+            -Italic $Italic[0]
     }
 
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
