@@ -34,12 +34,8 @@ function Add-WordTableTitle {
     )
     Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) Supress $Supress"
 
-    #$Titles
-
-    #Write-Color "Title Count $($Titles.Count) " -Color Yellow
     for ($a = 0; $a -lt $Titles.Count; $a++) {
         if ($Titles[$a] -is [string]) {
-            #$Titles[$a].GetType()
             $ColumnName = $Titles[$a]
         } else {
             $ColumnName = $Titles[$a].Name
