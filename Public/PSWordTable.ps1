@@ -11,7 +11,7 @@ function Add-WordTable {
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
         [int] $MaximumColumns = 5,
-        [string[]]$Columns = @('Name', 'Value'),
+        [string[]]$Titles = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
         [float[]] $ColummnWidth = @(),
         [nullable[float]] $TableWidth = $null,
@@ -64,12 +64,12 @@ function Add-WordTable {
             Add-WordTableRow -Table $Table -Count $DataTable.Count
         }
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-        Write-Verbose "Add-WordTable - Titles: $([string] $Columns)"
+        Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
     } elseif ($ObjectType -eq 'PSCustomObject') {
         Write-Verbose 'Add-WordTable - Option 2'
 
-        $Titles = Get-ObjectTitles -Object $DataTable[0]
-        $NumberRows = $Titles.Count + 1
+        $Columns = Get-ObjectTitles -Object $DataTable[0]
+        $NumberRows = $Columns.Count + 1
         $NumberColumns = 2
         if ($Table -eq $null) {
             $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
@@ -98,8 +98,8 @@ function Add-WordTable {
     } else {
         Write-Verbose 'Add-WordTable - Option 4'
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
-        $Columns = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
-        $NumberColumns = if ($Columns.Count -ge $MaximumColumns) { $MaximumColumns } else { $Columns.Count }
+        $Titles = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
+        $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
         $NumberRows = $DataTable.Count
 
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
@@ -117,7 +117,7 @@ function Add-WordTable {
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
         if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Columns `
+            Add-WordTableTitle -Title $Titles `
                 -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
@@ -130,7 +130,7 @@ function Add-WordTable {
     } elseif ($ObjectType -eq 'PSCustomObject') {
         Write-Verbose 'Add-WordTable - Option 2'
         if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Columns `
+            Add-WordTableTitle -Title $Titles `
                 -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
@@ -154,7 +154,7 @@ function Add-WordTable {
     } else {
         Write-Verbose 'Add-WordTable - Option 4'
         if (-not $DoNotAddTitle) {
-            Add-WordTableTitle -Title $Columns `
+            Add-WordTableTitle -Title $Titles `
                 -Table $Table `
                 -MaximumColumns $MaximumColumns `
                 -Color $Color[0] `
@@ -190,7 +190,7 @@ function Add-WordTable {
     } elseif ($ObjectType -eq 'PSCustomObject') {
         Write-Verbose 'Add-WordTable - Option 2'
         $RowNr = 1
-        foreach ($Title in $Titles) {
+        foreach ($Title in $Columns) {
             $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
             $ColumnTitle = 0
             $ColumnData = 1
@@ -235,7 +235,7 @@ function Add-WordTable {
 
         for ($RowNr = 1; $RowNr -lt $NumberRows; $RowNr++) {
             $ColumnNr = 0
-            foreach ($Title in $Columns.Name) {
+            foreach ($Title in $Titles.Name) {
                 $Value = $DataTable[$RowNr].$Title
                 $Data = Add-WordTableCellValue -Table $Table `
                     -Row $RowNr `
