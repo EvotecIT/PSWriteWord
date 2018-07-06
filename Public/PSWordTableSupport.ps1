@@ -63,8 +63,8 @@ function Add-WordTableCellValue {
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [int] $Row,
         [int] $Column,
-        [string] $Value,
-        [int] $Paragraph = 0,
+        [Object] $Value,
+        [int] $ParagraphNumber = 0,
         [alias ("C")] [nullable[System.Drawing.Color]]$Color,
         [alias ("S")] [nullable[double]] $FontSize,
         [alias ("FontName")] [string] $FontFamily,
@@ -96,7 +96,7 @@ function Add-WordTableCellValue {
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"
     #$bold.GetType()
     Write-Verbose "Add-WordTableCellValue - Bold $Bold"
-    $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$Paragraph].Append($Value)
+    $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$ParagraphNumber].Append($Value)
     <#
     $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Italic $Italic `
         -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
