@@ -23,10 +23,10 @@ Add-WordTable [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
  [[-Spacing] <Double[]>] [[-Highlight] <Highlight[]>] [[-CapsStyle] <CapsStyle[]>]
  [[-StrikeThrough] <StrikeThrough[]>] [[-HeadingType] <HeadingType[]>] [[-PercentageScale] <Int32[]>]
  [[-Misc] <Misc[]>] [[-Language] <String[]>] [[-Kerning] <Int32[]>] [[-Hidden] <Nullable`1[]>]
- [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>] [-KeepLinesTogether] [-KeepWithNextParagraph]
- [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>]
- [[-DirectionFormatting] <Direction[]>] [[-ShadingType] <ShadingType[]>] [[-Script] <Script[]>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-Position] <Int32[]>] [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>]
+ [[-Alignment] <Alignment[]>] [[-DirectionFormatting] <Direction[]>] [[-ShadingType] <ShadingType[]>]
+ [[-Script] <Script[]>] [[-NewLine] <Nullable`1[]>] [-KeepLinesTogether] [-KeepWithNextParagraph]
+ [-ContinueFormatting] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,7 +53,7 @@ Aliases:
 Accepted values: left, center, right, both
 
 Required: False
-Position: 35
+Position: 34
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -166,6 +166,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ContinueFormatting
+{{Fill ContinueFormatting Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DataTable
 {{Fill DataTable Description}}
 
@@ -223,7 +238,7 @@ Aliases:
 Accepted values: LeftToRight, RightToLeft
 
 Required: False
-Position: 36
+Position: 35
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -330,7 +345,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 33
+Position: 32
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -345,7 +360,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 34
+Position: 33
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -466,7 +481,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 32
+Position: 38
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -542,7 +557,7 @@ Aliases:
 Accepted values: superscript, subscript, none
 
 Required: False
-Position: 38
+Position: 37
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -558,7 +573,7 @@ Aliases:
 Accepted values: Text, Paragraph
 
 Required: False
-Position: 37
+Position: 36
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
