@@ -18,7 +18,7 @@ $ADSnapshot.ForestInformation = $(
 $ADSnapshot.DomainInformation = $(Get-ADDomain)
 # Get basic Ad information end
 
-#Clear-Host
+Clear-Host
 
 $WordDocument = New-WordDocument $FilePath
 Add-WordSection -WordDocument $WordDocument -PageBreak

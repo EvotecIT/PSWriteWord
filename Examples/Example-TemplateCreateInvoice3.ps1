@@ -55,7 +55,7 @@ $InvoiceData += $InvoiceEntry5
 $LastTable = Get-WordTable -WordDocument $WordDocument -LastTable
 $RowsToRemove = $LastTable.Rows.Count - 1
 Remove-WordTableRow -Table $LastTable -Count $RowsToRemove
-Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Verbose
+Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle #-Verbose
 
 Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice
 ### Start Word with file
