@@ -3,11 +3,13 @@
 
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
-
-
 ###### Updates:
 - 0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
 - 0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
+
+###### Example usage of Add-WordTable / Add-WordText in action
+
+![image](https://evotec.xyz/wp-content/uploads/2018/07/PSWriteWord-MoreAction.gif.pagespeed.ce.ULhhEhkC5h.gif)
 
 ###### Requirements:
 - Works only on Windows (as NET CORE is not supported by DLL) - until DocX
