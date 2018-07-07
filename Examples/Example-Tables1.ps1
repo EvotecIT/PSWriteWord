@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 Import-Module ActiveDirectory
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables1.docx"
@@ -21,18 +21,25 @@ $ADSnapshot.DomainInformation = $(Get-ADDomain)
 Clear-Host
 
 $WordDocument = New-WordDocument $FilePath
-Add-WordSection -WordDocument $WordDocument -PageBreak
-Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15
+
+Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" `
+    -FontSize 15 -CapsStyle smallCaps -Alignment both
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE -Design LightShading -Bold $true -Color Blue
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE `
+    -Design LightShading -Bold $true -Color Blue
 Add-WordSection -WordDocument $WordDocument -PageBreak
-Add-WordText -WordDocument $WordDocument -Text "Active Directory Forest Information" -FontSize 15
+Add-WordText -WordDocument $WordDocument -Text "Active Directory ", 'Domain', ' Forest Information' `
+    -FontSize 12, 12, 12 -StrikeThrough none, strike, none -Alignment center
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.ForestInformation -Design LightShading #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.ForestInformation `
+    -Design LightShading -Italic $true, $false -Bold $true, $false -ContinueFormatting
 Add-WordSection -WordDocument $WordDocument -PageBreak
-Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information" -FontSize 15
+Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information" `
+    -FontSize 15 -Color Green
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation -Design LightShading #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation `
+    -Design LightShading
+Add-WordSection -WordDocument $WordDocument -PageBreak
 
 Save-WordDocument $WordDocument -Language 'en-US'
 

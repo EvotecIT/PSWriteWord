@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables9.docx"
 
@@ -56,6 +56,10 @@ Add-WordText -WordDocument $WordDocument -Text 'Notice how ', 'Continue Formatti
 Add-WordParagraph -WordDocument $WordDocument
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with different formatting" -Alignment center -FontSize 15 -UnderlineColor Blue -UnderlineStyle doubleLine
 Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -FontFamily 'Tahoma' -FontSize 10, 9 -ContinueFormatting
+
+Add-WordParagraph -WordDocument $WordDocument
+Add-WordText -WordDocument $WordDocument -Text "Lots of different formatting" -Alignment center -FontSize 15 -UnderlineColor Red -UnderlineStyle dotDash -CapsStyle smallCaps
+Add-WordTable -WordDocument $WordDocument -AutoFit Window -DataTable $InvoiceData -FontSize 10 -FontFamily Tahoma -ContinueFormatting -Design ColorfulList -StrikeThrough none, doubleStrike, none -Color Black, Black, Red, Black
 
 Save-WordDocument $WordDocument -Language 'en-US'
 
