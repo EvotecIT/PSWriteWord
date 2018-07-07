@@ -432,7 +432,7 @@ function Set-WordTextHeadingType {
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $HeadingType -ne $null) {
-        $Paragraph = $Paragraph.StyleName = $HeadingType
+        $Paragraph.StyleName = $HeadingType
     }
     if ($Supress) { return } else { return $Paragraph }
 }
@@ -443,7 +443,7 @@ function Set-WordTextIndentationFirstLine {
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $IndentationFirstLine -ne $null) {
-        $Paragraph = $Paragraph.IndentationFirstLine = $IndentationFirstLine
+        $Paragraph.IndentationFirstLine = $IndentationFirstLine
     }
     if ($Supress) { return } else { return $Paragraph }
 }
@@ -454,7 +454,7 @@ function Set-WordTextAlignment {
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Alignment -ne $null) {
-        $Paragraph = $Paragraph.Alignment = $Alignment
+        $Paragraph.Alignment = $Alignment
     }
     if ($Supress) { return } else { return $Paragraph }
 }
@@ -465,7 +465,7 @@ function Set-WordTextIndentationHanging {
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $IndentationHanging -ne $null) {
-        $Paragraph = $Paragraph.IndentationHanging = $IndentationHanging
+        $Paragraph.IndentationHanging = $IndentationHanging
     }
     if ($Supress) { return } else { return $Paragraph }
 }
@@ -477,7 +477,7 @@ function Set-WordTextDirection {
         [bool] $Supress = $true
     )
     if ($Paragraph -ne $null -and $Direction -ne $null) {
-        $Paragraph = $Paragraph.Direction = $Direction
+        $Paragraph.Direction = $Direction
     }
     if ($Supress) { return } else { return $Paragraph }
 }
