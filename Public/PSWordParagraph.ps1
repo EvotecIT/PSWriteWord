@@ -41,6 +41,7 @@ function Add-WordText {
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
+        [System.Drawing.Color[]]$ShadingColor = @(),
         [Script[]] $Script = @(),
         [bool] $Supress = $true
     )
@@ -88,7 +89,7 @@ function Add-WordText {
         $Paragraph = $Paragraph | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextPosition -Position $Position[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
+        $Paragraph = $Paragraph | Set-WordTextShadingType -ShadingColor $ShadingColor[$i] -ShadingType $ShadingType[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextScript -Script $Script[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
@@ -132,6 +133,7 @@ function Set-WordText {
         [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
+        [System.Drawing.Color[]]$ShadingColor = @(),
         [Script[]] $Script = @(),
         [bool] $Supress = $true
     )
@@ -173,7 +175,7 @@ function Set-WordText {
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextPosition -Position $Position[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextHidden -Hidden $Hidden[$i] -Supress $false
-        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextShadingType -ShadingType $ShadingType[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextShadingType -ShadingColor $ShadingColor[$i] -ShadingType $ShadingType[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextScript -Script $Script[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextHeadingType -HeadingType $HeadingType[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine[$i] -Supress $false
@@ -343,10 +345,11 @@ function Set-WordTextShadingType {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[ShadingType]] $ShadingType,
+        [nullable[System.Drawing.Color]] $ShadingColor,
         [bool] $Supress = $true
     )
-    if ($Paragraph -ne $null -and $ShadingType -ne $null) {
-        $Paragraph = $Paragraph.ShadingType($ShadingType)
+    if ($Paragraph -ne $null -and $ShadingType -ne $null -and $ShadingColor -ne $null) {
+        $Paragraph = $Paragraph.Shading($ShadingColor, $ShadingType)
     }
     if ($Supress) { return } else { return $Paragraph }
 }

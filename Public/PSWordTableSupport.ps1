@@ -90,6 +90,7 @@ function Add-WordTableCellValue {
         [nullable[Alignment]] $Alignment ,
         [nullable[Direction]] $DirectionFormatting,
         [nullable[ShadingType]] $ShadingType,
+        [nullable[System.Drawing.Color]]$ShadingColor,
         [nullable[Script]] $Script,
         [bool] $Supress = $true
     )
@@ -125,7 +126,7 @@ function Add-WordTableCellValue {
     $Data = $Data | Set-WordTextMisc -Misc $Misc -Supress $false
     $Data = $Data | Set-WordTextPosition -Position $Position -Supress $false
     $Data = $Data | Set-WordTextHidden -Hidden $Hidden -Supress $false
-    $Data = $Data | Set-WordTextShadingType -ShadingType $ShadingType -Supress $false
+    $Data = $Data | Set-WordTextShadingType -ShadingColor $ShadingColor -ShadingType $ShadingType -Supress $false
     $Data = $Data | Set-WordTextScript -Script $Script -Supress $false
     $Data = $Data | Set-WordTextHeadingType -HeadingType $HeadingType -Supress $false
     $Data = $Data | Set-WordTextIndentationFirstLine -IndentationFirstLine $IndentationFirstLine -Supress $false
