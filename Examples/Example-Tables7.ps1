@@ -35,7 +35,8 @@ Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - di
 Add-WordParagraph -WordDocument $WordDocument
 Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Direction RightToLeft  #-Verbose
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - with break page before table" -FontSize 15 -Alignment center
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - with break page before table" `
+    -FontSize 15 -Alignment center -ShadingType Paragraph -ShadingColor Blue
 Add-WordParagraph -WordDocument $WordDocument
 Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -BreakPageBeforeTable
 
