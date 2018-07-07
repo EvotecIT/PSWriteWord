@@ -24,7 +24,7 @@ $WordDocument = New-WordDocument $FilePath
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE -Design LightShading # -Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE -Design LightShading -Bold $true -Color Blue
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Forest Information" -FontSize 15
 Add-WordParagraph -WordDocument $WordDocument
@@ -34,7 +34,7 @@ Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Informat
 Add-WordParagraph -WordDocument $WordDocument
 Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation -Design LightShading #-Verbose
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Language 'en-US'
 
 ### Start Word with file
 Invoke-Item $FilePath
