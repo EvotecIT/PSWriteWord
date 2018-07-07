@@ -37,9 +37,6 @@ function Add-WordTable {
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool][]]$Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
-        [nullable[bool][]] $NewLine = @(),
-        [switch] $KeepLinesTogether,
-        [switch] $KeepWithNextParagraph,
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
         [Alignment[]] $Alignment = @(),
@@ -47,6 +44,9 @@ function Add-WordTable {
         [ShadingType[]] $ShadingType = @(),
         [Script[]] $Script = @(),
 
+        [nullable[bool][]] $NewLine = @(),
+        [switch] $KeepLinesTogether,
+        [switch] $KeepWithNextParagraph,
         [switch]$ContinueFormatting,
         [bool] $Supress = $true
     )
@@ -54,7 +54,7 @@ function Add-WordTable {
     $ObjectType = $DataTable.GetType().Name
 
 
-    ### process table
+    ### Prepare Number of ROWS/COLUMNS
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         $NumberRows = $DataTable.Count + 1
         $NumberColumns = 2
@@ -84,12 +84,13 @@ function Add-WordTable {
         Write-Verbose 'Add-WordTable - Option 4'
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
     }
-
+    ### Add Table or Add To TABLE
     if ($Table -eq $null) {
         $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
     } else {
         Add-WordTableRow -Table $Table -Count $DataTable.Count
     }
+    ### Add titles
     if (-not $DoNotAddTitle) {
         Add-WordTableTitle -Title $Titles `
             -Table $Table `
@@ -99,8 +100,8 @@ function Add-WordTable {
             -FontFamily $FontFamily[0] `
             -Bold $Bold[0] `
             -Italic $Italic[0] `
-            -UnderlineStyle $UnderlineStyle[0]`
-            -UnderlineColor $UnderlineColor[0]`
+            -UnderlineStyle $UnderlineStyle[0] `
+            -UnderlineColor $UnderlineColor[0] `
             -SpacingAfter $SpacingAfter[0] `
             -SpacingBefore $SpacingBefore[0] `
             -Spacing $Spacing[0] `
@@ -110,18 +111,75 @@ function Add-WordTable {
             -HeadingType $HeadingType[0] `
             -PercentageScale $PercentageScale[0] `
             -Misc $Misc[0] `
-            -Language $Language[0]`
-            -Kerning $Kerning[0]`
-            -Hidden $Hidden[0]`
-            -Position $Position[0]`
-            -IndentationFirstLine $IndentationFirstLine[0]`
-            -IndentationHanging $IndentationHanging[0]`
-            -Alignment $Alignment[0]`
+            -Language $Language[0] `
+            -Kerning $Kerning[0] `
+            -Hidden $Hidden[0] `
+            -Position $Position[0] `
+            -IndentationFirstLine $IndentationFirstLine[0] `
+            -IndentationHanging $IndentationHanging[0] `
+            -Alignment $Alignment[0] `
             -DirectionFormatting $DirectionFormatting[0] `
-            -ShadingType $ShadingType[0]`
+            -ShadingType $ShadingType[0] `
             -Script $Script[0]
     }
+    ### Continue formatting
+    if ($ContinueFormatting -eq $true) {
+        $Formatting = Set-WordTableContinueFormatting -NumberRows $NumberRows `
+            -Color $Color `
+            -FontSize $FontSize `
+            -FontFamily $FontFamily `
+            -Bold $Bold `
+            -Italic $Italic `
+            -UnderlineStyle $UnderlineStyle `
+            -UnderlineColor $UnderlineColor `
+            -SpacingAfter $SpacingAfter `
+            -SpacingBefore $SpacingBefore `
+            -Spacing $Spacing `
+            -Highlight $Highlight `
+            -CapsStyle $CapsStyle `
+            -StrikeThrough $StrikeThrough `
+            -HeadingType $HeadingType `
+            -PercentageScale $PercentageScale `
+            -Misc $Misc `
+            -Language $Language `
+            -Kerning $Kerning `
+            -Hidden $Hidden `
+            -Position $Position `
+            -IndentationFirstLine $IndentationFirstLine `
+            -IndentationHanging $IndentationHanging `
+            -Alignment $Alignment `
+            -DirectionFormatting $DirectionFormatting `
+            -ShadingType $ShadingType `
+            -Script $Script
 
+        $Color = $Formatting[0]
+        $FontSize = $Formatting[1]
+        $FontFamily = $Formatting[2]
+        $Bold = $Formatting[3]
+        $Italic = $Formatting[4]
+        $UnderlineStyle = $Formatting[5]
+        $UnderlineColor = $Formatting[6]
+        $SpacingAfter = $Formatting[7]
+        $SpacingBefore = $Formatting[8]
+        $Spacing = $Formatting[9]
+        $Highlight = $Formatting[10]
+        $CapsStyle = $Formatting[11]
+        $StrikeThrough = $Formatting[12]
+        $HeadingType = $Formatting[13]
+        $PercentageScale = $Formatting[14]
+        $Misc = $Formatting[15]
+        $Language = $Formatting[16]
+        $Kerning = $Formatting[17]
+        $Hidden = $Formatting[18]
+        $Position = $Formatting[19]
+        $IndentationFirstLine = $Formatting[20]
+        $IndentationHanging = $Formatting[21]
+        $Alignment = $Formatting[22]
+        $DirectionFormatting = $Formatting[23]
+        $ShadingType = $Formatting[24]
+        $Script = $Formatting[25]
+    }
+    ###  Build data in Table
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
         $RowNr = 1
@@ -338,16 +396,107 @@ function Add-WordTable {
         }
 
     }
-
+    ### Apply formatting to table
     $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage
-
     $Table | Set-WordTable -Direction $Direction `
         -AutoFit $AutoFit `
         -Design $Design `
         -BreakPageAfterTable:$BreakPageAfterTable `
         -BreakPageBeforeTable:$BreakPageBeforeTable
-
+    ### return data
     if ($Supress -eq $false) { return $Table } else { return }
+}
+
+function Set-WordTableContinueFormatting {
+    param(
+        [int] $NumberRows,
+        [alias ("C")] [System.Drawing.Color[]]$Color = @(),
+        [alias ("S")] [double[]] $FontSize = @(),
+        [alias ("FontName")] [string[]] $FontFamily = @(),
+        [alias ("B")] [nullable[bool][]] $Bold = @(),
+        [alias ("I")] [nullable[bool][]] $Italic = @(),
+        [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
+        [alias ("SA")] [double[]] $SpacingAfter = @(),
+        [alias ("SB")] [double[]] $SpacingBefore = @(),
+        [alias ("SP")] [double[]] $Spacing = @(),
+        [alias ("H")] [highlight[]] $Highlight = @(),
+        [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
+        [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
+        [alias ("HT")] [HeadingType[]] $HeadingType = @(),
+        [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
+        [Misc[]] $Misc = @(),
+        [string[]] $Language = @(),
+        [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
+        [nullable[bool][]]$Hidden = @(),
+        [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
+        [single[]] $IndentationFirstLine = @(),
+        [single[]] $IndentationHanging = @(),
+        [Alignment[]] $Alignment = @(),
+        [Direction[]] $DirectionFormatting = @(),
+        [ShadingType[]] $ShadingType = @(),
+        [Script[]] $Script = @()
+    )
+    for ($RowNr = 0; $RowNr -lt $NumberRows; $RowNr++) {
+        Write-Verbose "Add-WordColor - RowNr: $RowNr / $NumberRows"
+        if ($null -eq $Color[$RowNr]) { $Color += $Color[$RowNr - 1] }
+        if ($null -eq $FontSize[$RowNr]) { $FontSize += $FontSize[$RowNr - 1] }
+        if ($null -eq $FontFamily[$RowNr]) { $FontFamily += $FontFamily[$RowNr - 1] }
+        if ($null -eq $Bold[$RowNr]) { $Bold += $Bold[$RowNr - 1] }
+        if ($null -eq $Italic[$RowNr]) { $Italic += $Italic[$RowNr - 1] }
+        #if ($null -eq $UnderlineStyle[$RowNr]) { $UnderlineStyle += $UnderlineStyle[$RowNr - 1] }
+        #if ($null -eq $UnderlineColor[$RowNr]) { $UnderlineColor += $UnderlineColor[$RowNr - 1] }
+        <#
+    -SpacingAfter $SpacingAfter[$RowNr] `
+    -SpacingBefore $SpacingBefore[$RowNr] `
+    -Spacing $Spacing[$RowNr] `
+    -Highlight $Highlight[$RowNr] `
+    -CapsStyle $CapsStyle[$RowNr] `
+    -StrikeThrough $StrikeThrough[$RowNr] `
+    -HeadingType $HeadingType[$RowNr] `
+    -PercentageScale $PercentageScale[$RowNr] `
+    -Misc $Misc[$RowNr] `
+    -Language $Language[$RowNr]`
+    -Kerning $Kerning[$RowNr]`
+    -Hidden $Hidden[$RowNr]`
+    -Position $Position[$RowNr]`
+    -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+    -IndentationHanging $IndentationHanging[$RowNr]`
+    -Alignment $Alignment[$RowNr]`
+    -DirectionFormatting $DirectionFormatting[$RowNr] `
+    -ShadingType $ShadingType[$RowNr]`
+    -Script $Script[$RowNr]
+    #>
+    }
+
+    return @(
+        $Color,
+        $FontSize,
+        $FontFamily,
+        $Bold,
+        $Italic,
+        $UnderlineStyle,
+        $UnderlineColor,
+        $SpacingAfter,
+        $SpacingBefore,
+        $Spacing,
+        $Highlight,
+        $CapsStyle,
+        $StrikeThrough,
+        $HeadingType,
+        $PercentageScale,
+        $Misc,
+        $Language,
+        $Kerning,
+        $Hidden,
+        $Position,
+        $IndentationFirstLine,
+        $IndentationHanging,
+        $Alignment,
+        $DirectionFormatting,
+        $ShadingType,
+        $Script
+    )
 }
 
 function Remove-WordTable {
