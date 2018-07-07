@@ -15,7 +15,7 @@ $PlaceToAddPicture = Add-WordText -WordDocument $WordDocument -Text 'Adding a pi
 
 Add-WordText -WordDocument $WordDocument -Text 'This is text'
 
-$AllPictures = Get-WordPicture -WordDocument $WordDocument -List
+$AllPictures = Get-WordPicture -WordDocument $WordDocument -ListPictures
 Add-WordText -WordDocument $WordDocument -Text 'This is another text'
 Add-WordPicture -WordDocument $WordDocument -Picture $AllPictures[1] # add copy of picture
 Add-WordPicture -WordDocument $WordDocument -Picture $AllPictures[1] -Paragraph $PlaceToAddPicture # add copy of picture to paragraph
