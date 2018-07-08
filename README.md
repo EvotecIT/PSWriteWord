@@ -12,7 +12,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 ![image](https://evotec.xyz/wp-content/uploads/2018/07/PSWriteWord-MoreAction.gif.pagespeed.ce.ULhhEhkC5h.gif)
 
 ###### Requirements:
-- Works only on Windows (as NET CORE is not supported by DLL) - until DocX adds it that is.
+- Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever). 
 
 ###### Tested on: (feel free to provide what you use it on)
 - Windows 10 1803+
