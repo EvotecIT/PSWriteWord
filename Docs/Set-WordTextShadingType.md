@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Set-WordTextShadingType [[-Paragraph] <InsertBeforeOrAfter>] [[-ShadingType] <ShadingType>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-ShadingColor] <Color>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,6 +46,21 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
+### -ShadingColor
+{{Fill ShadingColor Description}}
+
+```yaml
+Type: Color
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ShadingType
 {{Fill ShadingType Description}}
 
@@ -71,7 +86,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

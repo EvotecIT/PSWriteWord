@@ -22,7 +22,8 @@ Add-WordText [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] 
  [[-Kerning] <Int32[]>] [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>]
  [-KeepLinesTogether] [-KeepWithNextParagraph] [[-IndentationFirstLine] <Single[]>]
  [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>] [[-Direction] <Direction[]>]
- [[-ShadingType] <ShadingType[]>] [[-Script] <Script[]>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-ShadingType] <ShadingType[]>] [[-ShadingColor] <Color[]>] [[-Script] <Script[]>] [-ContinueFormatting]
+ [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -96,6 +97,21 @@ Aliases: C
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContinueFormatting
+{{Fill ContinueFormatting Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -385,6 +401,21 @@ Aliases:
 Accepted values: superscript, subscript, none
 
 Required: False
+Position: 30
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShadingColor
+{{Fill ShadingColor Description}}
+
+```yaml
+Type: Color[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: 29
 Default value: None
 Accept pipeline input: False
@@ -477,7 +508,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 30
+Position: 31
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

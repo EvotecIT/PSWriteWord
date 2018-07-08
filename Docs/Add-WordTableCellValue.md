@@ -21,7 +21,8 @@ Add-WordTableCellValue [[-Table] <InsertBeforeOrAfter>] [[-Row] <Int32>] [[-Colu
  [[-HeadingType] <HeadingType>] [[-PercentageScale] <Int32>] [[-Misc] <Misc>] [[-Language] <String>]
  [[-Kerning] <Int32>] [[-Hidden] <Boolean>] [[-Position] <Int32>] [[-IndentationFirstLine] <Single>]
  [[-IndentationHanging] <Single>] [[-Alignment] <Alignment>] [[-DirectionFormatting] <Direction>]
- [[-ShadingType] <ShadingType>] [[-Script] <Script>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-ShadingType] <ShadingType>] [[-ShadingColor] <Color>] [[-Script] <Script>] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -369,6 +370,21 @@ Aliases:
 Accepted values: superscript, subscript, none
 
 Required: False
+Position: 31
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShadingColor
+{{Fill ShadingColor Description}}
+
+```yaml
+Type: Color
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: 30
 Default value: None
 Accept pipeline input: False
@@ -461,7 +477,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 31
+Position: 32
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

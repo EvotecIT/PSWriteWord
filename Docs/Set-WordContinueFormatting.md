@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTableContinueFormatting
+# Set-WordContinueFormatting
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordTableContinueFormatting [[-NumberRows] <Int32>] [[-Color] <Color[]>] [[-FontSize] <Double[]>]
+Set-WordContinueFormatting [[-Count] <Int32>] [[-Color] <Color[]>] [[-FontSize] <Double[]>]
  [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>] [[-Italic] <Nullable`1[]>]
  [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>] [[-SpacingAfter] <Double[]>]
  [[-SpacingBefore] <Double[]>] [[-Spacing] <Double[]>] [[-Highlight] <Highlight[]>]
@@ -95,6 +95,21 @@ Aliases: C
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Count
+{{Fill Count Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -279,21 +294,6 @@ Accepted values: none, shadow, outline, outlineShadow, emboss, engrave
 
 Required: False
 Position: 16
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NumberRows
-{{Fill NumberRows Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
