@@ -43,6 +43,7 @@ function Add-WordText {
         [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
         [Script[]] $Script = @(),
+        [Switch] $ContinueFormatting,
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
@@ -69,6 +70,64 @@ function Add-WordText {
         } else {
             $Paragraph = $Paragraph.Append($Text[$i])
         }
+
+        if ($ContinueFormatting -eq $true) {
+            Write-Verbose "Add-WordText - ContinueFormatting: $ContinueFormatting Text Count: $($Text.Count)"
+            $Formatting = Set-WordContinueFormatting -Count $Text.Count `
+                -Color $Color `
+                -FontSize $FontSize `
+                -FontFamily $FontFamily `
+                -Bold $Bold `
+                -Italic $Italic `
+                -UnderlineStyle $UnderlineStyle `
+                -UnderlineColor $UnderlineColor `
+                -SpacingAfter $SpacingAfter `
+                -SpacingBefore $SpacingBefore `
+                -Spacing $Spacing `
+                -Highlight $Highlight `
+                -CapsStyle $CapsStyle `
+                -StrikeThrough $StrikeThrough `
+                -HeadingType $HeadingType `
+                -PercentageScale $PercentageScale `
+                -Misc $Misc `
+                -Language $Language `
+                -Kerning $Kerning `
+                -Hidden $Hidden `
+                -Position $Position `
+                -IndentationFirstLine $IndentationFirstLine `
+                -IndentationHanging $IndentationHanging `
+                -Alignment $Alignment `
+                -ShadingType $ShadingType `
+                -Script $Script
+
+            $Color = $Formatting[0]
+            $FontSize = $Formatting[1]
+            $FontFamily = $Formatting[2]
+            $Bold = $Formatting[3]
+            $Italic = $Formatting[4]
+            $UnderlineStyle = $Formatting[5]
+            $UnderlineColor = $Formatting[6]
+            $SpacingAfter = $Formatting[7]
+            $SpacingBefore = $Formatting[8]
+            $Spacing = $Formatting[9]
+            $Highlight = $Formatting[10]
+            $CapsStyle = $Formatting[11]
+            $StrikeThrough = $Formatting[12]
+            $HeadingType = $Formatting[13]
+            $PercentageScale = $Formatting[14]
+            $Misc = $Formatting[15]
+            $Language = $Formatting[16]
+            $Kerning = $Formatting[17]
+            $Hidden = $Formatting[18]
+            $Position = $Formatting[19]
+            $IndentationFirstLine = $Formatting[20]
+            $IndentationHanging = $Formatting[21]
+            $Alignment = $Formatting[22]
+            #$DirectionFormatting = $Formatting[23]
+            $ShadingType = $Formatting[24]
+            $Script = $Formatting[25]
+        }
+
         $Paragraph = $Paragraph | Set-WordTextColor -Color $Color[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false

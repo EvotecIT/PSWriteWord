@@ -124,7 +124,7 @@ function Add-WordTable {
     }
     ### Continue formatting
     if ($ContinueFormatting -eq $true) {
-        $Formatting = Set-WordTableContinueFormatting -NumberRows $NumberRows `
+        $Formatting = Set-WordContinueFormatting -Count $NumberRows `
             -Color $Color `
             -FontSize $FontSize `
             -FontFamily $FontFamily `
@@ -407,9 +407,9 @@ function Add-WordTable {
     if ($Supress -eq $false) { return $Table } else { return }
 }
 
-function Set-WordTableContinueFormatting {
+function Set-WordContinueFormatting {
     param(
-        [int] $NumberRows,
+        [int] $Count,
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
@@ -437,8 +437,8 @@ function Set-WordTableContinueFormatting {
         [ShadingType[]] $ShadingType = @(),
         [Script[]] $Script = @()
     )
-    for ($RowNr = 0; $RowNr -lt $NumberRows; $RowNr++) {
-        Write-Verbose "Set-WordTableContinueFormatting - RowNr: $RowNr / $NumberRows"
+    for ($RowNr = 0; $RowNr -lt $Count; $RowNr++) {
+        Write-Verbose "Set-WordContinueFormatting - RowNr: $RowNr / $Count"
         if ($null -eq $Color[$RowNr] -and $null -ne $Color[$RowNr - 1]) { $Color += $Color[$RowNr - 1] }
         if ($null -eq $FontSize[$RowNr] -and $null -ne $FontSize[$RowNr - 1]) {  $FontSize += $FontSize[$RowNr - 1]  }
         if ($null -eq $FontFamily[$RowNr] -and $null -ne $FontFamily[$RowNr - 1]) { $FontFamily += $FontFamily[$RowNr - 1] }
