@@ -8,6 +8,9 @@ Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -Sp
 Add-WordText -WordDocument $WordDocument -Text 'This is a text' -FontSize 10 -SpacingBefore 15 -Bold $true -Supress $True
 Add-WordText -WordDocument $WordDocument -Text 'This is a text with Heading type 3' -FontSize 15 -HeadingType Heading3 -FontFamily 'Arial' -Italic $true
 
+Add-WordText -WordDocument $WordDocument -Text 'This is a text', ' that will show ', 'how Add-WordText works ', 'without', ' continue formatting feature.' -FontFamily Tahoma -FontSize 10 -Color Blue
+Add-WordText -WordDocument $WordDocument -Text 'This is a text', ' that will show ', 'how Add-WordText works ', 'with...', ' continue formatting feature.' -FontFamily Tahoma -FontSize 10 -Color Blue -ContinueFormatting #-Verbose
+
 Save-WordDocument $WordDocument -Language 'en-US'
 
 ### Start Word with file
