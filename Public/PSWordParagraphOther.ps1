@@ -84,20 +84,16 @@ function Get-WordParagraphForList {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        $ListID
+        [int] $ListID
     )
     $IDs = @()
     foreach ($p in $WordDocument.Paragraphs) {
-        #Write-Color "testtting " -Color Yellow
         if ($p.ParagraphNumberProperties -ne $null) {
             $ListNumber = $p.ParagraphNumberProperties.LastNode.LastAttribute.Value
             if ($ListNumber -eq $ListID) {
                 $IDs += $p
             }
         }
-        #
-
-        #$p.StyleName = 'Heading1'
     }
     return $Ids
 }
@@ -106,9 +102,10 @@ function Get-WordParagraphs {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument
     )
-    $IDs = @()
+    $Paragraphs = @()
     foreach ($p in $WordDocument.Paragraphs) {
-        $p
+        Write-Verbose "Get-WordParagraphs - $p"
+        $Paragraphs += $p
     }
-    return $Ids
+    return $Paragraphs
 }
