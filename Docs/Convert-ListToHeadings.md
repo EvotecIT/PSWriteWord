@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Convert-ListToHeadings [[-WordDocument] <Container>] [[-List] <Object>] [[-HeadingType] <HeadingType>]
- [<CommonParameters>]
+Convert-ListToHeadings [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>]
+ [[-HeadingType] <HeadingType>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,7 +51,7 @@ Accept wildcard characters: False
 {{Fill List Description}}
 
 ```yaml
-Type: Object
+Type: InsertBeforeOrAfter
 Parameter Sets: (All)
 Aliases:
 

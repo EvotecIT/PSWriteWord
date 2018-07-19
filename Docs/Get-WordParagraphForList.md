@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WordParagraphForList [[-WordDocument] <Container>] [[-ListID] <Object>] [<CommonParameters>]
+Get-WordParagraphForList [[-WordDocument] <Container>] [[-ListID] <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +34,7 @@ PS C:\> {{ Add example code here }}
 {{Fill ListID Description}}
 
 ```yaml
-Type: Object
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
