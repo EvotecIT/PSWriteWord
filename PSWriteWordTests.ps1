@@ -1,6 +1,6 @@
 $PSVersionTable.PSVersion
 
-$ModuleVersion = (Get-Content -Raw .\PSWriteWord.psd1)  | Invoke-Expression | ForEach-Object ModuleVersion
+$ModuleVersion = (Get-Content -Raw $PSScriptRoot\PSWriteWord.psd1)  | Invoke-Expression | ForEach-Object ModuleVersion
 
 #$dest = "Builds\PSWriteWord-{0}-{1}.zip" -f $ModuleVersion, (Get-Date).ToString("yyyyMMddHHmmss")
 #Compress-Archive -Path . -DestinationPath .\$dest
