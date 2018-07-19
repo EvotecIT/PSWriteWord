@@ -13,7 +13,7 @@ Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... with rotatio
 
 Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage -Rotation 25
 
-Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... flip horizontal'
+Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... flip horizontal' -Alignment right
 
 Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage -FlipHorizontal
 

@@ -11,3 +11,5 @@ Add-WordText -WordDocument $WordDocument -Text 'This is my second title' -Headin
 Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText  -WordDocument $WordDocument -Text 'This is my third title' -HeadingType Heading2 -Italic $true -Bold $true
 Save-WordDocument $WordDocument
+### Start Word with file
+Invoke-Item $FilePath
