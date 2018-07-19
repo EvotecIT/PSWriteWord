@@ -1,5 +1,5 @@
-Import-Module PSWriteWord #-Force
 #Requires -Modules Pester
+Import-Module $PSScriptRoot\..\PSWriteWord.psd1 #-Force
 
 Describe 'Add-WordText' {
 
