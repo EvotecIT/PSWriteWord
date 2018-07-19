@@ -19,7 +19,7 @@ function Add-ToArray {
         $List,
         [ValidateNotNullOrEmpty()][Object] $Element
     )
-    Write-Verbose $Element
+    Write-Verbose "Add-ToArray - Element: $Element"
     $List.Add($Element) > $null
 }
 function Remove-FromArray {
