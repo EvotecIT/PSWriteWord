@@ -1,4 +1,4 @@
-Enum LineType {
+enum LineType {
     single
     double
     triple

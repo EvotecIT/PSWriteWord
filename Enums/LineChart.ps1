@@ -4,8 +4,10 @@
 /// 21.2.2.76 grouping (Grouping)
 /// </summary>
 #>
-enum Grouping {
-    PercentStacked
-    Stacked
+Add-Type -TypeDefinition @"
+public enum Grouping {
+    PercentStacked,
+    Stacked,
     Standard
 }
+"@

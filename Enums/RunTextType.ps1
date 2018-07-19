@@ -1,5 +1,6 @@
-
-enum RunTextType {
-    Text
+Add-Type -TypeDefinition @"
+public enum RunTextType {
+    Text,
     DelText
 }
+"@

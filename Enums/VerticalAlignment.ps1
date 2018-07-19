@@ -1,5 +1,7 @@
-enum VerticalAlignment {
-    Top
-    Center
+Add-Type -TypeDefinition @"
+public enum VerticalAlignment {
+    Top,
+    Center,
     Bottom
 }
+"@

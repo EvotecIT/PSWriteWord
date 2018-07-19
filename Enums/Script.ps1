@@ -1,5 +1,7 @@
-enum Script {
-    superscript
-    subscript
+Add-Type -TypeDefinition @"
+public enum Script {
+    superscript,
+    subscript,
     none
 }
+"@

@@ -1,10 +1,12 @@
-enum ChartLegendPosition {
-    Top
-    Bottom
-    Left
-    Right
+Add-Type -TypeDefinition @"
+public enum ChartLegendPosition {
+    Top,
+    Bottom,
+    Left,
+    Right,
     TopRight
 }
+"@
 
 <#
 /// <summary>
@@ -12,8 +14,10 @@ enum ChartLegendPosition {
 /// 21.2.3.10 ST_DispBlanksAs (Display Blanks As)
 /// </summary>
 #>
-enum DisplayBlanksAs {
-    Gap
-    Span
+Add-Type -TypeDefinition @"
+public enum DisplayBlanksAs {
+    Gap,
+    Span,
     Zero
 }
+"@

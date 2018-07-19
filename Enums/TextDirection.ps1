@@ -1,4 +1,6 @@
-enum TextDirection {
-    btLr
-    right
+Add-Type -TypeDefinition @"
+public enum TextDirection {
+    btLr,
+    right,
 }
+"@

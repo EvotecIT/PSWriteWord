@@ -1,4 +1,6 @@
-enum ShadingType {
-    Text
-    Paragraph
+Add-Type -TypeDefinition @"
+public enum ShadingType {
+    Text,
+    Paragraph,
 }
+"@

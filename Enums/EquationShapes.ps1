@@ -1,9 +1,10 @@
-
-enum EquationShapes {
-    mathPlus
-    mathMinus
-    mathMultiply
-    mathDivide
-    mathEqual
+Add-Type -TypeDefinition @"
+public enum EquationShapes {
+    mathPlus,
+    mathMinus,
+    mathMultiply,
+    mathDivide,
+    mathEqual,
     mathNotEqual
-};
+}
+"@

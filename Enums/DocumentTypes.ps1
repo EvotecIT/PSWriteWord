@@ -1,5 +1,6 @@
-
-enum DocumentTypes {
-    Document
+Add-Type -TypeDefinition @"
+public enum DocumentTypes {
+    Document,
     Template
 }
+"@

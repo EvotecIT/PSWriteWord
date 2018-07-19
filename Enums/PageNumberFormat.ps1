@@ -1,4 +1,6 @@
-enum PageNumberFormat {
-    normal
+Add-Type -TypeDefinition @"
+public enum PageNumberFormat {
+    normal,
     roman
 }
+"@

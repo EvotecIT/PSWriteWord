@@ -1,6 +1,8 @@
-enum SectionBreakType {
-    defaultNextPage
-    evenPage
-    oddPage
+Add-Type -TypeDefinition @"
+public enum SectionBreakType {
+    defaultNextPage,
+    evenPage,
+    oddPage,
     continuous
 }
+"@
