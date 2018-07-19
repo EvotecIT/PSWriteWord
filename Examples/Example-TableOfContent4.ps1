@@ -39,6 +39,9 @@ $paragraph1 = Add-WordText -WordDocument $WordDocument `
     -Color Black, Red, Black -Supress $false
 
 $Object1 = Get-Process | Select-Object ProcessName, Site, StartTime
-$paragraph1 = Add-WordTable -WordDocument $WordDocument -Paragraph $paragraph1 -Table $Object1 -Design 'ColorfulList' #-Verbose
+$paragraph1 = Add-WordTable -WordDocument $WordDocument -Paragraph $paragraph1 -DataTable $Object1 -Design 'ColorfulList' #-Verbose
 
 Save-WordDocument $WordDocument
+
+### Start Word with file
+Invoke-Item $FilePath
