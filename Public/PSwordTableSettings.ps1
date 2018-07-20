@@ -60,7 +60,8 @@ function Set-WordTablePageBreak {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [switch] $AfterTable,
-        [switch] $BeforeTable
+        [switch] $BeforeTable,
+        [nullable[bool]] $BreakAcrossPages
     )
     if ($Table -ne $null) {
         if ($BeforeTable) {
@@ -68,6 +69,9 @@ function Set-WordTablePageBreak {
         }
         if ($AfterTable) {
             $Table.InsertPageBreakAfterSelf()
+        }
+        if ($BreakAcrossPages -ne $null) {
+            $Table.BreakAcrossPages = $BreakAcrossPages
         }
     }
 }
@@ -82,13 +86,14 @@ function Set-WordTable {
         [nullable[TableDesign]] $Design,
         [nullable[Direction]] $Direction,
         [switch] $BreakPageAfterTable,
-        [switch] $BreakPageBeforeTable
+        [switch] $BreakPageBeforeTable,
+        [nullable[bool]] $BreakAcrossPages
     )
     if ($Table -ne $null) {
         $table | Set-WordTableDesign -Design $Design
         $table | Set-WordTableDirection -Direction $Direction
         $table | Set-WordTableBorder -TableBorderType $TableBorderType -Border $Border
-        $table | Set-WordTablePageBreak -AfterTable:$BreakPageAfterTable -BeforeTable:$BreakPageBeforeTable
+        $table | Set-WordTablePageBreak -AfterTable:$BreakPageAfterTable -BeforeTable:$BreakPageBeforeTable -BreakAcrossPages $BreakAcrossPages
         $table | Set-WordTableAutoFit -AutoFit $AutoFit
     }
 }
