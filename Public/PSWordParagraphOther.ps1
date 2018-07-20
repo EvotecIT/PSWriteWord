@@ -48,18 +48,20 @@ Function Add-WordParagraph {
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
-        $Paragraph,
+        [alias('Paragraph', 'Table', 'List')][Xceed.Words.NET.InsertBeforeOrAfter] $WordObject,
         [switch] $AfterSelf,
         [switch] $BeforeSelf,
-        [bool] $TrackChanges,
+        #[bool] $TrackChanges,
         [bool] $Supress = $true
     )
     $NewParagraph = $WordDocument.InsertParagraph()
-    if ($AfterSelf) {
-        $NewParagraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
-    }
-    if ($BeforeSelf) {
-        $NewParagraph = $NewParagraph.InsertParagraphBeforeSelf($Paragraph)
+    if ($WordObject -ne $null) {
+        if ($AfterSelf) {
+            $NewParagraph = $WordObject.InsertParagraphAfterSelf($NewParagraph)
+        }
+        if ($BeforeSelf) {
+            $NewParagraph = $WordObject.InsertParagraphBeforeSelf($NewParagraph)
+        }
     }
     if ($Supress -eq $true) { return } else { return $NewParagraph }
 }
