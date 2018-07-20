@@ -44,13 +44,16 @@ function Add-WordText {
         [System.Drawing.Color[]]$ShadingColor = @(),
         [Script[]] $Script = @(),
         [Switch] $ContinueFormatting,
+        [alias ("Append")][Switch] $AppendToExistingParagraph,
         [bool] $Supress = $true
     )
     if ($Text.Count -eq 0) { return }
 
     if ($Paragraph -ne $null) {
-        $NewParagraph = $WordDocument.InsertParagraph()
-        $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
+        if (-not $AppendToExistingParagraph) {
+            $NewParagraph = $WordDocument.InsertParagraph()
+            $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
+        }
     } else {
         if ($WordDocument -ne $null) {
             $Paragraph = $WordDocument.InsertParagraph()
