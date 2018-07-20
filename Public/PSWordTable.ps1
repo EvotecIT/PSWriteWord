@@ -10,6 +10,7 @@ function Add-WordTable {
         [Direction] $Direction,
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
+        [nullable[bool]] $BreakAcrossPages,
         [int] $MaximumColumns = 5,
         [string[]]$Titles = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
@@ -402,7 +403,8 @@ function Add-WordTable {
         -AutoFit $AutoFit `
         -Design $Design `
         -BreakPageAfterTable:$BreakPageAfterTable `
-        -BreakPageBeforeTable:$BreakPageBeforeTable
+        -BreakPageBeforeTable:$BreakPageBeforeTable `
+        -BreakAcrossPages $BreakAcrossPages
     ### return data
     if ($Supress -eq $false) { return $Table } else { return }
 }
