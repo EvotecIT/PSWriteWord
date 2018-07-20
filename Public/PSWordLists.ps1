@@ -71,15 +71,17 @@ function Convert-ListToHeadings {
     [CmdletBinding()]
     param(
         [Xceed.Words.NET.Container] $WordDocument,
-        $List,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $List,
         [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1
     )
-    $Headings = New-ArrayList
-    $List.GetType()
-    $Paragraphs = Get-WordParagraphForList $WordDocument $List.NumID
+    $ParagraphsWithHeadings = New-ArrayList
+    Write-Verbose "Convert-ListToHeadings - NumID: $($List.NumID)"
+    $Paragraphs = Get-WordParagraphForList -WordDocument $WordDocument -ListID $List.NumID
+    Write-Verbose "Convert-ListToHeadings - List Elements Count: $($Paragraphs.Count)"
     foreach ($p in $Paragraphs) {
+        Write-Verbose "Convert-ListToHeadings - Loop: $HeadingType"
         $p.StyleName = $HeadingType
-        Add-ToArray -List $Headings -Element $p
+        Add-ToArray -List $ParagraphsWithHeadings -Element $p
     }
-    return $Headings
+    return $ParagraphsWithHeadings
 }
