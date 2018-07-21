@@ -31,7 +31,7 @@ function Save-WordDocument {
         Write-Verbose "Save-WordDocument - Setting Language to $Language"
         $Paragraphs = Get-WordParagraphs -WordDocument $WordDocument
         foreach ($p in $Paragraphs) {
-            Set-WordParagraph -Paragraph $p -Language $Language
+            Set-WordParagraph -Paragraph $p -Language $Language -Supress $Supress
         }
     }
 
