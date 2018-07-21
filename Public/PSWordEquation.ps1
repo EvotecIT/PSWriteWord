@@ -3,7 +3,7 @@ function Add-WordEquation {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [string] $Equation,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $Output = $WordDocument.InsertEquation($Equation)
 
