@@ -4,7 +4,7 @@ function Add-WordFooter {
         [Xceed.Words.NET.Container]$WordDocument,
         [nullable[bool]] $DifferentFirstPage,
         [nullable[bool]] $DifferentOddAndEvenPages,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     #$WordDocument.AddFooters()
 
@@ -18,7 +18,7 @@ function Add-WordHeader {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $WordDocument.AddHeaders()
     if ($Supress) { return } else { return $WordDocument.Headers }
@@ -28,7 +28,7 @@ function Get-WordHeader {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
 
 }
@@ -37,7 +37,7 @@ function Get-WordFooter {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.Container]$WordDocument,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
 
 }

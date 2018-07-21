@@ -51,7 +51,7 @@ function Add-WordHyperLink {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [string] $UrlText,
         [string] $UrlLink,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $Url = New-Object -TypeName Uri -ArgumentList $UrlLink
 
@@ -63,7 +63,7 @@ function Set-WordHyperLink {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.DocXElement] $Value,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $Data = $Paragraph.InsertHyperlink($Value)
 

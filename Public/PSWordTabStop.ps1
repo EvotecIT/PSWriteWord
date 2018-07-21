@@ -6,7 +6,7 @@ function Add-WordTabStopPosition {
         [single] $HorizontalPosition,
         [TabStopPositionLeader] $TabStopPositionLeader,
         [Alignment] $Alignment,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     if ($Paragraph -eq $null) {
         $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $False

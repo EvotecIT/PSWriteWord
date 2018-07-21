@@ -8,7 +8,7 @@ function Add-WordTOC {
         [HeadingType] $HeaderStyle = [HeadingType]::Heading1,
         [int] $MaxIncludeLevel = 3,
         [int] $RightTabPos = $null,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
 
     #public TableOfContents InsertTableOfContents( string title, TableOfContentsSwitches switches, string headerStyle = null, int maxIncludeLevel = 3, int? rightTabPos = null )

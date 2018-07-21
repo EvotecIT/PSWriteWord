@@ -30,7 +30,7 @@ function Add-WordTableTitle {
         [nullable[Direction]] $DirectionFormatting ,
         [nullable[ShadingType]] $ShadingType ,
         [nullable[Script]] $Script ,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) Supress $Supress"
 
@@ -92,7 +92,7 @@ function Add-WordTableCellValue {
         [nullable[ShadingType]] $ShadingType,
         [nullable[System.Drawing.Color]]$ShadingColor,
         [nullable[Script]] $Script,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"
     #$bold.GetType()

@@ -4,7 +4,7 @@ function Add-WordTableRow {
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [int] $Count = 1,
         [nullable[int]] $Index,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $List = New-ArrayList
     if ($Table -ne $null) {
@@ -81,7 +81,7 @@ function Set-WordTableRowMergeCells {
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNrStart,
         [nullable[int]] $ColumnNrEnd,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     if ($Table -ne $null) {
         if ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
@@ -99,7 +99,7 @@ function Set-WordTableCell {
         [nullable[int]] $ColumnNr,
         [System.Drawing.Color] $FillColor,
         [System.Drawing.Color] $ShadingColor,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $Table = Set-WordTableCellFillColor -Table $Table -RowNr $RowNr -ColumnNr $ColumnNr -FillColor $FillColor -Supress $false
     $Table = Set-WordTableCellShadingColor  -Table $Table -RowNr $RowNr -ColumnNr $ColumnNr -ShadingColor $ShadingColor -Supress $false
@@ -113,7 +113,7 @@ function Set-WordTableCellFillColor {
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNr,
         [nullable[System.Drawing.Color]] $FillColor,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
 
     if ($Table -ne $null -and $RowNr -ne $null -and $ColumnNr -ne $null -and $FillColor -ne $null) {
@@ -129,7 +129,7 @@ function Set-WordTableCellShadingColor {
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNr,
         [nullable[System.Drawing.Color]] $ShadingColor,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     if ($Table -ne $null -and $RowNr -ne $null -and $ColumnNr -ne $null -and $ShadingColor -ne $null) {
         $Cell = $Table.Rows[$RowNr].Cells[$ColumnNr]
