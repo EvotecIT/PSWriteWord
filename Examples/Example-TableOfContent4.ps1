@@ -9,14 +9,10 @@ Add-WordToc -WordDocument $WordDocument -Title 'Table of content' -Switches C, A
 
 ### This list will be converted into Headings for Numbered Table of Contents
 $ListHeaders = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfHeaders -Supress $false
-$ListHeaders
 ### This list will be added added but....it will appear in the end... since we will use Add-WordText with $Paragraph
 $List2 = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $false
-
 ### Converts List into numbered Headings for Table of Content
 $Headings = Convert-ListToHeadings -WordDocument $WordDocument -List $ListHeaders
-#$Headings
-
 ### Notice how this gets added under Test2 in 1st numbered list... essentially putting $List2 to the end.
 $paragraph2 = Add-WordText -WordDocument $WordDocument `
     -Paragraph $Headings[2] -Text 'This is a text that will be added to ', ' 2nd ', 'section' `
@@ -43,7 +39,6 @@ $paragraph1 = Add-WordText -WordDocument $WordDocument `
 $Object1 = Get-Process | Select-Object ProcessName, Site, StartTime
 $paragraph1 = Add-WordTable -WordDocument $WordDocument -Paragraph $paragraph1 -DataTable $Object1 -Design 'ColorfulList' #-Verbose
 
-Save-WordDocument $WordDocument
-
+Save-WordDocument $WordDocument -Language 'en-US'
 ### Start Word with file
 Invoke-Item $FilePath
