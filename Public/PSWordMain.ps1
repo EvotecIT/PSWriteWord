@@ -23,7 +23,8 @@ function Save-WordDocument {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [string] $FilePath,
-        [string] $Language
+        [string] $Language,
+        [bool] $Supress = $false
     )
 
     if (-not [string]::IsNullOrEmpty($Language)) {
@@ -39,4 +40,5 @@ function Save-WordDocument {
     } else {
         $WordDocument.SaveAs($FilePath)
     }
+    if ($Supress) { return } else { return $WordDocument }
 }

@@ -52,7 +52,7 @@ Function Add-WordParagraph {
         [switch] $AfterSelf,
         [switch] $BeforeSelf,
         #[bool] $TrackChanges,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $NewParagraph = $WordDocument.InsertParagraph()
     if ($WordObject -ne $null) {
@@ -73,7 +73,7 @@ Function Set-WordParagraph {
         [Alignment] $Alignment,
         [Direction] $Direction,
         [string] $Language,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     if ($Paragraph -ne $null) {
         Write-Verbose "Set-WordParagraph - Paragraph is not null"

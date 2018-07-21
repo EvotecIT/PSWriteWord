@@ -49,7 +49,7 @@ function Add-WordTable {
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
         [switch]$ContinueFormatting,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     $DataTable = Convert-ObjectToProcess -DataTable $DataTable
     $ObjectType = $DataTable.GetType().Name
@@ -514,7 +514,7 @@ function New-WordTable {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [int] $NrRows,
         [int] $NrColumns,
-        [bool] $Supress = $true
+        [bool] $Supress = $false
     )
     Write-Verbose "New-WordTable - Paragraph $Paragraph"
     Write-Verbose "New-WordTable - NrRows $NrRows NrColumns $NrColumns Supress $supress"

@@ -6,7 +6,7 @@ function Add-WordList {
         [ListItemType]$ListType,
         [string[]] $ListData = $null,
         $Object = $null,
-        $Supress = $true
+        [bool] $Supress = $false
     )
     $LevelPrimary = 0
     $LevelSecondary = 1
