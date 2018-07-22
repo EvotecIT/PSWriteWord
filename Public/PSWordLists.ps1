@@ -14,6 +14,7 @@ function Add-WordList {
     $List = $null
 
     $ObjectType = Get-ObjectTypeInside $ListData
+    if ($ObjectType -eq $null) { return }
     Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
     Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
 
@@ -32,16 +33,10 @@ function Add-WordList {
                 foreach ($O in $Object.GetEnumerator()) {
                     Write-Verbose "Add-WordList - 1. This is Name: $($O.Name) With Value $($O.Value) "
                     $Value = "$($O.Name) $($O.Value)"
-                    #$List = Add-WordListItem -WordDocument $WordDocument -List $List -ListLevel $LevelPrimary -ListType $ListType -ListValue $Value
-                    #Write-Verbose "AddList (Object) - Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
                     if ($IsFirstValue -eq $True) {
-                        # $ListItem = $WordDocument.AddListItem($List, $Value, $LevelPrimary)
                         $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListType $ListType -ListValue $Value
-
                     } else {
                         $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 1 -ListType $ListType -ListValue $Value
-                        #$ListItem = $WordDocument.AddListItem($List, $Value, $LevelSecondary)
-                        Write-Verbose "AddList (Object) - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
                     }
 
                     $IsFirstValue = $false
@@ -65,50 +60,12 @@ function Add-WordList {
             }
         } else {
             Write-Verbose "Add-WordList - Option 4 - Detected $ObjectType"
-            $IsFirstTitle = $True
-            $Titles = Get-ObjectTitles -Object $ListData
-            $Titles
-            foreach ($Title in $Titles) {
-                $Values = Get-ObjectData -Object $ListData -Title $Title
-                #$Values
-                $IsFirstValue = $True
-                foreach ($Value in $Values) {
-                    if ($IsFirstTitle -eq $True) {
-                        $List = $WordDocument.AddList($Value, $LevelPrimary, $ListType)
-                        Write-Verbose "AddList (Object) - Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
-                    } else {
-                        #Write-Color 'Value IsFirstTitle ', $IsFirstTitle, ' Value IsFirstValue ', $IsFirstValue, ' Count ', $Values.Count, ' Value: ', $Value -Color Yellow, Green, Yellow, Green, White, Yellow
-                        if ($IsFirstValue -eq $True) {
-                            $ListItem = $WordDocument.AddListItem($List, $Value, $LevelPrimary) #> $null
-                            Write-Verbose "AddList (Object) - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
-                        } else {
-                            $ListItem = $WordDocument.AddListItem($List, $Value, $LevelSecondary) # > $null
-                            Write-Verbose "AddList (Object) - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
-                        }
-                    }
-                    $IsFirstTitle = $false
-                    $IsFirstValue = $false
-                }
-            }
 
         }
 
         $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
-        Write-Verbose "AddWordList - Return Type Name: $($data.GetType().Name) - BaseType: $($data.GetType().BaseType)"
-        <#
-        if ($Paragraph -ne $null) {
-            if ($InsertWhere -eq [InsertWhere]::AfterSelf) {
-                $data = $Paragraph.InsertListAfterSelf($List)
-            } elseif ($InsertWhere -eq [InsertWhere]::AfterSelf) {
-                $data = $Paragraph.InsertListBeforeSelf($List)
-            }
-        } else {
-            $data = $WordDocument.InsertList($List)
-        }
-        #>
     }
     if ($supress -eq $false) {
-
         return $data
     } else {
         return
@@ -132,6 +89,7 @@ function Add-WordListItem {
     } else {
         $data = $WordDocument.InsertList($List)
     }
+    Write-Verbose "Add-WordListItem - Return Type Name: $($Data.GetType().Name) - BaseType: $($Data.GetType().BaseType)"
     if ($Supress) { return } else { $data }
 }
 

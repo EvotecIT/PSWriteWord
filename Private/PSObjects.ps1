@@ -48,9 +48,13 @@ function Get-ObjectTypeInside {
     )
     if ($Object -ne $null) {
         $ObjectType = $Object.GetType().Name
-        if ((Get-ObjectCount $Object) -gt 0) {
-            $ObjectTypeInsider = $Object[0].GetType().Name
-            return $ObjectTypeInsider
+        if ($ObjectType -eq 'Object[]') {
+            if ((Get-ObjectCount $Object) -gt 0) {
+                $ObjectTypeInsider = $Object[0].GetType().Name
+                return $ObjectTypeInsider
+            }
+        } else {
+            return $ObjectType
         }
     }
     return
