@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module PSWriteWord -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables7.docx"
 
@@ -15,32 +15,32 @@ $InvoiceData += $InvoiceEntry2
 $InvoiceData1 = @()
 $InvoiceData1 += $InvoiceEntry1
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries" -FontSize 15 -Alignment center
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading #-Verbose
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries" -FontSize 15 -Alignment center -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Supress $true #-Verbose
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry" -FontSize 15 -Alignment center
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading #-Verbose
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry" -FontSize 15 -Alignment center -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -Supress $true #-Verbose
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - autofit to contents" -FontSize 15 -Alignment center
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -AutoFit Contents #-Verbose
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - autofit to contents" -FontSize 15 -Alignment center -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -AutoFit Contents -Supress $true #-Verbose
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - autofit to window" -FontSize 15 -Alignment center
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -AutoFit Window
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - autofit to window" -FontSize 15 -Alignment center -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -AutoFit Window -Supress $true
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - direction right to left" -FontSize 15 -Alignment center
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Direction RightToLeft  #-Verbose
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - direction right to left" -FontSize 15 -Alignment center -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightShading -Direction RightToLeft -Supress $true  #-Verbose
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry - with break page before table" `
-    -FontSize 15 -Alignment center -ShadingType Paragraph -ShadingColor Blue
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -BreakPageBeforeTable
+    -FontSize 15 -Alignment center -ShadingType Paragraph -ShadingColor Blue -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -BreakPageBeforeTable -Supress $true
 
-Save-WordDocument $WordDocument -Language 'en-US'
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
 
 ### Start Word with file
 Invoke-Item $FilePath

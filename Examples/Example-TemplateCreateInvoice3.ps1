@@ -8,22 +8,22 @@ $FilePathImage = "$PSScriptRoot\Images\Logo-Evotec-Small.jpg"
 
 $WordDocument = Get-WordDocument -FilePath $FilePathTemplate
 
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyName'  -Value 'Evotec'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanySlogan'  -Value 'IT Consultants'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyStreetName'  -Value 'Francuska 96B/23'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyCity'  -Value 'Katowice'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyZipCode'  -Value '40-507'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyPhone'  -Value '+48 500 500 500'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanySupport'  -Value 'fake-email@evotec1.xyz'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientName'  -Value 'Fake Company'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientStreetName'  -Value 'Fake Street Name'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientCity'  -Value 'Warsaw'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientZipCode'  -Value '10-000'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientPhone'  -Value '+48 400 400 400'
-Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientMail'  -Value 'fake-email@fake-company.com'
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyName'  -Value 'Evotec'  -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanySlogan'  -Value 'IT Consultants'  -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyStreetName'  -Value 'Francuska 96B/23'  -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyCity'  -Value 'Katowice' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyZipCode'  -Value '40-507' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyPhone'  -Value '+48 500 500 500' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanySupport'  -Value 'fake-email@evotec1.xyz' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientName'  -Value 'Fake Company' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientStreetName'  -Value 'Fake Street Name'-Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientCity'  -Value 'Warsaw' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientZipCode'  -Value '10-000' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientPhone'  -Value '+48 400 400 400' -Supress $true
+Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientMail'  -Value 'fake-email@fake-company.com' -Supress $true
 
 $ParagraphsWithPictures = Get-WordPicture -WordDocument $WordDocument -ListParagraphs
-Set-WordPicture -WordDocument $WordDocument -Paragraph $ParagraphsWithPictures[0] -ImagePath $FilePathImage -ImageWidth 100 -ImageHeight 40
+Set-WordPicture -WordDocument $WordDocument -Paragraph $ParagraphsWithPictures[0] -ImagePath $FilePathImage -ImageWidth 100 -ImageHeight 40 -Supress $true
 
 $InvoiceEntry1 = @{}
 $InvoiceEntry1.Description = 'IT Services 1'
@@ -54,9 +54,9 @@ $InvoiceData += $InvoiceEntry5
 
 $LastTable = Get-WordTable -WordDocument $WordDocument -LastTable
 $RowsToRemove = $LastTable.Rows.Count - 1
-Remove-WordTableRow -Table $LastTable -Count $RowsToRemove
-Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle #-Verbose
+Remove-WordTableRow -Table $LastTable -Count $RowsToRemove -Supress $true
+Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Supress $true #-Verbose
 
-Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice
+Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $true
 ### Start Word with file
 Invoke-Item $FilePathInvoice
