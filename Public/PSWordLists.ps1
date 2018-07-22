@@ -62,7 +62,6 @@ function Add-WordList {
             Write-Verbose "Add-WordList - Option 4 - Detected $ObjectType"
 
         }
-
         $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
     }
     if ($supress -eq $false) {
