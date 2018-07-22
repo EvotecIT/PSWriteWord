@@ -14,13 +14,13 @@ $myitems1 = @(
 
 $WordDocument = New-WordDocument $FilePath
 
-Add-WordTable -WordDocument $WordDocument -DataTable $myitems -Design ColorfulList #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $myitems -Design ColorfulList -Supress $True #-Verbose
 
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $myitems1 -Design ColorfulList #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $myitems1 -Design ColorfulList -Supress $True #-Verbose
 
-Save-WordDocument $WordDocument -Language 'en-US'
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 
 ### Start Word with file
 Invoke-Item $FilePath

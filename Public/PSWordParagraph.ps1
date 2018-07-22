@@ -65,7 +65,7 @@ function Add-WordText {
         if ($NewLine[$i] -ne $null -and $NewLine[$i] -eq $true) {
             if ($i -gt 0) {
                 if ($Paragraph -ne $null) {
-                    $Paragraph = $Paragraph.InsertParagraphAfterSelf()
+                    $Paragraph = $Paragraph.InsertParagraphAfterSelf($Paragraph)
                 } else {
                     $Paragraph = $WordDocument.InsertParagraph()
                 }
@@ -208,15 +208,14 @@ function Set-WordText {
         Write-Verbose "Set-WordText - $($Paragraph[$i])"
         Write-Verbose "Set-WordText - $($Paragraph[$i].Text)"
         if ($null -eq $Paragraph[$i]) {
-            Write-Color 'Paragraph is null'
+            Write-Verbose 'Set-WordText - Paragraph is null'
         } else {
-            Write-Color 'Paragraph is not null'
+            Write-Verbose 'Set-WordText - Paragraph is not null'
         }
-
         if ($null -eq $Color[$i]) {
-            Write-Color 'Color is null'
+            Write-Verbose 'Set-WordText - Color is null'
         } else {
-            Write-Color 'Color is not null'
+            Write-Verbose 'Set-WordText - Color is not null'
         }
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextColor -Color $Color[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false

@@ -5,7 +5,7 @@ $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
 $ListOfHeaders = @('This is 1st section', 'This is 2nd section', 'This is 3rd section', 'This is 4th section', 'This is 5th section')
 
 $WordDocument = New-WordDocument -FilePath $FilePath
-Add-WordToc -WordDocument $WordDocument -Title 'Table of content' -Switches C, A -RightTabPos 15 -HeaderStyle Heading1
+Add-WordToc -WordDocument $WordDocument -Title 'Table of content' -Switches C, A -RightTabPos 15 -HeaderStyle Heading1 -Supress $True
 
 ### This list will be converted into Headings for Numbered Table of Contents
 $ListHeaders = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfHeaders -Supress $false
@@ -39,6 +39,6 @@ $paragraph1 = Add-WordText -WordDocument $WordDocument `
 $Object1 = Get-Process | Select-Object ProcessName, Site, StartTime
 $paragraph1 = Add-WordTable -WordDocument $WordDocument -Paragraph $paragraph1 -DataTable $Object1 -Design 'ColorfulList' #-Verbose
 
-Save-WordDocument $WordDocument -Language 'en-US'
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 ### Start Word with file
 Invoke-Item $FilePath

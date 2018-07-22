@@ -16,11 +16,13 @@ function Set-WordTableBorder {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [nullable[TableBorderType]] $TableBorderType,
-        $Border
+        $Border,
+        [bool] $Supress
     )
     if ($Table -ne $null -and $TableBorderType -ne $null -and $Border -ne $null) {
         $Table.SetBorder($TableBorderType, $Border)
     }
+    if ($Supress) { return } else { $Table }
 }
 function Set-WordTableAutoFit {
     [CmdletBinding()]
@@ -32,6 +34,7 @@ function Set-WordTableAutoFit {
         Write-Verbose "Set-WordTabelAutofit - Setting Table Autofit to: $AutoFit"
         $Table.AutoFit = $AutoFit
     }
+    return $Table
 }
 
 function Set-WordTableDesign {
@@ -43,6 +46,7 @@ function Set-WordTableDesign {
     if ($Table -ne $null -and $Design -ne $null) {
         $Table.Design = $Design
     }
+    return $Table
 }
 
 function Set-WordTableDirection {
@@ -54,6 +58,7 @@ function Set-WordTableDirection {
     if ($Table -ne $null -and $Direction -ne $null) {
         $Table.SetDirection($Direction)
     }
+    return $Table
 }
 
 function Set-WordTablePageBreak {
@@ -75,6 +80,7 @@ function Set-WordTablePageBreak {
             $Table.BreakAcrossPages = $BreakAcrossPages
         }
     }
+    return $Table
 }
 
 function Set-WordTable {
@@ -92,11 +98,11 @@ function Set-WordTable {
         [bool] $Supress
     )
     if ($Table -ne $null) {
-        $table | Set-WordTableDesign -Design $Design
-        $table | Set-WordTableDirection -Direction $Direction
-        $table | Set-WordTableBorder -TableBorderType $TableBorderType -Border $Border
-        $table | Set-WordTablePageBreak -AfterTable:$BreakPageAfterTable -BeforeTable:$BreakPageBeforeTable -BreakAcrossPages $BreakAcrossPages
-        $table | Set-WordTableAutoFit -AutoFit $AutoFit
+        $Table = $table | Set-WordTableDesign -Design $Design
+        $Table = $table | Set-WordTableDirection -Direction $Direction
+        $Table = $table | Set-WordTableBorder -TableBorderType $TableBorderType -Border $Border
+        $Table = $table | Set-WordTablePageBreak -AfterTable:$BreakPageAfterTable -BeforeTable:$BreakPageBeforeTable -BreakAcrossPages $BreakAcrossPages
+        $Table = $table | Set-WordTableAutoFit -AutoFit $AutoFit
     }
     if ($Supress) { return } Else { return $Table}
 }

@@ -41,19 +41,19 @@ Import-Module PSWriteWord #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables6.docx"
 
 $WordDocument = New-WordDocument $FilePath
-Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulList #-Verbose
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulList  -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulGrid -Columns 'My Name', 'My Value'
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $hash -Design ColorfulGrid -Titles 'My Name', 'My Value' -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $hash1 -Design ColorfulGrid -Columns 'My Name', 'My Value' -AutoFit Window
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $hash1 -Design ColorfulGrid -Titles 'My Name', 'My Value' -AutoFit Window -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $hash2 -Design ColorfulGrid -Columns 'My Name', 'My Value'
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $hash2 -Design ColorfulGrid -Titles 'My Name', 'My Value' -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulList #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulList  -Supress $True
 
-Save-WordDocument $WordDocument -Language 'en-US'
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 Invoke-Item $FilePath

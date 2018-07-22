@@ -23,33 +23,33 @@ Import-Module PSWriteWord #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables10.docx"
 
 $WordDocument = New-WordDocument $FilePath
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
+
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 50, 5, 25, 20 -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
+
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 50, 5, 25, 20 -AutoFit Window -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
+
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 10, 25, 50, 15 -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
+
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 10, 25, 50, 15 -AutoFit Contents -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
+
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $false -ColummnWidth 5, 5, 60, 30 -Verbose -Supress $True
 Add-WordParagraph -WordDocument $WordDocument
 
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 50, 5, 25, 20
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $false -ColummnWidth 5, 5, 60, 30 -AutoFit Window -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 50, 5, 25, 20 -AutoFit Window
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 5, 5, 60, 30 -Verbose -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 10, 25, 50, 15
-Add-WordParagraph -WordDocument $WordDocument
-
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 10, 25, 50, 15 -AutoFit Contents
-Add-WordParagraph -WordDocument $WordDocument
-
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $false -ColummnWidth 5, 5, 60, 30 -Verbose
-Add-WordParagraph -WordDocument $WordDocument
-
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $false -ColummnWidth 5, 5, 60, 30 -AutoFit Window -Verbose
-Add-WordParagraph -WordDocument $WordDocument
-
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 5, 5, 60, 30 -Verbose
-Add-WordParagraph -WordDocument $WordDocument
-
-Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 5, 5, 60, 30 -AutoFit Window -Verbose
-Add-WordParagraph -WordDocument $WordDocument
+Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulGrid -Percentage $true -ColummnWidth 5, 5, 60, 30 -AutoFit Window -Verbose -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
 
-Save-WordDocument $WordDocument -Language 'en-US'
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 Invoke-Item $FilePath

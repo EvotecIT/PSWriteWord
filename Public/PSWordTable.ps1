@@ -398,13 +398,16 @@ function Add-WordTable {
 
     }
     ### Apply formatting to table
-    $Table = $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $False
-    $Table = $Table | Set-WordTable -Direction $Direction `
+
+    $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
+
+    $Table | Set-WordTable -Direction $Direction `
         -AutoFit $AutoFit `
         -Design $Design `
         -BreakPageAfterTable:$BreakPageAfterTable `
         -BreakPageBeforeTable:$BreakPageBeforeTable `
-        -BreakAcrossPages $BreakAcrossPages -Supress $false
+        -BreakAcrossPages $BreakAcrossPages -Supress $True
+
     ### return data
     if ($Supress) { return } else { return $Table }
 }

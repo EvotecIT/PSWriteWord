@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord #-Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-ParagraphAdvanced1.docx"
 
@@ -7,7 +7,7 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
     -FontSize 15, 10 `
     -Color Blue, Red `
     -Bold $true, $false, $true `
-    -Italic $true, $true
+    -Italic $true, $true -Supress $True
 
 
 Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size of 15', ' and this is font size of 10 ', ' while this will be 12.' `
@@ -21,10 +21,11 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
     -Highlight darkCyan `
     -SpacingBefore 15, 50 `
     -Spacing 5, 20, 1 `
-    -NewLine $true, $true
+    -NewLine $true, $true -Supress $True
 
 Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size of 15', ' and this is font size of 10 ', ' while this will be default size.' `
     -FontSize 15, 10 `
     -Color Blue, Red `
-    -NewLine $true, $true
-Save-WordDocument $WordDocument -Language 'en-US' -Verbose
+    -NewLine $true, $true -Supress $True
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
+Invoke-Item $FilePath

@@ -7,11 +7,11 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
     -FontSize 15, 10 `
     -Color Blue, Red `
     -Bold $true, $false, $true `
-    -Italic $true, $true
+    -Italic $true, $true -Supress $True
 
 Add-WordProtection -WordDocument $WordDocument -EditRestrictions readOnly -Password '12345678'
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Supress $True
 
 ### Start Word with file
 Invoke-Item $FilePath
