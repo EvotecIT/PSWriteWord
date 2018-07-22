@@ -11,6 +11,7 @@ function Add-WordList {
     $LevelPrimary = 0
     $LevelSecondary = 1
     $LevelThird = 2
+    $List = $null
 
     $ObjectType = Get-ObjectTypeInside $ListData
     Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
@@ -18,16 +19,52 @@ function Add-WordList {
 
     if ($ListData -ne $null) {
         if ($ObjectType -eq 'string') {
-            $ListCount = ($ListData | Measure-Object).Count
-            If ($ListCount -gt 0) {
-                $List = $WordDocument.AddList($ListData[0], 0, $ListType)
-                Write-Verbose "AddList - Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
-                for ($i = 1; $i -lt $ListData.Count; $i++ ) {
-                    $ListItem = $WordDocument.AddListItem($List, $ListData[$i])
-                    Write-Verbose "AddList - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
+            Write-Verbose 'Add-WordList - Option 1 - Detected string type inside array'
+            foreach ($Value in $ListData) {
+                $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value
+                Write-Verbose "AddList - ListItemType Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
+            }
+        } elseif ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
+            Write-Verbose "Add-WordList - Option 2 - Detected $ObjectType"
+            $IsFirstValue = $True
+            foreach ($Object in $ListData) {
+                $IsFirstValue = $True
+                foreach ($O in $Object.GetEnumerator()) {
+                    Write-Verbose "Add-WordList - 1. This is Name: $($O.Name) With Value $($O.Value) "
+                    $Value = "$($O.Name) $($O.Value)"
+                    #$List = Add-WordListItem -WordDocument $WordDocument -List $List -ListLevel $LevelPrimary -ListType $ListType -ListValue $Value
+                    #Write-Verbose "AddList (Object) - Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
+                    if ($IsFirstValue -eq $True) {
+                        # $ListItem = $WordDocument.AddListItem($List, $Value, $LevelPrimary)
+                        $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListType $ListType -ListValue $Value
+
+                    } else {
+                        $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 1 -ListType $ListType -ListValue $Value
+                        #$ListItem = $WordDocument.AddListItem($List, $Value, $LevelSecondary)
+                        Write-Verbose "AddList (Object) - Name: $($ListItem.GetType().Name) - BaseType: $($ListItem.GetType().BaseType)"
+                    }
+
+                    $IsFirstValue = $false
+                }
+                <## Working alternative
+                foreach ($O in $Object.Keys) {
+                    Write-Verbose "Add-WordList - 2. This is Name: $O With Value $($Object.$O) "
+                }
+                #>
+            }
+        } elseif ($ObjectType -eq 'PSCustomObject') {
+            Write-Verbose "Add-WordList - Option 3 - Detected $ObjectType"
+            $IsFirstTitle = $True
+            $IsFirstValue = $True
+            foreach ($Object in $ListData) {
+                $Titles = Get-ObjectTitles -Object $Object
+                foreach ($T in $Titles) {
+                    $Value = "$T - $($Object.$T)"
+                    $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListType $ListType -ListValue $Value
                 }
             }
         } else {
+            Write-Verbose "Add-WordList - Option 4 - Detected $ObjectType"
             $IsFirstTitle = $True
             $Titles = Get-ObjectTitles -Object $ListData
             $Titles
@@ -55,6 +92,10 @@ function Add-WordList {
             }
 
         }
+
+        $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
+        Write-Verbose "AddWordList - Return Type Name: $($data.GetType().Name) - BaseType: $($data.GetType().BaseType)"
+        <#
         if ($Paragraph -ne $null) {
             if ($InsertWhere -eq [InsertWhere]::AfterSelf) {
                 $data = $Paragraph.InsertListAfterSelf($List)
@@ -64,20 +105,85 @@ function Add-WordList {
         } else {
             $data = $WordDocument.InsertList($List)
         }
+        #>
     }
-    Write-Verbose "AddWordList - Return Type Name: $($data.GetType().Name) - BaseType: $($data.GetType().BaseType)"
     if ($supress -eq $false) {
+
         return $data
     } else {
         return
     }
 }
 
+function Add-WordListItem {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [bool] $Supress
+    )
+    if ($Paragraph -ne $null) {
+        if ($InsertWhere -eq [InsertWhere]::AfterSelf) {
+            $data = $Paragraph.InsertListAfterSelf($List)
+        } elseif ($InsertWhere -eq [InsertWhere]::AfterSelf) {
+            $data = $Paragraph.InsertListBeforeSelf($List)
+        }
+    } else {
+        $data = $WordDocument.InsertList($List)
+    }
+    if ($Supress) { return } else { $data }
+}
+
+function New-WordListItem {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
+        [alias('Level')] [ValidateRange(0, 8)] [int] $ListLevel,
+        [alias('ListType')][ListItemType] $ListItemType,
+        [alias('Value')]$ListValue,
+        [nullable[int]] $StartNumber,
+        [bool]$TrackChanges = $false,
+        [bool]$ContinueNumbering = $false,
+        [bool]$Supress = $false
+    )
+    if ($List -eq $null) {
+        $List = $WordDocument.AddList($ListValue, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
+        $Paragraph = $List.Items[$List.Items.Count - 1]
+    } else {
+        $List = $WordDocument.AddListItem($List, $ListValue, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
+        $Paragraph = $List.Items[$List.Items.Count - 1]
+    }
+    Write-Verbose "Add-WordListItem - ListType Value: $ListValue Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
+    return $List
+}
+
+function Get-WordListItemParagraph {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
+        [nullable[int]] $Item,
+        [switch] $LastItem
+    )
+    if ($List -ne $null) {
+        $Count = $List.Items.Count
+        if ($LastItem) {
+            $Paragraph = $List.Items[$List.Items.Count - 1]
+        } else {
+            if ($Item -ne $null -and $Count -le $Item) {
+                $Paragraph = $List.Items[$Item]
+            }
+        }
+    }
+    return $Paragraph
+}
+
 function Convert-ListToHeadings {
     [CmdletBinding()]
     param(
-        [Xceed.Words.NET.Container] $WordDocument,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $List,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
         [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1
     )
     $ParagraphsWithHeadings = New-ArrayList
