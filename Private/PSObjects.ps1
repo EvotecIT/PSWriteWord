@@ -38,3 +38,18 @@ function Get-ObjectCount {
     )
     return $($Object | Measure-Object).Count
 }
+
+function Get-ObjectTypeInside {
+    [CmdletBinding()]
+    param(
+        $Object
+    )
+    if ($Object -ne $null) {
+        $ObjectType = $Object.GetType().Name
+        if ((Get-ObjectCount $Object) -gt 0) {
+            $ObjectTypeInsider = $Object[0].GetType().Name
+            return $ObjectTypeInsider
+        }
+    }
+    return
+}

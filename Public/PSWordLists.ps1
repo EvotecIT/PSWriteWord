@@ -11,12 +11,13 @@ function Add-WordList {
     $LevelPrimary = 0
     $LevelSecondary = 1
     $LevelThird = 2
-    Write-Verbose "Add-WordList - InsertType: BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
 
-    $ObjectType = $ListData.GetType().Name
+    $ObjectType = Get-ObjectTypeInside $ListData
+    Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
+    Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
 
     if ($ListData -ne $null) {
-        if ($ObjectType -eq 'Object[]') {
+        if ($ObjectType -eq 'string') {
             $ListCount = ($ListData | Measure-Object).Count
             If ($ListCount -gt 0) {
                 $List = $WordDocument.AddList($ListData[0], 0, $ListType)
@@ -29,6 +30,7 @@ function Add-WordList {
         } else {
             $IsFirstTitle = $True
             $Titles = Get-ObjectTitles -Object $ListData
+            $Titles
             foreach ($Title in $Titles) {
                 $Values = Get-ObjectData -Object $ListData -Title $Title
                 #$Values
