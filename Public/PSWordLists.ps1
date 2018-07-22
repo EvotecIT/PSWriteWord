@@ -3,16 +3,12 @@ function Add-WordList {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [ListItemType]$ListType,
-        [object] $ListData = $null,
+        [ListItemType]$ListType = [ListItemType]::Bulleted,
+        [alias('DataTable')][object] $ListData = $null,
         [InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
         [bool] $Supress = $false
     )
-    $LevelPrimary = 0
-    $LevelSecondary = 1
-    $LevelThird = 2
     $List = $null
-
     $ObjectType = Get-ObjectTypeInside $ListData
     if ($ObjectType -eq $null) { return }
     Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
@@ -31,8 +27,9 @@ function Add-WordList {
             foreach ($Object in $ListData) {
                 $IsFirstValue = $True
                 foreach ($O in $Object.GetEnumerator()) {
-                    Write-Verbose "Add-WordList - 1. This is Name: $($O.Name) With Value $($O.Value) "
+                    #Write-Verbose "Add-WordList - 1. This is Name: $($O.Name) With Value $($O.Value) "
                     $Value = "$($O.Name) $($O.Value)"
+                    Write-Verbose "Add-WordList - This is Name: $($O.Name) With Value $($O.Value) - Proposed Text: $Value "
                     if ($IsFirstValue -eq $True) {
                         $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListType $ListType -ListValue $Value
                     } else {
@@ -55,12 +52,24 @@ function Add-WordList {
                 $Titles = Get-ObjectTitles -Object $Object
                 foreach ($T in $Titles) {
                     $Value = "$T - $($Object.$T)"
-                    $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListType $ListType -ListValue $Value
+                    Write-Verbose "Add-WordList - This is Name: $($O.Name) With Value $($O.Value) - Proposed Text: $Value "
+                    $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListItemType $ListType -ListValue $Value
                 }
             }
         } else {
             Write-Verbose "Add-WordList - Option 4 - Detected $ObjectType"
-
+            $ListData = Convert-ObjectToProcess -DataTable $ListData
+            $IsFirstTitle = $True
+            $IsFirstValue = $True
+            foreach ($Object in $ListData) {
+                $Titles = Get-ObjectTitles -Object $Object
+                foreach ($T in $Titles) {
+                    $Value = "$T - $($Object.$T)"
+                    Write-Verbose "Add-WordList - This is Name: $($O.Name) With Value $($O.Value) - Proposed Text: $Value "
+                    $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListItemType $ListType -ListValue $Value
+                }
+            }
+            #throw "$ObjectType is not supported"
         }
         $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
     }
@@ -70,6 +79,8 @@ function Add-WordList {
         return
     }
 }
+
+
 
 function Add-WordListItem {
     [CmdletBinding()]
