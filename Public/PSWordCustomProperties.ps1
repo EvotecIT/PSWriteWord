@@ -3,10 +3,12 @@ function Add-WordCustomProperty {
     param (
         [Xceed.Words.NET.Container]$WordDocument,
         [string] $Name,
-        [string] $Value
+        [string] $Value,
+        [bool] $Supress
     )
     $CustomProperty = New-Object -TypeName Xceed.Words.NET.CustomProperty -ArgumentList $Name, $Value
-    $WordDocument.AddCustomProperty($CustomProperty)
+    $Data = $WordDocument.AddCustomProperty($CustomProperty)
+    if ($Supress) { return } else { return $Data }
 }
 
 function Get-WordCustomProperty {
@@ -16,8 +18,9 @@ function Get-WordCustomProperty {
         [string] $Name
     )
     if ($Property -eq $null) {
-        return $WordDocument.CustomProperties.Values
+        $Data = $WordDocument.CustomProperties.Values
     } else {
-        return $WordDocument.CustomProperties.$Name.Value
+        $Data = $WordDocument.CustomProperties.$Name.Value
     }
+    return $Data
 }

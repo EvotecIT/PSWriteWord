@@ -29,6 +29,7 @@ function Set-WordTableAutoFit {
         [nullable[AutoFit]] $AutoFit
     )
     if ($Table -ne $null -and $AutoFit -ne $null) {
+        Write-Verbose "Set-WordTabelAutofit - Setting Table Autofit to: $AutoFit"
         $Table.AutoFit = $AutoFit
     }
 }
@@ -87,7 +88,8 @@ function Set-WordTable {
         [nullable[Direction]] $Direction,
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
-        [nullable[bool]] $BreakAcrossPages
+        [nullable[bool]] $BreakAcrossPages,
+        [bool] $Supress
     )
     if ($Table -ne $null) {
         $table | Set-WordTableDesign -Design $Design
@@ -96,4 +98,5 @@ function Set-WordTable {
         $table | Set-WordTablePageBreak -AfterTable:$BreakPageAfterTable -BeforeTable:$BreakPageBeforeTable -BreakAcrossPages $BreakAcrossPages
         $table | Set-WordTableAutoFit -AutoFit $AutoFit
     }
+    if ($Supress) { return } Else { return $Table}
 }

@@ -89,7 +89,7 @@ function Add-WordTable {
     if ($Table -eq $null) {
         $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
     } else {
-        Add-WordTableRow -Table $Table -Count $DataTable.Count
+        Add-WordTableRow -Table $Table -Count $DataTable.Count -Supress $True
     }
     ### Add titles
     if (-not $DoNotAddTitle) {
@@ -121,7 +121,7 @@ function Add-WordTable {
             -Alignment $Alignment[0] `
             -DirectionFormatting $DirectionFormatting[0] `
             -ShadingType $ShadingType[0] `
-            -Script $Script[0]
+            -Script $Script[0] -Supress $True
     }
     ### Continue formatting
     if ($ContinueFormatting -eq $true) {
@@ -398,15 +398,15 @@ function Add-WordTable {
 
     }
     ### Apply formatting to table
-    $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage
-    $Table | Set-WordTable -Direction $Direction `
+    $Table = $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $False
+    $Table = $Table | Set-WordTable -Direction $Direction `
         -AutoFit $AutoFit `
         -Design $Design `
         -BreakPageAfterTable:$BreakPageAfterTable `
         -BreakPageBeforeTable:$BreakPageBeforeTable `
-        -BreakAcrossPages $BreakAcrossPages
+        -BreakAcrossPages $BreakAcrossPages -Supress $false
     ### return data
-    if ($Supress -eq $false) { return $Table } else { return }
+    if ($Supress) { return } else { return $Table }
 }
 
 function Set-WordContinueFormatting {

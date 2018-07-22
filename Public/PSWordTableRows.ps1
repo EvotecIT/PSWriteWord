@@ -25,7 +25,8 @@ function Remove-WordTableRow {
     param (
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [int] $Count = 1,
-        [nullable[int]] $Index
+        [nullable[int]] $Index,
+        [bool] $Supress
     )
     if ($Table -ne $null) {
         if ($Index -ne $null) {
@@ -38,6 +39,7 @@ function Remove-WordTableRow {
             }
         }
     }
+    if ($Supress) { return } else { return $Table}
 }
 function Copy-WordTableRow {
     [CmdletBinding()]

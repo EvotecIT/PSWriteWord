@@ -56,6 +56,7 @@ function Add-WordTableTitle {
             break;
         }
     }
+    if ($Supress) { return } else { return $Table }
 }
 function Add-WordTableCellValue {
     [CmdletBinding()]

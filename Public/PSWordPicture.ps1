@@ -67,11 +67,13 @@ function Remove-WordPicture {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [int] $PictureID
+        [int] $PictureID,
+        [bool] $Supress
     )
     if ($Paragraph.Pictures[$PictureID] -ne $null) {
         $Paragraph.Pictures[$PictureID].Remove()
     }
+    if ($supress) { return } else { return $Paragraph}
 }
 
 function Set-WordPicture {
@@ -90,10 +92,11 @@ function Set-WordPicture {
         [int] $PictureID,
         [bool] $Supress = $false
     )
-    Remove-WordPicture -WordDocument $WordDocument -Paragraph $Paragraph
+    $Paragraph = Remove-WordPicture -WordDocument $WordDocument -Paragraph $Paragraph -PictureID $PictureID -Supress $Supress
     $data = Add-WordPicture -WordDocument $WordDocument -Paragraph $Paragraph `
         -Picture $Picture `
         -ImagePath $ImagePath -ImageWidth $ImageWidth -ImageHeight $ImageHeight `
         -Rotation $Rotation -FlipHorizontal:$FlipHorizontal -FlipVertical:$FlipVertical -Supress $Supress
-    return $data
+
+    if ($Supress) { return } else { return $data }
 }
