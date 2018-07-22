@@ -13,4 +13,5 @@ Add-WordSection -WordDocument $WordDocument -PageBreak
 Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be numbered list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
 Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
+Invoke-Item $FilePath
