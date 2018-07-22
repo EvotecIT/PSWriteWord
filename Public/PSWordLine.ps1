@@ -7,10 +7,12 @@ function Add-WordLine {
         [LineType] $LineType = [LineType]::Single,
         [nullable[int]] $LineSize = 6,
         [nullable[int]] $LineSpace = 1,
-        [string] $LineColor = 'black'
+        [string] $LineColor = 'black',
+        [bool] $Supress
     )
     if ($Paragraph -eq $null) {
         $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $False
     }
-    $Paragraph.InsertHorizontalLine($HorizontalBorderPosition, $LineType, $LineSize, $LineSpace, $LineColor );
+    $Paragraph = $Paragraph.InsertHorizontalLine($HorizontalBorderPosition, $LineType, $LineSize, $LineSpace, $LineColor );
+    if ($Supress) { return } else { $Paragraph }
 }
