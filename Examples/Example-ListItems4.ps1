@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module PSWriteWord -Force
 Import-Module ActiveDirectory
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-ListItems4.docx"
@@ -24,18 +24,15 @@ $WordDocument = New-WordDocument $FilePath
 
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15 -CapsStyle smallCaps -Alignment both -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
-
-Add-WordList -WordDocument $WordDocument -ListData $ADSnapshot.RootDSE -Verbose -Supress $True
-
-Add-WordSection -WordDocument $WordDocument -PageBreak
+Add-WordList -WordDocument $WordDocument -ListData $ADSnapshot.RootDSE -Supress $True
+Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
 Add-WordText -WordDocument $WordDocument -Text "Active Directory ", 'Domain', ' Forest Information' -FontSize 12, 12, 12 -StrikeThrough none, strike, none -Alignment center -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.ForestInformation -Design LightShading -Italic $true, $false -Bold $true, $false -ContinueFormatting -Supress $True
-Add-WordSection -WordDocument $WordDocument -PageBreak
-Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information" -FontSize 15 -Color Green -Supress $True
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation -Design LightShading
-Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
+Add-WordList -WordDocument $WordDocument -DataTable $ADSnapshot.ForestInformation -Supress $True # -Italic $true, $false -Bold $true, $false -ContinueFormatting -Supress $True
+Add-WordSection -WordDocument $WordDocument -PageBreak  -Supress $True
+Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information"  -FontSize 15 -Color Green -Supress $True
+Add-WordParagraph -WordDocument $WordDocument -Supress $True
+Add-WordList -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation -Supress $true -Verbose
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 

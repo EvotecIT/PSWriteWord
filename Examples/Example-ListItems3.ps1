@@ -16,7 +16,7 @@ $myitems1 = @(
 $WordDocument = New-WordDocument $FilePath
 
 Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be bulleted list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
-Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $myitems -Supress $false -Verbose
+Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $myitems -Supress $True
 
 Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $true
 
