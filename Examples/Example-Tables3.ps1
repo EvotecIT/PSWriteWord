@@ -32,11 +32,11 @@ $InvoiceData += $InvoiceEntry3
 $InvoiceData += $InvoiceEntry4
 $InvoiceData += $InvoiceEntry5
 
-Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -FontSize 15 -Alignment center
-Add-WordParagraph -WordDocument $WordDocument
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design MediumShading1 -AutoFit Contents
+Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -FontSize 15 -Alignment center -Supress $true
+Add-WordParagraph -WordDocument $WordDocument -Supress $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design MediumShading1 -AutoFit Contents -Supress $true
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Supress $true
 
 ### Start Word with file
 Invoke-Item $FilePath

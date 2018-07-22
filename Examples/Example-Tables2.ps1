@@ -4,24 +4,23 @@ $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables2.docx"
 
 Clear-Host
 $WordDocument = New-WordDocument $FilePath
-Add-WordText -WordDocument $WordDocument -Text "This is a text, after which we add section break, followed by table" -FontSize 20
+Add-WordText -WordDocument $WordDocument -Text "This is a text, after which we add section break, followed by table" -FontSize 20 -Supress $true
 
-Add-WordSection -WordDocument $WordDocument -PageBreak
-$Object1 = Get-Process #| Select-Object ProcessName, Site, StartTime
-Add-WordTable -WordDocument $WordDocument -DataTable $Object1 -Design 'ColorfulList' #-Verbose
+Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $true
+$Object1 = Get-Process | Select-Object ProcessName, Handle, StartTime
+Add-WordTable -WordDocument $WordDocument -DataTable $Object1 -Design 'ColorfulList' -Supress $true #-Verbose
 
-Add-WordText -WordDocument $WordDocument -Text "Then we do another pagebreak, and add another table" -FontSize 20
-Add-WordSection -WordDocument $WordDocument -PageBreak
+Add-WordText -WordDocument $WordDocument -Text "Then we do another pagebreak, and add another table" -FontSize 20 -Supress $true
+Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $true
 $Object2 = Get-PSDrive
-Add-WordTable -WordDocument $WordDocument -DataTable $Object2 -Design "LightShading" #-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $Object2 -Design "LightShading" -Supress $true #-Verbose
 
-Add-WordText -WordDocument $WordDocument -Text "Then we do another pagebreak, and add another table" -FontSize 20
-Add-WordSection -WordDocument $WordDocument -PageBreak
-$Object3 = $Object1 | Select-Object ProcessName, Site, StartTime
-Add-WordTable -WordDocument $WordDocument -DataTable $Object3 -Design 'ColorfulList' #-Verbose
+Add-WordText -WordDocument $WordDocument -Text "Then we do another pagebreak, and add another table" -FontSize 20 -Supress $true
+Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $true
+$Object3 = $Object1 | Select-Object ProcessName, Id, StartTime
+Add-WordTable -WordDocument $WordDocument -DataTable $Object3 -Design 'ColorfulList' -Supress $true #-Verbose
 
-
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Supress $true
 
 ### Start Word with file
 Invoke-Item $FilePath
