@@ -1,5 +1,5 @@
 #Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1 #-Force
+Import-Module $PSScriptRoot\..\PSWriteWord.psd1 -Force
 
 Describe 'Add-WordTable' {
     It 'Given 2 tables, document should have 2 tables with proper design' {
@@ -44,7 +44,7 @@ Describe 'Add-WordTable' {
         Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design MediumShading1 -AutoFit Contents #-Verbose
         $WordDocument.Tables[0].RowCount | Should -Be 6
         $WordDocument.Tables[0].ColumnCount | Should -Be 2
-        #$WordDocument.Tables[0].AutoFit | Should -Be 'Contents' # Seems like a bug in Xceed - always returns ColumnWidth
+        # $WordDocument.Tables[0].AutoFit | Should -Be 'Contents' # Seems like a bug in Xceed - always returns ColumnWidth
         $WordDocument.Tables[0].Design | Should -Be 'MediumShading1'
     }
     It 'Given Array of PSCustomObejct document should have 1 table with proper design, proper number of columns and rows and proper index' {
