@@ -49,7 +49,7 @@ Function Add-WordParagraph {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [alias('Paragraph', 'Table', 'List')][Xceed.Words.NET.InsertBeforeOrAfter] $WordObject,
-        [InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
+        [alias('Insert')][InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
         #[bool] $TrackChanges,
         [bool] $Supress = $false
     )
