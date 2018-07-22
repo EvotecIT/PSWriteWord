@@ -15,7 +15,7 @@ $myitems1 = @(
 
 $WordDocument = New-WordDocument $FilePath
 
-Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be bulleted list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
+#Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be bulleted list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
 Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $myitems -Supress $false -Verbose
 
 #Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $true
@@ -24,4 +24,4 @@ Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $myitems -
 #Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $true
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
-#Invoke-Item $FilePath
+Invoke-Item $FilePath
