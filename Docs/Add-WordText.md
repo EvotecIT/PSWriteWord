@@ -20,10 +20,10 @@ Add-WordText [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] 
  [[-Highlight] <Highlight[]>] [[-CapsStyle] <CapsStyle[]>] [[-StrikeThrough] <StrikeThrough[]>]
  [[-HeadingType] <HeadingType[]>] [[-PercentageScale] <Int32[]>] [[-Misc] <Misc[]>] [[-Language] <String[]>]
  [[-Kerning] <Int32[]>] [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>]
- [-KeepLinesTogether] [-KeepWithNextParagraph] [[-IndentationFirstLine] <Single[]>]
- [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>] [[-Direction] <Direction[]>]
- [[-ShadingType] <ShadingType[]>] [[-ShadingColor] <Color[]>] [[-Script] <Script[]>] [-ContinueFormatting]
- [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>]
+ [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>] [[-ShadingColor] <Color[]>]
+ [[-Script] <Script[]>] [-ContinueFormatting] [-AppendToExistingParagraph] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,6 +51,21 @@ Accepted values: left, center, right, both
 
 Required: False
 Position: 26
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AppendToExistingParagraph
+{{Fill AppendToExistingParagraph Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: Append
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -250,36 +265,6 @@ Aliases: I
 
 Required: False
 Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -KeepLinesTogether
-{{Fill KeepLinesTogether Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -KeepWithNextParagraph
-{{Fill KeepWithNextParagraph Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

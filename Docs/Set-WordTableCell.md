@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-WordTableRow
+# Set-WordTableCell
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-WordTableRow [[-Table] <InsertBeforeOrAfter>] [[-Count] <Int32>] [[-Index] <Int32>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+Set-WordTableCell [[-Table] <InsertBeforeOrAfter>] [[-RowNr] <Int32>] [[-ColumnNr] <Int32>]
+ [[-FillColor] <Color>] [[-ShadingColor] <Color>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,8 +31,38 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Count
-{{Fill Count Description}}
+### -ColumnNr
+{{Fill ColumnNr Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FillColor
+{{Fill FillColor Description}}
+
+```yaml
+Type: Color
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RowNr
+{{Fill RowNr Description}}
 
 ```yaml
 Type: Int32
@@ -46,16 +76,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Index
-{{Fill Index Description}}
+### -ShadingColor
+{{Fill ShadingColor Description}}
 
 ```yaml
-Type: Int32
+Type: Color
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -70,7 +100,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -92,11 +122,13 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
+
 
 ## OUTPUTS
 

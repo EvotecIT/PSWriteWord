@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordParagraph [[-WordDocument] <Container>] [[-Supress] <Boolean>] [<CommonParameters>]
+Add-WordParagraph [[-WordDocument] <Container>] [[-WordObject] <InsertBeforeOrAfter>]
+ [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +31,22 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -InsertWhere
+{{Fill InsertWhere Description}}
+
+```yaml
+Type: InsertWhere
+Parameter Sets: (All)
+Aliases: Insert
+Accepted values: AfterSelf, BeforeSelf
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Supress
 {{Fill Supress Description}}
 
@@ -39,7 +56,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -57,6 +74,21 @@ Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -WordObject
+{{Fill WordObject Description}}
+
+```yaml
+Type: InsertBeforeOrAfter
+Parameter Sets: (All)
+Aliases: Paragraph, Table, List
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

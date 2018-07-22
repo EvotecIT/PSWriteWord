@@ -15,7 +15,7 @@ schema: 2.0.0
 ```
 Set-WordTable [[-Table] <InsertBeforeOrAfter>] [[-TableBorderType] <TableBorderType>] [[-Border] <Object>]
  [[-AutoFit] <AutoFit>] [[-Design] <TableDesign>] [[-Direction] <Direction>] [-BreakPageAfterTable]
- [-BreakPageBeforeTable] [<CommonParameters>]
+ [-BreakPageBeforeTable] [[-BreakAcrossPages] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,6 +58,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BreakAcrossPages
+{{Fill BreakAcrossPages Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -120,6 +135,21 @@ Accepted values: LeftToRight, RightToLeft
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Supress
+{{Fill Supress Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

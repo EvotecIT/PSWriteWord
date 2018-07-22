@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Set-WordTableColumnWidth [[-Table] <InsertBeforeOrAfter>] [[-Width] <Single[]>] [[-TotalWidth] <Single>]
- [[-Percentage] <Boolean>] [<CommonParameters>]
+ [[-Percentage] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,6 +41,21 @@ Aliases:
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Supress
+{{Fill Supress Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

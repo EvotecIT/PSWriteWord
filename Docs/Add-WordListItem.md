@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-WordPicture
+# Add-WordListItem
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-WordPicture [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-PictureID] <Int32>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+Add-WordListItem [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>]
+ [[-Paragraph] <InsertBeforeOrAfter>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,8 +31,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Paragraph
-{{Fill Paragraph Description}}
+### -List
+{{Fill List Description}}
 
 ```yaml
 Type: InsertBeforeOrAfter
@@ -46,11 +46,11 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -PictureID
-{{Fill PictureID Description}}
+### -Paragraph
+{{Fill Paragraph Description}}
 
 ```yaml
-Type: Int32
+Type: InsertBeforeOrAfter
 Parameter Sets: (All)
 Aliases:
 
@@ -92,12 +92,14 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### Xceed.Words.NET.Container
 Xceed.Words.NET.InsertBeforeOrAfter
+
 
 ## OUTPUTS
 

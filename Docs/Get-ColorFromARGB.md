@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-WordCustomProperty
+# Get-ColorFromARGB
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordCustomProperty [[-WordDocument] <Container>] [[-Name] <String>] [[-Value] <String>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+Get-ColorFromARGB [[-A] <Int32>] [[-R] <Int32>] [[-G] <Int32>] [[-B] <Int32>]
 ```
 
 ## DESCRIPTION
@@ -31,56 +30,11 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Name
-{{Fill Name Description}}
+### -A
+{{Fill A Description}}
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Supress
-{{Fill Supress Description}}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Value
-{{Fill Value Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WordDocument
-{{Fill WordDocument Description}}
-
-```yaml
-Type: Container
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -91,12 +45,55 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+### -B
+{{Fill B Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -G
+{{Fill G Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -R
+{{Fill R Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ## INPUTS
 
 ### None
+
 
 ## OUTPUTS
 

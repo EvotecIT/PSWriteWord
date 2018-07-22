@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Add-WordList [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ListType] <ListItemType>]
- [[-ListData] <String[]>] [[-Object] <Object>] [[-Supress] <Object>] [<CommonParameters>]
+ [[-ListData] <Object>] [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,13 +31,29 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -InsertWhere
+{{Fill InsertWhere Description}}
+
+```yaml
+Type: InsertWhere
+Parameter Sets: (All)
+Aliases:
+Accepted values: AfterSelf, BeforeSelf
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ListData
 {{Fill ListData Description}}
 
 ```yaml
-Type: String[]
+Type: Object
 Parameter Sets: (All)
-Aliases:
+Aliases: DataTable
 
 Required: False
 Position: 3
@@ -62,21 +78,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Object
-{{Fill Object Description}}
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Paragraph
 {{Fill Paragraph Description}}
 
@@ -96,7 +97,7 @@ Accept wildcard characters: False
 {{Fill Supress Description}}
 
 ```yaml
-Type: Object
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 

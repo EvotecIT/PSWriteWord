@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WordTableRow [[-Table] <InsertBeforeOrAfter>] [-RowsCount] [<CommonParameters>]
+Get-WordTableRow [[-Table] <InsertBeforeOrAfter>] [[-RowNr] <Int32>] [[-ColumnNr] <Int32>]
+ [[-ParagraphNr] <Int32>] [-RowsCount] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,6 +30,51 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -ColumnNr
+{{Fill ColumnNr Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ParagraphNr
+{{Fill ParagraphNr Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RowNr
+{{Fill RowNr Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -RowsCount
 {{Fill RowsCount Description}}
