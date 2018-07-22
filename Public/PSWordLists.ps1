@@ -136,10 +136,13 @@ function Get-WordListItemParagraph {
     )
     if ($List -ne $null) {
         $Count = $List.Items.Count
+        Write-Verbose "Get-WordListItemParagraph - List Count $Count"
         if ($LastItem) {
-            $Paragraph = $List.Items[$List.Items.Count - 1]
+            Write-Verbose "Get-WordListItemParagraph - Last Element $($Count-1)"
+            $Paragraph = $List.Items[$Count - 1]
         } else {
-            if ($Item -ne $null -and $Count -le $Item) {
+            if ($null -ne $Item -and $Item -le $Count) {
+                Write-Verbose "Get-WordListItemParagraph - Returning paragraph for Item Nr: $Item"
                 $Paragraph = $List.Items[$Item]
             }
         }
