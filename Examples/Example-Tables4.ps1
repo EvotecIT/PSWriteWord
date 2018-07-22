@@ -18,7 +18,7 @@ $InvoiceData += $InvoiceEntry1
 $InvoiceData += $InvoiceEntry2
 
 
-$Table = New-WordTable -WordDocument $WordDocument -NrRows 5 -NrColumns 3 -Supress $false
+$Table = New-WordTable -WordDocument $WordDocument -NrRows 5 -NrColumns 3
 
 $BorderTypeTop = New-WordTableBorder -BorderStyle Tcbs_dotted -BorderSize two -BorderSpace 0 -BorderColor Blue
 $BorderTypeBottom = New-WordTableBorder -BorderStyle Tcbs_single -BorderSize one -BorderSpace 0 -BorderColor Red
@@ -30,18 +30,18 @@ $BorderTypeInsideV = New-WordTableBorder -BorderStyle Tcbs_single -BorderSize on
 
 #$Table = Add-WordTable -WordDocument $WordDocument -Table $InvoiceData -Design LightShading -Supress $false
 
-Set-WordTableBorder -Table $Table -TableBorderType Top -Border $BorderTypeTop
-Set-WordTableBorder -Table $Table -TableBorderType Bottom -Border $BorderTypeBottom
-Set-WordTableBorder -Table $Table -TableBorderType Left -Border $BorderTypeLeft
-Set-WordTableBorder -Table $Table -TableBorderType Right -Border $BorderTypeRight
-Set-WordTableBorder -Table $Table -TableBorderType InsideH -Border $BorderTypeInsideH
-Set-WordTableBorder -Table $Table -TableBorderType InsideV -Border $BorderTypeInsideV
+Set-WordTableBorder -Table $Table -TableBorderType Top -Border $BorderTypeTop -Supress $True
+Set-WordTableBorder -Table $Table -TableBorderType Bottom -Border $BorderTypeBottm -Supress $True
+Set-WordTableBorder -Table $Table -TableBorderType Left -Border $BorderTypeLeft -Supress $True
+Set-WordTableBorder -Table $Table -TableBorderType Right -Border $BorderTypeRight -Supress $True
+Set-WordTableBorder -Table $Table -TableBorderType InsideH -Border $BorderTypeInsideH -Supress $True
+Set-WordTableBorder -Table $Table -TableBorderType InsideV -Border $BorderTypeInsideV -Supress $True
 
 #Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -FontSize 15
 #Add-WordParagraph -WordDocument $WordDocument
 
 
-Save-WordDocument $WordDocument
+Save-WordDocument $WordDocument -Supress $True
 
 ### Start Word with file
 Invoke-Item $FilePath
