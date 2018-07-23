@@ -69,5 +69,15 @@ Add-WordListItem -WordDocument $WordDocument -List $List3 -Supress $True
 #Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be numbered list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True
 #Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $True
 
+$List4 = New-WordListItem -WordDocument $WordDocument -List $null -ListLevel 0 -ListItemType Numbered -ListValue 'Test 1'
+$List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 0 -ListItemType Numbered -ListValue 'Test 1'
+$List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 1 -ListItemType Numbered -ListValue 'Test 1'
+$List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 1 -ListItemType Numbered -ListValue 'Test 1'
+$List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 1 -ListItemType Numbered -ListValue 'Test 1'
+$List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 0 -ListItemType Numbered -ListValue 'Test 1'
+
+Add-WordListItem -WordDocument $WordDocument -List $List4 -Verbose
+
+
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
 Invoke-Item $FilePath
