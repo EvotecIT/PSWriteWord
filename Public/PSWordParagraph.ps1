@@ -168,6 +168,7 @@ function Set-WordText {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter[]] $Paragraph,
+        [AllowNull()][string[]] $Text = @(),
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
@@ -198,6 +199,7 @@ function Set-WordText {
         [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
         [Script[]] $Script = @(),
+        [switch] $ClearText,
         [bool] $Supress = $false
     )
 
@@ -217,6 +219,7 @@ function Set-WordText {
         } else {
             Write-Verbose 'Set-WordText - Color is not null'
         }
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextText -Text $Text[$i] -ClearText:$ClearText -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextColor -Color $Color[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
@@ -245,6 +248,42 @@ function Set-WordText {
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextAlignment -Alignment $Alignment[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextDirection -Direction $Direction[$i] -Supress $false
     }
+}
+function Remove-WordText {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [int] $Index = 0,
+        [int] $Count = $($Paragraph.Text.Length),
+        [bool] $TrackChanges,
+        [bool] $RemoveEmptyParagraph,
+        [bool] $Supress = $false
+    )
+    if ($Paragraph -ne $null) {
+        Write-Verbose "Remove-WordText - Current text $($Paragraph.Text) "
+        Write-Verbose "Remove-WordText - Removing from $Index to $Count - Paragraph Text Count: $($Paragraph.Text.Length)"
+        $Paragraph.RemoveText($Index, $Count, $TrackChanges, $RemoveEmptyParagraph)
+    }
+    if ($Supress) { return } else { return $Paragraph }
+}
+
+function Set-WordTextText {
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [alias ("S")] [AllowNull()][string] $Text,
+        [switch] $ClearText,
+        [bool] $Supress = $false
+    )
+    if ($Paragraph -ne $null) {
+        if (-not [string]::IsNullOrEmpty($Text)) {
+            if ($ClearText -eq $true) {
+                Write-Verbose 'Set-WordTextText - Clearing Text $ClearText is True'
+                $Paragraph = Remove-WordText -Paragraph $Paragraph
+            }
+            Write-Verbose "Set-WordTextText - Appending Value $Text"
+            $Paragraph = $Paragraph.Append($Text)
+        }
+    }
+    if ($Supress) { return } else { return $Paragraph }
 }
 
 function Set-WordTextFontSize {

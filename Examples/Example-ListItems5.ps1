@@ -31,14 +31,15 @@ for ($i = 0; $i -le 8; $i++) {
     #$Paragraph = Get-WordListItemParagraph -List $List -LastItem
     #Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text ' Added text' -Color Blue -AppendToExistingParagraph -Supress $True
 }
+$ParagraphFromList0 = Get-WordListItemParagraph -List $ListColors -Item 1 #-Verbose
 $ParagraphFromList1 = Get-WordListItemParagraph -List $ListColors -Item 3 #-Verbose
 $ParagraphFromList2 = Get-WordListItemParagraph -List $ListColors -Item 5 #-Verbose
 $ParagraphFromList3 = Get-WordListItemParagraph -List $ListColors -Item 7 #-Verbose
 Set-WordText -Paragraph $ParagraphFromList1 -Color Red -FontFamily Calibri -Supress $True
-Set-WordText -Paragraph $ParagraphFromList2 -Color Blue -FontFamily Calibri -Supress $True
-Set-WordText -Paragraph $ParagraphFromList3 -Color Orange -FontFamily Calibri -Supress $True
+Set-WordText -Paragraph $ParagraphFromList2 -Text 'This will add text' -Color Blue -FontFamily Calibri -Supress $True -Verbose
+Set-WordText -Paragraph $ParagraphFromList3 -Color Orange -FontFamily Calibri -Supress $True -Verbose
+Set-WordText -Paragraph $ParagraphFromList0 -Text 'Replacing this text with color Orange' -FontSize 8 -ClearText -Color Orange -Verbose
 Add-WordListItem -WordDocument $WordDocument -List $ListColors -Supress $True
-
 
 $List = $null
 for ($i = 0; $i -le 8; $i++) {
