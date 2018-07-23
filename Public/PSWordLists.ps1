@@ -14,6 +14,13 @@ function Add-WordList {
     Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
     Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
 
+    if ($ObjectType -ne 'string' -and $ObjectType -ne 'PSCustomObject' -and $ObjectType -ne $ObjectType -ne 'Hashtable' -and $ObjectType -ne 'OrderedDictionary') {
+        $ListData = Convert-ObjectToProcess -DataTable $ListData
+        $ObjectType = Get-ObjectTypeInside $ListData
+        Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
+        Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
+    }
+
     if ($ListData -ne $null) {
         if ($ObjectType -eq 'string') {
             Write-Verbose 'Add-WordList - Option 1 - Detected string type inside array'
@@ -57,6 +64,7 @@ function Add-WordList {
                 }
             }
         } else {
+            <#
             Write-Verbose "Add-WordList - Option 4 - Detected $ObjectType"
             $ListData = Convert-ObjectToProcess -DataTable $ListData
             $IsFirstTitle = $True
@@ -69,6 +77,7 @@ function Add-WordList {
                     $List = New-WordListItem -WordDocument $WordDocument -List $List -ListLevel 0 -ListItemType $ListType -ListValue $Value
                 }
             }
+            #>
             #throw "$ObjectType is not supported"
         }
         $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
@@ -110,20 +119,20 @@ function New-WordListItem {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
         [alias('Level')] [ValidateRange(0, 8)] [int] $ListLevel,
         [alias('ListType')][ListItemType] $ListItemType,
-        [alias('Value')]$ListValue,
+        [alias('Value', 'ListValue')]$Text,
         [nullable[int]] $StartNumber,
         [bool]$TrackChanges = $false,
         [bool]$ContinueNumbering = $false,
         [bool]$Supress = $false
     )
     if ($List -eq $null) {
-        $List = $WordDocument.AddList($ListValue, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
+        $List = $WordDocument.AddList($Text, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
         $Paragraph = $List.Items[$List.Items.Count - 1]
     } else {
-        $List = $WordDocument.AddListItem($List, $ListValue, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
+        $List = $WordDocument.AddListItem($List, $Text, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
         $Paragraph = $List.Items[$List.Items.Count - 1]
     }
-    Write-Verbose "Add-WordListItem - ListType Value: $ListValue Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
+    Write-Verbose "Add-WordListItem - ListType Value: $Text Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
     return $List
 }
 
