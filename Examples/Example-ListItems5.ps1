@@ -36,9 +36,9 @@ $ParagraphFromList1 = Get-WordListItemParagraph -List $ListColors -Item 3 #-Verb
 $ParagraphFromList2 = Get-WordListItemParagraph -List $ListColors -Item 5 #-Verbose
 $ParagraphFromList3 = Get-WordListItemParagraph -List $ListColors -Item 7 #-Verbose
 Set-WordText -Paragraph $ParagraphFromList1 -Color Red -FontFamily Calibri -Supress $True
-Set-WordText -Paragraph $ParagraphFromList2 -Text 'This will add text' -Color Blue -FontFamily Calibri -Supress $True -Verbose
+Set-WordText -Paragraph $ParagraphFromList2 -Text 'This will add text' -Append -Color Blue -FontFamily Calibri -Supress $True -Verbose
 Set-WordText -Paragraph $ParagraphFromList3 -Color Orange -FontFamily Calibri -Supress $True -Verbose
-Set-WordText -Paragraph $ParagraphFromList0 -Text 'Replacing this text with color Orange' -FontSize 8 -ClearText -Color Orange -Verbose
+Set-WordText -Paragraph $ParagraphFromList0 -Text 'Replacing this text with color Orange' -FontSize 8 -Color Orange -Verbose
 Add-WordListItem -WordDocument $WordDocument -List $ListColors -Supress $True
 
 $List = $null
@@ -76,7 +76,7 @@ $List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 1 
 $List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 1 -ListItemType Numbered -ListValue 'Test 1'
 $List4 = New-WordListItem -WordDocument $WordDocument -List $List4 -ListLevel 0 -ListItemType Numbered -ListValue 'Test 1'
 
-Add-WordListItem -WordDocument $WordDocument -List $List4 -Verbose
+Add-WordListItem -WordDocument $WordDocument -List $List4 -Verbose -Supress $true
 
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
