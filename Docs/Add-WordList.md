@@ -14,7 +14,8 @@ schema: 2.0.0
 
 ```
 Add-WordList [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ListType] <ListItemType>]
- [[-ListData] <Object>] [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-ListData] <Object>] [[-InsertWhere] <InsertWhere>] [[-BehaviourOption] <Object>] [[-ListLevels] <Object>]
+ [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +31,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -BehaviourOption
+{{Fill BehaviourOption Description}}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -InsertWhere
 {{Fill InsertWhere Description}}
@@ -57,6 +73,21 @@ Aliases: DataTable
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ListLevels
+{{Fill ListLevels Description}}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -102,7 +133,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

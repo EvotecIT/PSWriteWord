@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordTOC [[-WordDocument] <Container>] [[-BeforeParagraph] <InsertBeforeOrAfter>] [[-Title] <String>]
+Add-WordTOC [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Title] <String>]
  [[-Switches] <TableOfContentsSwitches[]>] [[-HeaderStyle] <HeadingType>] [[-MaxIncludeLevel] <Int32>]
  [[-RightTabPos] <Int32>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
@@ -32,28 +32,13 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -BeforeParagraph
-{{Fill BeforeParagraph Description}}
-
-```yaml
-Type: InsertBeforeOrAfter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
 ### -HeaderStyle
 {{Fill HeaderStyle Description}}
 
 ```yaml
 Type: HeadingType
 Parameter Sets: (All)
-Aliases:
+Aliases: Heading, HeadingType
 Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
 
 Required: False
@@ -75,6 +60,21 @@ Required: False
 Position: 5
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Paragraph
+{{Fill Paragraph Description}}
+
+```yaml
+Type: InsertBeforeOrAfter
+Parameter Sets: (All)
+Aliases: BeforeParagraph
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 

@@ -14,7 +14,8 @@ schema: 2.0.0
 
 ```
 Add-WordListItem [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>]
- [[-Paragraph] <InsertBeforeOrAfter>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-Paragraph] <InsertBeforeOrAfter>] [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +31,22 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -InsertWhere
+{{Fill InsertWhere Description}}
+
+```yaml
+Type: InsertWhere
+Parameter Sets: (All)
+Aliases:
+Accepted values: AfterSelf, BeforeSelf
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -List
 {{Fill List Description}}
@@ -70,7 +87,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -92,14 +109,12 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### Xceed.Words.NET.Container
 Xceed.Words.NET.InsertBeforeOrAfter
-
 
 ## OUTPUTS
 

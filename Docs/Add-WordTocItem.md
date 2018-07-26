@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# New-WordListItem
+# Add-WordTocItem
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-New-WordListItem [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>] [[-ListLevel] <Int32>]
- [[-ListItemType] <ListItemType>] [[-Text] <Object>] [[-StartNumber] <Int32>] [[-TrackChanges] <Boolean>]
+Add-WordTocItem [[-WordDocument] <Container>] [[-ListLevel] <Int32>] [[-ListItemType] <ListItemType>]
+ [[-Text] <Object>] [[-HeadingType] <HeadingType>] [[-StartNumber] <Int32>] [[-TrackChanges] <Boolean>]
  [[-ContinueNumbering] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
@@ -47,18 +47,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -List
-{{Fill List Description}}
+### -HeadingType
+{{Fill HeadingType Description}}
 
 ```yaml
-Type: InsertBeforeOrAfter
+Type: HeadingType
 Parameter Sets: (All)
-Aliases:
+Aliases: HT
+Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
 
 Required: False
-Position: 1
+Position: 4
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -72,7 +73,7 @@ Aliases: ListType
 Accepted values: Bulleted, Numbered
 
 Required: False
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -87,7 +88,7 @@ Parameter Sets: (All)
 Aliases: Level
 
 Required: False
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -132,7 +133,7 @@ Parameter Sets: (All)
 Aliases: Value, ListValue
 
 Required: False
-Position: 4
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -169,12 +170,13 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### Xceed.Words.NET.Container
-Xceed.Words.NET.InsertBeforeOrAfter
+
 
 ## OUTPUTS
 

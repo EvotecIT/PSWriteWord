@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-ColorFromARGB
+# Set-WordTextText
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-ColorFromARGB [[-A] <Int32>] [[-R] <Int32>] [[-G] <Int32>] [[-B] <Int32>] [<CommonParameters>]
+Set-WordTextText [[-Paragraph] <InsertBeforeOrAfter>] [[-Text] <Object>] [-Append] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,41 +31,41 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -A
-{{Fill A Description}}
+### -Append
+{{Fill Append Description}}
 
 ```yaml
-Type: Int32
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Paragraph
+{{Fill Paragraph Description}}
+
+```yaml
+Type: InsertBeforeOrAfter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -B
-{{Fill B Description}}
+### -Supress
+{{Fill Supress Description}}
 
 ```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -G
-{{Fill G Description}}
-
-```yaml
-Type: Int32
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -75,13 +76,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -R
-{{Fill R Description}}
+### -Text
+{{Fill Text Description}}
 
 ```yaml
-Type: Int32
+Type: Object
 Parameter Sets: (All)
-Aliases:
+Aliases: S
 
 Required: False
 Position: 1
@@ -91,11 +92,13 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
+### Xceed.Words.NET.InsertBeforeOrAfter
+
 
 ## OUTPUTS
 

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# New-WordListItem
+# Format-WordListItem
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,9 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-New-WordListItem [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>] [[-ListLevel] <Int32>]
- [[-ListItemType] <ListItemType>] [[-Text] <Object>] [[-StartNumber] <Int32>] [[-TrackChanges] <Boolean>]
- [[-ContinueNumbering] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
+Format-WordListItem [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>] [[-ListType] <ListItemType>]
+ [[-TextMain] <Object>] [[-TextSub] <Object>] [[-BehaviourOption] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,16 +31,16 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ContinueNumbering
-{{Fill ContinueNumbering Description}}
+### -BehaviourOption
+{{Fill BehaviourOption Description}}
 
 ```yaml
-Type: Boolean
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,29 +61,14 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -ListItemType
-{{Fill ListItemType Description}}
+### -ListType
+{{Fill ListType Description}}
 
 ```yaml
 Type: ListItemType
 Parameter Sets: (All)
-Aliases: ListType
+Aliases:
 Accepted values: Bulleted, Numbered
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ListLevel
-{{Fill ListLevel Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: Level
 
 Required: False
 Position: 2
@@ -93,61 +77,31 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -StartNumber
-{{Fill StartNumber Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Supress
-{{Fill Supress Description}}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Text
-{{Fill Text Description}}
+### -TextMain
+{{Fill TextMain Description}}
 
 ```yaml
 Type: Object
 Parameter Sets: (All)
-Aliases: Value, ListValue
+Aliases:
 
 Required: False
-Position: 4
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TrackChanges
-{{Fill TrackChanges Description}}
+### -TextSub
+{{Fill TextSub Description}}
 
 ```yaml
-Type: Boolean
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -169,12 +123,14 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### Xceed.Words.NET.Container
 Xceed.Words.NET.InsertBeforeOrAfter
+
 
 ## OUTPUTS
 

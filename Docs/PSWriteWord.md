@@ -50,6 +50,9 @@ Locale: {{ Update Locale }}
 ### [Add-WordList](Add-WordList.md)
 {{Fill in the Synopsis}}
 
+### [Add-WordListItem](Add-WordListItem.md)
+{{Fill in the Synopsis}}
+
 ### [Add-WordParagraph](Add-WordParagraph.md)
 {{Fill in the Synopsis}}
 
@@ -101,6 +104,9 @@ Add a new TabStopPosition in the current paragraph.
 ### [Copy-WordTableRow](Copy-WordTableRow.md)
 {{Fill in the Synopsis}}
 
+### [Get-ColorFromARGB](Get-ColorFromARGB.md)
+{{Fill in the Synopsis}}
+
 ### [Get-ObjectCount](Get-ObjectCount.md)
 {{Fill in the Synopsis}}
 
@@ -108,6 +114,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Get-ObjectTitles](Get-ObjectTitles.md)
+{{Fill in the Synopsis}}
+
+### [Get-ObjectTypeInside](Get-ObjectTypeInside.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordCustomProperty](Get-WordCustomProperty.md)
@@ -120,6 +129,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Get-WordHeader](Get-WordHeader.md)
+{{Fill in the Synopsis}}
+
+### [Get-WordListItemParagraph](Get-WordListItemParagraph.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordPageSettings](Get-WordPageSettings.md)
@@ -147,6 +159,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [New-WordDocument](New-WordDocument.md)
+{{Fill in the Synopsis}}
+
+### [New-WordListItem](New-WordListItem.md)
 {{Fill in the Synopsis}}
 
 ### [New-WordTable](New-WordTable.md)
@@ -206,6 +221,15 @@ Add a new TabStopPosition in the current paragraph.
 ### [Set-WordTableBorder](Set-WordTableBorder.md)
 {{Fill in the Synopsis}}
 
+### [Set-WordTableCell](Set-WordTableCell.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableCellFillColor](Set-WordTableCellFillColor.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableCellShadingColor](Set-WordTableCellShadingColor.md)
+{{Fill in the Synopsis}}
+
 ### [Set-WordTableColumnWidth](Set-WordTableColumnWidth.md)
 {{Fill in the Synopsis}}
 
@@ -219,6 +243,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTablePageBreak](Set-WordTablePageBreak.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableRowMergeCells](Set-WordTableRowMergeCells.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordText](Set-WordText.md)

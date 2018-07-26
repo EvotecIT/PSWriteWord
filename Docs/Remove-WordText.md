@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTableCellShadingColor
+# Remove-WordText
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordTableCellShadingColor [[-Table] <InsertBeforeOrAfter>] [[-RowNr] <Int32>] [[-ColumnNr] <Int32>]
- [[-ShadingColor] <Color>] [[-Supress] <Boolean>] [<CommonParameters>]
+Remove-WordText [[-Paragraph] <InsertBeforeOrAfter>] [[-Index] <Int32>] [[-Count] <Int32>]
+ [[-TrackChanges] <Boolean>] [[-RemoveEmptyParagraph] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,8 +31,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ColumnNr
-{{Fill ColumnNr Description}}
+### -Count
+{{Fill Count Description}}
 
 ```yaml
 Type: Int32
@@ -46,8 +46,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RowNr
-{{Fill RowNr Description}}
+### -Index
+{{Fill Index Description}}
 
 ```yaml
 Type: Int32
@@ -61,16 +61,31 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ShadingColor
-{{Fill ShadingColor Description}}
+### -Paragraph
+{{Fill Paragraph Description}}
 
 ```yaml
-Type: Color
+Type: InsertBeforeOrAfter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 0
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -RemoveEmptyParagraph
+{{Fill RemoveEmptyParagraph Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -85,33 +100,35 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Table
-{{Fill Table Description}}
+### -TrackChanges
+{{Fill TrackChanges Description}}
 
 ```yaml
-Type: InsertBeforeOrAfter
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
+### Xceed.Words.NET.InsertBeforeOrAfter
+
 
 ## OUTPUTS
 

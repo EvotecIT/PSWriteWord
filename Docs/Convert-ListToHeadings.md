@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Convert-ListToHeadings [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>]
- [[-HeadingType] <HeadingType>] [<CommonParameters>]
+ [[-HeadingType] <HeadingType>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,6 +59,21 @@ Required: False
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Supress
+{{Fill Supress Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
