@@ -194,7 +194,7 @@ function New-WordListItem {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
         [alias('Level')] [ValidateRange(0, 8)] [int] $ListLevel,
-        [alias('ListType')][ListItemType] $ListItemType,
+        [alias('ListType')][ListItemType] $ListItemType = [ListItemType]::Bulleted,
         [alias('Value', 'ListValue')]$Text,
         [nullable[int]] $StartNumber,
         [bool]$TrackChanges = $false,
@@ -240,7 +240,8 @@ function Convert-ListToHeadings {
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
-        [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1
+        [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1,
+        [bool] $Supress
     )
     $ParagraphsWithHeadings = New-ArrayList
     Write-Verbose "Convert-ListToHeadings - NumID: $($List.NumID)"
@@ -251,5 +252,5 @@ function Convert-ListToHeadings {
         $p.StyleName = $HeadingType
         Add-ToArray -List $ParagraphsWithHeadings -Element $p
     }
-    return $ParagraphsWithHeadings
+    if ($Supress) { return } else { return $ParagraphsWithHeadings }
 }
