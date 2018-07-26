@@ -199,10 +199,9 @@ function Set-WordText {
         [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
         [Script[]] $Script = @(),
-        [switch] $ClearText,
+        [alias ("AppendText")][Switch] $Append,
         [bool] $Supress = $false
     )
-
 
     Write-Verbose "Set-WordText - Paragraph Count: $($Paragraph.Count)"
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {
@@ -219,7 +218,7 @@ function Set-WordText {
         } else {
             Write-Verbose 'Set-WordText - Color is not null'
         }
-        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextText -Text $Text[$i] -ClearText:$ClearText -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextText -Text $Text[$i] -Append:$Append -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextColor -Color $Color[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontSize -FontSize $FontSize[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextFontFamily -FontFamily $FontFamily[$i] -Supress $false
@@ -250,6 +249,7 @@ function Set-WordText {
     }
 }
 function Remove-WordText {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [int] $Index = 0,
@@ -267,18 +267,17 @@ function Remove-WordText {
 }
 
 function Set-WordTextText {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [alias ("S")] [AllowNull()][string] $Text,
-        [switch] $ClearText,
+        [alias ("S")][AllowNull()] $Text,
+        [switch]$Append,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null) {
-        if (-not [string]::IsNullOrEmpty($Text)) {
-            if ($ClearText -eq $true) {
-                Write-Verbose 'Set-WordTextText - Clearing Text $ClearText is True'
-                $Paragraph = Remove-WordText -Paragraph $Paragraph
-            }
+        if ($Text -ne $null) {
+            if ($Text -isnot [String]) { throw 'Invalid argument for parameter -Text.' }
+            if ($Append -ne $true) { $Paragraph = Remove-WordText -Paragraph $Paragraph }
             Write-Verbose "Set-WordTextText - Appending Value $Text"
             $Paragraph = $Paragraph.Append($Text)
         }
@@ -287,6 +286,7 @@ function Set-WordTextText {
 }
 
 function Set-WordTextFontSize {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [alias ("S")] [nullable[double]] $FontSize,
@@ -299,6 +299,7 @@ function Set-WordTextFontSize {
 }
 
 function Set-WordTextColor {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [alias ("C")] [nullable[System.Drawing.Color]] $Color,
@@ -311,6 +312,7 @@ function Set-WordTextColor {
 }
 
 function Set-WordTextBold {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[bool]] $Bold,
@@ -323,6 +325,7 @@ function Set-WordTextBold {
 }
 
 function Set-WordTextItalic {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[bool]] $Italic,
@@ -335,6 +338,7 @@ function Set-WordTextItalic {
 }
 
 function Set-WordTextFontFamily {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $FontFamily,
@@ -347,6 +351,7 @@ function Set-WordTextFontFamily {
 }
 
 function Set-WordTextUnderlineStyle {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[UnderlineStyle]] $UnderlineStyle,
@@ -359,6 +364,7 @@ function Set-WordTextUnderlineStyle {
 }
 
 function Set-WordTextUnderlineColor {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[System.Drawing.Color]] $UnderlineColor,
@@ -371,6 +377,7 @@ function Set-WordTextUnderlineColor {
 }
 
 function Set-WordTextSpacingAfter {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[double]] $SpacingAfter,
@@ -383,6 +390,7 @@ function Set-WordTextSpacingAfter {
 }
 
 function Set-WordTextSpacingBefore {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[double]] $SpacingBefore,
@@ -395,6 +403,7 @@ function Set-WordTextSpacingBefore {
 }
 
 function Set-WordTextSpacing {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[double]] $Spacing,
@@ -408,6 +417,7 @@ function Set-WordTextSpacing {
 
 
 function Set-WordTextHighlight {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[Highlight]] $Highlight,
@@ -420,6 +430,7 @@ function Set-WordTextHighlight {
 }
 
 function Set-WordTextCapsStyle {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[CapsStyle]] $CapsStyle,
@@ -432,6 +443,7 @@ function Set-WordTextCapsStyle {
 }
 
 function Set-WordTextStrikeThrough {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[StrikeThrough]] $StrikeThrough,
@@ -443,6 +455,7 @@ function Set-WordTextStrikeThrough {
     if ($Supress) { return } else { return $Paragraph }
 }
 function Set-WordTextShadingType {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[ShadingType]] $ShadingType,
@@ -456,6 +469,7 @@ function Set-WordTextShadingType {
 }
 
 function Set-WordTextPercentageScale {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[int]]$PercentageScale,
@@ -468,6 +482,7 @@ function Set-WordTextPercentageScale {
 }
 
 function Set-WordTextLanguage {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string]$Language,
@@ -481,6 +496,7 @@ function Set-WordTextLanguage {
 }
 
 function Set-WordTextKerning {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[int]] $Kerning,
@@ -493,6 +509,7 @@ function Set-WordTextKerning {
 }
 
 function Set-WordTextMisc {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[Misc]] $Misc,
@@ -506,6 +523,7 @@ function Set-WordTextMisc {
 
 
 function Set-WordTextPosition {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[int]]$Position,
@@ -518,6 +536,7 @@ function Set-WordTextPosition {
 }
 
 function Set-WordTextHidden {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[bool]] $Hidden,
@@ -530,17 +549,21 @@ function Set-WordTextHidden {
 }
 
 function Set-WordTextHeadingType {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[HeadingType]] $HeadingType,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $HeadingType -ne $null) {
+        #$StyleName = [string] "$HeadingType"
+        Write-Verbose "Set-WordTextHeadingType - Setting StyleName to $StyleName"
         $Paragraph.StyleName = $HeadingType
     }
     if ($Supress) { return } else { return $Paragraph }
 }
 function Set-WordTextIndentationFirstLine {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[single]] $IndentationFirstLine,
@@ -552,6 +575,7 @@ function Set-WordTextIndentationFirstLine {
     if ($Supress) { return } else { return $Paragraph }
 }
 function Set-WordTextAlignment {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[Alignment]] $Alignment,
@@ -563,6 +587,7 @@ function Set-WordTextAlignment {
     if ($Supress) { return } else { return $Paragraph }
 }
 function Set-WordTextIndentationHanging {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[single]] $IndentationHanging,
@@ -575,6 +600,7 @@ function Set-WordTextIndentationHanging {
 }
 
 function Set-WordTextDirection {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[Direction]] $Direction,
@@ -586,6 +612,7 @@ function Set-WordTextDirection {
     if ($Supress) { return } else { return $Paragraph }
 }
 function Set-WordTextScript {
+    [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[Script]] $Script,
