@@ -172,6 +172,7 @@ function Add-WordListItem {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
         [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
         [bool] $Supress
     )
     if ($Paragraph -ne $null) {
