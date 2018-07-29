@@ -64,6 +64,32 @@ Function Add-WordParagraph {
     if ($Supress -eq $true) { return } else { return $NewParagraph }
 }
 
+function Add-WordPageBreak {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Paragraph', 'Table', 'List')][Xceed.Words.NET.InsertBeforeOrAfter] $WordObject,
+        [alias('Insert')][InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
+        [bool] $Supress = $false
+    )
+    $RemovalRequired = $false
+    if ($WordObject -eq $null) {
+        Write-Verbose "Add-WordPageBreak - Adding temporary paragraph"
+        $RemovalRequired = $True
+        $WordObject = $WordDocument.InsertParagraph()
+    }
+    if ($InsertWhere -eq [InsertWhere]::AfterSelf) {
+        $WordObject.InsertPageBreakAfterSelf()
+    } else {
+        $WordObject.InsertPageBreakBeforeSelf()
+    }
+    if ($RemovalRequired) {
+        Write-Verbose "Add-WordPageBreak - Removing paragraph that was added temporary"
+        Remove-WordParagraph -Paragraph $WordObject
+    }
+    if ($Supress -eq $true) { return } else { return $WordObject }
+}
+
 Function Set-WordParagraph {
     [CmdletBinding()]
     param (

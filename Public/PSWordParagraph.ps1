@@ -623,3 +623,12 @@ function Set-WordTextScript {
     }
     if ($Supress) { return } else { return $Paragraph }
 }
+
+function Remove-WordParagraph {
+    [CmdletBinding()]
+    param(
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [bool] $TrackChanges
+    )
+    $Paragraph.Remove($TrackChanges)
+}
