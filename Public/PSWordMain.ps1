@@ -24,6 +24,7 @@ function Save-WordDocument {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [string] $FilePath,
         [string] $Language,
+        [switch] $KillWord,
         [bool] $Supress = $false
     )
 
@@ -34,7 +35,14 @@ function Save-WordDocument {
             Set-WordParagraph -Paragraph $p -Language $Language -Supress $Supress
         }
     }
-
+    if (($KillWord) -and ($FilePath -ne '')) {
+        $FileName = Split-Path $FilePath -leaf
+        #$Process = get-process | Where { $_.MainWindowTitle -like "$FileName*"} | Select-Object id, name, mainwindowtitle | Sort-Object mainwindowtitle
+        #$Process.MainWindowTitle
+        Write-Verbose "Save-WordDocument - Killing Microsoft Word with text $FileName"
+        $Process = Stop-Process -Name "$FileName*" -Confirm:$false -PassThru
+        Write-Verbose "Save-WordDocument - Killed Microsoft Word: $FileName"
+    }
     if ([string]::IsNullOrEmpty($FilePath)) {
         $WordDocument.Save()
     } else {
