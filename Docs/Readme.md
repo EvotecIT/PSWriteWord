@@ -50,6 +50,12 @@ Locale: {{ Update Locale }}
 ### [Add-WordList](Add-WordList.md)
 {{Fill in the Synopsis}}
 
+### [Add-WordListItem](Add-WordListItem.md)
+{{Fill in the Synopsis}}
+
+### [Add-WordPageBreak](Add-WordPageBreak.md)
+{{Fill in the Synopsis}}
+
 ### [Add-WordParagraph](Add-WordParagraph.md)
 {{Fill in the Synopsis}}
 
@@ -89,6 +95,9 @@ Add a new TabStopPosition in the current paragraph.
 ### [Add-WordTOC](Add-WordTOC.md)
 {{Fill in the Synopsis}}
 
+### [Add-WordTocItem](Add-WordTocItem.md)
+{{Fill in the Synopsis}}
+
 ### [Convert-ListToHeadings](Convert-ListToHeadings.md)
 {{Fill in the Synopsis}}
 
@@ -101,6 +110,12 @@ Add a new TabStopPosition in the current paragraph.
 ### [Copy-WordTableRow](Copy-WordTableRow.md)
 {{Fill in the Synopsis}}
 
+### [Format-WordListItem](Format-WordListItem.md)
+{{Fill in the Synopsis}}
+
+### [Get-ColorFromARGB](Get-ColorFromARGB.md)
+{{Fill in the Synopsis}}
+
 ### [Get-ObjectCount](Get-ObjectCount.md)
 {{Fill in the Synopsis}}
 
@@ -108,6 +123,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Get-ObjectTitles](Get-ObjectTitles.md)
+{{Fill in the Synopsis}}
+
+### [Get-ObjectTypeInside](Get-ObjectTypeInside.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordCustomProperty](Get-WordCustomProperty.md)
@@ -120,6 +138,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Get-WordHeader](Get-WordHeader.md)
+{{Fill in the Synopsis}}
+
+### [Get-WordListItemParagraph](Get-WordListItemParagraph.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordPageSettings](Get-WordPageSettings.md)
@@ -146,7 +167,22 @@ Add a new TabStopPosition in the current paragraph.
 ### [New-ArrayList](New-ArrayList.md)
 {{Fill in the Synopsis}}
 
+### [New-WordBlock](New-WordBlock.md)
+{{Fill in the Synopsis}}
+
+### [New-WordBlockList](New-WordBlockList.md)
+{{Fill in the Synopsis}}
+
+### [New-WordBlockParagraph](New-WordBlockParagraph.md)
+{{Fill in the Synopsis}}
+
+### [New-WordBlockTable](New-WordBlockTable.md)
+{{Fill in the Synopsis}}
+
 ### [New-WordDocument](New-WordDocument.md)
+{{Fill in the Synopsis}}
+
+### [New-WordListItem](New-WordListItem.md)
 {{Fill in the Synopsis}}
 
 ### [New-WordTable](New-WordTable.md)
@@ -156,6 +192,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Remove-FromArray](Remove-FromArray.md)
+{{Fill in the Synopsis}}
+
+### [Remove-WordParagraph](Remove-WordParagraph.md)
 {{Fill in the Synopsis}}
 
 ### [Remove-WordPicture](Remove-WordPicture.md)
@@ -170,6 +209,9 @@ Add a new TabStopPosition in the current paragraph.
 ### [Remove-WordTableRow](Remove-WordTableRow.md)
 {{Fill in the Synopsis}}
 
+### [Remove-WordText](Remove-WordText.md)
+{{Fill in the Synopsis}}
+
 ### [Save-WordDocument](Save-WordDocument.md)
 {{Fill in the Synopsis}}
 
@@ -177,6 +219,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordHyperLink](Set-WordHyperLink.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordList](Set-WordList.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordMargins](Set-WordMargins.md)
@@ -206,6 +251,15 @@ Add a new TabStopPosition in the current paragraph.
 ### [Set-WordTableBorder](Set-WordTableBorder.md)
 {{Fill in the Synopsis}}
 
+### [Set-WordTableCell](Set-WordTableCell.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableCellFillColor](Set-WordTableCellFillColor.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableCellShadingColor](Set-WordTableCellShadingColor.md)
+{{Fill in the Synopsis}}
+
 ### [Set-WordTableColumnWidth](Set-WordTableColumnWidth.md)
 {{Fill in the Synopsis}}
 
@@ -219,6 +273,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTablePageBreak](Set-WordTablePageBreak.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableRowMergeCells](Set-WordTableRowMergeCells.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordText](Set-WordText.md)
@@ -294,6 +351,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextStrikeThrough](Set-WordTextStrikeThrough.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTextText](Set-WordTextText.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextUnderlineColor](Set-WordTextUnderlineColor.md)
