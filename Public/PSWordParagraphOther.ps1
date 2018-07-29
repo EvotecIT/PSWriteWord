@@ -74,7 +74,7 @@ Function Set-WordParagraph {
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null) {
-        Write-Verbose "Set-WordParagraph - Paragraph is not null"
+        #Write-Verbose "Set-WordParagraph - Paragraph is not null"
         if ($Alignment -ne $null) {
             Write-Verbose "Set-WordParagraph - Setting Alignment to $Alignment"
             $Paragraph.Alignment = $Alignment
@@ -114,7 +114,7 @@ function Get-WordParagraphs {
     )
     $Paragraphs = @()
     foreach ($p in $WordDocument.Paragraphs) {
-        Write-Verbose "Get-WordParagraphs - $p"
+        #Write-Verbose "Get-WordParagraphs - $p"
         $Paragraphs += $p
     }
     return $Paragraphs
