@@ -73,7 +73,7 @@ function New-WordBlockList {
         [string] $TextListEmpty,
 
         [Object] $ListData,
-        [ListType] $ListType
+        [ListItemType] $ListType
     )
     if ($TocEnable) {
         $TOC = $WordDocument | Add-WordTocItem -Text $TocText -ListLevel $TocListLevel -ListItemType $TocListItemType -HeadingType $TocHeadingType
