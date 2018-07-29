@@ -39,7 +39,12 @@ function New-WordBlockTable {
         [bool] $TableTitleMerge = $false,
         [string] $TableTitleText,
         [Alignment] $TableTitleAlignment = 'center',
-        [System.Drawing.Color] $TableTitleColor = 'Black'
+        [System.Drawing.Color] $TableTitleColor = 'Black',
+        [bool] $ChartEnable,
+        [string] $ChartTitle,
+        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
+        [bool] $ChartLegendOverlay
+
     )
     if ($TocEnable) {
         $TOC = $WordDocument | Add-WordTocItem -Text $TocText -ListLevel $TocListLevel -ListItemType $TocListItemType -HeadingType $TocHeadingType
@@ -54,6 +59,10 @@ function New-WordBlockTable {
             $TableParagraph = Get-WordTableRow -Table $Table -RowNr 0 -ColumnNr 0
             $TableParagraph = Add-WordText -WordDocument $WordDocument -Paragraph $TableParagraph -Text $TableTitleText -Alignment $TableTitleAlignment -Color $TableTitleColor -AppendToExistingParagraph
         }
+    }
+    if ($ChartEnable) {
+        $WordDocument | New-WordBlockParagraph -EmptyParagraphs 1
+        Add-WordPieChart -WordDocument $WordDocument -ChartName $ChartTitle -Names $TableData.Keys -Values  $TableData.Values -ChartLegendPosition $ChartLegendPosition -ChartLegendOverlay $ChartLegendOverlay
     }
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsAfter
 }
