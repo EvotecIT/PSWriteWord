@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Save-WordDocument
+# Add-WordPageBreak
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Save-WordDocument [[-WordDocument] <Container>] [[-FilePath] <String>] [[-Language] <String>] [-KillWord]
- [[-Supress] <Boolean>] [<CommonParameters>]
+Add-WordPageBreak [[-WordDocument] <Container>] [[-WordObject] <InsertBeforeOrAfter>]
+ [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,43 +31,14 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -FilePath
-{{Fill FilePath Description}}
+### -InsertWhere
+{{Fill InsertWhere Description}}
 
 ```yaml
-Type: String
+Type: InsertWhere
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -KillWord
-{{Fill KillWord Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Language
-{{Fill Language Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
+Aliases: Insert
+Accepted values: AfterSelf, BeforeSelf
 
 Required: False
 Position: 2
@@ -106,12 +77,30 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
+### -WordObject
+{{Fill WordObject Description}}
+
+```yaml
+Type: InsertBeforeOrAfter
+Parameter Sets: (All)
+Aliases: Paragraph, Table, List
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### Xceed.Words.NET.Container
+Xceed.Words.NET.InsertBeforeOrAfter
+
 
 ## OUTPUTS
 

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-WordTocItem
+# New-WordBlock
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,9 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordTocItem [[-WordDocument] <Container>] [[-ListLevel] <Int32>] [[-ListItemType] <ListItemType>]
- [[-Text] <Object>] [[-HeadingType] <HeadingType>] [[-StartNumber] <Int32>] [[-TrackChanges] <Boolean>]
- [[-ContinueNumbering] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
+New-WordBlock [[-WordDocument] <Object>] [[-TocEnable] <Boolean>] [[-TocText] <String>]
+ [[-TocListLevel] <Int32>] [[-TocListItemType] <ListItemType>] [[-TocHeadingType] <HeadingType>]
+ [[-EmptyParagraphsBefore] <Int32>] [[-EmptyParagraphsAfter] <Int32>] [[-Text] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,11 +32,11 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ContinueNumbering
-{{Fill ContinueNumbering Description}}
+### -EmptyParagraphsAfter
+{{Fill EmptyParagraphsAfter Description}}
 
 ```yaml
-Type: Boolean
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -47,103 +47,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -HeadingType
-{{Fill HeadingType Description}}
-
-```yaml
-Type: HeadingType
-Parameter Sets: (All)
-Aliases: HT
-Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ListItemType
-{{Fill ListItemType Description}}
-
-```yaml
-Type: ListItemType
-Parameter Sets: (All)
-Aliases: ListType
-Accepted values: Bulleted, Numbered
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ListLevel
-{{Fill ListLevel Description}}
+### -EmptyParagraphsBefore
+{{Fill EmptyParagraphsBefore Description}}
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
-Aliases: Level
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -StartNumber
-{{Fill StartNumber Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Supress
-{{Fill Supress Description}}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Text
-{{Fill Text Description}}
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases: Value, ListValue
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TrackChanges
-{{Fill TrackChanges Description}}
-
-```yaml
-Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -154,11 +62,103 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Text
+{{Fill Text Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TocEnable
+{{Fill TocEnable Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TocHeadingType
+{{Fill TocHeadingType Description}}
+
+```yaml
+Type: HeadingType
+Parameter Sets: (All)
+Aliases:
+Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TocListItemType
+{{Fill TocListItemType Description}}
+
+```yaml
+Type: ListItemType
+Parameter Sets: (All)
+Aliases:
+Accepted values: Bulleted, Numbered
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TocListLevel
+{{Fill TocListLevel Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TocText
+{{Fill TocText Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WordDocument
 {{Fill WordDocument Description}}
 
 ```yaml
-Type: Container
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
@@ -170,11 +170,13 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Xceed.Words.NET.Container
+### System.Object
+
 
 ## OUTPUTS
 

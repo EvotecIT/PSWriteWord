@@ -92,6 +92,9 @@ Add a new TabStopPosition in the current paragraph.
 ### [Add-WordTOC](Add-WordTOC.md)
 {{Fill in the Synopsis}}
 
+### [Add-WordTocItem](Add-WordTocItem.md)
+{{Fill in the Synopsis}}
+
 ### [Convert-ListToHeadings](Convert-ListToHeadings.md)
 {{Fill in the Synopsis}}
 
@@ -102,6 +105,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Copy-WordTableRow](Copy-WordTableRow.md)
+{{Fill in the Synopsis}}
+
+### [Format-WordListItem](Format-WordListItem.md)
 {{Fill in the Synopsis}}
 
 ### [Get-ColorFromARGB](Get-ColorFromARGB.md)
@@ -185,6 +191,9 @@ Add a new TabStopPosition in the current paragraph.
 ### [Remove-WordTableRow](Remove-WordTableRow.md)
 {{Fill in the Synopsis}}
 
+### [Remove-WordText](Remove-WordText.md)
+{{Fill in the Synopsis}}
+
 ### [Save-WordDocument](Save-WordDocument.md)
 {{Fill in the Synopsis}}
 
@@ -192,6 +201,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordHyperLink](Set-WordHyperLink.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordList](Set-WordList.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordMargins](Set-WordMargins.md)
@@ -321,6 +333,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextStrikeThrough](Set-WordTextStrikeThrough.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTextText](Set-WordTextText.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextUnderlineColor](Set-WordTextUnderlineColor.md)
