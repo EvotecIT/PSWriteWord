@@ -42,6 +42,8 @@ function New-WordBlockTable {
         [System.Drawing.Color] $TableTitleColor = 'Black',
         [bool] $ChartEnable,
         [string] $ChartTitle,
+        $ChartKeys,
+        $ChartValues,
         [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
         [bool] $ChartLegendOverlay
 
@@ -62,7 +64,7 @@ function New-WordBlockTable {
     }
     if ($ChartEnable) {
         $WordDocument | New-WordBlockParagraph -EmptyParagraphs 1
-        Add-WordPieChart -WordDocument $WordDocument -ChartName $ChartTitle -Names $TableData.Keys -Values  $TableData.Values -ChartLegendPosition $ChartLegendPosition -ChartLegendOverlay $ChartLegendOverlay
+        Add-WordPieChart -WordDocument $WordDocument -ChartName $ChartTitle -Names $ChartKeys -Values $ChartValues -ChartLegendPosition $ChartLegendPosition -ChartLegendOverlay $ChartLegendOverlay
     }
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsAfter
 }
