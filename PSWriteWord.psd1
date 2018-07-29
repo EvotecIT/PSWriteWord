@@ -12,7 +12,7 @@
     RootModule        = 'PSWriteWord.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.4.7.1'
+    ModuleVersion     = '0.4.8.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
