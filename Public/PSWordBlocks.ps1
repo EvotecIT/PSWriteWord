@@ -36,6 +36,7 @@ function New-WordBlockTable {
 
         [Object] $TableData,
         [TableDesign] $TableDesign,
+        [int] $TableMaximumColumns = 5,
         [bool] $TableTitleMerge = $false,
         [string] $TableTitleText,
         [Alignment] $TableTitleAlignment = 'center',
@@ -53,7 +54,7 @@ function New-WordBlockTable {
     }
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsBefore
     $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text
-    $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge
+    $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns
 
     if ($TableTitleMerge) {
         $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -ColumnNrStart 0 -ColumnNrEnd 1
