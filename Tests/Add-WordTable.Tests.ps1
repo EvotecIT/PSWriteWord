@@ -1,7 +1,6 @@
 #Requires -Modules Pester
 Import-Module $PSScriptRoot\..\PSWriteWord.psd1 #-Force
 
-
 ### Preparing Data Start
 $myitems0 = @(
     [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover"},
@@ -51,15 +50,44 @@ $InvoiceData3 += $InvoiceEntry1
 $InvoiceData4 = $InvoiceData3.ForEach( {[PSCustomObject]$_})
 ### Preparing Data End
 
+$Object1 = Get-Process | Select-Object ProcessName, Handle, StartTime -First 5
+$Object2 = Get-PSDrive
+$Object3 = Get-PSDrive | Select-Object * -First 2
+$Object4 = Get-PSDrive | Select-Object * -First 1
 
 Clear-Host
 
-$InvoiceData5.GetType()
-Get-ObjectTypeInside -Object $InvoiceData5
-$InvoiceData5 | ft -a
+#$Object1.GetType()
+#Get-ObjectTypeInside -Object $Object1
+#$Object1 | ft -a
+#$Object2.GetType()
+#Get-ObjectTypeInside -Object $Object2
+#$Object2 | ft -a
+#$Object3.GetType()
+#Get-ObjectTypeInside -Object $Object3
+#$Object3 | ft -a
+#$Object4.GetType()
+#Get-ObjectTypeInside -Object $Object4
+#$Object4 | ft -a
 
+$Array = @()
+$Array += Get-ObjectType -Object $myitems0 #| ft -a
+$Array += Get-ObjectType -Object $myitems1 #| ft -a
+$Array += Get-ObjectType -Object $myitems2 #| ft -a
+$Array += Get-ObjectType -Object $InvoiceEntry1 #| ft -a
+$Array += Get-ObjectType -Object $InvoiceData1 #| ft -a
+$Array += Get-ObjectType -Object $InvoiceData2 #| ft -a
+$Array += Get-ObjectType -Object $InvoiceData3 #| ft -a
+$Array += Get-ObjectType -Object $InvoiceData4 #| ft -a
+$Array += Get-ObjectType -Object $Object1 #| ft -a
+$Array += Get-ObjectType -Object $Object2 #| ft -a
+$Array += Get-ObjectType -Object $Object3 #| ft -a
+$Array += Get-ObjectType -Object $Object4 #| ft -a
+#$Array | Sort-Object ObjectTypeName | Format-Table -AutoSize
+$Array | Format-Table -AutoSize
 
 Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize' {
+
 
     It 'Given Object[]/Array (MyItems0) with PSCustomObject should have 3 columns, 4 rows, 3rd row 3rd column should be Food lover' {
         <#  $myitems | Format-Table -AutoSize
@@ -69,9 +97,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         Sue    29 Dog lover
         Jason  42 Food lover
         #>
-        $myitems0.GetType().Name | Should -Be 'Object[]'
-        $myitems0.GetType().BaseType | Should -Be 'Array'
-        Get-ObjectTypeInside -Object $myitems0 | Should -Be 'PSCustomObject'
+        $Type = Get-ObjectType -Object $myitems0
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $myitems0
@@ -83,16 +113,17 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[2].Cells[0].Paragraphs[0].Text | Should -Be 'Sue'
         $WordDocument.Tables[0].Rows[3].Cells[2].Paragraphs[0].Text | Should -Be 'Food lover'
     }
-
     It 'Given Object[]/Array (MyItems1) with PSCustomObject should have 3 columns, 2 rows, data should be in proper columns' {
         <#  $myitems1 | Format-Table -AutoSize
             name age info
             ---- --- ----
             Joe   32 Cat lover
         #>
-        $myitems1.GetType().Name | Should -Be 'Object[]'
-        $myitems1.GetType().BaseType | Should -Be 'Array'
-        Get-ObjectTypeInside -Object $myitems1 | Should -Be 'PSCustomObject'
+        $Type = Get-ObjectType -Object $myitems1
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $myitems1
@@ -110,9 +141,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
             ---- --- ----
             Joe   32 Cat lover
         #>
-        $myitems2.GetType().Name | Should -Be 'PSCustomObject'
-        $myitems2.GetType().BaseType | Should -Be 'System.Object'
-        Get-ObjectTypeInside -Object $myitems2 | Should -Be 'PSCustomObject'
+        $Type = Get-ObjectType -Object $MyItems2
+        $Type.ObjectTypeName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeBaseName | Should -Be 'System.Object'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $myitems2
@@ -132,9 +165,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
             Amount      $200
             #>
         #
-        $InvoiceEntry1.GetType().Name | Should -Be 'Hashtable'
-        $InvoiceEntry1.GetType().BaseType | Should -Be 'System.Object'
-        Get-ObjectTypeInside -Object $InvoiceEntry1 | Should -Be 'Hashtable'
+        $Type = Get-ObjectType -Object $InvoiceEntry1
+        $Type.ObjectTypeName | Should -Be 'Hashtable'
+        $Type.ObjectTypeBaseName | Should -Be 'System.Object'
+        $Type.ObjectTypeInsiderName | Should -Be ''
+        $Type.ObjectTypeInsiderBaseName | Should -Be ''
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $InvoiceEntry1
@@ -146,7 +181,6 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
-
     It 'Given Object[]/Array (InvoiceData1) with HashTable should have 2 columns, 10 rows, data should be in proper columns' {
         <#
             Name        Value
@@ -164,9 +198,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
         #>
         #$InvoiceData1 | Format-Table -AutoSize
-        $InvoiceData1.GetType().Name | Should -Be 'Object[]'
-        $InvoiceData1.GetType().BaseType | Should -Be 'Array'
-        Get-ObjectTypeInside -Object $InvoiceData1 | Should -Be 'Hashtable'
+        $Type = Get-ObjectType -Object $InvoiceData1
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'Hashtable'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $InvoiceData1
@@ -196,9 +232,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
         #>
         #$InvoiceData1 | Format-Table -AutoSize
-        $InvoiceData2.GetType().Name | Should -Be 'Collection`1'
-        $InvoiceData2.GetType().BaseType | Should -Be 'System.Object'
-        Get-ObjectTypeInside -Object $InvoiceData2 | Should -Be 'Collection`1'
+        $Type = Get-ObjectType -Object $InvoiceData2
+        $Type.ObjectTypeName | Should -Be 'Collection`1'
+        $Type.ObjectTypeBaseName | Should -Be 'System.Object'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $InvoiceData2
@@ -210,7 +248,6 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'IT Services 1'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$300'
     }
-
     It 'Given Object[]/Array (InvoiceData3) with HashTable should have 2 columns, 3 rows, data should be in proper columns' {
         <#
         IsPublic IsSerial Name                                     BaseType
@@ -227,9 +264,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
         #>
         #$InvoiceData1 | Format-Table -AutoSize
-        $InvoiceData3.GetType().Name | Should -Be 'Object[]'
-        $InvoiceData3.GetType().BaseType | Should -Be 'Array'
-        Get-ObjectTypeInside -Object $InvoiceData3 | Should -Be 'Hashtable'
+        $Type = Get-ObjectType -Object $InvoiceData3
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'Hashtable'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $InvoiceData3
@@ -241,7 +280,6 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
     }
-
     It 'Given Collection`1/System.Object (InvoiceData4) with Collection`1 should have 2 columns, 3 rows, data should be in proper columns' {
         <#
         IsPublic IsSerial Name                                     BaseType
@@ -256,9 +294,11 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         IT Services 1 $200
         #>
         #$InvoiceData1 | Format-Table -AutoSize
-        $InvoiceData4.GetType().Name | Should -Be 'Collection`1'
-        $InvoiceData4.GetType().BaseType | Should -Be 'System.Object'
-        Get-ObjectTypeInside -Object $InvoiceData4 | Should -Be 'Collection`1'
+        $Type = Get-ObjectType -Object $InvoiceData4
+        $Type.ObjectTypeName | Should -Be 'Collection`1'
+        $Type.ObjectTypeBaseName | Should -Be 'System.Object'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
         $WordDocument | Add-WordTable -DataTable $InvoiceData4
@@ -270,6 +310,8 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'IT Services 1'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
+
+
 
 }
 

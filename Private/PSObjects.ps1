@@ -60,3 +60,32 @@ function Get-ObjectTypeInside {
 
     return $ObjectTypeInsider
 }
+function Get-ObjectType {
+    [CmdletBinding()]
+    param(
+        $Object
+    )
+    $Return = [ordered] @{}
+    if ($Object -ne $null) {
+        $ObjectType = $Object.GetType().Name
+        $ObjectTypeBaseName = $Object.GetType().BaseType
+        $Return.ObjectTypeName = $ObjectType
+        $Return.ObjectTypeBaseName = $ObjectTypeBaseName
+
+        #if ($ObjectType -eq 'Object[]') {
+        if ((Get-ObjectCount $Object) -gt 0) {
+            $Return.ObjectTypeInsiderName = if ($Object[0] -ne $null) { $Object[0].GetType().Name } else { '' }
+            $Return.ObjectTypeInsiderBaseName = if ($Object[0] -ne $null) { $Object[0].GetType().BaseType } else { '' }
+            #}
+        } else {
+            $Return.ObjectTypeInsiderName = ''
+            $Return.ObjectTypeInsiderBaseName = ''
+        }
+    } else {
+        $Return.ObjectTypeName = ''
+        $Return.ObjectTypeBaseName = ''
+        $Return.ObjectTypeInsiderName = ''
+        $Return.ObjectTypeInsiderBaseName = ''
+    }
+    return  $Return.ForEach( {[PSCustomObject]$_})
+}
