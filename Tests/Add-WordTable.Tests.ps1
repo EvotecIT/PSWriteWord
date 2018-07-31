@@ -1,6 +1,6 @@
 #Requires -Modules Pester
 Import-Module $PSScriptRoot\..\PSWriteWord.psd1 #-Force
-
+Clear-Host
 ### Preparing Data Start
 $myitems0 = @(
     [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover"},
@@ -55,22 +55,39 @@ $Object2 = Get-PSDrive
 $Object3 = Get-PSDrive | Select-Object * -First 2
 $Object4 = Get-PSDrive | Select-Object * -First 1
 
-Clear-Host
+$obj = New-Object System.Object
+$obj | Add-Member -type NoteProperty -name Name -Value "Ryan_PC"
+$obj | Add-Member -type NoteProperty -name Manufacturer -Value "Dell"
+$obj | Add-Member -type NoteProperty -name ProcessorSpeed -Value "3 Ghz"
+$obj | Add-Member -type NoteProperty -name Memory -Value "6 GB"
 
-#$Object1.GetType()
-#Get-ObjectTypeInside -Object $Object1
-#$Object1 | ft -a
-#$Object2.GetType()
-#Get-ObjectTypeInside -Object $Object2
-#$Object2 | ft -a
-#$Object3.GetType()
-#Get-ObjectTypeInside -Object $Object3
-#$Object3 | ft -a
-#$Object4.GetType()
-#Get-ObjectTypeInside -Object $Object4
-#$Object4 | ft -a
+$obj | ft -a
+#$obj.GetType() | fl *
+
+$myObject2 = New-Object System.Object
+$myObject2 | Add-Member -type NoteProperty -name Name -Value "Doug_PC"
+$myObject2 | Add-Member -type NoteProperty -name Manufacturer -Value "HP"
+$myObject2 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.6 Ghz"
+$myObject2 | Add-Member -type NoteProperty -name Memory -Value "4 GB"
+
+
+$myObject2 | ft -a
+
+$myObject3 = New-Object System.Object
+$myObject3 | Add-Member -type NoteProperty -name Name -Value "Julie_PC"
+$myObject3 | Add-Member -type NoteProperty -name Manufacturer -Value "Compaq"
+$myObject3 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.0 Ghz"
+$myObject3 | Add-Member -type NoteProperty -name Memory -Value "2.5 GB"
+
+$myArray1 = @($obj, $myobject2, $myObject3)
+$myArray2 = @($obj)
+
+$myArray1 | ft -a
+$myArray2 | ft -a
+
 
 $Array = @()
+
 $Array += Get-ObjectType -Object $myitems0 #| ft -a
 $Array += Get-ObjectType -Object $myitems1 #| ft -a
 $Array += Get-ObjectType -Object $myitems2 #| ft -a
@@ -79,10 +96,18 @@ $Array += Get-ObjectType -Object $InvoiceData1 #| ft -a
 $Array += Get-ObjectType -Object $InvoiceData2 #| ft -a
 $Array += Get-ObjectType -Object $InvoiceData3 #| ft -a
 $Array += Get-ObjectType -Object $InvoiceData4 #| ft -a
+# Not yet done
+
 $Array += Get-ObjectType -Object $Object1 #| ft -a
 $Array += Get-ObjectType -Object $Object2 #| ft -a
 $Array += Get-ObjectType -Object $Object3 #| ft -a
 $Array += Get-ObjectType -Object $Object4 #| ft -a
+
+$Array += Get-ObjectType -Object $obj #| ft -a
+$Array += Get-ObjectType -Object $myObject2 #| ft -a
+$Array += Get-ObjectType -Object $myArray1 #| ft -a
+$Array += Get-ObjectType -Object $myArray2 #| ft -a
+
 #$Array | Sort-Object ObjectTypeName | Format-Table -AutoSize
 $Array | Format-Table -AutoSize
 

@@ -71,21 +71,25 @@ function Get-ObjectType {
         $ObjectTypeBaseName = $Object.GetType().BaseType
         $Return.ObjectTypeName = $ObjectType
         $Return.ObjectTypeBaseName = $ObjectTypeBaseName
+        #$Return.ObjectTypeIsNested = $Object.GetType().IsNested
 
         #if ($ObjectType -eq 'Object[]') {
         if ((Get-ObjectCount $Object) -gt 0) {
             $Return.ObjectTypeInsiderName = if ($Object[0] -ne $null) { $Object[0].GetType().Name } else { '' }
             $Return.ObjectTypeInsiderBaseName = if ($Object[0] -ne $null) { $Object[0].GetType().BaseType } else { '' }
-            #}
+            #     $Return.ObjectTypeInsiderIsNested = if ($Object[0] -ne $null) { $Object[0].GetType().IsNested } else { '' }
         } else {
             $Return.ObjectTypeInsiderName = ''
             $Return.ObjectTypeInsiderBaseName = ''
+            #     $Return.ObjectTypeInsiderIsNested = ''
         }
     } else {
         $Return.ObjectTypeName = ''
         $Return.ObjectTypeBaseName = ''
+        # $Return.ObjectTypeIsNested = ''
         $Return.ObjectTypeInsiderName = ''
         $Return.ObjectTypeInsiderBaseName = ''
+        #     $Return.ObjectTypeInsiderIsNested = ''
     }
     return  $Return.ForEach( {[PSCustomObject]$_})
 }
