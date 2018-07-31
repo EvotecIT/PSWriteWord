@@ -43,20 +43,21 @@ $InvoiceData1 += $InvoiceEntry3
 $InvoiceData1 += $InvoiceEntry4
 $InvoiceData1 += $InvoiceEntry5
 
-$InvoiceData2 = @()
-$InvoiceData2 += $InvoiceEntry1
+$InvoiceData2 = $InvoiceData1.ForEach( {[PSCustomObject]$_})
 
 $InvoiceData3 = @()
 $InvoiceData3 += $InvoiceEntry1
-$InvoiceData3 += $InvoiceEntry2
+
+$InvoiceData4 = $InvoiceData3.ForEach( {[PSCustomObject]$_})
 ### Preparing Data End
 
 
 Clear-Host
 
-$InvoiceEntry1.GetType()
-Get-ObjectTypeInside -Object $InvoiceEntry1
-$InvoiceEntry1 | ft -a
+$InvoiceData5.GetType()
+Get-ObjectTypeInside -Object $InvoiceData5
+$InvoiceData5 | ft -a
+
 
 Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize' {
 
@@ -146,23 +147,129 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
 
+    It 'Given Object[]/Array (InvoiceData1) with HashTable should have 2 columns, 10 rows, data should be in proper columns' {
+        <#
+            Name        Value
+            ----        -----
+            Description IT Services 1
+            Amount      $200
+            Description IT Services 2
+            Amount      $300
+            Description IT Services 3
+            Amount      $288
+            Description IT Services 4
+            Amount      $301
+            Description IT Services 5
+            Amount      $299
+
+        #>
+        #$InvoiceData1 | Format-Table -AutoSize
+        $InvoiceData1.GetType().Name | Should -Be 'Object[]'
+        $InvoiceData1.GetType().BaseType | Should -Be 'Array'
+        Get-ObjectTypeInside -Object $InvoiceData1 | Should -Be 'Hashtable'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceData1
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 10
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+        $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
+        $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
+    }
+    It 'Given Collection`1/System.Object (InvoiceData2) with Collection`1 should have 2 columns, 6 rows, data should be in proper columns' {
+        <#
+            IsPublic IsSerial Name                                     BaseType
+            -------- -------- ----                                     --------
+            True     True     Collection`1                             System.Object
+            Collection`1
+
+
+            Description   Amount
+            -----------   ------
+            IT Services 1 $200
+            IT Services 2 $300
+            IT Services 3 $288
+            IT Services 4 $301
+            IT Services 5 $299
+
+        #>
+        #$InvoiceData1 | Format-Table -AutoSize
+        $InvoiceData2.GetType().Name | Should -Be 'Collection`1'
+        $InvoiceData2.GetType().BaseType | Should -Be 'System.Object'
+        Get-ObjectTypeInside -Object $InvoiceData2 | Should -Be 'Collection`1'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceData2
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 6
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Amount'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'IT Services 1'
+        $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$300'
+    }
+
+    It 'Given Object[]/Array (InvoiceData3) with HashTable should have 2 columns, 3 rows, data should be in proper columns' {
+        <#
+        IsPublic IsSerial Name                                     BaseType
+        -------- -------- ----                                     --------
+        True     True     Object[]                                 System.Array
+        Hashtable
 
 
 
+        Name        Value
+        ----        -----
+        Description IT Services 1
+        Amount      $200
+
+        #>
+        #$InvoiceData1 | Format-Table -AutoSize
+        $InvoiceData3.GetType().Name | Should -Be 'Object[]'
+        $InvoiceData3.GetType().BaseType | Should -Be 'Array'
+        Get-ObjectTypeInside -Object $InvoiceData3 | Should -Be 'Hashtable'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceData3
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 3
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Value'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+        $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
+    }
+
+    It 'Given Collection`1/System.Object (InvoiceData4) with Collection`1 should have 2 columns, 3 rows, data should be in proper columns' {
+        <#
+        IsPublic IsSerial Name                                     BaseType
+        -------- -------- ----                                     --------
+        True     True     Collection`1                             System.Object
+        Collection`1
 
 
 
+        Description   Amount
+        -----------   ------
+        IT Services 1 $200
+        #>
+        #$InvoiceData1 | Format-Table -AutoSize
+        $InvoiceData4.GetType().Name | Should -Be 'Collection`1'
+        $InvoiceData4.GetType().BaseType | Should -Be 'System.Object'
+        Get-ObjectTypeInside -Object $InvoiceData4 | Should -Be 'Collection`1'
 
-
-
-
-
-
-
-
-
-
-
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceData4
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 2
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Amount'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'IT Services 1'
+        $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be '$200'
+    }
 
 }
 
@@ -186,7 +293,7 @@ Describe 'Add-WordTable - Should have proper settings' {
     It 'Given Array of PSCustomObject document should have 1 table with proper design, proper number of columns and rows' {
         $WordDocument = New-WordDocument
 
-        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design MediumShading1 -AutoFit Contents #-Verbose
+        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents #-Verbose
         $WordDocument.Tables[0].RowCount | Should -Be 6
         $WordDocument.Tables[0].ColumnCount | Should -Be 2
         # $WordDocument.Tables[0].AutoFit | Should -Be 'Contents' # Seems like a bug in Xceed - always returns ColumnWidth
