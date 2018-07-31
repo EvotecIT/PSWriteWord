@@ -63,9 +63,11 @@ function Get-ObjectTypeInside {
 function Get-ObjectType {
     [CmdletBinding()]
     param(
-        $Object
+        $Object,
+        [string] $ObjectName
     )
     $Return = [ordered] @{}
+    $Return.ObjectName = $ObjectName
     if ($Object -ne $null) {
         $ObjectType = $Object.GetType().Name
         $ObjectTypeBaseName = $Object.GetType().BaseType

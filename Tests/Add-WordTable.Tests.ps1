@@ -61,7 +61,7 @@ $obj | Add-Member -type NoteProperty -name Manufacturer -Value "Dell"
 $obj | Add-Member -type NoteProperty -name ProcessorSpeed -Value "3 Ghz"
 $obj | Add-Member -type NoteProperty -name Memory -Value "6 GB"
 
-$obj | ft -a
+#$obj | ft -a
 #$obj.GetType() | fl *
 
 $myObject2 = New-Object System.Object
@@ -71,7 +71,7 @@ $myObject2 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.6 Ghz"
 $myObject2 | Add-Member -type NoteProperty -name Memory -Value "4 GB"
 
 
-$myObject2 | ft -a
+#$myObject2 | ft -a
 
 $myObject3 = New-Object System.Object
 $myObject3 | Add-Member -type NoteProperty -name Name -Value "Julie_PC"
@@ -82,39 +82,51 @@ $myObject3 | Add-Member -type NoteProperty -name Memory -Value "2.5 GB"
 $myArray1 = @($obj, $myobject2, $myObject3)
 $myArray2 = @($obj)
 
-$myArray1 | ft -a
-$myArray2 | ft -a
 
+$InvoiceEntry7 = [ordered]@{}
+$InvoiceEntry7.Description = 'IT Services 4'
+$InvoiceEntry7.Amount = '$301'
+
+$InvoiceEntry8 = [ordered]@{}
+$InvoiceEntry8.Description = 'IT Services 5'
+$InvoiceEntry8.Amount = '$299'
+
+$InvoiceDataOrdered1 = @()
+$InvoiceDataOrdered1 += $InvoiceEntry7
+
+$InvoiceDataOrdered2 = @()
+$InvoiceDataOrdered2 += $InvoiceEntry7
+$InvoiceDataOrdered2 += $InvoiceEntry8
 
 $Array = @()
 
-$Array += Get-ObjectType -Object $myitems0 #| ft -a
-$Array += Get-ObjectType -Object $myitems1 #| ft -a
-$Array += Get-ObjectType -Object $myitems2 #| ft -a
-$Array += Get-ObjectType -Object $InvoiceEntry1 #| ft -a
-$Array += Get-ObjectType -Object $InvoiceData1 #| ft -a
-$Array += Get-ObjectType -Object $InvoiceData2 #| ft -a
-$Array += Get-ObjectType -Object $InvoiceData3 #| ft -a
-$Array += Get-ObjectType -Object $InvoiceData4 #| ft -a
-# Not yet done
+$Array += Get-ObjectType -Object $myitems0  -ObjectName '$myitems0'
+$Array += Get-ObjectType -Object $myitems1  -ObjectName '$myitems1'
+$Array += Get-ObjectType -Object $myitems2 -ObjectName '$myitems2'
+$Array += Get-ObjectType -Object $InvoiceEntry1 -ObjectName '$InvoiceEntry1'
+$Array += Get-ObjectType -Object $InvoiceData1  -ObjectName '$InvoiceData1'
+$Array += Get-ObjectType -Object $InvoiceData2  -ObjectName '$InvoiceData2'
+$Array += Get-ObjectType -Object $InvoiceData3  -ObjectName '$InvoiceData3'
+$Array += Get-ObjectType -Object $InvoiceData4  -ObjectName '$InvoiceData4'
+$Array += Get-ObjectType -Object $Object1  -ObjectName '$Object1'
+$Array += Get-ObjectType -Object $Object2  -ObjectName '$Object2'
+$Array += Get-ObjectType -Object $Object3  -ObjectName '$Object3'
+$Array += Get-ObjectType -Object $Object4  -ObjectName '$Object4'
+$Array += Get-ObjectType -Object $obj -ObjectName '$obj'
+$Array += Get-ObjectType -Object $myArray1 -ObjectName '$myArray1'
+$Array += Get-ObjectType -Object $myArray2 -ObjectName '$myArray2'
+###
+$Array += Get-ObjectType -Object $InvoiceEntry7 -ObjectName '$InvoiceEntry7'
+$Array += Get-ObjectType -Object $InvoiceDataOrdered1 -ObjectName '$InvoiceDataOrdered1'
+$Array += Get-ObjectType -Object $InvoiceDataOrdered2 -ObjectName '$InvoiceDataOrdered2'
 
-$Array += Get-ObjectType -Object $Object1 #| ft -a
-$Array += Get-ObjectType -Object $Object2 #| ft -a
-$Array += Get-ObjectType -Object $Object3 #| ft -a
-$Array += Get-ObjectType -Object $Object4 #| ft -a
-
-$Array += Get-ObjectType -Object $obj #| ft -a
-$Array += Get-ObjectType -Object $myObject2 #| ft -a
-$Array += Get-ObjectType -Object $myArray1 #| ft -a
-$Array += Get-ObjectType -Object $myArray2 #| ft -a
 
 #$Array | Sort-Object ObjectTypeName | Format-Table -AutoSize
 $Array | Format-Table -AutoSize
 
 Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize' {
 
-
-    It 'Given Object[]/Array (MyItems0) with PSCustomObject should have 3 columns, 4 rows, 3rd row 3rd column should be Food lover' {
+    It 'Given (MyItems0) should have 3 columns, 4 rows, 3rd row 3rd column should be Food lover' {
         <#  $myitems | Format-Table -AutoSize
         name  age info
         ----  --- ----
@@ -138,7 +150,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[2].Cells[0].Paragraphs[0].Text | Should -Be 'Sue'
         $WordDocument.Tables[0].Rows[3].Cells[2].Paragraphs[0].Text | Should -Be 'Food lover'
     }
-    It 'Given Object[]/Array (MyItems1) with PSCustomObject should have 3 columns, 2 rows, data should be in proper columns' {
+    It 'Given (MyItems1) should have 3 columns, 2 rows, data should be in proper columns' {
         <#  $myitems1 | Format-Table -AutoSize
             name age info
             ---- --- ----
@@ -160,7 +172,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be '32'
         $WordDocument.Tables[0].Rows[1].Cells[2].Paragraphs[0].Text | Should -Be 'Cat lover'
     }
-    It 'Given PSCustomObject/System.Object (MyItems2) with PSCustomObject should have 3 columns, 2 rows, data should be in proper columns' {
+    It 'Given (MyItems2) should have 3 columns, 2 rows, data should be in proper columns' {
         <#  $myitems2 | Format-Table -AutoSize
             name age info
             ---- --- ----
@@ -182,7 +194,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be '32'
         $WordDocument.Tables[0].Rows[1].Cells[2].Paragraphs[0].Text | Should -Be 'Cat lover'
     }
-    It 'Given Hashtable/System.Object (InvoiceEntry1) with HashTable should have 2 columns, 3 rows, data should be in proper columns' {
+    It 'Given (InvoiceEntry1) should have 2 columns, 3 rows, data should be in proper columns' {
         <# $InvoiceEntry1 | Format-Table -AutoSize
             Name        Value
             ----        -----
@@ -206,7 +218,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
-    It 'Given Object[]/Array (InvoiceData1) with HashTable should have 2 columns, 10 rows, data should be in proper columns' {
+    It 'Given (InvoiceData1) should have 2 columns, 10 rows, data should be in proper columns' {
         <#
             Name        Value
             ----        -----
@@ -239,7 +251,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
-    It 'Given Collection`1/System.Object (InvoiceData2) with Collection`1 should have 2 columns, 6 rows, data should be in proper columns' {
+    It 'Given (InvoiceData2) should have 2 columns, 6 rows, data should be in proper columns' {
         <#
             IsPublic IsSerial Name                                     BaseType
             -------- -------- ----                                     --------
@@ -273,7 +285,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'IT Services 1'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$300'
     }
-    It 'Given Object[]/Array (InvoiceData3) with HashTable should have 2 columns, 3 rows, data should be in proper columns' {
+    It 'Given (InvoiceData3) should have 2 columns, 3 rows, data should be in proper columns' {
         <#
         IsPublic IsSerial Name                                     BaseType
         -------- -------- ----                                     --------
@@ -305,7 +317,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
     }
-    It 'Given Collection`1/System.Object (InvoiceData4) with Collection`1 should have 2 columns, 3 rows, data should be in proper columns' {
+    It 'Given (InvoiceData4) should have 2 columns, 3 rows, data should be in proper columns' {
         <#
         IsPublic IsSerial Name                                     BaseType
         -------- -------- ----                                     --------
@@ -337,15 +349,222 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
     }
 
 
+    It 'Given ($Object1) should have 3 columns, 6 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object1
+        $Object1 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $Object1
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $Object1
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 3
+        $WordDocument.Tables[0].RowCount | Should -Be 6
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'ProcessName'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Handle'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'StartTime'
+
+    }
+    It 'Given ($Object2) should have 6 columns, Have more then 4 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object2
+        $Object2 | ft -a
+        #>
+
+
+        $Type = Get-ObjectType -Object $Object2
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSDriveInfo'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 10
+        $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 4
+        # Not sure yet how to predict thje order. Seems order of FT -a is differnt then FL and script takes FL for now
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Used (GB)'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'Free (GB)'
+
+    }
+    It 'Given ($Object3) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $Object3
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $Object3 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 10
+        $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 1
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Used'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Free'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'CurrentLocation'
+
+    }
+    It 'Given ($Object4) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $Object4
+        $Type.ObjectTypeName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeBaseName | Should -Be 'System.Object'
+        $Type.ObjectTypeInsiderName | Should -Be 'PSCustomObject'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $Object4 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 10
+        $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 1
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Used'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Free'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'CurrentLocation'
+
+    }
+
+    It 'Given ($obj) should have 4 columns, Have 2 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $obj
+        $Type.ObjectTypeName | Should -Be 'Object'
+        $Type.ObjectTypeBaseName | Should -Be $null
+        $Type.ObjectTypeInsiderName | Should -Be 'Object'
+        $Type.ObjectTypeInsiderBaseName | Should -Be $null
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $obj -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 4
+        $WordDocument.Tables[0].RowCount | Should -Be 2
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Manufacturer'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'ProcessorSpeed'
+
+    }
+    It 'Given ($myArray1) should have 4 columns, Have 4 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $myArray1
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'Object'
+        $Type.ObjectTypeInsiderBaseName | Should -Be $null
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $myArray1 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 4
+        $WordDocument.Tables[0].RowCount | Should -Be 4
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Manufacturer'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'ProcessorSpeed'
+
+    }
+    It 'Given ($myArray2) should have 4 columns, Have 2 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $myArray2
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'Object'
+        $Type.ObjectTypeInsiderBaseName | Should -Be $null
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $myArray2 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 4
+        $WordDocument.Tables[0].RowCount | Should -Be 2
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Manufacturer'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'ProcessorSpeed'
+
+    }
+    It 'Given ($InvoiceEntry7) should have 2 columns, Have 3 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $InvoiceEntry7
+        $Type.ObjectTypeName | Should -Be 'OrderedDictionary'
+        $Type.ObjectTypeBaseName | Should -Be 'System.Object'
+        $Type.ObjectTypeInsiderName | Should -Be 'String'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceEntry7 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 3
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Value'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+
+    }
+    It 'Given ($InvoiceDataOrdered1) should have 2 columns, Have 3 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $InvoiceDataOrdered1
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'OrderedDictionary'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceDataOrdered1 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 3
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Value'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+
+    }
+    It 'Given ($InvoiceDataOrdered2) should have 2 columns, Have 5 rows, data should be in proper columns' {
+        <#
+        $Type = Get-ObjectType -Object $Object3
+        $Object3 | ft -a
+        #>
+        $Type = Get-ObjectType -Object $InvoiceDataOrdered2
+        $Type.ObjectTypeName | Should -Be 'Object[]'
+        $Type.ObjectTypeBaseName | Should -Be 'Array'
+        $Type.ObjectTypeInsiderName | Should -Be 'OrderedDictionary'
+        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+
+        $WordDocument = New-WordDocument
+        $WordDocument | Add-WordTable -DataTable $InvoiceDataOrdered2 -MaximumColumns 20
+        $WordDocument.Tables.Count | Should -Be 1
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].RowCount | Should -Be 5
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Value'
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
+
+    }
 
 }
-
-
-
-
-
-
-
 
 Describe 'Add-WordTable - Should have proper settings' {
     It 'Given 2 tables, document should have 2 tables with proper design' {
