@@ -140,14 +140,17 @@ $Array | Format-Table -AutoSize
 
 
 function Format-PSHashTable {
-    param ($Object)
-    Write-Verbose 'Format-PSTable - Level 1 - Option 3'
+    [CmdletBinding()]
+    param (
+        $Object
+    )
+    Write-Verbose 'Format-PSHashTable - Option 3'
     $Array = New-ArrayList
     ### Add Titles
     $Titles = New-ArrayList
     Add-ToArray -List $Titles -Element 'Name'
     Add-ToArray -List $Titles -Element 'Value'
-    Add-ToArray -List ($Array) -Element $Titles
+    Add-ToArray -List $Array -Element $Titles
 
     ### Add Data
     foreach ($O in $Object) {
@@ -162,7 +165,11 @@ function Format-PSHashTable {
     return , $Array
 }
 function Format-PSObjects {
-    Write-Verbose 'Format-PSTable - Level 1 - Option 2'
+    [CmdletBinding()]
+    param(
+        $Object
+    )
+    Write-Verbose 'Format-PSTable - Option 2'
     $Array = New-ArrayList
     ### Add Titles
     $Titles = New-ArrayList
@@ -185,6 +192,30 @@ function Format-PSObjects {
     }
     return , $Array
 }
+function Format-PSOrdered {
+    [CmdletBinding()]
+    param ($Object)
+    Write-Verbose 'Format-PSOrdered - Option 1'
+    $Array = New-ArrayList
+    ### Add Titles
+    # $Array += , @('Name', 'Value')
+    $Titles = New-ArrayList
+    Add-ToArray -List $Titles -Element 'Name'
+    Add-ToArray -List $Titles -Element 'Value'
+    Add-ToArray -List $Array -Element $Titles
+    ### Add Data
+    foreach ($Key in $Object.Keys) {
+        Write-Verbose $Key
+        Write-Verbose $Object.$Key
+        #$Array += , @($Key, $Object.$Key)
+        $ArrayValues = New-ArrayList
+        Add-ToArray -List $ArrayValues -Element $Key
+        Add-ToArray -List $ArrayValues -Element $Object.$Key
+        Add-ToArray -List $Array -Element $ArrayValues
+    }
+
+    return , $Array
+}
 
 
 function Format-PSTable {
@@ -201,12 +232,12 @@ function Format-PSTable {
         $Type.ObjectTypeName -eq 'PSCustomObject' -or
         $Type.ObjectTypeName -eq 'Collection`1'
     ) {
-        Write-Verbose 'Format-PSTable - Level 0'
         if (
-            $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' -or
+
             $Type.ObjectTypeInsiderName -eq 'string'
 
         ) {
+            <#
             Write-Verbose 'Format-PSTable - Level 1 - Option 1'
             $Array = New-ArrayList
             ### Add Titles
@@ -226,38 +257,19 @@ function Format-PSTable {
             }
 
             return , $Array
+            #>
+            return Format-PSOrdered -Object $Object
         } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or
             $Type.ObjectTypeInsiderName -eq 'PSCustomObject' -or
             $Type.ObjectTypeInsiderName -eq 'ADDriveInfo'
 
         ) {
-            Write-Verbose 'Format-PSTable - Level 1 - Option 2'
-            $Array = New-ArrayList
-            ### Add Titles
-            $Titles = New-ArrayList
-            foreach ($O in $Object) {
-                foreach ($Name in $O.PSObject.Properties.Name) {
-                    #Write-Verbose $Name
-                    Add-ToArray -List $Titles -Element $Name
-                }
-                break
-            }
-            Add-ToArray -List ($Array) -Element $Titles
-            ### Add Data
-            foreach ($O in $Object) {
-                $ArrayValues = New-ArrayList
-                foreach ($Value in $O.PSObject.Properties.Value) {
-                    #Write-Verbose $Value
-                    Add-ToArray -List $ArrayValues -Element $Value
-                }
-                Add-ToArray -List $Array -Element $ArrayValues
-            }
-            return , $Array
-        } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable') {
-            Format-PSHashTable -Object $Object
+            return Format-PSObjects -Object $Object
+        } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable' -or $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' ) {
+            return Format-PSHashTable -Object $Object
         }
     } elseif ($Type.ObjectTypeName -eq 'HashTable') {
-        Format-PSHashTable -Object $Object
+        return Format-PSHashTable -Object $Object
     }
     Write-Verbose 'Option Exit'
 
@@ -298,6 +310,6 @@ function Show-TableVisualization {
 #Show-TableVisualization $obj -Verbose
 #Show-TableVisualization $myArray1 -Verbose
 #Show-TableVisualization $myArray2 -Verbose
-#Show-TableVisualization $InvoiceEntry7
-#Show-TableVisualization $InvoiceDataOrdered1
-#Show-TableVisualization $InvoiceDataOrdered2
+#Show-TableVisualization $InvoiceEntry7 -Verbose
+Show-TableVisualization $InvoiceDataOrdered1 -Verbose
+Show-TableVisualization $InvoiceDataOrdered2 -Verbose
