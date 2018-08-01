@@ -139,6 +139,53 @@ $Array | Format-Table -AutoSize
 #$InvoiceDataOrdered2.Values
 
 
+function Format-PSHashTable {
+    param ($Object)
+    Write-Verbose 'Format-PSTable - Level 1 - Option 3'
+    $Array = New-ArrayList
+    ### Add Titles
+    $Titles = New-ArrayList
+    Add-ToArray -List $Titles -Element 'Name'
+    Add-ToArray -List $Titles -Element 'Value'
+    Add-ToArray -List ($Array) -Element $Titles
+
+    ### Add Data
+    foreach ($O in $Object) {
+        foreach ($Key in $O.Keys) {
+            # Write-Verbose "Test2 - $Key - $($O[$Key])"
+            $ArrayValues = New-ArrayList
+            Add-ToArray -List $ArrayValues -Element $Key
+            Add-ToArray -List $ArrayValues -Element $O[$Key]
+            Add-ToArray -List $Array -Element $ArrayValues
+        }
+    }
+    return , $Array
+}
+function Format-PSObjects {
+    Write-Verbose 'Format-PSTable - Level 1 - Option 2'
+    $Array = New-ArrayList
+    ### Add Titles
+    $Titles = New-ArrayList
+    foreach ($O in $Object) {
+        foreach ($Name in $O.PSObject.Properties.Name) {
+            #Write-Verbose $Name
+            Add-ToArray -List $Titles -Element $Name
+        }
+        break
+    }
+    Add-ToArray -List ($Array) -Element $Titles
+    ### Add Data
+    foreach ($O in $Object) {
+        $ArrayValues = New-ArrayList
+        foreach ($Value in $O.PSObject.Properties.Value) {
+            #Write-Verbose $Value
+            Add-ToArray -List $ArrayValues -Element $Value
+        }
+        Add-ToArray -List $Array -Element $ArrayValues
+    }
+    return , $Array
+}
+
 
 function Format-PSTable {
     [CmdletBinding()]
@@ -207,28 +254,10 @@ function Format-PSTable {
             }
             return , $Array
         } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable') {
-            Write-Verbose 'Format-PSTable - Level 1 - Option 3'
-            $Array = New-ArrayList
-            ### Add Titles
-            $Titles = New-ArrayList
-            Add-ToArray -List $Titles -Element 'Name'
-            Add-ToArray -List $Titles -Element 'Value'
-            Add-ToArray -List ($Array) -Element $Titles
-
-            ### Add Data
-            foreach ($O in $Object) {
-                foreach ($Key in $O.Keys) {
-                    # Write-Verbose "Test2 - $Key - $($O[$Key])"
-                    $ArrayValues = New-ArrayList
-                    Add-ToArray -List $ArrayValues -Element $Key
-                    Add-ToArray -List $ArrayValues -Element $O[$Key]
-                    Add-ToArray -List $Array -Element $ArrayValues
-                }
-            }
-
-
-            return , $Array
+            Format-PSHashTable -Object $Object
         }
+    } elseif ($Type.ObjectTypeName -eq 'HashTable') {
+        Format-PSHashTable -Object $Object
     }
     Write-Verbose 'Option Exit'
 
@@ -254,16 +283,10 @@ function Show-TableVisualization {
     }
 }
 
-#$Array = Test-Table $InvoiceDataOrdered2
-#$Data = Test-Table $myArray2 -Verbose
-#$Array = Test-Table $InvoiceEntry7
-
-#Get-ObjectType -Object $myArray1 -ObjectName '$myArray1'
-#Format-PSTable $myArray1 -Verbose
-
-
-
-
+#Show-TableVisualization $myItems0 -Verbose
+#Show-TableVisualization $myItems1 -Verbose
+#Show-TableVisualization $myItems2 -Verbose
+#Show-TableVisualization $InvoiceEntry1 -Verbose
 #Show-TableVisualization $InvoiceData1 -Verbose
 #Show-TableVisualization $InvoiceData2 -Verbose
 #Show-TableVisualization $InvoiceData3 -Verbose
