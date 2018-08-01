@@ -61,17 +61,11 @@ $obj | Add-Member -type NoteProperty -name Manufacturer -Value "Dell"
 $obj | Add-Member -type NoteProperty -name ProcessorSpeed -Value "3 Ghz"
 $obj | Add-Member -type NoteProperty -name Memory -Value "6 GB"
 
-#$obj | ft -a
-#$obj.GetType() | fl *
-
 $myObject2 = New-Object System.Object
 $myObject2 | Add-Member -type NoteProperty -name Name -Value "Doug_PC"
 $myObject2 | Add-Member -type NoteProperty -name Manufacturer -Value "HP"
 $myObject2 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.6 Ghz"
 $myObject2 | Add-Member -type NoteProperty -name Memory -Value "4 GB"
-
-
-#$myObject2 | ft -a
 
 $myObject3 = New-Object System.Object
 $myObject3 | Add-Member -type NoteProperty -name Name -Value "Julie_PC"
@@ -100,7 +94,6 @@ $InvoiceDataOrdered2 += $InvoiceEntry8
 
 
 $Array = @()
-
 $Array += Get-ObjectType -Object $myitems0  -ObjectName '$myitems0'
 $Array += Get-ObjectType -Object $myitems1  -ObjectName '$myitems1'
 $Array += Get-ObjectType -Object $myitems2 -ObjectName '$myitems2'
@@ -116,35 +109,18 @@ $Array += Get-ObjectType -Object $Object4  -ObjectName '$Object4'
 $Array += Get-ObjectType -Object $obj -ObjectName '$obj'
 $Array += Get-ObjectType -Object $myArray1 -ObjectName '$myArray1'
 $Array += Get-ObjectType -Object $myArray2 -ObjectName '$myArray2'
-###
 $Array += Get-ObjectType -Object $InvoiceEntry7 -ObjectName '$InvoiceEntry7'
 $Array += Get-ObjectType -Object $InvoiceDataOrdered1 -ObjectName '$InvoiceDataOrdered1'
 $Array += Get-ObjectType -Object $InvoiceDataOrdered2 -ObjectName '$InvoiceDataOrdered2'
-
-
-#$Array | Sort-Object ObjectTypeName | Format-Table -AutoSize
 $Array | Format-Table -AutoSize
 
 
-
-#$Type = Get-ObjectType -Object $InvoiceEntry7
-#$InvoiceEntry7 | ft -a
-
-#$Type = Get-ObjectType -Object $InvoiceDataOrdered1
-#$InvoiceDataOrdered1 | ft -a
-
-
-
-#$InvoiceDataOrdered2.Keys
-#$InvoiceDataOrdered2.Values
-
-
-function Format-PSHashTable {
+function Format-PSTableConvertType3 {
     [CmdletBinding()]
     param (
         $Object
     )
-    Write-Verbose 'Format-PSHashTable - Option 3'
+    Write-Verbose 'Format-PSTableConvertType3 - Option 3'
     $Array = New-ArrayList
     ### Add Titles
     $Titles = New-ArrayList
@@ -164,12 +140,12 @@ function Format-PSHashTable {
     }
     return , $Array
 }
-function Format-PSObjects {
+function Format-PSTableConvertType2 {
     [CmdletBinding()]
     param(
         $Object
     )
-    Write-Verbose 'Format-PSTable - Option 2'
+    Write-Verbose 'Format-PSTableConvertType2 - Option 2'
     $Array = New-ArrayList
     ### Add Titles
     $Titles = New-ArrayList
@@ -192,10 +168,10 @@ function Format-PSObjects {
     }
     return , $Array
 }
-function Format-PSOrdered {
+function Format-PSTableConvertType1 {
     [CmdletBinding()]
     param ($Object)
-    Write-Verbose 'Format-PSOrdered - Option 1'
+    Write-Verbose 'Format-PSTableConvertType1 - Option 1'
     $Array = New-ArrayList
     ### Add Titles
     # $Array += , @('Name', 'Value')
@@ -232,44 +208,19 @@ function Format-PSTable {
         $Type.ObjectTypeName -eq 'PSCustomObject' -or
         $Type.ObjectTypeName -eq 'Collection`1'
     ) {
-        if (
-
-            $Type.ObjectTypeInsiderName -eq 'string'
-
-        ) {
-            <#
-            Write-Verbose 'Format-PSTable - Level 1 - Option 1'
-            $Array = New-ArrayList
-            ### Add Titles
-            # $Array += , @('Name', 'Value')
-            $Titles = New-ArrayList
-            Add-ToArray -List $Titles -Element 'Name'
-            Add-ToArray -List $Titles -Element 'Value'
-            ### Add Data
-            foreach ($Key in $Object.Keys) {
-                Write-Verbose $Key
-                Write-Verbose $Object.$Key
-                #$Array += , @($Key, $Object.$Key)
-                $ArrayValues = New-ArrayList
-                Add-ToArray -List $ArrayValues -Element $Key
-                Add-ToArray -List $ArrayValues -Element $Object.$Key
-                Add-ToArray -List $Array -Element $ArrayValues
-            }
-
-            return , $Array
-            #>
-            return Format-PSOrdered -Object $Object
+        if ($Type.ObjectTypeInsiderName -eq 'string') {
+            return Format-PSTableConvertType1 -Object $Object
         } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or
             $Type.ObjectTypeInsiderName -eq 'PSCustomObject' -or
             $Type.ObjectTypeInsiderName -eq 'ADDriveInfo'
 
         ) {
-            return Format-PSObjects -Object $Object
+            return Format-PSTableConvertType2 -Object $Object
         } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable' -or $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' ) {
-            return Format-PSHashTable -Object $Object
+            return Format-PSTableConvertType3 -Object $Object
         }
     } elseif ($Type.ObjectTypeName -eq 'HashTable') {
-        return Format-PSHashTable -Object $Object
+        return Format-PSTableConvertType3 -Object $Object
     }
     Write-Verbose 'Option Exit'
 
@@ -311,5 +262,5 @@ function Show-TableVisualization {
 #Show-TableVisualization $myArray1 -Verbose
 #Show-TableVisualization $myArray2 -Verbose
 #Show-TableVisualization $InvoiceEntry7 -Verbose
-Show-TableVisualization $InvoiceDataOrdered1 -Verbose
-Show-TableVisualization $InvoiceDataOrdered2 -Verbose
+#Show-TableVisualization $InvoiceDataOrdered1 -Verbose
+#Show-TableVisualization $InvoiceDataOrdered2 -Verbose
