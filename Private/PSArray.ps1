@@ -1,8 +1,6 @@
 function New-ArrayList {
     [CmdletBinding()]
-    param(
-
-    )
+    param()
     $List = New-Object System.Collections.ArrayList
     <#
     Mathias Rørbo Jessen:
@@ -16,11 +14,12 @@ function New-ArrayList {
 function Add-ToArray {
     [CmdletBinding()]
     param(
-        $List,
-        [ValidateNotNullOrEmpty()][Object] $Element
+        [System.Collections.ArrayList] $List,
+        [Object] $Element
     )
     Write-Verbose "Add-ToArray - Element: $Element"
     $List.Add($Element) > $null
+    #return , $List
 }
 function Remove-FromArray {
     param(
