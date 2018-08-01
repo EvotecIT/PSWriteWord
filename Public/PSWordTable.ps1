@@ -44,17 +44,26 @@ function Add-WordTable {
         [Direction[]] $DirectionFormatting = @(),
         [ShadingType[]] $ShadingType = @(),
         [Script[]] $Script = @(),
-
         [nullable[bool][]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
-        [switch]$ContinueFormatting,
-        [bool] $Supress = $false
+        [switch] $ContinueFormatting,
+        [switch] $PivotRows,
+        [bool] $Supress = $false,
+        [switch] $VerboseColor
     )
-    $DataTable = Convert-ObjectToProcess -DataTable $DataTable
-    $ObjectType = $DataTable.GetType().Name
+
+    if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
+    #$DataTable = Convert-ObjectToProcess -DataTable $DataTable
+    #$ObjectType = $DataTable.GetType().Name
 
 
+    $Data = Format-PSTable $DataTable #-Verbose
+    $NumberRows = $Data.Count
+    $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
+
+
+    <#
     ### Prepare Number of ROWS/COLUMNS
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         $NumberRows = $DataTable.Count + 1
@@ -85,6 +94,7 @@ function Add-WordTable {
         Write-Verbose 'Add-WordTable - Option 4'
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
     }
+    #>
     ### Add Table or Add To TABLE
     if ($Table -eq $null) {
         $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
@@ -92,6 +102,7 @@ function Add-WordTable {
         Add-WordTableRow -Table $Table -Count $DataTable.Count -Supress $True
     }
     ### Add titles
+    <#
     if (-not $DoNotAddTitle) {
         Add-WordTableTitle -Title $Titles `
             -Table $Table `
@@ -123,6 +134,7 @@ function Add-WordTable {
             -ShadingType $ShadingType[0] `
             -Script $Script[0] -Supress $True
     }
+    #>
     ### Continue formatting
     if ($ContinueFormatting -eq $true) {
         $Formatting = Set-WordContinueFormatting -Count $NumberRows `
@@ -181,6 +193,56 @@ function Add-WordTable {
         $Script = $Formatting[25]
     }
     ###  Build data in Table
+
+
+
+    $RowNr = 0
+    #Write-Color "[i] Presenting table after conversion" -Color Yellow
+    foreach ($Row in $Data) {
+        $ColumnNr = 0
+        foreach ($Column in $Row) {
+            if ($VerboseColor) {
+                Write-Color 'Row: ', $RowNr, ' Column: ', $ColumnNr, " Data: ", $Column -Color White, Yellow, White, Green
+            }
+            Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
+            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Column `
+                -Color $Color[$RowNr] `
+                -FontSize $FontSize[$RowNr] `
+                -FontFamily $FontFamily[$RowNr] `
+                -Bold $Bold[$RowNr] `
+                -Italic $Italic[$RowNr] `
+                -UnderlineStyle $UnderlineStyle[$RowNr]`
+                -UnderlineColor $UnderlineColor[$RowNr]`
+                -SpacingAfter $SpacingAfter[$RowNr] `
+                -SpacingBefore $SpacingBefore[$RowNr] `
+                -Spacing $Spacing[$RowNr] `
+                -Highlight $Highlight[$RowNr] `
+                -CapsStyle $CapsStyle[$RowNr] `
+                -StrikeThrough $StrikeThrough[$RowNr] `
+                -HeadingType $HeadingType[$RowNr] `
+                -PercentageScale $PercentageScale[$RowNr] `
+                -Misc $Misc[$RowNr] `
+                -Language $Language[$RowNr]`
+                -Kerning $Kerning[$RowNr]`
+                -Hidden $Hidden[$RowNr]`
+                -Position $Position[$RowNr]`
+                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                -IndentationHanging $IndentationHanging[$RowNr]`
+                -Alignment $Alignment[$RowNr]`
+                -DirectionFormatting $DirectionFormatting[$RowNr] `
+                -ShadingType $ShadingType[$RowNr]`
+                -Script $Script[$RowNr]
+            if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
+            $ColumnNr++
+
+        }
+        $RowNr++
+    }
+
+
+
+
+    <#
     if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
         Write-Verbose 'Add-WordTable - Option 1'
         $RowNr = 1
@@ -397,6 +459,7 @@ function Add-WordTable {
         }
 
     }
+    #>
     ### Apply formatting to table
 
     $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
