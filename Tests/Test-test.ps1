@@ -202,28 +202,26 @@ function Format-PSTable {
 
     $Type = Get-ObjectType -Object $Object
     Write-Verbose "Format-PSTable - Type: $($Type.ObjectTypeName)"
-    if ($Type.ObjectTypeName -eq 'Object[]' -or
-        $Type.ObjectTypeName -eq 'OrderedDictionary' -or
-        $Type.ObjectTypeName -eq 'Object' -or
-        $Type.ObjectTypeName -eq 'PSCustomObject' -or
-        $Type.ObjectTypeName -eq 'Collection`1'
-    ) {
+
+    if ($Type.ObjectTypeName -eq 'Object[]' -or $Type.ObjectTypeName -eq 'OrderedDictionary' -or
+        $Type.ObjectTypeName -eq 'Object' -or $Type.ObjectTypeName -eq 'PSCustomObject' -or
+        $Type.ObjectTypeName -eq 'Collection`1') {
+
         if ($Type.ObjectTypeInsiderName -eq 'string') {
             return Format-PSTableConvertType1 -Object $Object
-        } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or
-            $Type.ObjectTypeInsiderName -eq 'PSCustomObject' -or
-            $Type.ObjectTypeInsiderName -eq 'ADDriveInfo'
-
-        ) {
+        } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or $Type.ObjectTypeInsiderName -eq 'PSCustomObject') {
             return Format-PSTableConvertType2 -Object $Object
         } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable' -or $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' ) {
             return Format-PSTableConvertType3 -Object $Object
+        } else {
+            # Covers ADDriveInfo and other types of objects
+            return Format-PSTableConvertType2 -Object $Object
         }
     } elseif ($Type.ObjectTypeName -eq 'HashTable') {
         return Format-PSTableConvertType3 -Object $Object
+    } else {
+        throw 'Not supported? Weird'
     }
-    Write-Verbose 'Option Exit'
-
 }
 
 function Show-TableVisualization {
