@@ -125,13 +125,7 @@ $Array | Format-Table -AutoSize
 Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize' {
 
     It 'Given (MyItems0) should have 3 columns, 4 rows, 3rd row 3rd column should be Food lover' {
-        <#  $myitems | Format-Table -AutoSize
-        name  age info
-        ----  --- ----
-        Joe    32 Cat lover
-        Sue    29 Dog lover
-        Jason  42 Food lover
-        #>
+
         $Type = Get-ObjectType -Object $myitems0
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -149,11 +143,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[3].Cells[2].Paragraphs[0].Text | Should -Be 'Food lover'
     }
     It 'Given (MyItems1) should have 3 columns, 2 rows, data should be in proper columns' {
-        <#  $myitems1 | Format-Table -AutoSize
-            name age info
-            ---- --- ----
-            Joe   32 Cat lover
-        #>
+
         $Type = Get-ObjectType -Object $myitems1
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -171,11 +161,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[2].Paragraphs[0].Text | Should -Be 'Cat lover'
     }
     It 'Given (MyItems2) should have 3 columns, 2 rows, data should be in proper columns' {
-        <#  $myitems2 | Format-Table -AutoSize
-            name age info
-            ---- --- ----
-            Joe   32 Cat lover
-        #>
+
         $Type = Get-ObjectType -Object $MyItems2
         $Type.ObjectTypeName | Should -Be 'PSCustomObject'
         $Type.ObjectTypeBaseName | Should -Be 'System.Object'
@@ -193,13 +179,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[2].Paragraphs[0].Text | Should -Be 'Cat lover'
     }
     It 'Given (InvoiceEntry1) should have 2 columns, 3 rows, data should be in proper columns' {
-        <# $InvoiceEntry1 | Format-Table -AutoSize
-            Name        Value
-            ----        -----
-            Description IT Services 1
-            Amount      $200
-            #>
-        #
+
         $Type = Get-ObjectType -Object $InvoiceEntry1
         $Type.ObjectTypeName | Should -Be 'Hashtable'
         $Type.ObjectTypeBaseName | Should -Be 'System.Object'
@@ -217,22 +197,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
     It 'Given (InvoiceData1) should have 2 columns, 10 rows, data should be in proper columns' {
-        <#
-            Name        Value
-            ----        -----
-            Description IT Services 1
-            Amount      $200
-            Description IT Services 2
-            Amount      $300
-            Description IT Services 3
-            Amount      $288
-            Description IT Services 4
-            Amount      $301
-            Description IT Services 5
-            Amount      $299
 
-        #>
-        #$InvoiceData1 | Format-Table -AutoSize
         $Type = Get-ObjectType -Object $InvoiceData1
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -250,23 +215,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$200'
     }
     It 'Given (InvoiceData2) should have 2 columns, 6 rows, data should be in proper columns' {
-        <#
-            IsPublic IsSerial Name                                     BaseType
-            -------- -------- ----                                     --------
-            True     True     Collection`1                             System.Object
-            Collection`1
 
-
-            Description   Amount
-            -----------   ------
-            IT Services 1 $200
-            IT Services 2 $300
-            IT Services 3 $288
-            IT Services 4 $301
-            IT Services 5 $299
-
-        #>
-        #$InvoiceData1 | Format-Table -AutoSize
         $Type = Get-ObjectType -Object $InvoiceData2
         $Type.ObjectTypeName | Should -Be 'Collection`1'
         $Type.ObjectTypeBaseName | Should -Be 'System.Object'
@@ -284,21 +233,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs[0].Text | Should -Be '$300'
     }
     It 'Given (InvoiceData3) should have 2 columns, 3 rows, data should be in proper columns' {
-        <#
-        IsPublic IsSerial Name                                     BaseType
-        -------- -------- ----                                     --------
-        True     True     Object[]                                 System.Array
-        Hashtable
 
-
-
-        Name        Value
-        ----        -----
-        Description IT Services 1
-        Amount      $200
-
-        #>
-        #$InvoiceData1 | Format-Table -AutoSize
         $Type = Get-ObjectType -Object $InvoiceData3
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -316,19 +251,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs[0].Text | Should -Be 'IT Services 1'
     }
     It 'Given (InvoiceData4) should have 2 columns, 3 rows, data should be in proper columns' {
-        <#
-        IsPublic IsSerial Name                                     BaseType
-        -------- -------- ----                                     --------
-        True     True     Collection`1                             System.Object
-        Collection`1
 
-
-
-        Description   Amount
-        -----------   ------
-        IT Services 1 $200
-        #>
-        #$InvoiceData1 | Format-Table -AutoSize
         $Type = Get-ObjectType -Object $InvoiceData4
         $Type.ObjectTypeName | Should -Be 'Collection`1'
         $Type.ObjectTypeBaseName | Should -Be 'System.Object'
@@ -348,10 +271,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
 
     It 'Given ($Object1) should have 3 columns, 6 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object1
-        $Object1 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $Object1
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -369,11 +289,6 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($Object2) should have 6 columns, Have more then 4 rows, data is in random order (unfortunately)' {
-        <#
-        $Type = Get-ObjectType -Object $Object2
-        $Object2 | ft -a
-        #>
-
 
         $Type = Get-ObjectType -Object $Object2
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -393,10 +308,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($Object3) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $Object3
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -414,10 +326,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($Object4) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $Object4
         $Type.ObjectTypeName | Should -Be 'PSCustomObject'
         $Type.ObjectTypeBaseName | Should -Be 'System.Object'
@@ -435,10 +344,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($obj) should have 4 columns, Have 2 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $obj
         $Type.ObjectTypeName | Should -Be 'Object'
         $Type.ObjectTypeBaseName | Should -Be $null
@@ -456,10 +362,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($myArray1) should have 4 columns, Have 4 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $myArray1
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -477,10 +380,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($myArray2) should have 4 columns, Have 2 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $myArray2
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -498,10 +398,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($InvoiceEntry7) should have 2 columns, Have 3 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $InvoiceEntry7
         $Type.ObjectTypeName | Should -Be 'OrderedDictionary'
         $Type.ObjectTypeBaseName | Should -Be 'System.Object'
@@ -519,10 +416,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($InvoiceDataOrdered1) should have 2 columns, Have 3 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
+
         $Type = Get-ObjectType -Object $InvoiceDataOrdered1
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -540,10 +434,6 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
     }
     It 'Given ($InvoiceDataOrdered2) should have 2 columns, Have 5 rows, data should be in proper columns' {
-        <#
-        $Type = Get-ObjectType -Object $Object3
-        $Object3 | ft -a
-        #>
         $Type = Get-ObjectType -Object $InvoiceDataOrdered2
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
