@@ -4,7 +4,7 @@ function Add-WordTable {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [ValidateNotNullOrEmpty()]$DataTable,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]$DataTable,
         [AutoFit] $AutoFit,
         [TableDesign] $Design,
         [Direction] $Direction,
@@ -51,29 +51,30 @@ function Add-WordTable {
         [bool] $Supress = $false,
         [switch] $VerboseColor
     )
+    Begin {}
+    Process {
 
-    if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
-    $Data = Format-PSTable $DataTable #-Verbose
-    $NumberRows = $Data.Count
-    $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
+        if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
+        $Data = Format-PSTable $DataTable #-Verbose
+        $NumberRows = $Data.Count
+        $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
-    <#
-    ### Prepare Number of ROWS/COLUMNS
+        ### Add Table or Add To TABLE
+        if ($Table -eq $null) {
+            $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        } else {
+            Add-WordTableRow -Table $Table -Count $DataTable.Count -Supress $True
+        }
+        ### Add titles
+        <#
+     ### Prepare Number of ROWS/COLUMNS
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
         $Titles = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
         $NumberRows = $DataTable.Count
         Write-Verbose 'Add-WordTable - Option 4'
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-    #>
-    ### Add Table or Add To TABLE
-    if ($Table -eq $null) {
-        $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
-    } else {
-        Add-WordTableRow -Table $Table -Count $DataTable.Count -Supress $True
-    }
-    ### Add titles
-    <#
+
     if (-not $DoNotAddTitle) {
         Add-WordTableTitle -Title $Titles `
             -Table $Table `
@@ -106,120 +107,124 @@ function Add-WordTable {
             -Script $Script[0] -Supress $True
     }
     #>
-    ### Continue formatting
-    if ($ContinueFormatting -eq $true) {
-        $Formatting = Set-WordContinueFormatting -Count $NumberRows `
-            -Color $Color `
-            -FontSize $FontSize `
-            -FontFamily $FontFamily `
-            -Bold $Bold `
-            -Italic $Italic `
-            -UnderlineStyle $UnderlineStyle `
-            -UnderlineColor $UnderlineColor `
-            -SpacingAfter $SpacingAfter `
-            -SpacingBefore $SpacingBefore `
-            -Spacing $Spacing `
-            -Highlight $Highlight `
-            -CapsStyle $CapsStyle `
-            -StrikeThrough $StrikeThrough `
-            -HeadingType $HeadingType `
-            -PercentageScale $PercentageScale `
-            -Misc $Misc `
-            -Language $Language `
-            -Kerning $Kerning `
-            -Hidden $Hidden `
-            -Position $Position `
-            -IndentationFirstLine $IndentationFirstLine `
-            -IndentationHanging $IndentationHanging `
-            -Alignment $Alignment `
-            -DirectionFormatting $DirectionFormatting `
-            -ShadingType $ShadingType `
-            -Script $Script
-
-        $Color = $Formatting[0]
-        $FontSize = $Formatting[1]
-        $FontFamily = $Formatting[2]
-        $Bold = $Formatting[3]
-        $Italic = $Formatting[4]
-        $UnderlineStyle = $Formatting[5]
-        $UnderlineColor = $Formatting[6]
-        $SpacingAfter = $Formatting[7]
-        $SpacingBefore = $Formatting[8]
-        $Spacing = $Formatting[9]
-        $Highlight = $Formatting[10]
-        $CapsStyle = $Formatting[11]
-        $StrikeThrough = $Formatting[12]
-        $HeadingType = $Formatting[13]
-        $PercentageScale = $Formatting[14]
-        $Misc = $Formatting[15]
-        $Language = $Formatting[16]
-        $Kerning = $Formatting[17]
-        $Hidden = $Formatting[18]
-        $Position = $Formatting[19]
-        $IndentationFirstLine = $Formatting[20]
-        $IndentationHanging = $Formatting[21]
-        $Alignment = $Formatting[22]
-        $DirectionFormatting = $Formatting[23]
-        $ShadingType = $Formatting[24]
-        $Script = $Formatting[25]
     }
-    ###  Build data in Table
+    End {
+        ### Continue formatting
+        if ($ContinueFormatting -eq $true) {
+            $Formatting = Set-WordContinueFormatting -Count $NumberRows `
+                -Color $Color `
+                -FontSize $FontSize `
+                -FontFamily $FontFamily `
+                -Bold $Bold `
+                -Italic $Italic `
+                -UnderlineStyle $UnderlineStyle `
+                -UnderlineColor $UnderlineColor `
+                -SpacingAfter $SpacingAfter `
+                -SpacingBefore $SpacingBefore `
+                -Spacing $Spacing `
+                -Highlight $Highlight `
+                -CapsStyle $CapsStyle `
+                -StrikeThrough $StrikeThrough `
+                -HeadingType $HeadingType `
+                -PercentageScale $PercentageScale `
+                -Misc $Misc `
+                -Language $Language `
+                -Kerning $Kerning `
+                -Hidden $Hidden `
+                -Position $Position `
+                -IndentationFirstLine $IndentationFirstLine `
+                -IndentationHanging $IndentationHanging `
+                -Alignment $Alignment `
+                -DirectionFormatting $DirectionFormatting `
+                -ShadingType $ShadingType `
+                -Script $Script
 
-    $RowNr = 0
-    #Write-Color "[i] Presenting table after conversion" -Color Yellow
-    foreach ($Row in $Data) {
-        $ColumnNr = 0
-        foreach ($Column in $Row) {
-            if ($VerboseColor) {
-                Write-Color 'Row: ', $RowNr, ' Column: ', $ColumnNr, " Data: ", $Column -Color White, Yellow, White, Green
-            }
-            Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
-            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Column `
-                -Color $Color[$RowNr] `
-                -FontSize $FontSize[$RowNr] `
-                -FontFamily $FontFamily[$RowNr] `
-                -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr] `
-                -UnderlineStyle $UnderlineStyle[$RowNr]`
-                -UnderlineColor $UnderlineColor[$RowNr]`
-                -SpacingAfter $SpacingAfter[$RowNr] `
-                -SpacingBefore $SpacingBefore[$RowNr] `
-                -Spacing $Spacing[$RowNr] `
-                -Highlight $Highlight[$RowNr] `
-                -CapsStyle $CapsStyle[$RowNr] `
-                -StrikeThrough $StrikeThrough[$RowNr] `
-                -HeadingType $HeadingType[$RowNr] `
-                -PercentageScale $PercentageScale[$RowNr] `
-                -Misc $Misc[$RowNr] `
-                -Language $Language[$RowNr]`
-                -Kerning $Kerning[$RowNr]`
-                -Hidden $Hidden[$RowNr]`
-                -Position $Position[$RowNr]`
-                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                -IndentationHanging $IndentationHanging[$RowNr]`
-                -Alignment $Alignment[$RowNr]`
-                -DirectionFormatting $DirectionFormatting[$RowNr] `
-                -ShadingType $ShadingType[$RowNr]`
-                -Script $Script[$RowNr]
-            if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
-            $ColumnNr++
-
+            $Color = $Formatting[0]
+            $FontSize = $Formatting[1]
+            $FontFamily = $Formatting[2]
+            $Bold = $Formatting[3]
+            $Italic = $Formatting[4]
+            $UnderlineStyle = $Formatting[5]
+            $UnderlineColor = $Formatting[6]
+            $SpacingAfter = $Formatting[7]
+            $SpacingBefore = $Formatting[8]
+            $Spacing = $Formatting[9]
+            $Highlight = $Formatting[10]
+            $CapsStyle = $Formatting[11]
+            $StrikeThrough = $Formatting[12]
+            $HeadingType = $Formatting[13]
+            $PercentageScale = $Formatting[14]
+            $Misc = $Formatting[15]
+            $Language = $Formatting[16]
+            $Kerning = $Formatting[17]
+            $Hidden = $Formatting[18]
+            $Position = $Formatting[19]
+            $IndentationFirstLine = $Formatting[20]
+            $IndentationHanging = $Formatting[21]
+            $Alignment = $Formatting[22]
+            $DirectionFormatting = $Formatting[23]
+            $ShadingType = $Formatting[24]
+            $Script = $Formatting[25]
         }
-        $RowNr++
+        ###  Build data in Table
+
+        $RowNr = 0
+        #Write-Color "[i] Presenting table after conversion" -Color Yellow
+        foreach ($Row in $Data) {
+            $ColumnNr = 0
+            foreach ($Column in $Row) {
+                if ($VerboseColor) {
+                    Write-Color 'Row: ', $RowNr, ' Column: ', $ColumnNr, " Data: ", $Column -Color White, Yellow, White, Green
+                }
+                Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
+                $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Column `
+                    -Color $Color[$RowNr] `
+                    -FontSize $FontSize[$RowNr] `
+                    -FontFamily $FontFamily[$RowNr] `
+                    -Bold $Bold[$RowNr] `
+                    -Italic $Italic[$RowNr] `
+                    -UnderlineStyle $UnderlineStyle[$RowNr]`
+                    -UnderlineColor $UnderlineColor[$RowNr]`
+                    -SpacingAfter $SpacingAfter[$RowNr] `
+                    -SpacingBefore $SpacingBefore[$RowNr] `
+                    -Spacing $Spacing[$RowNr] `
+                    -Highlight $Highlight[$RowNr] `
+                    -CapsStyle $CapsStyle[$RowNr] `
+                    -StrikeThrough $StrikeThrough[$RowNr] `
+                    -HeadingType $HeadingType[$RowNr] `
+                    -PercentageScale $PercentageScale[$RowNr] `
+                    -Misc $Misc[$RowNr] `
+                    -Language $Language[$RowNr]`
+                    -Kerning $Kerning[$RowNr]`
+                    -Hidden $Hidden[$RowNr]`
+                    -Position $Position[$RowNr]`
+                    -IndentationFirstLine $IndentationFirstLine[$RowNr]`
+                    -IndentationHanging $IndentationHanging[$RowNr]`
+                    -Alignment $Alignment[$RowNr]`
+                    -DirectionFormatting $DirectionFormatting[$RowNr] `
+                    -ShadingType $ShadingType[$RowNr]`
+                    -Script $Script[$RowNr]
+                if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
+                $ColumnNr++
+
+            }
+            $RowNr++
+        }
+
+        ### Apply formatting to table
+
+        $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
+
+        $Table | Set-WordTable -Direction $Direction `
+            -AutoFit $AutoFit `
+            -Design $Design `
+            -BreakPageAfterTable:$BreakPageAfterTable `
+            -BreakPageBeforeTable:$BreakPageBeforeTable `
+            -BreakAcrossPages $BreakAcrossPages -Supress $True
+
+        ### return data
+        if ($Supress) { return } else { return $Table }
     }
-    ### Apply formatting to table
-
-    $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
-
-    $Table | Set-WordTable -Direction $Direction `
-        -AutoFit $AutoFit `
-        -Design $Design `
-        -BreakPageAfterTable:$BreakPageAfterTable `
-        -BreakPageBeforeTable:$BreakPageBeforeTable `
-        -BreakAcrossPages $BreakAcrossPages -Supress $True
-
-    ### return data
-    if ($Supress) { return } else { return $Table }
 }
 
 function Set-WordContinueFormatting {
