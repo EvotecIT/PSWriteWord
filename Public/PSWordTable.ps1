@@ -17,7 +17,6 @@ function Add-WordTable {
         [float[]] $ColummnWidth = @(),
         [nullable[float]] $TableWidth = $null,
         [bool] $Percentage,
-
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
