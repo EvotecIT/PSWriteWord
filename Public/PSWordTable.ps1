@@ -54,46 +54,18 @@ function Add-WordTable {
     )
 
     if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
-    #$DataTable = Convert-ObjectToProcess -DataTable $DataTable
-    #$ObjectType = $DataTable.GetType().Name
-
-
     $Data = Format-PSTable $DataTable #-Verbose
     $NumberRows = $Data.Count
     $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
-
     <#
     ### Prepare Number of ROWS/COLUMNS
-    if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-        $NumberRows = $DataTable.Count + 1
-        $NumberColumns = 2
-        Write-Verbose 'Add-WordTable - Option 1'
-        Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-        Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
-    } elseif ($ObjectType -eq 'PSCustomObject') {
-        $Columns = Get-ObjectTitles -Object $DataTable[0]
-        $NumberRows = $Columns.Count + 1
-        $NumberColumns = 2
-        Write-Verbose 'Add-WordTable - Option 2'
-        Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-        Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
-    } elseif ($DataTable.GetType().Name -eq 'Object[]') {
-        $Titles = Get-ObjectTitles -Object $DataTable[0]
-        $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
-        $NumberRows = $DataTable.Count + 1
-        write-verbose 'Add-WordTable - option 3'
-        Write-Verbose "Add-WordTable - DoNotAddTitle $DoNotAddTitle (Option 3)"
-        Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-        Write-Verbose "Add-WordTable - Titles: $([string] $Titles)"
-    } else {
         $pattern = 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort'
         $Titles = ($DataTable | Get-Member | Where-Object { $_.MemberType -like "*Property" -and $_.Definition -match $pattern }) | Select-Object Name
         $NumberColumns = if ($Titles.Count -ge $MaximumColumns) { $MaximumColumns } else { $Titles.Count }
         $NumberRows = $DataTable.Count
         Write-Verbose 'Add-WordTable - Option 4'
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-    }
     #>
     ### Add Table or Add To TABLE
     if ($Table -eq $null) {
@@ -194,8 +166,6 @@ function Add-WordTable {
     }
     ###  Build data in Table
 
-
-
     $RowNr = 0
     #Write-Color "[i] Presenting table after conversion" -Color Yellow
     foreach ($Row in $Data) {
@@ -238,228 +208,6 @@ function Add-WordTable {
         }
         $RowNr++
     }
-
-
-
-
-    <#
-    if ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-        Write-Verbose 'Add-WordTable - Option 1'
-        $RowNr = 1
-        foreach ($TableEntry in $DataTable.GetEnumerator()) {
-            $ColumnNrForTitle = 0
-            $ColumnNrForData = 1
-            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNrForTitle -Value $TableEntry.Name `
-                -Color $Color[$RowNr] `
-                -FontSize $FontSize[$RowNr] `
-                -FontFamily $FontFamily[$RowNr] `
-                -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr] `
-                -UnderlineStyle $UnderlineStyle[$RowNr]`
-                -UnderlineColor $UnderlineColor[$RowNr]`
-                -SpacingAfter $SpacingAfter[$RowNr] `
-                -SpacingBefore $SpacingBefore[$RowNr] `
-                -Spacing $Spacing[$RowNr] `
-                -Highlight $Highlight[$RowNr] `
-                -CapsStyle $CapsStyle[$RowNr] `
-                -StrikeThrough $StrikeThrough[$RowNr] `
-                -HeadingType $HeadingType[$RowNr] `
-                -PercentageScale $PercentageScale[$RowNr] `
-                -Misc $Misc[$RowNr] `
-                -Language $Language[$RowNr]`
-                -Kerning $Kerning[$RowNr]`
-                -Hidden $Hidden[$RowNr]`
-                -Position $Position[$RowNr]`
-                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                -IndentationHanging $IndentationHanging[$RowNr]`
-                -Alignment $Alignment[$RowNr]`
-                -DirectionFormatting $DirectionFormatting[$RowNr] `
-                -ShadingType $ShadingType[$RowNr]`
-                -Script $Script[$RowNr]
-            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNrForData -Value $TableEntry.Value `
-                -Color $Color[$RowNr] `
-                -FontSize $FontSize[$RowNr] `
-                -FontFamily $FontFamily[$RowNr] `
-                -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr] `
-                -UnderlineStyle $UnderlineStyle[$RowNr]`
-                -UnderlineColor $UnderlineColor[$RowNr]`
-                -SpacingAfter $SpacingAfter[$RowNr] `
-                -SpacingBefore $SpacingBefore[$RowNr] `
-                -Spacing $Spacing[$RowNr] `
-                -Highlight $Highlight[$RowNr] `
-                -CapsStyle $CapsStyle[$RowNr] `
-                -StrikeThrough $StrikeThrough[$RowNr] `
-                -HeadingType $HeadingType[$RowNr] `
-                -PercentageScale $PercentageScale[$RowNr] `
-                -Misc $Misc[$RowNr] `
-                -Language $Language[$RowNr]`
-                -Kerning $Kerning[$RowNr]`
-                -Hidden $Hidden[$RowNr]`
-                -Position $Position[$RowNr]`
-                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                -IndentationHanging $IndentationHanging[$RowNr]`
-                -Alignment $Alignment[$RowNr]`
-                -DirectionFormatting $DirectionFormatting[$RowNr] `
-                -ShadingType $ShadingType[$RowNr]`
-                -Script $Script[$RowNr]
-            Write-Verbose "Add-WordTable - RowNr: $RowNr / ColumnNr: $ColumnTitle Name: $($TableEntry.Name) Value: $($TableEntry.Value)"
-            $RowNr++
-
-        }
-    } elseif ($ObjectType -eq 'PSCustomObject') {
-        Write-Verbose 'Add-WordTable - Option 2'
-        $RowNr = 1
-        foreach ($Title in $Columns) {
-            $Value = Get-ObjectData -Object $DataTable -Title $Title -DoNotAddTitles
-            $ColumnTitle = 0
-            $ColumnData = 1
-            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnTitle -Value $Title `
-                -Color $Color[$RowNr] `
-                -FontSize $FontSize[$RowNr] `
-                -FontFamily $FontFamily[$RowNr] `
-                -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr] `
-                -UnderlineStyle $UnderlineStyle[$RowNr]`
-                -UnderlineColor $UnderlineColor[$RowNr]`
-                -SpacingAfter $SpacingAfter[$RowNr] `
-                -SpacingBefore $SpacingBefore[$RowNr] `
-                -Spacing $Spacing[$RowNr] `
-                -Highlight $Highlight[$RowNr] `
-                -CapsStyle $CapsStyle[$RowNr] `
-                -StrikeThrough $StrikeThrough[$RowNr] `
-                -HeadingType $HeadingType[$RowNr] `
-                -PercentageScale $PercentageScale[$RowNr] `
-                -Misc $Misc[$RowNr] `
-                -Language $Language[$RowNr]`
-                -Kerning $Kerning[$RowNr]`
-                -Hidden $Hidden[$RowNr]`
-                -Position $Position[$RowNr]`
-                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                -IndentationHanging $IndentationHanging[$RowNr]`
-                -Alignment $Alignment[$RowNr]`
-                -DirectionFormatting $DirectionFormatting[$RowNr] `
-                -ShadingType $ShadingType[$RowNr]`
-                -Script $Script[$RowNr]
-
-            $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnData -Value $Value `
-                -Color $Color[$RowNr] `
-                -FontSize $FontSize[$RowNr] `
-                -FontFamily $FontFamily[$RowNr] `
-                -Bold $Bold[$RowNr] `
-                -Italic $Italic[$RowNr] `
-                -UnderlineStyle $UnderlineStyle[$RowNr]`
-                -UnderlineColor $UnderlineColor[$RowNr]`
-                -SpacingAfter $SpacingAfter[$RowNr] `
-                -SpacingBefore $SpacingBefore[$RowNr] `
-                -Spacing $Spacing[$RowNr] `
-                -Highlight $Highlight[$RowNr] `
-                -CapsStyle $CapsStyle[$RowNr] `
-                -StrikeThrough $StrikeThrough[$RowNr] `
-                -HeadingType $HeadingType[$RowNr] `
-                -PercentageScale $PercentageScale[$RowNr] `
-                -Misc $Misc[$RowNr] `
-                -Language $Language[$RowNr]`
-                -Kerning $Kerning[$RowNr]`
-                -Hidden $Hidden[$RowNr]`
-                -Position $Position[$RowNr]`
-                -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                -IndentationHanging $IndentationHanging[$RowNr]`
-                -Alignment $Alignment[$RowNr]`
-                -DirectionFormatting $DirectionFormatting[$RowNr] `
-                -ShadingType $ShadingType[$RowNr]`
-                -Script $Script[$RowNr]
-
-            Write-Verbose "Add-WordTable - Title:  $Title Value: $Value Row: $RowNr "
-            $RowNr++
-
-        }
-    } elseif ($DataTable.GetType().Name -eq 'Object[]') {
-        write-verbose 'Add-WordTable - option 3'
-        Write-Verbose "Add-WordTable - Process Data (Option3)"
-        for ($b = 0; $b -lt $NumberRows - 1; $b++) {
-            $ColumnNr = 0
-            foreach ($Title in $Titles) {
-
-                $RowNr = $($b + 1)
-                $Value = $DataTable[$b].$Title
-                $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Value `
-                    -Color $Color[$RowNr] `
-                    -FontSize $FontSize[$RowNr] `
-                    -FontFamily $FontFamily[$RowNr] `
-                    -Bold $Bold[$RowNr] `
-                    -Italic $Italic[$RowNr] `
-                    -UnderlineStyle $UnderlineStyle[$RowNr]`
-                    -UnderlineColor $UnderlineColor[$RowNr]`
-                    -SpacingAfter $SpacingAfter[$RowNr] `
-                    -SpacingBefore $SpacingBefore[$RowNr] `
-                    -Spacing $Spacing[$RowNr] `
-                    -Highlight $Highlight[$RowNr] `
-                    -CapsStyle $CapsStyle[$RowNr] `
-                    -StrikeThrough $StrikeThrough[$RowNr] `
-                    -HeadingType $HeadingType[$RowNr] `
-                    -PercentageScale $PercentageScale[$RowNr] `
-                    -Misc $Misc[$RowNr] `
-                    -Language $Language[$RowNr]`
-                    -Kerning $Kerning[$RowNr]`
-                    -Hidden $Hidden[$RowNr]`
-                    -Position $Position[$RowNr]`
-                    -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                    -IndentationHanging $IndentationHanging[$RowNr]`
-                    -Alignment $Alignment[$RowNr]`
-                    -DirectionFormatting $DirectionFormatting[$RowNr] `
-                    -ShadingType $ShadingType[$RowNr]`
-                    -Script $Script[$RowNr]
-
-                if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
-                $ColumnNr++
-            }
-        }
-    } else {
-        Write-Verbose 'Add-WordTable - Option 4'
-
-        for ($RowNr = 1; $RowNr -lt $NumberRows; $RowNr++) {
-            $ColumnNr = 0
-            foreach ($Title in $Titles.Name) {
-                $Value = $DataTable[$RowNr].$Title
-                $Data = Add-WordTableCellValue -Table $Table `
-                    -Row $RowNr `
-                    -Column $ColumnNr `
-                    -Value $Value `
-                    -Color $Color[$RowNr] `
-                    -FontSize $FontSize[$RowNr] `
-                    -FontFamily $FontFamily[$RowNr] `
-                    -Bold $Bold[$RowNr] `
-                    -Italic $Italic[$RowNr] `
-                    -UnderlineStyle $UnderlineStyle[$RowNr]`
-                    -UnderlineColor $UnderlineColor[$RowNr]`
-                    -SpacingAfter $SpacingAfter[$RowNr] `
-                    -SpacingBefore $SpacingBefore[$RowNr] `
-                    -Spacing $Spacing[$RowNr] `
-                    -Highlight $Highlight[$RowNr] `
-                    -CapsStyle $CapsStyle[$RowNr] `
-                    -StrikeThrough $StrikeThrough[$RowNr] `
-                    -HeadingType $HeadingType[$RowNr] `
-                    -PercentageScale $PercentageScale[$RowNr] `
-                    -Misc $Misc[$RowNr] `
-                    -Language $Language[$RowNr]`
-                    -Kerning $Kerning[$RowNr]`
-                    -Hidden $Hidden[$RowNr]`
-                    -Position $Position[$RowNr]`
-                    -IndentationFirstLine $IndentationFirstLine[$RowNr]`
-                    -IndentationHanging $IndentationHanging[$RowNr]`
-                    -Alignment $Alignment[$RowNr]`
-                    -DirectionFormatting $DirectionFormatting[$RowNr] `
-                    -ShadingType $ShadingType[$RowNr]`
-                    -Script $Script[$RowNr]
-
-                if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
-                $ColumnNr++
-            }
-        }
-
-    }
-    #>
     ### Apply formatting to table
 
     $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
