@@ -59,8 +59,6 @@ function Add-WordTable {
         if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
 
         if ($Run -eq 0) {
-
-
             $Data = Format-PSTable $DataTable
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
