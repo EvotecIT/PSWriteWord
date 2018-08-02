@@ -9,16 +9,19 @@ Function Format-PSPivotTable {
 function Format-PSTableConvertType3 {
     [CmdletBinding()]
     param (
-        $Object
+        $Object,
+        [switch] $SkipTitles
+
     )
     Write-Verbose 'Format-PSTableConvertType3 - Option 3'
     $Array = New-ArrayList
     ### Add Titles
-    $Titles = New-ArrayList
-    Add-ToArray -List $Titles -Element 'Name'
-    Add-ToArray -List $Titles -Element 'Value'
-    Add-ToArray -List $Array -Element $Titles
-
+    if (-not $SkipTitles) {
+        $Titles = New-ArrayList
+        Add-ToArray -List $Titles -Element 'Name'
+        Add-ToArray -List $Titles -Element 'Value'
+        Add-ToArray -List $Array -Element $Titles
+    }
     ### Add Data
     foreach ($O in $Object) {
         foreach ($Key in $O.Keys) {
@@ -34,20 +37,24 @@ function Format-PSTableConvertType3 {
 function Format-PSTableConvertType2 {
     [CmdletBinding()]
     param(
-        $Object
+        $Object,
+        [switch] $SkipTitles
     )
     Write-Verbose 'Format-PSTableConvertType2 - Option 2'
     $Array = New-ArrayList
     ### Add Titles
-    $Titles = New-ArrayList
-    foreach ($O in $Object) {
-        foreach ($Name in $O.PSObject.Properties.Name) {
-            #Write-Verbose $Name
-            Add-ToArray -List $Titles -Element $Name
+    if (-not $SkipTitle) {
+
+        $Titles = New-ArrayList
+        foreach ($O in $Object) {
+            foreach ($Name in $O.PSObject.Properties.Name) {
+                #Write-Verbose $Name
+                Add-ToArray -List $Titles -Element $Name
+            }
+            break
         }
-        break
+        Add-ToArray -List ($Array) -Element $Titles
     }
-    Add-ToArray -List ($Array) -Element $Titles
     ### Add Data
     foreach ($O in $Object) {
         $ArrayValues = New-ArrayList
@@ -61,15 +68,19 @@ function Format-PSTableConvertType2 {
 }
 function Format-PSTableConvertType1 {
     [CmdletBinding()]
-    param ($Object)
+    param (
+        $Object,
+        [switch] $SkipTitles
+    )
     Write-Verbose 'Format-PSTableConvertType1 - Option 1'
     $Array = New-ArrayList
     ### Add Titles
-    # $Array += , @('Name', 'Value')
-    $Titles = New-ArrayList
-    Add-ToArray -List $Titles -Element 'Name'
-    Add-ToArray -List $Titles -Element 'Value'
-    Add-ToArray -List $Array -Element $Titles
+    if (-not $SkipTitles) {
+        $Titles = New-ArrayList
+        Add-ToArray -List $Titles -Element 'Name'
+        Add-ToArray -List $Titles -Element 'Value'
+        Add-ToArray -List $Array -Element $Titles
+    }
     ### Add Data
     foreach ($Key in $Object.Keys) {
         Write-Verbose $Key
@@ -88,7 +99,8 @@ function Format-PSTableConvertType1 {
 function Format-PSTable {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object,
+        [switch] $SkipTitle
     )
 
     $Type = Get-ObjectType -Object $Object
@@ -99,17 +111,17 @@ function Format-PSTable {
         $Type.ObjectTypeName -eq 'Collection`1') {
 
         if ($Type.ObjectTypeInsiderName -eq 'string') {
-            return Format-PSTableConvertType1 -Object $Object
+            return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle
         } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or $Type.ObjectTypeInsiderName -eq 'PSCustomObject') {
-            return Format-PSTableConvertType2 -Object $Object
+            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
         } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable' -or $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' ) {
-            return Format-PSTableConvertType3 -Object $Object
+            return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle
         } else {
             # Covers ADDriveInfo and other types of objects
-            return Format-PSTableConvertType2 -Object $Object
+            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
         }
     } elseif ($Type.ObjectTypeName -eq 'HashTable') {
-        return Format-PSTableConvertType3 -Object $Object
+        return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle
     } else {
         throw 'Not supported? Weird'
     }
