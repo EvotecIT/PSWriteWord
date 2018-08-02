@@ -1,9 +1,33 @@
+Function Format-PSPivotTableOld {
+    [CmdletBinding()]
+    param (
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
+    )
+    Begin {
+        $Value = @()
+    }
+    Process {
+        $Value += $Object.ForEach( {[PSCustomObject]$_})
+    }
+    End {
+        return $Value
+    }
+}
+
 Function Format-PSPivotTable {
     [CmdletBinding()]
     param (
-        $Object
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
     )
-    return $Object.ForEach( {[PSCustomObject]$_})
+    Begin {
+        $Value = New-ArrayList
+    }
+    Process {
+        Add-ToArray -List $Value -Element $Object.ForEach( {[PSCustomObject]$_})
+    }
+    End {
+        return $Value
+    }
 }
 
 function Format-PSTableConvertType3 {
@@ -83,8 +107,8 @@ function Format-PSTableConvertType1 {
     }
     ### Add Data
     foreach ($Key in $Object.Keys) {
-        Write-Verbose $Key
-        Write-Verbose $Object.$Key
+        Write-Verbose "$Key"
+        Write-Verbose "$Object.$Key"
         #$Array += , @($Key, $Object.$Key)
         $ArrayValues = New-ArrayList
         Add-ToArray -List $ArrayValues -Element $Key
@@ -123,8 +147,10 @@ function Format-PSTable {
     } elseif ($Type.ObjectTypeName -eq 'HashTable') {
         return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle
     } else {
-        throw 'Not supported? Weird'
+        # Covers ADDriveInfo and other types of objects
+        return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
     }
+    throw 'Not supported? Weird'
 }
 
 function Show-TableVisualization {
