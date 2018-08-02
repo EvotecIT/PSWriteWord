@@ -51,19 +51,44 @@ function Add-WordTable {
         [bool] $Supress = $false,
         [switch] $VerboseColor
     )
-    Begin {}
+    Begin {
+        [int] $Run = 0
+        [int] $RowNr = 0
+    }
     Process {
-
         if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
-        $Data = Format-PSTable $DataTable #-Verbose
-        $NumberRows = $Data.Count
-        $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
-        ### Add Table or Add To TABLE
-        if ($Table -eq $null) {
-            $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+        if ($Run -eq 0) {
+
+
+            $Data = Format-PSTable $DataTable
+            $NumberRows = $Data.Count
+            $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
+
+            ### Add Table or Add To TABLE
+            if ($Table -eq $null) {
+                $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+            } else {
+                Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
+            }
+            Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
+            $Run++
         } else {
-            Add-WordTableRow -Table $Table -Count $DataTable.Count -Supress $True
+
+
+            $Data = Format-PSTable $DataTable -SkipTitle
+            $NumberRows = $Data.Count
+            $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
+
+            ### Add Table or Add To TABLE
+            if ($Table -eq $null) {
+                $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+            } else {
+
+                Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
+            }
+            Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
+            $Run++
         }
         ### Add titles
         <#
@@ -107,8 +132,7 @@ function Add-WordTable {
             -Script $Script[0] -Supress $True
     }
     #>
-    }
-    End {
+
         ### Continue formatting
         if ($ContinueFormatting -eq $true) {
             $Formatting = Set-WordContinueFormatting -Count $NumberRows `
@@ -168,7 +192,7 @@ function Add-WordTable {
         }
         ###  Build data in Table
 
-        $RowNr = 0
+        # $RowNr = 0
         #Write-Color "[i] Presenting table after conversion" -Color Yellow
         foreach ($Row in $Data) {
             $ColumnNr = 0
@@ -210,7 +234,8 @@ function Add-WordTable {
             }
             $RowNr++
         }
-
+    }
+    End {
         ### Apply formatting to table
 
         $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
