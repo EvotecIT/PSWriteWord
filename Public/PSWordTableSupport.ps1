@@ -96,8 +96,6 @@ function Add-WordTableCellValue {
         [bool] $Supress = $false
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"
-    #$bold.GetType()
-    Write-Verbose "Add-WordTableCellValue - Bold $Bold"
     $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$ParagraphNumber].Append($Value)
     <#
     $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Italic $Italic `
