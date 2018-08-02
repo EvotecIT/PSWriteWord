@@ -41,6 +41,7 @@ function New-WordBlockTable {
         [string] $TableTitleText,
         [Alignment] $TableTitleAlignment = 'center',
         [System.Drawing.Color] $TableTitleColor = 'Black',
+        [switch] $TablePivotRows,
         [bool] $ChartEnable,
         [string] $ChartTitle,
         $ChartKeys,
@@ -54,7 +55,7 @@ function New-WordBlockTable {
     }
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsBefore
     $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text
-    $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns
+    $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -PivotRows:$TablePivotRows
 
     if ($TableTitleMerge) {
         $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -ColumnNrStart 0 -ColumnNrEnd 1
