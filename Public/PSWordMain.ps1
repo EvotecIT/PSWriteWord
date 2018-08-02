@@ -1,7 +1,7 @@
 function New-WordDocument {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][string] $FilePath = ''
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath = ''
     )
     $Word = [Xceed.Words.NET.DocX]
     $WordDocument = $Word::Create($FilePath)
@@ -11,7 +11,7 @@ function New-WordDocument {
 function Get-WordDocument {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][string] $FilePath
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath
     )
     $Word = [Xceed.Words.NET.DocX]
     $WordDocument = $Word::Load($FilePath)
@@ -21,8 +21,8 @@ function Get-WordDocument {
 function Save-WordDocument {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [string] $FilePath,
+        [alias('Document')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [alias('Path')][string] $FilePath,
         [string] $Language,
         [switch] $KillWord,
         [bool] $Supress = $false
@@ -48,5 +48,5 @@ function Save-WordDocument {
     } else {
         $WordDocument.SaveAs($FilePath)
     }
-    if ($Supress) { return } else { return $WordDocument }
+    #if ($Supress) { return } else { return $WordDocument }
 }
