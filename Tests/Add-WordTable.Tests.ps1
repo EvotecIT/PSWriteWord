@@ -121,52 +121,7 @@ $Array += Get-ObjectType -Object $InvoiceDataOrdered1 -ObjectName '$InvoiceDataO
 $Array += Get-ObjectType -Object $InvoiceDataOrdered2 -ObjectName '$InvoiceDataOrdered2'
 $Array | Format-Table -AutoSize
 #>
-$FilePath1 = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture1.docx"
-$FilePath2 = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture2.docx"
 
-<#
-$WordDocument = New-WordDocument
-$WordDocument | Add-WordTable -DataTable $myitems0  -VerboseColor -Verbose -Supress $true #-Verbose
-$WordDocument.Tables.Count
-$WordDocument.Tables[0].ColumnCount
-$WordDocument.Tables[0].RowCount
-$WordDocument.Tables[0].Rows[0].Cells[0].Paragraph
-$WordDocument | Save-WordDocument -FilePath $FilePath1
-
-
-$WordDocument = New-WordDocument
-$myitems0 | Add-WordTable -WordDocument $WordDocument -VerboseColor -Verbose -Supress $true #-Verbose
-$WordDocument.Tables.Count
-$WordDocument.Tables[0].ColumnCount
-$WordDocument.Tables[0].RowCount
-$WordDocument.Tables[0].Rows[0].Cells[0].Paragraph
-$WordDocument | Save-WordDocument -FilePath $FilePath2
-
-#>
-
-#Show-TableVisualization -Object $Object2 -Color
-
-$Type = Get-ObjectType -Object $Object2
-$Type.ObjectTypeName #| Should -Be 'Object[]'
-$Type.ObjectTypeBaseName #| Should -Be 'Array'
-$Type.ObjectTypeInsiderName # | Should -Be 'PSDriveInfo'
-$Type.ObjectTypeInsiderBaseName #| Should -Be 'System.Object'
-
-$WordDocument = New-WordDocument
-$Object2 | Add-WordTable -WordDocument $WordDocument -MaximumColumns 20 -Verbose
-$WordDocument.Tables.Count #| Should -Be 1
-$WordDocument.Tables[0].ColumnCount #| Should -Be 10
-$WordDocument.Tables[0].RowCount #| Should -BeGreaterThan 4
-$WordDocument | Save-WordDocument -FilePath $FilePath2
-
-#return
-
-
-Invoke-Item $FilePath2
-
-#return
-
-#return
 Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize' {
     It 'Given (MyItems0) should have 3 columns, 4 rows, 3rd row 3rd column should be Food lover' {
 
@@ -360,7 +315,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
-        $WordDocument | Add-WordTable -DataTable $Object3 -MaximumColumns 20
+        $WordDocument | Add-WordTable -DataTable $Object3 -MaximumColumns 20 #-Verbose
         $WordDocument.Tables.Count | Should -Be 1
         $WordDocument.Tables[0].ColumnCount | Should -Be 10
         $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 1

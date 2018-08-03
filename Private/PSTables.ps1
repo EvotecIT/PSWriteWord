@@ -72,7 +72,7 @@ function Format-PSTableConvertType2 {
         $Titles = New-ArrayList
         foreach ($O in $Object) {
             foreach ($Name in $O.PSObject.Properties.Name) {
-                #Write-Verbose $Name
+                #Write-Verbose "my title is $Name"
                 Add-ToArray -List $Titles -Element $Name
             }
             break
@@ -83,7 +83,7 @@ function Format-PSTableConvertType2 {
     foreach ($O in $Object) {
         $ArrayValues = New-ArrayList
         foreach ($Value in $O.PSObject.Properties.Value) {
-            #Write-Verbose $Value
+            #Write-Verbose "my name is $Value"
             Add-ToArray -List $ArrayValues -Element $Value
         }
         Add-ToArray -List $Array -Element $ArrayValues
