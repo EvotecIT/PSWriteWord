@@ -1,4 +1,4 @@
-Function Format-PSPivotTableOld {
+Function Format-PSPivotTable22 {
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
@@ -14,7 +14,7 @@ Function Format-PSPivotTableOld {
     }
 }
 
-Function Format-PSPivotTable {
+Function Format-PSPivotTable1 {
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
@@ -27,6 +27,44 @@ Function Format-PSPivotTable {
     }
     End {
         return $Value
+    }
+}
+function Format-PSPivotTable {
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Position = 0,
+            Mandatory = $true,
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true
+        )] [object[]]$Object
+    )
+    begin { $i = 0; }
+
+    process {
+        foreach ($myObject in $Object) {
+            if ($myObject.GetType().Name -eq 'hashtable' -or $myObject.GetType().Name -eq 'OrderedDictionary') {
+                Write-Verbose 'Format-PSPivotTable - Converting HashTable/OrderedDictionary to PSCustomObject'
+                $output = New-Object -TypeName PsObject;
+                Add-Member -InputObject $output -MemberType ScriptMethod -Name AddNote -Value {
+                    Add-Member -InputObject $this -MemberType NoteProperty -Name $args[0] -Value $args[1];
+                };
+                $myObject.Keys | Sort-Object | % {
+                    $output.AddNote($_, $myObject.$_);
+                }
+                $output;
+            } else {
+                Write-Verbose 'Format-PSPivotTable - Converting PSCustomObject to HashTable/OrderedDictionary'
+                # Write-Warning "Index $i is not of type [hashtable]";
+                $output = [ordered] @{};
+                $myObject | Get-Member -MemberType *Property | % {
+                    $output.($_.name) = $myObject.($_.name);
+                }
+                $output
+
+            }
+            $i += 1;
+        }
     }
 }
 
