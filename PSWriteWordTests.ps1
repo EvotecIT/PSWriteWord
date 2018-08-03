@@ -1,3 +1,4 @@
+Clear-Host
 $PSVersionTable.PSVersion
 
 $ModuleVersion = (Get-Content -Raw $PSScriptRoot\PSWriteWord.psd1)  | Invoke-Expression | ForEach-Object ModuleVersion
