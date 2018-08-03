@@ -1,34 +1,3 @@
-Function Format-PSPivotTable22 {
-    [CmdletBinding()]
-    param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
-    )
-    Begin {
-        $Value = @()
-    }
-    Process {
-        $Value += $Object.ForEach( {[PSCustomObject]$_})
-    }
-    End {
-        return $Value
-    }
-}
-
-Function Format-PSPivotTable1 {
-    [CmdletBinding()]
-    param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
-    )
-    Begin {
-        $Value = New-ArrayList
-    }
-    Process {
-        Add-ToArray -List $Value -Element $Object.ForEach( {[PSCustomObject]$_})
-    }
-    End {
-        return $Value
-    }
-}
 function Format-PSPivotTable {
     [CmdletBinding()]
     param (
