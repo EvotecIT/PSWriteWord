@@ -130,7 +130,7 @@ function Format-PSTable {
     $Type = Get-ObjectType -Object $Object
     Write-Verbose "Format-PSTable - Type: $($Type.ObjectTypeName)"
 
-    if ($Type.ObjectTypeName -eq 'Object[]' -or $Type.ObjectTypeName -eq 'OrderedDictionary' -or
+    if ($Type.ObjectTypeName -eq 'Object[]' -or
         $Type.ObjectTypeName -eq 'Object' -or $Type.ObjectTypeName -eq 'PSCustomObject' -or
         $Type.ObjectTypeName -eq 'Collection`1') {
 
@@ -144,7 +144,7 @@ function Format-PSTable {
             # Covers ADDriveInfo and other types of objects
             return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
         }
-    } elseif ($Type.ObjectTypeName -eq 'HashTable') {
+    } elseif ($Type.ObjectTypeName -eq 'HashTable' -or $Type.ObjectTypeName -eq 'OrderedDictionary' ) {
         return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle
     } else {
         # Covers ADDriveInfo and other types of objects
