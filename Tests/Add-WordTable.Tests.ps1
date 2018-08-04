@@ -61,17 +61,11 @@ $obj | Add-Member -type NoteProperty -name Manufacturer -Value "Dell"
 $obj | Add-Member -type NoteProperty -name ProcessorSpeed -Value "3 Ghz"
 $obj | Add-Member -type NoteProperty -name Memory -Value "6 GB"
 
-#$obj | ft -a
-#$obj.GetType() | fl *
-
 $myObject2 = New-Object System.Object
 $myObject2 | Add-Member -type NoteProperty -name Name -Value "Doug_PC"
 $myObject2 | Add-Member -type NoteProperty -name Manufacturer -Value "HP"
 $myObject2 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.6 Ghz"
 $myObject2 | Add-Member -type NoteProperty -name Memory -Value "4 GB"
-
-
-#$myObject2 | ft -a
 
 $myObject3 = New-Object System.Object
 $myObject3 | Add-Member -type NoteProperty -name Name -Value "Julie_PC"
@@ -544,10 +538,3 @@ Describe 'Add-WordTable - Should have proper settings' {
         $WordDocument.Tables.Count | Should -Be 2
     }
 }
-
-#$WordDocument = New-WordDocument
-
-#Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -Supress $True -PivotRows -Verbose
-#$WordDocument | Save-WordDocument -FilePath "test1.docx"
-
-#$invoiceData1 | ft -AutoSize
