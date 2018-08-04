@@ -32,14 +32,17 @@ Add-WordText -WordDocument $WordDocument -Text "Active Directory ", 'Domain', ' 
     -FontSize 12, 12, 12 -StrikeThrough none, strike, none -Alignment center -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.ForestInformation `
-    -Design LightShading -Italic $true, $false -Bold $true, $false -ContinueFormatting -Supress $True -Verbose #-PivotRows -AutoFit Window
+    -Design LightShading -Italic $true, $false -Bold $true, $false -ContinueFormatting -Supress $True -Verbose
 Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Information" `
     -FontSize 15 -Color Green -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation `
     -Design LightShading -Supress $True -Transpose
-Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
+Add-WordPageBreak -WordDocument $WordDocument -Supress $True
+Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation `
+    -Design LightShading -Supress $True -Transpose `
+    -ExcludeProperty 'ComputersContainer', 'AllowedDNSSuffixes', 'Item', 'LinkedGroupPolicyObjects' #-Verbose
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 
