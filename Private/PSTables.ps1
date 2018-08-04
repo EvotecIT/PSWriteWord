@@ -43,8 +43,8 @@ function Format-PSTableConvertType3 {
         $Object,
         [switch] $SkipTitles,
         [string[]] $ExcludeProperty,
-        [switch] $NoAliasOrScriptProperties
-
+        [switch] $NoAliasOrScriptProperties,
+        [switch] $DisplayPropertySet
     )
     Write-Verbose 'Format-PSTableConvertType3 - Option 3'
     $Array = New-ArrayList
@@ -76,43 +76,36 @@ function Format-PSTableConvertType2 {
         $Object,
         [switch] $SkipTitles,
         [string[]] $ExcludeProperty,
-        [switch] $NoAliasOrScriptProperties
+        [switch] $NoAliasOrScriptProperties,
+        [switch] $DisplayPropertySet
     )
     if ($NoAliasOrScriptProperties) {$PropertyType = 'AliasProperty', 'ScriptProperty'  } else {$PropertyType = ''}
     Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
     $Array = New-ArrayList
     ### Add Titles
     if (-not $SkipTitle) {
-        # Write-Verbose 'Format-PSTableConvertType2 - Option 2 - Titles Start'
+
         $Titles = New-ArrayList
         foreach ($O in $Object) {
             foreach ($Name in $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name) {
-                #  if ($NoAliasOrScriptPropeties) {$propType = "Property"} else {$propType = "*" }
-                #$TargetData.PSObject.Properties.where( {$_.MemberType -like $propType -and $_.Name -notin $ExcludeProperty}).Name
-                #Write-Verbose "my title is $Name"
-                #if ($ExcludeProperty -notcontains $Name) {
                 Add-ToArray -List $Titles -Element $Name
-                # }
             }
             break
         }
         Add-ToArray -List ($Array) -Element $Titles
-        # Write-Verbose 'Format-PSTableConvertType2 - Option 2 - Titles End'
+
     }
     ### Add Data
-    #Write-Verbose 'Format-PSTableConvertType2 - Option 2 - Data Start'
     foreach ($O in $Object) {
         $ArrayValues = New-ArrayList
         foreach ($Name in $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name) {
-            #foreach ($Name in $O.PSObject.Properties.Where( {$_.MemberType -like $PropertyType -and $_.Name -notin $ExcludeProperty})) {
-            #Write-Verbose "my name is $Value"
-            #if ($ExcludeProperty -notcontains $Name) {
+
             Add-ToArray -List $ArrayValues -Element  $O.$Name
-            #}
+
         }
         Add-ToArray -List $Array -Element $ArrayValues
     }
-    #Write-Verbose 'Format-PSTableConvertType2 - Option 2 - Data End'
+
     return , $Array
 }
 function Format-PSTableConvertType1 {
@@ -121,7 +114,8 @@ function Format-PSTableConvertType1 {
         $Object,
         [switch] $SkipTitles,
         [string[]] $ExcludeProperty,
-        [switch] $NoAliasOrScriptProperties
+        [switch] $NoAliasOrScriptProperties,
+        [switch] $DisplayPropertySet
     )
     Write-Verbose 'Format-PSTableConvertType1 - Option 1'
     $Array = New-ArrayList
