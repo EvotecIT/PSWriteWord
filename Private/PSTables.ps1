@@ -41,7 +41,8 @@ function Format-PSTableConvertType3 {
     [CmdletBinding()]
     param (
         $Object,
-        [switch] $SkipTitles
+        [switch] $SkipTitles,
+        [string[]] $ExcludeProperty
 
     )
     Write-Verbose 'Format-PSTableConvertType3 - Option 3'
@@ -69,7 +70,8 @@ function Format-PSTableConvertType2 {
     [CmdletBinding()]
     param(
         $Object,
-        [switch] $SkipTitles
+        [switch] $SkipTitles,
+        [string[]] $ExcludeProperty
     )
     #Write-Verbose 'Format-PSTableConvertType2 - Option 2'
     $Array = New-ArrayList
@@ -105,7 +107,8 @@ function Format-PSTableConvertType1 {
     [CmdletBinding()]
     param (
         $Object,
-        [switch] $SkipTitles
+        [switch] $SkipTitles,
+        [string[]] $ExcludeProperty
     )
     Write-Verbose 'Format-PSTableConvertType1 - Option 1'
     $Array = New-ArrayList
@@ -120,7 +123,6 @@ function Format-PSTableConvertType1 {
     foreach ($Key in $Object.Keys) {
         Write-Verbose "$Key"
         Write-Verbose "$Object.$Key"
-        #$Array += , @($Key, $Object.$Key)
         $ArrayValues = New-ArrayList
         Add-ToArray -List $ArrayValues -Element $Key
         Add-ToArray -List $ArrayValues -Element $Object.$Key
@@ -133,7 +135,8 @@ function Format-PSTable {
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object,
-        [switch] $SkipTitle
+        [switch] $SkipTitle,
+        [string[]] $ExcludeProperty
     )
 
     $Type = Get-ObjectType -Object $Object
@@ -144,25 +147,25 @@ function Format-PSTable {
         #Write-Verbose 'Level 0-0'
         if ($Type.ObjectTypeInsiderName -eq 'string') {
             #Write-Verbose 'Level 1-0'
-            return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle
+            return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty
         } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or $Type.ObjectTypeInsiderName -eq 'PSCustomObject') {
             # Write-Verbose 'Level 1-1'
-            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
+            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty
         } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable' -or $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' ) {
             # Write-Verbose 'Level 1-2'
-            return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle
+            return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty
         } else {
             # Covers ADDriveInfo and other types of objects
             # Write-Verbose 'Level 1-3'
-            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
+            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty
         }
     } elseif ($Type.ObjectTypeName -eq 'HashTable' -or $Type.ObjectTypeName -eq 'OrderedDictionary' ) {
         #Write-Verbose 'Level 0-1'
-        return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle
+        return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty
     } else {
         #Write-Verbose 'Level 0-2'
         # Covers ADDriveInfo and other types of objects
-        return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle
+        return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty
     }
     throw 'Not supported? Weird'
 }
