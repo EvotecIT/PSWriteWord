@@ -14,6 +14,13 @@ $myitems2 = [PSCustomObject]@{
     name = "Joe"; age = 32; info = "Cat lover"
 }
 
+
+#$MyItems0[0].PsObject.Properties
+
+#Format-PSTableConvertType2 $MyItems0 -Verbose
+
+#return
+
 $InvoiceEntry1 = @{}
 $InvoiceEntry1.Description = 'IT Services 1'
 $InvoiceEntry1.Amount = '$200'
@@ -290,7 +297,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         #$Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
-        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 10
+        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 10 -Verbose
         $WordDocument.Tables.Count | Should -Be 1
         $WordDocument.Tables[0].ColumnCount | Should -Be 10
         $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 4
