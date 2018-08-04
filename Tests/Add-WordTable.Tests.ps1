@@ -14,13 +14,6 @@ $myitems2 = [PSCustomObject]@{
     name = "Joe"; age = 32; info = "Cat lover"
 }
 
-
-#$MyItems0[0].PsObject.Properties
-
-#Format-PSTableConvertType2 $MyItems0 -Verbose
-
-#return
-
 $InvoiceEntry1 = @{}
 $InvoiceEntry1.Description = 'IT Services 1'
 $InvoiceEntry1.Amount = '$200'
@@ -270,7 +263,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
     }
 
 
-    It 'Given ($Object1) should have 3 columns, 6 rows, data should be in proper columns' {
+    It 'Given (Object1) should have 3 columns, 6 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $Object1
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -297,7 +290,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         #$Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
-        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 10 -Verbose
+        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 10 #-Verbose
         $WordDocument.Tables.Count | Should -Be 1
         $WordDocument.Tables[0].ColumnCount | Should -Be 10
         $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 4
@@ -507,7 +500,7 @@ Describe 'Add-WordTable - Should have proper settings' {
     It 'Given Array of PSCustomObject document should have 1 table with proper design, proper number of columns and rows' {
         $WordDocument = New-WordDocument
 
-        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -TransposeColumnsRows
+        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -TransposeColumnsRows #-Verbose
         $WordDocument.Tables[0].RowCount | Should -Be 6
         $WordDocument.Tables[0].ColumnCount | Should -Be 2
         # $WordDocument.Tables[0].AutoFit | Should -Be 'Contents' # Seems like a bug in Xceed - always returns ColumnWidth
