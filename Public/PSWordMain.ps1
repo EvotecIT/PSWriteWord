@@ -22,7 +22,7 @@ function Save-WordDocument {
     [CmdletBinding()]
     param (
         [alias('Document')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [alias('Path')][string] $FilePath,
+        [alias('Path')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][string] $FilePath,
         [string] $Language,
         [switch] $KillWord,
         [bool] $Supress = $false
@@ -44,8 +44,10 @@ function Save-WordDocument {
         Write-Verbose "Save-WordDocument - Killed Microsoft Word: $FileName"
     }
     if ([string]::IsNullOrEmpty($FilePath)) {
+        Write-Verbose 'Save-WordDocument - Saving document without FilePath'
         $WordDocument.Save()
     } else {
+        Write-Verbose "Save-WordDocument - Saving document to $FilePath"
         $WordDocument.SaveAs($FilePath)
     }
     #if ($Supress) { return } else { return $WordDocument }

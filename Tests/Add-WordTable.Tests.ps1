@@ -50,9 +50,10 @@ $InvoiceData4 = $InvoiceData3.ForEach( {[PSCustomObject]$_})
 ### Preparing Data End
 
 $Object1 = Get-Process | Select-Object ProcessName, Handle, StartTime -First 5
-$Object2 = Get-PSDrive
-$Object3 = Get-PSDrive | Select-Object * -First 2
-$Object4 = Get-PSDrive | Select-Object * -First 1
+$Object2 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*' }
+$Object3 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*'} | Select-Object * -First 2
+$Object4 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*'} | Select-Object * -First 1
+
 
 $obj = New-Object System.Object
 $obj | Add-Member -type NoteProperty -name Name -Value "Ryan_PC"
@@ -286,26 +287,27 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'StartTime'
 
     }
-    It 'Given ($Object2) should have 6 columns, Have more then 4 rows, data is in random order (unfortunately)' {
+    It 'Given (Object2) should have 10 columns, Have more then 4 rows, data is in random order (unfortunately)' {
 
         $Type = Get-ObjectType -Object $Object2
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
         #$Type.ObjectTypeInsiderName | Should -Be 'PSDriveInfo'
-        $Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
+        #$Type.ObjectTypeInsiderBaseName | Should -Be 'System.Object'
 
         $WordDocument = New-WordDocument
-        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 20
+        $WordDocument | Add-WordTable -DataTable $Object2 -MaximumColumns 10
         $WordDocument.Tables.Count | Should -Be 1
         $WordDocument.Tables[0].ColumnCount | Should -Be 10
         $WordDocument.Tables[0].RowCount | Should -BeGreaterThan 4
+        #Save-WordDocument -WordDocument $WordDocument -Path 'C:\test.docx'
         # Not sure yet how to predict thje order. Seems order of FT -a is differnt then FL and script takes FL for now
         #$WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'Name'
         #$WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs[0].Text | Should -Be 'Used (GB)'
         #$WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'Free (GB)'
 
     }
-    It 'Given ($Object3) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
+    It 'Given (Object3) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $Object3
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -323,7 +325,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'CurrentLocation'
 
     }
-    It 'Given ($Object4) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
+    It 'Given (Object4) should have 10 columns, Have more then 1 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $Object4
         $Type.ObjectTypeName | Should -Be 'PSCustomObject'
@@ -341,7 +343,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'CurrentLocation'
 
     }
-    It 'Given ($obj) should have 4 columns, Have 2 rows, data should be in proper columns' {
+    It 'Given (obj) should have 4 columns, Have 2 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $obj
         $Type.ObjectTypeName | Should -Be 'Object'
@@ -359,7 +361,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'ProcessorSpeed'
 
     }
-    It 'Given ($myArray1) should have 4 columns, Have 4 rows, data should be in proper columns' {
+    It 'Given (myArray1) should have 4 columns, Have 4 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $myArray1
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -377,7 +379,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'ProcessorSpeed'
 
     }
-    It 'Given ($myArray2) should have 4 columns, Have 2 rows, data should be in proper columns' {
+    It 'Given (myArray2) should have 4 columns, Have 2 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $myArray2
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -395,7 +397,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs[0].Text | Should -Be 'ProcessorSpeed'
 
     }
-    It 'Given ($InvoiceEntry7) should have 2 columns, Have 3 rows, data should be in proper columns' {
+    It 'Given (InvoiceEntry7) should have 2 columns, Have 3 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $InvoiceEntry7
         $Type.ObjectTypeName | Should -Be 'OrderedDictionary'
@@ -413,7 +415,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
 
     }
-    It 'Given ($InvoiceDataOrdered1) should have 2 columns, Have 3 rows, data should be in proper columns' {
+    It 'Given (InvoiceDataOrdered1) should have 2 columns, Have 3 rows, data should be in proper columns' {
 
         $Type = Get-ObjectType -Object $InvoiceDataOrdered1
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -431,7 +433,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'Description'
 
     }
-    It 'Given ($InvoiceDataOrdered2) should have 2 columns, Have 5 rows, data should be in proper columns' {
+    It 'Given (InvoiceDataOrdered2) should have 2 columns, Have 5 rows, data should be in proper columns' {
         $Type = Get-ObjectType -Object $InvoiceDataOrdered2
         $Type.ObjectTypeName | Should -Be 'Object[]'
         $Type.ObjectTypeBaseName | Should -Be 'Array'
@@ -469,7 +471,7 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
         $WordDocument.Tables[0].Rows[3].Cells[2].Paragraphs[0].Text | Should -Be 'Food lover'
     }
 
-    It 'Given ($Object2) should have 10 columns, Have more then 4 rows, data is in random order (unfortunately)' {
+    It 'Given (Object2) should have 10 columns, Have more then 4 rows, data is in random order (unfortunately)' {
 
         $Type = Get-ObjectType -Object $Object2
         $Type.ObjectTypeName | Should -Be 'Object[]'
@@ -491,8 +493,6 @@ Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize'
 
 }
 
-#Show-TableVisualization $InvoiceData1 -Color
-
 Describe 'Add-WordTable - Should have proper settings' {
     It 'Given 2 tables, document should have 2 tables with proper design' {
         $WordDocument = New-WordDocument
@@ -506,13 +506,13 @@ Describe 'Add-WordTable - Should have proper settings' {
     It 'Given Array of PSCustomObject document should have 1 table with proper design, proper number of columns and rows' {
         $WordDocument = New-WordDocument
 
-        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -PivotRows #-Verbose
+        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -PivotRows
         $WordDocument.Tables[0].RowCount | Should -Be 6
         $WordDocument.Tables[0].ColumnCount | Should -Be 2
         # $WordDocument.Tables[0].AutoFit | Should -Be 'Contents' # Seems like a bug in Xceed - always returns ColumnWidth
         $WordDocument.Tables[0].Design | Should -Be 'MediumShading1'
     }
-    It 'Given Array of PSCustomObejct document should have 1 table with proper design, proper number of columns and rows and proper index' {
+    It 'Given Array of PSCustomObject document should have 1 table with proper design, proper number of columns and rows and proper index' {
         $WordDocument = New-WordDocument
 
         $InvoiceEntry1 = @{}
@@ -531,8 +531,8 @@ Describe 'Add-WordTable - Should have proper settings' {
     It 'Given Array of 2 tables document should have 2 tables with proper row count, column count and design' {
         $WordDocument = New-WordDocument
         $Object1 = Get-Process | Select-Object ProcessName, Handle, StartTime -First 5
-        Add-WordTable -WordDocument $WordDocument -DataTable $Object1 -Design 'ColorfulList' -PivotRows -Supress $true #-Verbose
-        $Object2 = Get-PSDrive | Select-Object * -First 2
+        Add-WordTable -WordDocument $WordDocument -DataTable $Object1 -Design 'ColorfulList' -Supress $true #-Verbose
+        $Object2 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' } | Select-Object * -First 2
         Add-WordTable -WordDocument $WordDocument -DataTable $Object2 -Design "LightShading" -MaximumColumns 7 -Supress $true #-Verbose
 
         $WordDocument.Tables[0].RowCount | Should -Be 6
@@ -544,3 +544,10 @@ Describe 'Add-WordTable - Should have proper settings' {
         $WordDocument.Tables.Count | Should -Be 2
     }
 }
+
+#$WordDocument = New-WordDocument
+
+#Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -Supress $True -PivotRows -Verbose
+#$WordDocument | Save-WordDocument -FilePath "test1.docx"
+
+#$invoiceData1 | ft -AutoSize
