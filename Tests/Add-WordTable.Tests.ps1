@@ -506,7 +506,7 @@ Describe 'Add-WordTable - Should have proper settings' {
     It 'Given Array of PSCustomObject document should have 1 table with proper design, proper number of columns and rows' {
         $WordDocument = New-WordDocument
 
-        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -PivotRows
+        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design MediumShading1 -AutoFit Contents -TransposeColumnsRows
         $WordDocument.Tables[0].RowCount | Should -Be 6
         $WordDocument.Tables[0].ColumnCount | Should -Be 2
         # $WordDocument.Tables[0].AutoFit | Should -Be 'Contents' # Seems like a bug in Xceed - always returns ColumnWidth
@@ -522,7 +522,7 @@ Describe 'Add-WordTable - Should have proper settings' {
         $InvoiceData = @()
         $InvoiceData += $InvoiceEntry1
 
-        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design ColorfulGrid -PivotRows
+        Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design ColorfulGrid -TransposeColumnsRows
         $WordDocument.Tables[0].RowCount | Should -Be 2
         $WordDocument.Tables[0].ColumnCount | Should -Be 2
         $WordDocument.Tables[0].Index | Should -Be 0

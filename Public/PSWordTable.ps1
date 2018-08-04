@@ -47,7 +47,7 @@ function Add-WordTable {
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
         [switch] $ContinueFormatting,
-        [switch] $PivotRows,
+        [alias('Rotate', 'RotateData')][switch] $TransposeColumnsRows,
         [bool] $Supress = $false,
         [switch] $VerboseColor
     )
@@ -57,7 +57,7 @@ function Add-WordTable {
     }
     Process {
         if ($Run -eq 0) {
-            if ($PivotRows) { $DataTable = Format-PSPivotTable -Object $DataTable }
+            if ($TransposeColumnsRows) { $DataTable = Format-TransposeTable -Object $DataTable }
             $Data = Format-PSTable $DataTable
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
