@@ -79,12 +79,14 @@ function Format-PSTableConvertType2 {
         [switch] $NoAliasOrScriptProperties,
         [switch] $DisplayPropertySet
     )
-    if ($NoAliasOrScriptProperties) {$PropertyType = 'AliasProperty', 'ScriptProperty'  } else {$PropertyType = ''}
-    Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
-    $Array = New-ArrayList
-    ### Add Titles
+
     [int] $Run = 0
+    $Array = New-ArrayList
     $Titles = New-ArrayList
+    if ($NoAliasOrScriptProperties) {$PropertyType = 'AliasProperty', 'ScriptProperty'  } else {$PropertyType = ''}
+
+    Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
+
     foreach ($O in $Object) {
         $ArrayValues = New-ArrayList
         foreach ($Name in $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name) {
