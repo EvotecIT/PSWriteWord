@@ -47,7 +47,7 @@ function Add-WordTable {
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
         [switch] $ContinueFormatting,
-        [alias('Rotate', 'RotateData')][switch] $TransposeColumnsRows,
+        [alias('Rotate', 'RotateData', 'TransposeColumnsRows', 'TransposeData')][switch] $Transpose,
         [string[]] $ExcludeProperty,
         [bool] $Supress = $false,
         [switch] $VerboseColor
@@ -58,7 +58,7 @@ function Add-WordTable {
     }
     Process {
         if ($Run -eq 0) {
-            if ($TransposeColumnsRows) { $DataTable = Format-TransposeTable -Object $DataTable }
+            if ($Transpose) { $DataTable = Format-TransposeTable -Object $DataTable }
             $Data = Format-PSTable $DataTable -ExcludeProperty $ExcludeProperty
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }

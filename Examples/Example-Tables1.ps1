@@ -26,7 +26,7 @@ Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" `
     -FontSize 15 -CapsStyle smallCaps -Alignment both -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.RootDSE `
-    -Design LightShading -Bold $true -Color Blue -Supress $True -PivotRows
+    -Design LightShading -Bold $true -Color Blue -Supress $True -Transpose
 Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
 Add-WordText -WordDocument $WordDocument -Text "Active Directory ", 'Domain', ' Forest Information' `
     -FontSize 12, 12, 12 -StrikeThrough none, strike, none -Alignment center -Supress $True
@@ -38,7 +38,7 @@ Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Informat
     -FontSize 15 -Color Green -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordTable -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation `
-    -Design LightShading -Supress $True -PivotRows
+    -Design LightShading -Supress $True -Transpose
 Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
