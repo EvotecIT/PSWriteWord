@@ -79,17 +79,20 @@ function Format-PSTableConvertType2 {
         [switch] $NoAliasOrScriptProperties,
         [switch] $DisplayPropertySet
     )
-
     [int] $Run = 0
     $Array = New-ArrayList
     $Titles = New-ArrayList
     if ($NoAliasOrScriptProperties) {$PropertyType = 'AliasProperty', 'ScriptProperty'  } else {$PropertyType = ''}
-
     Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
 
     foreach ($O in $Object) {
         $ArrayValues = New-ArrayList
-        foreach ($Name in $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name) {
+        if ($DisplayPropertySet -and $O.psStandardmembers.DefaultDisplayPropertySet.ReferencedPropertyNames) {
+            $ObjectProperties = $O.psStandardmembers.DefaultDisplayPropertySet.ReferencedPropertyNames.Where( { $ExcludeProperty -notcontains $_  } ) #.Name
+        } else {
+            $ObjectProperties = $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name
+        }
+        foreach ($Name in $ObjectProperties) {
             if ($Run -eq 0 -and -not $SkipTitle) { Add-ToArray -List $Titles -Element $Name }
             Add-ToArray -List $ArrayValues -Element  $O.$Name
         }
@@ -143,7 +146,7 @@ function Format-PSTable {
     )
 
     $Type = Get-ObjectType -Object $Object
-    Write-Verbose "Format-PSTable - Type: $($Type.ObjectTypeName) NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
+    Write-Verbose "Format-PSTable - Type: $($Type.ObjectTypeName) NoAliasOrScriptProperties: $NoAliasOrScriptProperties DisplayPropertySet: $DisplayPropertySet"
     if ($Type.ObjectTypeName -eq 'Object[]' -or
         $Type.ObjectTypeName -eq 'Object' -or $Type.ObjectTypeName -eq 'PSCustomObject' -or
         $Type.ObjectTypeName -eq 'Collection`1') {
