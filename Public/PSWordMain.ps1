@@ -22,7 +22,7 @@ function Save-WordDocument {
     [CmdletBinding()]
     param (
         [alias('Document')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [alias('Path')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][string] $FilePath,
+        [alias('Path')][string] $FilePath,
         [string] $Language,
         [switch] $KillWord,
         [bool] $Supress = $false
