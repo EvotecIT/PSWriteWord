@@ -34,15 +34,15 @@ $InvoiceData += $InvoiceEntry5
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -Alignment center -FontSize 15 -UnderlineColor Blue -UnderlineStyle doubleLine -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -Color Blue, Green, Red -FontSize 15, 10, 8 -Bold $true, $false, $false -FontFamily 'Arial', 'Tahoma' -Supress $True
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -Color Blue, Green, Red -FontSize 15, 10, 8 -Bold $true, $false, $false -FontFamily 'Arial', 'Tahoma' -Supress $True -Transpose
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data" -Alignment center -FontSize 15 -UnderlineColor Blue -UnderlineStyle doubleLine -Supress $True
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -Color Blue, Green, Red -FontSize 15, 10, 8 -Bold $true, $false, $false -FontFamily 'Arial', 'Tahoma' -ContinueFormatting -Supress $True
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -Color Blue, Green, Red -FontSize 15, 10, 8 -Bold $true, $false, $false -FontFamily 'Arial', 'Tahoma' -ContinueFormatting -Supress $True -Transpose
 
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with different formatting" -Alignment center -FontSize 15 -UnderlineColor Blue -UnderlineStyle doubleLine -Supress $True
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -Color Blue, Green, Red -FontSize 15, 10 -Bold $true, $true, $false -FontFamily 'Tahoma' -ContinueFormatting -Supress $True
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -Color Blue, Green, Red -FontSize 15, 10 -Bold $true, $true, $false -FontFamily 'Tahoma' -ContinueFormatting -Supress $True -Transpose
 
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordText -WordDocument $WordDocument -Text 'Notice how ', 'Continue Formatting', ' switch takes over formatting for', `
@@ -55,11 +55,11 @@ Add-WordText -WordDocument $WordDocument -Text 'Notice how ', 'Continue Formatti
 
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with different formatting" -Alignment center -FontSize 15 -UnderlineColor Blue -UnderlineStyle doubleLine -Supress $True
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -FontFamily 'Tahoma' -FontSize 10, 9 -ContinueFormatting -Supress $True
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -AutoFit Window -FontFamily 'Tahoma' -FontSize 10, 9 -ContinueFormatting -Supress $True -Transpose
 
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordText -WordDocument $WordDocument -Text "Lots of different formatting" -Alignment center -FontSize 15 -UnderlineColor Red -UnderlineStyle dotDash -CapsStyle smallCaps -Supress $True
-Add-WordTable -WordDocument $WordDocument -AutoFit Window -DataTable $InvoiceData -FontSize 10 -FontFamily Tahoma -ContinueFormatting -Design ColorfulList -StrikeThrough none, doubleStrike, none -Color Black, Black, Red, Black -Supress $True
+Add-WordTable -WordDocument $WordDocument -AutoFit Window -DataTable $InvoiceData -FontSize 10 -FontFamily Tahoma -ContinueFormatting -Design ColorfulList -StrikeThrough none, doubleStrike, none -Color Black, Black, Red, Black -Supress $True -Transpose
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 

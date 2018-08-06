@@ -20,11 +20,10 @@ Import-Module PSWriteWord #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables11.docx"
 
 $WordDocument = New-WordDocument $FilePath
-$Table = Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceDataOrdered1 -Design ColorfulGrid -Supress $false
-$Table
+$Table = Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceDataOrdered1 -Design ColorfulGrid -Supress $false -Transpose
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceDataOrdered2 -Design ColorfulGrid -Percentage $true
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceDataOrdered2 -Design ColorfulGrid -Percentage $true -Transpose -Supress $True
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
 Invoke-Item $FilePath
