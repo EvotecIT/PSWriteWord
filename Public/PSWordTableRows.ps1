@@ -85,11 +85,22 @@ function Set-WordTableRowMergeCells {
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNrStart,
         [nullable[int]] $ColumnNrEnd,
+        [switch] $MergeAll,
+        [switch] $TrackChanges,
         [bool] $Supress = $false
     )
     if ($Table -ne $null) {
-        if ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
+        if ($MergeAll -and $RowNr -ne $null) {
+            $CellsCount = $Table.Rows[$RowNr].Cells.Count
+            $Table.Rows[$RowNr].MergeCells(0, $CellsCount)
+            for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Paragraphs.Count; $paragraph++) {
+                $Table.Rows[$RowNr].Paragraphs[$paragraph].Remove($TrackChanges)
+            }
+        } elseif ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
             $Table.Rows[$RowNr].MergeCells($ColumnNrStart, $ColumnNrEnd)
+            for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count; $paragraph++) {
+                $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[$paragraph].Remove($TrackChanges)
+            }
         }
     }
     if ($Supress) { return } else { return $Table }

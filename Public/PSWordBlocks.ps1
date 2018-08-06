@@ -58,10 +58,10 @@ function New-WordBlockTable {
     $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
 
     if ($TableTitleMerge) {
-        $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -ColumnNrStart 0 -ColumnNrEnd 1
+        $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll  # -ColumnNrStart 0 -ColumnNrEnd 1
         if ($TableTitleText -ne $null) {
             $TableParagraph = Get-WordTableRow -Table $Table -RowNr 0 -ColumnNr 0
-            $TableParagraph = Add-WordText -WordDocument $WordDocument -Paragraph $TableParagraph -Text $TableTitleText -Alignment $TableTitleAlignment -Color $TableTitleColor -AppendToExistingParagraph
+            $TableParagraph = Set-WordText -Paragraph $TableParagraph -Text $TableTitleText -Alignment $TableTitleAlignment -Color $TableTitleColor
         }
     }
     if ($ChartEnable) {
