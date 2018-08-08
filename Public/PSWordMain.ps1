@@ -37,7 +37,7 @@ function Save-WordDocument {
             Set-WordParagraph -Paragraph $p -Language $Language -Supress $Supress
         }
     }
-    if (($KillWord) -and ($FilePath -ne '')) {
+    if (($KillWord) -and ($FilePath)) {
         $FileName = Split-Path $FilePath -leaf
         #$Process = get-process | Where { $_.MainWindowTitle -like "$FileName*"} | Select-Object id, name, mainwindowtitle | Sort-Object mainwindowtitle
         #$Process.MainWindowTitle
@@ -45,6 +45,8 @@ function Save-WordDocument {
         $Process = Stop-Process -Name "$FileName*" -Confirm:$false -PassThru
         Write-Verbose "Save-WordDocument - Killed Microsoft Word: $FileName"
     }
+
+    ### Saving PART
     if (-not $FilePath) {
         try {
             $FilePath = $WordDocument.FilePath
@@ -71,6 +73,8 @@ function Save-WordDocument {
             }
         }
     }
+    ### Saving PART
+
     If ($OpenDocument) { Invoke-Item $FilePath }
     if ($Supress) { return } else { return $FilePath }
 }
