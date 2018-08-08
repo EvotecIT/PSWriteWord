@@ -23,7 +23,7 @@ function New-WordBlock {
 
         ### Text Data
         [string] $Text,
-        [nullable[Alignment]] $TextAlignment = [Alignment]::Both,
+        [nullable[Alignment][]] $TextAlignment = [Alignment]::Both,
 
         ### Table Data
         [Object] $TableData,

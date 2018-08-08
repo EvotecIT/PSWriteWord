@@ -38,7 +38,7 @@ function Add-WordText {
         # [switch] $KeepWithNextParagraph, # not done
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [Alignment[]] $Alignment = @(),
+        [nullable[Alignment][]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
@@ -47,6 +47,7 @@ function Add-WordText {
         [alias ("Append")][Switch] $AppendToExistingParagraph,
         [bool] $Supress = $false
     )
+    if ($Alignment -eq $null) { $Alignment = @() }
     if ($Text.Count -eq 0) { return }
 
     if ($Paragraph -ne $null) {
@@ -194,7 +195,7 @@ function Set-WordText {
         [switch] $KeepWithNextParagraph,
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [Alignment[]] $Alignment = @(),
+        [nullable[Alignment][]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
@@ -202,6 +203,8 @@ function Set-WordText {
         [alias ("AppendText")][Switch] $Append,
         [bool] $Supress = $false
     )
+    if ($Alignment -eq $null) { $Alignment = @() }
+
 
     Write-Verbose "Set-WordText - Paragraph Count: $($Paragraph.Count)"
     for ($i = 0; $i -lt $Paragraph.Count; $i++) {

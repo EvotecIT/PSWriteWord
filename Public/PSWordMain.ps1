@@ -5,6 +5,7 @@ function New-WordDocument {
     )
     $Word = [Xceed.Words.NET.DocX]
     $WordDocument = $Word::Create($FilePath)
+    $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
     return $WordDocument
 }
 
@@ -15,6 +16,7 @@ function Get-WordDocument {
     )
     $Word = [Xceed.Words.NET.DocX]
     $WordDocument = $Word::Load($FilePath)
+    $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
     return $WordDocument
 }
 
@@ -25,6 +27,7 @@ function Save-WordDocument {
         [alias('Path')][string] $FilePath,
         [string] $Language,
         [switch] $KillWord,
+        [switch] $OpenDocument,
         [bool] $Supress = $false
     )
     if ($Language) {
@@ -43,11 +46,31 @@ function Save-WordDocument {
         Write-Verbose "Save-WordDocument - Killed Microsoft Word: $FileName"
     }
     if (-not $FilePath) {
-        Write-Verbose 'Save-WordDocument - Saving document without FilePath'
-        $WordDocument.Save()
+        try {
+            $FilePath = $WordDocument.FilePath
+            Write-Verbose "Save-WordDocument - Saving document (Save: $FilePath)"
+            $WordDocument.Save()
+        } catch {
+            $ErrorMessage = $_.Exception.Message
+            if ($ErrorMessage -like "*The process cannot access the file*because it is being used by another process.*") {
+                $FilePath = "$($([System.IO.Path]::GetTempFileName()).Split('.')[0]).docx"
+                Write-Warning "Couldn't save file as it was in use. Trying different name $FilePath"
+                $WordDocument.SaveAs($FilePath)
+            }
+        }
     } else {
-        Write-Verbose "Save-WordDocument - Saving document to $FilePath"
-        $WordDocument.SaveAs($FilePath)
+        try {
+            Write-Verbose "Save-WordDocument - Saving document (Save AS: $FilePath)"
+            $WordDocument.SaveAs($FilePath)
+        } catch {
+            $ErrorMessage = $_.Exception.Message
+            if ($ErrorMessage -like "*The process cannot access the file*because it is being used by another process.*") {
+                $FilePath = "$($([System.IO.Path]::GetTempFileName()).Split('.')[0]).docx"
+                Write-Warning "Couldn't save file as it was in use. Trying different name $FilePath"
+                $WordDocument.SaveAs($FilePath)
+            }
+        }
     }
-    #if ($Supress) { return } else { return $WordDocument }
+    If ($OpenDocument) { Invoke-Item $FilePath }
+    if ($Supress) { return } else { return $FilePath }
 }
