@@ -2,17 +2,25 @@ function New-WordBlock {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Words.NET.Container]$WordDocument,
+        ### TOC GLOBAL
+        [nullable[bool]] $TocGlobalDefinition,
+        [string] $TocGlobalTitle,
+        [int] $TocGlobalRightTabPos,
+        [TableOfContentsSwitches[]] $TocGlobalSwitches,
+
         ### TOC
-        [bool] $TocEnable,
+        [nullable[bool]] $TocEnable,
         [string] $TocText,
         [int] $TocListLevel,
-        [ListItemType] $TocListItemType,
-        [HeadingType] $TocHeadingType,
+        [nullable[ListItemType]] $TocListItemType,
+        [nullable[HeadingType]] $TocHeadingType,
+
         ### Paragraphs/PageBreaks
         [int] $EmptyParagraphsBefore,
         [int] $EmptyParagraphsAfter,
         [int] $PageBreaksBefore,
         [int] $PageBreaksAfter,
+
         ### Text Data
         [string] $Text,
         [nullable[Alignment]] $TextAlignment = [Alignment]::Both,
@@ -29,7 +37,7 @@ function New-WordBlock {
 
         ### List Data
         [Object] $ListData,
-        [ListItemType] $ListType,
+        [nullable[ListItemType]] $ListType,
 
 
         ### Chart Data
@@ -42,6 +50,11 @@ function New-WordBlock {
     )
     ### PAGE BREAKS BEFORE
     $WordDocument | New-WordBlockPageBreak -PageBreaks $PageBreaksBefore
+
+    ### TOC GLLOBAL PROCESSING
+    if ($TocGlobalDefinition) {
+        Add-WordToc -WordDocument $WordDocument -Title $TocGlobalTitle -Switches $TocGlobalSwitches -RightTabPos $TocGlobalRightTabPos -Supress $True
+    }
 
     ### TOC PROCESSING
     if ($TocEnable) {
@@ -65,10 +78,12 @@ function New-WordBlock {
         }
     }
     ### LIST PROCESSING
-    if ((Get-ObjectCount $ListData) -gt 0) {
-        $List = Add-WordList -WordDocument $WordDocument -ListType $ListType -Paragraph $Paragraph -ListData $ListData #-Verbose
-    } else {
-        $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $TextListEmpty
+    if ($ListData) {
+        if ((Get-ObjectCount $ListData) -gt 0) {
+            $List = Add-WordList -WordDocument $WordDocument -ListType $ListType -Paragraph $Paragraph -ListData $ListData #-Verbose
+        } else {
+            $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $TextListEmpty
+        }
     }
     ### CHART PROCESSING
     if ($ChartEnable) {

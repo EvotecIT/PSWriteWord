@@ -13,11 +13,13 @@ function Add-WordTOC {
     if ($WordDocument -ne $null) {
         #public TableOfContents InsertTableOfContents( string title, TableOfContentsSwitches switches, string headerStyle = null, int maxIncludeLevel = 3, int? rightTabPos = null )
         #public TableOfContents InsertTableOfContents( Paragraph reference, string title, TableOfContentsSwitches switches, string headerStyle = null, int maxIncludeLevel = 3, int? rightTabPos = null )
-        $TableOfContentSwitch = 0;
+
+        $TableOfContentSwitch = 0
         foreach ($S in $switches) {
             $TableOfContentSwitch += $s -As [Int]
         }
         Write-Verbose $TableOfContentSwitch
+
 
         #if ($Title -eq $null -or $Title -eq '') {
         #    $Toc = $WordDocument.InsertDefaultTableOfContents()
