@@ -21,14 +21,13 @@ function Get-WordDocument {
 function Save-WordDocument {
     [CmdletBinding()]
     param (
-        [alias('Document')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [alias('Document')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Words.NET.Container]$WordDocument,
         [alias('Path')][string] $FilePath,
         [string] $Language,
         [switch] $KillWord,
         [bool] $Supress = $false
     )
-
-    if (-not [string]::IsNullOrEmpty($Language)) {
+    if ($Language) {
         Write-Verbose "Save-WordDocument - Setting Language to $Language"
         $Paragraphs = Get-WordParagraphs -WordDocument $WordDocument
         foreach ($p in $Paragraphs) {
@@ -43,7 +42,7 @@ function Save-WordDocument {
         $Process = Stop-Process -Name "$FileName*" -Confirm:$false -PassThru
         Write-Verbose "Save-WordDocument - Killed Microsoft Word: $FileName"
     }
-    if ([string]::IsNullOrEmpty($FilePath)) {
+    if (-not $FilePath) {
         Write-Verbose 'Save-WordDocument - Saving document without FilePath'
         $WordDocument.Save()
     } else {
