@@ -38,7 +38,7 @@ function New-WordBlock {
         ### List Data
         [Object] $ListData,
         [nullable[ListItemType]] $ListType,
-
+        [string] $ListTextEmpty,
 
         ### Chart Data
         [nullable[bool]] $ChartEnable,
@@ -65,7 +65,9 @@ function New-WordBlock {
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsBefore
 
     ### TEXT PROCESSING
-    $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text -Alignment $TextAlignment
+    if ($Text) {
+        $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text -Alignment $TextAlignment
+    }
     ### TABLE PROCESSING
     if ($TableData) {
         $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
@@ -80,9 +82,11 @@ function New-WordBlock {
     ### LIST PROCESSING
     if ($ListData) {
         if ((Get-ObjectCount $ListData) -gt 0) {
+            Write-Verbose 'New-WordBlock - Adding ListData'
             $List = Add-WordList -WordDocument $WordDocument -ListType $ListType -Paragraph $Paragraph -ListData $ListData #-Verbose
         } else {
-            $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $TextListEmpty
+            Write-Verbose 'New-WordBlock - Adding ListData - Empty List'
+            $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $ListTextEmpty
         }
     }
     ### CHART PROCESSING
