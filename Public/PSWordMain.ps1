@@ -34,7 +34,7 @@ function Save-WordDocument {
         Write-Verbose "Save-WordDocument - Setting Language to $Language"
         $Paragraphs = Get-WordParagraphs -WordDocument $WordDocument
         foreach ($p in $Paragraphs) {
-            Set-WordParagraph -Paragraph $p -Language $Language -Supress $Supress
+            Set-WordParagraph -Paragraph $p -Language $Language -Supress $True
         }
     }
     if (($KillWord) -and ($FilePath)) {
@@ -51,25 +51,25 @@ function Save-WordDocument {
         try {
             $FilePath = $WordDocument.FilePath
             Write-Verbose "Save-WordDocument - Saving document (Save: $FilePath)"
-            $WordDocument.Save()
+            $Data = $WordDocument.Save()
         } catch {
             $ErrorMessage = $_.Exception.Message
             if ($ErrorMessage -like "*The process cannot access the file*because it is being used by another process.*") {
                 $FilePath = "$($([System.IO.Path]::GetTempFileName()).Split('.')[0]).docx"
                 Write-Warning "Couldn't save file as it was in use. Trying different name $FilePath"
-                $WordDocument.SaveAs($FilePath)
+                $Data = $WordDocument.SaveAs($FilePath)
             }
         }
     } else {
         try {
             Write-Verbose "Save-WordDocument - Saving document (Save AS: $FilePath)"
-            $WordDocument.SaveAs($FilePath)
+            $Data = $WordDocument.SaveAs($FilePath)
         } catch {
             $ErrorMessage = $_.Exception.Message
             if ($ErrorMessage -like "*The process cannot access the file*because it is being used by another process.*") {
                 $FilePath = "$($([System.IO.Path]::GetTempFileName()).Split('.')[0]).docx"
                 Write-Warning "Couldn't save file as it was in use. Trying different name $FilePath"
-                $WordDocument.SaveAs($FilePath)
+                $Data = $WordDocument.SaveAs($FilePath)
             }
         }
     }
