@@ -40,6 +40,11 @@ function New-WordBlock {
         [nullable[ListItemType]] $ListType,
         [string] $ListTextEmpty,
 
+        ### List Builder
+        [string[]] $ListBuilderContent,
+        [ListItemType[]] $ListBuilderType,
+        [int[]] $ListBuilderLevel,
+
         ### Chart Data
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
@@ -89,6 +94,16 @@ function New-WordBlock {
             $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $ListTextEmpty
         }
     }
+
+    ### LIST BUILDER PROCESSING
+    if ($ListBuilderContent) {
+        $ListDomainInformation = $null
+        for ($a = 0; $a -lt $ListBuilderContent.Count; $a++) {
+            $ListDomainInformation = $ListDomainInformation | New-WordListItem -WordDocument $WordDocument -ListLevel $ListBuilderLevel[$a] -ListItemType $ListBuilderType[$a] -ListValue $ListBuilderContent[$a]
+        }
+        $Paragraph = Add-WordListItem -WordDocument $WordDocument -Paragraph $Paragraph -List $ListDomainInformation #-Supress $true
+    }
+
     ### CHART PROCESSING
     if ($ChartEnable) {
         $WordDocument | New-WordBlockParagraph -EmptyParagraphs 1
@@ -98,7 +113,7 @@ function New-WordBlock {
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsAfter
 
     ### PAGE BREAKS AFTER
-    $WordDocument | New-WordBlockPageBreak -PageBreaks $PageBreaks
+    $WordDocument | New-WordBlockPageBreak -PageBreaks $PageBreaksAfter
 }
 function New-WordBlockTable {
     [CmdletBinding()]
