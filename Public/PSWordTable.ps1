@@ -11,7 +11,7 @@ function Add-WordTable {
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
         [nullable[bool]] $BreakAcrossPages,
-        [int] $MaximumColumns = 5,
+        [nullable[int]] $MaximumColumns,
         [string[]]$Titles = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
         [float[]] $ColummnWidth = @(),
@@ -57,6 +57,7 @@ function Add-WordTable {
     Begin {
         [int] $Run = 0
         [int] $RowNr = 0
+        if ($MaximumColumns -eq $null) { $MaximumColumns = 5 }
     }
     Process {
         if ($Run -eq 0) {
@@ -307,7 +308,7 @@ function Set-WordContinueFormatting {
         if ($null -eq $ShadingType[$RowNr] -and $null -ne $ShadingType[$RowNr - 1]) { $ShadingType += $ShadingType[$RowNr - 1] }
         if ($null -eq $Script[$RowNr] -and $null -ne $Script[$RowNr - 1]) { $Script += $Script[$RowNr - 1] }
     }
-
+    Write-Verbose "Set-WordContinueFormatting - Alignment: $Alignment"
     return @(
         $Color,
         $FontSize,

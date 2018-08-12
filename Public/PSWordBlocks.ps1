@@ -28,7 +28,7 @@ function New-WordBlock {
         ### Table Data
         [Object] $TableData,
         [nullable[TableDesign]] $TableDesign,
-        [int] $TableMaximumColumns = 5,
+        [nullable[int]] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
         [nullable[Alignment]] $TableTitleAlignment = 'center',
@@ -75,6 +75,7 @@ function New-WordBlock {
     }
     ### TABLE PROCESSING
     if ($TableData) {
+        if ($TableMaximumColumns -eq $null) { $TableMaximumColumns = 5 }
         $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
         if ($TableTitleMerge) {
             $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll  # -ColumnNrStart 0 -ColumnNrEnd 1

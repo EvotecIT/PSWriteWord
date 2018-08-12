@@ -38,7 +38,7 @@ function Add-WordText {
         # [switch] $KeepWithNextParagraph, # not done
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [nullable[Alignment][]] $Alignment = @(),
+        [Alignment[]] $Alignment = @(),
         [Direction[]] $Direction = @(),
         [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
