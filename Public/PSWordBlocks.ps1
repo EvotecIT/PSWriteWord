@@ -23,11 +23,12 @@ function New-WordBlock {
 
         ### Text Data
         [string] $Text,
+        [string] $TextNoData,
         [nullable[Alignment][]] $TextAlignment = [Alignment]::Both,
 
         ### Table Data
         [Object] $TableData,
-        [nullable[TableDesign]] $TableDesign,
+        [nullable[TableDesign]] $TableDesign = [TableDesign]::None,
         [nullable[int]] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
@@ -71,10 +72,16 @@ function New-WordBlock {
 
     ### TEXT PROCESSING
     if ($Text) {
-        $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text -Alignment $TextAlignment
+        if ($TableData -or $ListData -or $ChartEnable -or $ListBuilderContent -or (-not $TextNoData)) {
+            $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text -Alignment $TextAlignment
+        } else {
+            if ($TextNoData) {
+                $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $TextNoData -Alignment $TextAlignment
+            }
+        }
     }
     ### TABLE PROCESSING
-    if ($TableData) {
+    if ($TableData -and $TableDesign) {
         if ($TableMaximumColumns -eq $null) { $TableMaximumColumns = 5 }
         $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
         if ($TableTitleMerge) {

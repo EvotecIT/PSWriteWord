@@ -1,7 +1,7 @@
 function Format-TransposeTable {
     [CmdletBinding()]
     param (
-        [Parameter(Position = 0, Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)] [object[]]$Object,
+        [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)] [object[]]$Object,
         [ValidateSet("ASC", "DESC", "NONE")][String] $Sort = 'NONE'
     )
     begin { $i = 0; }
