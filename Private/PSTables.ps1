@@ -44,7 +44,8 @@ function Format-PSTableConvertType3 {
         [switch] $SkipTitles,
         [string[]] $ExcludeProperty,
         [switch] $NoAliasOrScriptProperties,
-        [switch] $DisplayPropertySet
+        [switch] $DisplayPropertySet,
+        $OverwriteHeaders
     )
     Write-Verbose 'Format-PSTableConvertType3 - Option 3'
     $Array = New-ArrayList
@@ -77,30 +78,43 @@ function Format-PSTableConvertType2 {
         [switch] $SkipTitles,
         [string[]] $ExcludeProperty,
         [switch] $NoAliasOrScriptProperties,
-        [switch] $DisplayPropertySet
+        [switch] $DisplayPropertySet,
+        $OverwriteHeaders
     )
-    [int] $Run = 0
+    #[int] $Run = 0
     $Array = New-ArrayList
     $Titles = New-ArrayList
     if ($NoAliasOrScriptProperties) {$PropertyType = 'AliasProperty', 'ScriptProperty'  } else {$PropertyType = ''}
     Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
 
+    # Get Titles first (to make sure order is correct for all rows)
+    if ($OverwriteHeaders) {
+        $Titles = $OverwriteHeaders
+    } else {
+        foreach ($O in $Object) {
+            if ($DisplayPropertySet -and $O.psStandardmembers.DefaultDisplayPropertySet.ReferencedPropertyNames) {
+                $ObjectProperties = $O.psStandardmembers.DefaultDisplayPropertySet.ReferencedPropertyNames.Where( { $ExcludeProperty -notcontains $_  } ) #.Name
+            } else {
+                $ObjectProperties = $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name
+            }
+            foreach ($Name in $ObjectProperties) {
+                Add-ToArray -List $Titles -Element $Name
+            }
+            break
+        }
+        # Add Titles to Array (if not -SkipTitles)
+        if (-not $SkipTitle) {
+            Add-ToArray -List $Array -Element $Titles
+        }
+    }
+    # Extract data (based on Title)
     foreach ($O in $Object) {
         $ArrayValues = New-ArrayList
-        if ($DisplayPropertySet -and $O.psStandardmembers.DefaultDisplayPropertySet.ReferencedPropertyNames) {
-            $ObjectProperties = $O.psStandardmembers.DefaultDisplayPropertySet.ReferencedPropertyNames.Where( { $ExcludeProperty -notcontains $_  } ) #.Name
-        } else {
-            $ObjectProperties = $O.PSObject.Properties.Where( { $PropertyType -notcontains $_.MemberType -and $ExcludeProperty -notcontains $_.Name  } ).Name
-        }
-        foreach ($Name in $ObjectProperties) {
-            if ($Run -eq 0 -and -not $SkipTitle) { Add-ToArray -List $Titles -Element $Name }
+        foreach ($Name in $Titles) {
             Add-ToArray -List $ArrayValues -Element $O.$Name
         }
-        if ($Run -eq 0 -and -not $SkipTitle) {Add-ToArray -List ($Array) -Element $Titles }
         Add-ToArray -List $Array -Element $ArrayValues
-        $Run++
     }
-
     return , $Array
 }
 function Format-PSTableConvertType1 {
@@ -110,7 +124,8 @@ function Format-PSTableConvertType1 {
         [switch] $SkipTitles,
         [string[]] $ExcludeProperty,
         [switch] $NoAliasOrScriptProperties,
-        [switch] $DisplayPropertySet
+        [switch] $DisplayPropertySet,
+        $OverwriteHeaders
     )
     Write-Verbose 'Format-PSTableConvertType1 - Option 1'
     $Array = New-ArrayList
@@ -142,7 +157,8 @@ function Format-PSTable {
         [switch] $SkipTitle,
         [string[]] $ExcludeProperty,
         [switch] $NoAliasOrScriptProperties,
-        [switch] $DisplayPropertySet
+        [switch] $DisplayPropertySet,
+        $OverwriteHeaders
     )
 
     $Type = Get-ObjectType -Object $Object
@@ -153,50 +169,46 @@ function Format-PSTable {
         #Write-Verbose 'Level 0-0'
         if ($Type.ObjectTypeInsiderName -match 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort') {
             #Write-Verbose 'Level 1-0'
-            return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
         } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or $Type.ObjectTypeInsiderName -eq 'PSCustomObject') {
             # Write-Verbose 'Level 1-1'
-            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
         } elseif ($Type.ObjectTypeInsiderName -eq 'HashTable' -or $Type.ObjectTypeInsiderName -eq 'OrderedDictionary' ) {
             # Write-Verbose 'Level 1-2'
-            return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
         } else {
             # Covers ADDriveInfo and other types of objects
             # Write-Verbose 'Level 1-3'
-            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
         }
     } elseif ($Type.ObjectTypeName -eq 'HashTable' -or $Type.ObjectTypeName -eq 'OrderedDictionary' ) {
         #Write-Verbose 'Level 0-1'
-        return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+        return Format-PSTableConvertType3 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
     } elseif ($Type.ObjectTypeName -match 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort') {
         return $Object
     } else {
         #Write-Verbose 'Level 0-2'
         # Covers ADDriveInfo and other types of objects
-        return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+        return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
     }
     throw 'Not supported? Weird'
 }
 function Show-TableVisualization {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object,
-        [switch] $Color
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] $Object
     )
     if ($Color) { Write-Color "[i] This is how table looks like in Format-Table" -Color Yellow }
     Write-Verbose '[i] This is how table looks like in Format-Table'
     $Object | Format-Table -AutoSize
     $Data = Format-PSTable $Object #-Verbose
-    # $Data.Count
-    #$Data[0].Count
-    if ($Color) { Write-Color "[i] Rows Count ", $Data.Count, " Column Count ", $Data[0].Count -Color Yellow }
+
     Write-Verbose "[i] Rows Count $($Data.Count) Column Count $($Data[0].Count)"
     $RowNr = 0
     if ($Color) { Write-Color "[i] Presenting table after conversion" -Color Yellow }
     foreach ($Row in $Data) {
         $ColumnNr = 0
         foreach ($Column in $Row) {
-            if ($Color) { Write-Color 'Row: ', $RowNr, ' Column: ', $ColumnNr, " Data: ", $Column -Color White, Yellow, White, Green }
             Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
             $ColumnNr++
         }

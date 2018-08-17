@@ -63,35 +63,37 @@ function Get-ObjectTypeInside {
 function Get-ObjectType {
     [CmdletBinding()]
     param(
-        $Object,
-        [string] $ObjectName
+        [Object] $Object,
+        [string] $ObjectName = 'Random Object Name'
     )
     $Return = [ordered] @{}
     $Return.ObjectName = $ObjectName
-    if ($Object -ne $null) {
-        $ObjectType = $Object.GetType().Name
-        $ObjectTypeBaseName = $Object.GetType().BaseType
-        $Return.ObjectTypeName = $ObjectType
-        $Return.ObjectTypeBaseName = $ObjectTypeBaseName
-        #$Return.ObjectTypeIsNested = $Object.GetType().IsNested
 
-        #if ($ObjectType -eq 'Object[]') {
+    if ($Object -ne $null) {
+        $TypeInformation = $Object.GetType()
+
+        $Return.ObjectTypeName = $TypeInformation.Name
+        $Return.ObjectTypeBaseName = $TypeInformation.BaseType
+        $Return.SystemType = $TypeInformation.UnderlyingSystemType
+
         if ((Get-ObjectCount $Object) -gt 0) {
-            $Return.ObjectTypeInsiderName = if ($Object[0] -ne $null) { $Object[0].GetType().Name } else { '' }
-            $Return.ObjectTypeInsiderBaseName = if ($Object[0] -ne $null) { $Object[0].GetType().BaseType } else { '' }
-            #     $Return.ObjectTypeInsiderIsNested = if ($Object[0] -ne $null) { $Object[0].GetType().IsNested } else { '' }
+            #Write-Verbose "Get-ObjectType - $($Object.Count)"
+            $TypeInformationInsider = $Object[0].GetType()
+            $Return.ObjectTypeInsiderName = $TypeInformationInsider.Name
+            $Return.ObjectTypeInsiderBaseName = $TypeInformationInsider.BaseType
+            $Return.SystemTypeInsider = $TypeInformationInsider.UnderlyingSystemType
         } else {
             $Return.ObjectTypeInsiderName = ''
             $Return.ObjectTypeInsiderBaseName = ''
-            #     $Return.ObjectTypeInsiderIsNested = ''
+            $Return.SystemTypeInsider = ''
         }
     } else {
         $Return.ObjectTypeName = ''
         $Return.ObjectTypeBaseName = ''
-        # $Return.ObjectTypeIsNested = ''
         $Return.ObjectTypeInsiderName = ''
         $Return.ObjectTypeInsiderBaseName = ''
-        #     $Return.ObjectTypeInsiderIsNested = ''
+        $Return.SystemTypeInsider = ''
+
     }
     return  $Return.ForEach( {[PSCustomObject]$_})
 }

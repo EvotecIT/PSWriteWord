@@ -63,6 +63,7 @@ function Add-WordTable {
         if ($Run -eq 0) {
             if ($Transpose) { $DataTable = Format-TransposeTable -Object $DataTable }
             $Data = Format-PSTable $DataTable -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            $WorksheetHeaders = $Data[0] # Saving Header information for later use
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
@@ -72,10 +73,10 @@ function Add-WordTable {
             } else {
                 Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
             }
-            Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
+            #Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
             $Run++
         } else {
-            $Data = Format-PSTable $DataTable -SkipTitle -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            $Data = Format-PSTable $DataTable -SkipTitle -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $WorksheetHeaders
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
@@ -86,7 +87,7 @@ function Add-WordTable {
 
                 Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
             }
-            Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
+            #Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
             $Run++
         }
         ### Add titles
