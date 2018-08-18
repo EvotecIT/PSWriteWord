@@ -12,7 +12,7 @@
     RootModule        = 'PSWriteWord.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.4.8.1'
+    ModuleVersion     = '0.5.0.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@
     CompanyName       = 'Evotec'
 
     # Copyright statement for this module
-    Copyright         = 'Evotec (c) 2018. All rights reserved.'
+    Copyright         = 'Evotec (c) 2011 - 2019. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description       = 'Simple project to create Microsoft Word in PowerShell without having Office installed.'
@@ -115,8 +115,6 @@
 
     } # End of PrivateData hashtable
 
-    # HelpInfo URI of this module
-    HelpInfoURI       = ''
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
