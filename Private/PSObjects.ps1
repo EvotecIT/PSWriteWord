@@ -40,60 +40,43 @@ function Get-ObjectCount {
     )
     return $($Object | Measure-Object).Count
 }
-
-function Get-ObjectTypeInside {
-    [CmdletBinding()]
-    param(
-        $Object
-    )
-    if ($Object -ne $null) {
-        $ObjectType = $Object.GetType().Name
-        if ($ObjectType -eq 'Object[]') {
-            if ((Get-ObjectCount $Object) -gt 0) {
-                $ObjectTypeInsider = $Object[0].GetType().Name
-
-            }
-        } else {
-            $ObjectTypeInsider = $ObjectType
-        }
-    }
-
-    return $ObjectTypeInsider
-}
 function Get-ObjectType {
     [CmdletBinding()]
     param(
         [Object] $Object,
         [string] $ObjectName = 'Random Object Name'
     )
-    $Return = [ordered] @{}
-    $Return.ObjectName = $ObjectName
+    $Data = [ordered] @{}
+    $Data.ObjectName = $ObjectName
 
-    if ($Object -ne $null) {
-        $TypeInformation = $Object.GetType()
-
-        $Return.ObjectTypeName = $TypeInformation.Name
-        $Return.ObjectTypeBaseName = $TypeInformation.BaseType
-        $Return.SystemType = $TypeInformation.UnderlyingSystemType
-
-        if ((Get-ObjectCount $Object) -gt 0) {
-            #Write-Verbose "Get-ObjectType - $($Object.Count)"
+    if ($Object) {
+        try {
+            $TypeInformation = $Object.GetType()
+            $Data.ObjectTypeName = $TypeInformation.Name
+            $Data.ObjectTypeBaseName = $TypeInformation.BaseType
+            $Data.SystemType = $TypeInformation.UnderlyingSystemType
+        } catch {
+            $Data.ObjectTypeName = ''
+            $Data.ObjectTypeBaseName = ''
+            $Data.SystemType = ''
+        }
+        try {
             $TypeInformationInsider = $Object[0].GetType()
-            $Return.ObjectTypeInsiderName = $TypeInformationInsider.Name
-            $Return.ObjectTypeInsiderBaseName = $TypeInformationInsider.BaseType
-            $Return.SystemTypeInsider = $TypeInformationInsider.UnderlyingSystemType
-        } else {
-            $Return.ObjectTypeInsiderName = ''
-            $Return.ObjectTypeInsiderBaseName = ''
-            $Return.SystemTypeInsider = ''
+            $Data.ObjectTypeInsiderName = $TypeInformationInsider.Name
+            $Data.ObjectTypeInsiderBaseName = $TypeInformationInsider.BaseType
+            $Data.SystemTypeInsider = $TypeInformationInsider.UnderlyingSystemType
+        } catch {
+            $Data.ObjectTypeInsiderName = ''
+            $Data.ObjectTypeInsiderBaseName = ''
+            $Data.SystemTypeInsider = ''
         }
     } else {
-        $Return.ObjectTypeName = ''
-        $Return.ObjectTypeBaseName = ''
-        $Return.ObjectTypeInsiderName = ''
-        $Return.ObjectTypeInsiderBaseName = ''
-        $Return.SystemTypeInsider = ''
-
+        $Data.ObjectTypeName = ''
+        $Data.ObjectTypeBaseName = ''
+        $Data.SystemType = ''
+        $Data.ObjectTypeInsiderName = ''
+        $Data.ObjectTypeInsiderBaseName = ''
+        $Data.SystemTypeInsider = ''
     }
-    return  $Return.ForEach( {[PSCustomObject]$_})
+    return Format-TransposeTable -Object $Data
 }

@@ -12,7 +12,7 @@
     RootModule        = 'PSWriteWord.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.5.0.0'
+    ModuleVersion     = '0.4.9'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -95,7 +95,7 @@
     PrivateData       = @{
 
         PSData = @{
-
+            Prerelease = '-alpha1'
             # Tags applied to this module. These help with module discovery in online galleries.
             Tags       = @('word', 'docx', 'write', 'PSWord', 'office', 'pswriteword', 'writeword')
 

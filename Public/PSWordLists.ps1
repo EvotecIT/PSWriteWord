@@ -11,61 +11,56 @@ function Add-WordList {
         [bool] $Supress = $false
     )
     $List = $null
-    $ObjectType = Get-ObjectTypeInside $ListData
-    if ($ObjectType -eq $null) { return }
-    Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
-    Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
+    if ($ListData -eq $null) { return }
 
-    if ($ObjectType -ne 'string' -and $ObjectType -ne 'PSCustomObject' -and $ObjectType -ne $ObjectType -ne 'Hashtable' -and $ObjectType -ne 'OrderedDictionary') {
+    $Type = Get-ObjectType $ListData
+    if ($Type.ObjectTypeInsiderName -ne '') { $ObjectType = $Type.ObjectTypeInsiderName } else { $ObjectType = $Type.ObjectTypeName}
+
+    if ($ObjectType -ne 'string' -and $ObjectType -ne 'PSCustomObject' -and $ObjectType -ne 'Hashtable' -and $ObjectType -ne 'OrderedDictionary') {
         $ListData = Convert-ObjectToProcess -DataTable $ListData
-        $ObjectType = Get-ObjectTypeInside $ListData
+        $Type = Get-ObjectType $ListData
+        if ($Type.ObjectTypeInsiderName -ne '') { $ObjectType = $Type.ObjectTypeInsiderName } else { $ObjectType = $Type.ObjectTypeName}
         Write-Verbose "Add-WordList - Outside Object BaseName: $($ListData.GetType().BaseType) Name: $($ListData.GetType().Name)"
         Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
     }
 
-    if ($ListData -ne $null) {
-        if ($ObjectType -eq 'string') {
-            Write-Verbose 'Add-WordList - Option 1 - Detected string type inside array'
-            $Counter = 0;
-            foreach ($Value in $ListData) {
-                if ($ListLevels -eq $null) {
-                    $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel 0
-                    Write-Verbose "AddList - ListItemType Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
-                } else {
-                    $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel $ListLevels[$Counter]
-                    $Counter++
-                }
+    if ($ObjectType -eq 'string') {
+        Write-Verbose 'Add-WordList - Option 1 - Detected string type inside array'
+        $Counter = 0;
+        foreach ($Value in $ListData) {
+            if ($ListLevels -eq $null) {
+                $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel 0
+                Write-Verbose "AddList - ListItemType Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
+            } else {
+                $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel $ListLevels[$Counter]
+                $Counter++
             }
-        } elseif ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
-            Write-Verbose "Add-WordList - Option 2 - Detected $ObjectType"
-            foreach ($Object in $ListData) {
-                foreach ($O in $Object.GetEnumerator()) {
-                    $TextMain = $($O.Name)
-                    $TextSub = $($O.Value)
-                    $List = Format-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -TextMain $TextMain -TextSub $TextSub -BehaviourOption $BehaviourOption
-
-                }
-                <## Working alternative
-                foreach ($O in $Object.Keys) {
-                    Write-Verbose "Add-WordList - 2. This is Name: $O With Value $($Object.$O) "
-                }
-                #>
-            }
-        } elseif ($ObjectType -eq 'PSCustomObject') {
-            Write-Verbose "Add-WordList - Option 3 - Detected $ObjectType"
-            foreach ($Object in $ListData) {
-                $Titles = Get-ObjectTitles -Object $Object
-                foreach ($Text in $Titles) {
-                    $TextMain = $Text
-                    $TextSub = $($Object.$Text)
-                    $List = Format-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -TextMain $TextMain -TextSub $TextSub -BehaviourOption $BehaviourOption
-                }
-            }
-        } else {
-            throw "$ObjectType is not supported - report for support with explanation what you need it to look like"
         }
-        $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
+    } elseif ($ObjectType -eq 'Hashtable' -or $ObjectType -eq 'OrderedDictionary') {
+        Write-Verbose "Add-WordList - Option 2 - Detected $ObjectType"
+        foreach ($Object in $ListData) {
+            foreach ($O in $Object.GetEnumerator()) {
+                $TextMain = $($O.Name)
+                $TextSub = $($O.Value)
+                $List = Format-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -TextMain $TextMain -TextSub $TextSub -BehaviourOption $BehaviourOption
+
+            }
+        }
+    } elseif ($ObjectType -eq 'PSCustomObject') {
+        Write-Verbose "Add-WordList - Option 3 - Detected $ObjectType"
+        foreach ($Object in $ListData) {
+            $Titles = Get-ObjectTitles -Object $Object
+            foreach ($Text in $Titles) {
+                $TextMain = $Text
+                $TextSub = $($Object.$Text)
+                $List = Format-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -TextMain $TextMain -TextSub $TextSub -BehaviourOption $BehaviourOption
+            }
+        }
+    } else {
+        throw "$ObjectType is not supported - report for support with explanation what you need it to look like"
     }
+    $Data = Add-WordListItem -WordDocument $WordDocument -List $List -Paragraph $Paragraph -Supress $Supress
+
     if ($supress -eq $false) {
         return $data
     } else {
