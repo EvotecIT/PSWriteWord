@@ -95,7 +95,7 @@
     PrivateData       = @{
 
         PSData = @{
-            Prerelease = '-alpha1'
+            Prerelease = '-alpha2'
             # Tags applied to this module. These help with module discovery in online galleries.
             Tags       = @('word', 'docx', 'write', 'PSWord', 'office', 'pswriteword', 'writeword')
 
