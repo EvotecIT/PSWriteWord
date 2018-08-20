@@ -4,7 +4,7 @@ function Add-WordLine {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [HorizontalBorderPosition] $HorizontalBorderPosition = [HorizontalBorderPosition]::Bottom,
-        [LineType] $LineType = [LineType]::Single,
+        [ValidateSet('single', 'double', 'triple')] $LineType = 'single',
         [nullable[int]] $LineSize = 6,
         [nullable[int]] $LineSpace = 1,
         [string] $LineColor = 'black',
