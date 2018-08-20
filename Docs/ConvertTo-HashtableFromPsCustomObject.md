@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-WordDocument
+# ConvertTo-HashtableFromPsCustomObject
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WordDocument [[-FilePath] <String>] [<CommonParameters>]
+ConvertTo-HashtableFromPsCustomObject [-psObject] <Object[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,15 +30,15 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -FilePath
-{{Fill FilePath Description}}
+### -psObject
+{{Fill psObject Description}}
 
 ```yaml
-Type: String
+Type: Object[]
 Parameter Sets: (All)
-Aliases: Path
+Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
@@ -50,12 +50,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.Object[]
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

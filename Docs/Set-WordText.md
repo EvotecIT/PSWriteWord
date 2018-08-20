@@ -21,7 +21,7 @@ Set-WordText [[-Paragraph] <InsertBeforeOrAfter[]>] [[-Text] <String[]>] [[-Colo
  [[-PercentageScale] <Int32[]>] [[-Misc] <Misc[]>] [[-Language] <String[]>] [[-Kerning] <Int32[]>]
  [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>] [-KeepLinesTogether]
  [-KeepWithNextParagraph] [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>]
- [[-Alignment] <Alignment[]>] [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>]
+ [[-Alignment] <Nullable`1[]>] [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>]
  [[-ShadingColor] <Color[]>] [[-Script] <Script[]>] [-Append] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
@@ -43,10 +43,9 @@ PS C:\> {{ Add example code here }}
 {{Fill Alignment Description}}
 
 ```yaml
-Type: Alignment[]
+Type: Nullable`1[]
 Parameter Sets: (All)
 Aliases:
-Accepted values: left, center, right, both
 
 Required: False
 Position: 25

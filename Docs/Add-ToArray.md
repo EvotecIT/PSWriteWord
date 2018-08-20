@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-ToArray [[-List] <Object>] [[-Element] <Object>] [<CommonParameters>]
+Add-ToArray [[-List] <ArrayList>] [[-Element] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,7 +49,7 @@ Accept wildcard characters: False
 {{Fill List Description}}
 
 ```yaml
-Type: Object
+Type: ArrayList
 Parameter Sets: (All)
 Aliases:
 

@@ -26,7 +26,8 @@ Add-WordTable [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
  [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-IndentationFirstLine] <Single[]>]
  [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>] [[-DirectionFormatting] <Direction[]>]
  [[-ShadingType] <ShadingType[]>] [[-Script] <Script[]>] [[-NewLine] <Nullable`1[]>] [-KeepLinesTogether]
- [-KeepWithNextParagraph] [-ContinueFormatting] [[-Supress] <Boolean>] [<CommonParameters>]
+ [-KeepWithNextParagraph] [-ContinueFormatting] [-Transpose] [[-ExcludeProperty] <String[]>]
+ [-NoAliasOrScriptProperties] [-DisplayPropertySet] [[-Supress] <Boolean>] [-VerboseColor] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -207,7 +208,7 @@ Aliases:
 Required: False
 Position: 3
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -259,6 +260,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -DisplayPropertySet
+{{Fill DisplayPropertySet Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DoNotAddTitle
 {{Fill DoNotAddTitle Description}}
 
@@ -269,6 +285,21 @@ Aliases:
 
 Required: False
 Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeProperty
+{{Fill ExcludeProperty Description}}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 40
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -502,6 +533,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -NoAliasOrScriptProperties
+{{Fill NoAliasOrScriptProperties Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Paragraph
 {{Fill Paragraph Description}}
 
@@ -664,7 +710,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 40
+Position: 41
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -715,6 +761,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Transpose
+{{Fill Transpose Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: Rotate, RotateData, TransposeColumnsRows, TransposeData
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UnderlineColor
 {{Fill UnderlineColor Description}}
 
@@ -741,6 +802,21 @@ Accepted values: none, singleLine, words, doubleLine, dotted, thick, dash, dotDa
 
 Required: False
 Position: 18
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -VerboseColor
+{{Fill VerboseColor Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

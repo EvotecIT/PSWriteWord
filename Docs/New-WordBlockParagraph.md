@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-New-WordBlockParagraph [[-WordDocument] <Object>] [[-EmptyParagraphs] <Int32>] [<CommonParameters>]
+New-WordBlockParagraph [-WordDocument] <Container> [[-EmptyParagraphs] <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,11 +49,11 @@ Accept wildcard characters: False
 {{Fill WordDocument Description}}
 
 ```yaml
-Type: Object
+Type: Container
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)

@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-New-WordBlockList [[-WordDocument] <Object>] [[-TocEnable] <Boolean>] [[-TocText] <String>]
+New-WordBlockList [-WordDocument] <Container> [[-TocEnable] <Boolean>] [[-TocText] <String>]
  [[-TocListLevel] <Int32>] [[-TocListItemType] <ListItemType>] [[-TocHeadingType] <HeadingType>]
  [[-EmptyParagraphsBefore] <Int32>] [[-EmptyParagraphsAfter] <Int32>] [[-Text] <String>]
  [[-TextListEmpty] <String>] [[-ListData] <Object>] [[-ListType] <ListItemType>] [<CommonParameters>]
@@ -205,11 +205,11 @@ Accept wildcard characters: False
 {{Fill WordDocument Description}}
 
 ```yaml
-Type: Object
+Type: Container
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)

@@ -14,6 +14,9 @@ Locale: {{ Update Locale }}
 ### [Add-ToArray](Add-ToArray.md)
 {{Fill in the Synopsis}}
 
+### [Add-ToArrayAdvanced](Add-ToArrayAdvanced.md)
+{{Fill in the Synopsis}}
+
 ### [Add-WordBarChart](Add-WordBarChart.md)
 {{Fill in the Synopsis}}
 
@@ -104,10 +107,31 @@ Add a new TabStopPosition in the current paragraph.
 ### [Convert-ObjectToProcess](Convert-ObjectToProcess.md)
 {{Fill in the Synopsis}}
 
+### [ConvertTo-HashtableFromPsCustomObject](ConvertTo-HashtableFromPsCustomObject.md)
+{{Fill in the Synopsis}}
+
+### [ConvertTo-PsCustomObjectFromHashtable](ConvertTo-PsCustomObjectFromHashtable.md)
+{{Fill in the Synopsis}}
+
 ### [Copy-WordTable](Copy-WordTable.md)
 {{Fill in the Synopsis}}
 
 ### [Copy-WordTableRow](Copy-WordTableRow.md)
+{{Fill in the Synopsis}}
+
+### [Format-PSTable](Format-PSTable.md)
+{{Fill in the Synopsis}}
+
+### [Format-PSTableConvertType1](Format-PSTableConvertType1.md)
+{{Fill in the Synopsis}}
+
+### [Format-PSTableConvertType2](Format-PSTableConvertType2.md)
+{{Fill in the Synopsis}}
+
+### [Format-PSTableConvertType3](Format-PSTableConvertType3.md)
+{{Fill in the Synopsis}}
+
+### [Format-TransposeTable](Format-TransposeTable.md)
 {{Fill in the Synopsis}}
 
 ### [Format-WordListItem](Format-WordListItem.md)
@@ -125,7 +149,7 @@ Add a new TabStopPosition in the current paragraph.
 ### [Get-ObjectTitles](Get-ObjectTitles.md)
 {{Fill in the Synopsis}}
 
-### [Get-ObjectTypeInside](Get-ObjectTypeInside.md)
+### [Get-ObjectType](Get-ObjectType.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordCustomProperty](Get-WordCustomProperty.md)
@@ -171,6 +195,9 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [New-WordBlockList](New-WordBlockList.md)
+{{Fill in the Synopsis}}
+
+### [New-WordBlockPageBreak](New-WordBlockPageBreak.md)
 {{Fill in the Synopsis}}
 
 ### [New-WordBlockParagraph](New-WordBlockParagraph.md)
@@ -360,5 +387,11 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextUnderlineStyle](Set-WordTextUnderlineStyle.md)
+{{Fill in the Synopsis}}
+
+### [Show-Array](Show-Array.md)
+{{Fill in the Synopsis}}
+
+### [Show-TableVisualization](Show-TableVisualization.md)
 {{Fill in the Synopsis}}
 

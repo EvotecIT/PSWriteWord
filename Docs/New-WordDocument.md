@@ -36,7 +36,7 @@ PS C:\> {{ Add example code here }}
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Path
 
 Required: False
 Position: 0

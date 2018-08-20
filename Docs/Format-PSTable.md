@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTableRowMergeCells
+# Format-PSTable
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordTableRowMergeCells [[-Table] <InsertBeforeOrAfter>] [[-RowNr] <Int32>] [[-ColumnNrStart] <Int32>]
- [[-ColumnNrEnd] <Int32>] [-MergeAll] [-TrackChanges] [[-Supress] <Boolean>] [<CommonParameters>]
+Format-PSTable [[-Object] <Object>] [-SkipTitle] [[-ExcludeProperty] <String[]>] [-NoAliasOrScriptProperties]
+ [-DisplayPropertySet] [[-OverwriteHeaders] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,38 +31,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ColumnNrEnd
-{{Fill ColumnNrEnd Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ColumnNrStart
-{{Fill ColumnNrStart Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MergeAll
-{{Fill MergeAll Description}}
+### -DisplayPropertySet
+{{Fill DisplayPropertySet Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -76,11 +46,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RowNr
-{{Fill RowNr Description}}
+### -ExcludeProperty
+{{Fill ExcludeProperty Description}}
 
 ```yaml
-Type: Int32
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -91,38 +61,53 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Supress
-{{Fill Supress Description}}
+### -NoAliasOrScriptProperties
+{{Fill NoAliasOrScriptProperties Description}}
 
 ```yaml
-Type: Boolean
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Table
-{{Fill Table Description}}
+### -Object
+{{Fill Object Description}}
 
 ```yaml
-Type: InsertBeforeOrAfter
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -OverwriteHeaders
+{{Fill OverwriteHeaders Description}}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TrackChanges
-{{Fill TrackChanges Description}}
+### -SkipTitle
+{{Fill SkipTitle Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -141,12 +126,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.Object
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

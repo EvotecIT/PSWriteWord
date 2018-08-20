@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-WordDocument
+# New-WordBlockPageBreak
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WordDocument [[-FilePath] <String>] [<CommonParameters>]
+New-WordBlockPageBreak [-WordDocument] <Container> [[-PageBreaks] <Int32>] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,15 +31,45 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -FilePath
-{{Fill FilePath Description}}
+### -PageBreaks
+{{Fill PageBreaks Description}}
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
-Aliases: Path
+Aliases:
 
 Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Supress
+{{Fill Supress Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WordDocument
+{{Fill WordDocument Description}}
+
+```yaml
+Type: Container
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
@@ -50,12 +81,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### Xceed.Words.NET.Container
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

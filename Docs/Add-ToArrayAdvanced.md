@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTableRowMergeCells
+# Add-ToArrayAdvanced
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordTableRowMergeCells [[-Table] <InsertBeforeOrAfter>] [[-RowNr] <Int32>] [[-ColumnNrStart] <Int32>]
- [[-ColumnNrEnd] <Int32>] [-MergeAll] [-TrackChanges] [[-Supress] <Boolean>] [<CommonParameters>]
+Add-ToArrayAdvanced [[-List] <ArrayList>] [[-Element] <Object>] [-SkipNull] [-RequireUnique] [-FullComparison]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,38 +31,23 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ColumnNrEnd
-{{Fill ColumnNrEnd Description}}
+### -Element
+{{Fill Element Description}}
 
 ```yaml
-Type: Int32
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ColumnNrStart
-{{Fill ColumnNrStart Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MergeAll
-{{Fill MergeAll Description}}
+### -FullComparison
+{{Fill FullComparison Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -76,41 +61,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RowNr
-{{Fill RowNr Description}}
+### -List
+{{Fill List Description}}
 
 ```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Supress
-{{Fill Supress Description}}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Table
-{{Fill Table Description}}
-
-```yaml
-Type: InsertBeforeOrAfter
+Type: ArrayList
 Parameter Sets: (All)
 Aliases:
 
@@ -121,8 +76,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TrackChanges
-{{Fill TrackChanges Description}}
+### -RequireUnique
+{{Fill RequireUnique Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SkipNull
+{{Fill SkipNull Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -146,7 +116,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

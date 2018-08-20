@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Save-WordDocument [[-WordDocument] <Container>] [[-FilePath] <String>] [[-Language] <String>] [-KillWord]
- [[-Supress] <Boolean>] [<CommonParameters>]
+Save-WordDocument [-WordDocument] <Container> [[-FilePath] <String>] [[-Language] <String>] [-KillWord]
+ [-OpenDocument] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,7 +37,7 @@ PS C:\> {{ Add example code here }}
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Path
 
 Required: False
 Position: 1
@@ -76,6 +76,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -OpenDocument
+{{Fill OpenDocument Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Supress
 {{Fill Supress Description}}
 
@@ -97,9 +112,9 @@ Accept wildcard characters: False
 ```yaml
 Type: Container
 Parameter Sets: (All)
-Aliases:
+Aliases: Document
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
