@@ -6,7 +6,7 @@
 [![Build status](https://img.shields.io/powershellgallery/dt/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
 -->
 
-*PSWriteWord* is powershell module to create Microsoft Word documents without Microsoft Word installed.
+*PSWriteWord* is PowerShell module to create Microsoft Word documents without Microsoft Word installed.
 
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 

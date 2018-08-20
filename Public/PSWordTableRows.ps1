@@ -89,7 +89,7 @@ function Set-WordTableRowMergeCells {
         [switch] $TrackChanges,
         [bool] $Supress = $false
     )
-    if ($Table -ne $null) {
+    if ($Table) {
         if ($MergeAll -and $RowNr -ne $null) {
             $CellsCount = $Table.Rows[$RowNr].Cells.Count
             $Table.Rows[$RowNr].MergeCells(0, $CellsCount)
