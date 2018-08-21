@@ -12,7 +12,8 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
-- 0.5.0 - Updates
+- 0.5.1 - Small cleanup
+- 0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
 - 0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
 - 0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
 - 0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
