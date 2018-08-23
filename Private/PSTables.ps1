@@ -9,7 +9,7 @@ function Format-TransposeTable {
     process {
         foreach ($myObject in $Object) {
             if ($myObject.GetType().Name -eq 'hashtable' -or $myObject.GetType().Name -eq 'OrderedDictionary') {
-                Write-Verbose "Format-TransposeTable - Converting HashTable/OrderedDictionary to PSCustomObject - $($myObject.GetType().Name)"
+                #Write-Verbose "Format-TransposeTable - Converting HashTable/OrderedDictionary to PSCustomObject - $($myObject.GetType().Name)"
                 $output = New-Object -TypeName PsObject;
                 Add-Member -InputObject $output -MemberType ScriptMethod -Name AddNote -Value {
                     Add-Member -InputObject $this -MemberType NoteProperty -Name $args[0] -Value $args[1];
@@ -23,7 +23,7 @@ function Format-TransposeTable {
                 }
                 $output;
             } else {
-                Write-Verbose "Format-TransposeTable - Converting PSCustomObject to HashTable/OrderedDictionary - $($myObject.GetType().Name)"
+                #Write-Verbose "Format-TransposeTable - Converting PSCustomObject to HashTable/OrderedDictionary - $($myObject.GetType().Name)"
                 # Write-Warning "Index $i is not of type [hashtable]";
                 $output = [ordered] @{};
                 $myObject | Get-Member -MemberType *Property | % {
@@ -47,7 +47,7 @@ function Format-PSTableConvertType3 {
         [switch] $DisplayPropertySet,
         $OverwriteHeaders
     )
-    Write-Verbose 'Format-PSTableConvertType3 - Option 3'
+    #Write-Verbose 'Format-PSTableConvertType3 - Option 3'
     $Array = New-ArrayList
     ### Add Titles
     if (-not $SkipTitles) {
@@ -85,7 +85,7 @@ function Format-PSTableConvertType2 {
     $Array = New-ArrayList
     $Titles = New-ArrayList
     if ($NoAliasOrScriptProperties) {$PropertyType = 'AliasProperty', 'ScriptProperty'  } else {$PropertyType = ''}
-    Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
+    #Write-Verbose "Format-PSTableConvertType2 - Option 2 - NoAliasOrScriptProperties: $NoAliasOrScriptProperties"
 
     # Get Titles first (to make sure order is correct for all rows)
     if ($OverwriteHeaders) {
@@ -127,7 +127,7 @@ function Format-PSTableConvertType1 {
         [switch] $DisplayPropertySet,
         $OverwriteHeaders
     )
-    Write-Verbose 'Format-PSTableConvertType1 - Option 1'
+    #Write-Verbose 'Format-PSTableConvertType1 - Option 1'
     $Array = New-ArrayList
     ### Add Titles
     if (-not $SkipTitles) {
@@ -162,14 +162,15 @@ function Format-PSTable {
     )
 
     $Type = Get-ObjectType -Object $Object
-    Write-Verbose "Format-PSTable - Type: $($Type.ObjectTypeName) NoAliasOrScriptProperties: $NoAliasOrScriptProperties DisplayPropertySet: $DisplayPropertySet"
+    #Write-Verbose "Format-PSTable - Type: $($Type.ObjectTypeName) NoAliasOrScriptProperties: $NoAliasOrScriptProperties DisplayPropertySet: $DisplayPropertySet"
     if ($Type.ObjectTypeName -eq 'Object[]' -or
         $Type.ObjectTypeName -eq 'Object' -or $Type.ObjectTypeName -eq 'PSCustomObject' -or
         $Type.ObjectTypeName -eq 'Collection`1') {
         #Write-Verbose 'Level 0-0'
         if ($Type.ObjectTypeInsiderName -match 'string|bool|byte|char|decimal|double|float|int|long|sbyte|short|uint|ulong|ushort') {
             #Write-Verbose 'Level 1-0'
-            return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
+            return $Object
+            #return Format-PSTableConvertType1 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
         } elseif ($Type.ObjectTypeInsiderName -eq 'Object' -or $Type.ObjectTypeInsiderName -eq 'PSCustomObject') {
             # Write-Verbose 'Level 1-1'
             return Format-PSTableConvertType2 -Object $Object -SkipTitle:$SkipTitle -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $OverwriteHeaders
