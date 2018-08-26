@@ -107,12 +107,6 @@ Add a new TabStopPosition in the current paragraph.
 ### [Convert-ObjectToProcess](Convert-ObjectToProcess.md)
 {{Fill in the Synopsis}}
 
-### [ConvertTo-HashtableFromPsCustomObject](ConvertTo-HashtableFromPsCustomObject.md)
-{{Fill in the Synopsis}}
-
-### [ConvertTo-PsCustomObjectFromHashtable](ConvertTo-PsCustomObjectFromHashtable.md)
-{{Fill in the Synopsis}}
-
 ### [Copy-WordTable](Copy-WordTable.md)
 {{Fill in the Synopsis}}
 

@@ -1594,9 +1594,9 @@
             <command:parameterValue required="false" command:variableLength="false">double</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">triple</command:parameterValue>
           </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">LineType</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
-            <maml:name>LineType</maml:name>
+            <maml:name>Object</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -1705,9 +1705,9 @@
         <maml:Description>
           <maml:para>{{Fill LineType Description}}</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">LineType</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
-          <maml:name>LineType</maml:name>
+          <maml:name>Object</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>

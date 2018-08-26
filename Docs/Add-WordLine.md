@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Add-WordLine [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
- [[-HorizontalBorderPosition] <HorizontalBorderPosition>] [[-LineType] <LineType>] [[-LineSize] <Int32>]
+ [[-HorizontalBorderPosition] <HorizontalBorderPosition>] [[-LineType] <Object>] [[-LineSize] <Int32>]
  [[-LineSpace] <Int32>] [[-LineColor] <String>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 {{Fill LineType Description}}
 
 ```yaml
-Type: LineType
+Type: Object
 Parameter Sets: (All)
 Aliases:
 Accepted values: single, double, triple
