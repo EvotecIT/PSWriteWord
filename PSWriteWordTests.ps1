@@ -7,7 +7,12 @@ $ModuleVersion = (Get-Content -Raw $PSScriptRoot\PSWriteWord.psd1)  | Invoke-Exp
 #Compress-Archive -Path . -DestinationPath .\$dest
 
 if ((Get-Module -ListAvailable pester) -eq $null) {
+    Write-Warning 'PSWriteWordTests - Downloading Pester from PSGallery'
     Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
+}
+if ((Get-Module -ListAvailable PSSharedGoods) -eq $null) {
+    Write-Warning 'PSWriteWordTests - Downloading PSSharedGoods from PSGallery'
+    Install-Module -Name PSSharedGoods -Repository PSGallery -Force
 }
 
 $result = Invoke-Pester -Script $PSScriptRoot\Tests -Verbose -PassThru
