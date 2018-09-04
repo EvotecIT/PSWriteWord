@@ -44,7 +44,8 @@ function Get-ObjectType {
     [CmdletBinding()]
     param(
         [Object] $Object,
-        [string] $ObjectName = 'Random Object Name'
+        [string] $ObjectName = 'Random Object Name',
+        [switch] $VerboseOnly
     )
     $Data = [ordered] @{}
     $Data.ObjectName = $ObjectName
@@ -78,5 +79,12 @@ function Get-ObjectType {
         $Data.ObjectTypeInsiderBaseName = ''
         $Data.SystemTypeInsider = ''
     }
-    return Format-TransposeTable -Object $Data
+    Write-Verbose "Get-ObjectType - ObjectTypeName: $($Data.ObjectTypeName)"
+    Write-Verbose "Get-ObjectType - ObjectTypeBaseName: $($Data.ObjectTypeBaseName)"
+    Write-Verbose "Get-ObjectType - SystemType: $($Data.SystemType)"
+    Write-Verbose "Get-ObjectType - ObjectTypeInsiderName: $($Data.ObjectTypeInsiderName)"
+    Write-Verbose "Get-ObjectType - ObjectTypeInsiderBaseName: $($Data.ObjectTypeInsiderBaseName)"
+    Write-Verbose "Get-ObjectType - SystemTypeInsider: $($Data.SystemTypeInsider)"
+    if ($VerboseOnly) { return } else { return Format-TransposeTable -Object $Data }
+
 }
