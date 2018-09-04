@@ -7,13 +7,16 @@ function Add-WordPieChart {
         [string[]] $Names,
         [int[]] $Values,
         [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
-        [bool] $ChartLegendOverlay = $false
+        [bool] $ChartLegendOverlay = $false,
+        [switch] $NoLegend
     )
 
     $Series = Add-WordChartSeries -ChartName $ChartName -Names $Names -Values $Values
 
     [Xceed.Words.NET.PieChart] $chart = New-Object -TypeName Xceed.Words.NET.PieChart
-    $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
+    if (-not $NoLegend) {
+        $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
+    }
     $chart.AddSeries($Series)
 
     if ($Paragraph -eq $null) {
@@ -34,7 +37,8 @@ function Add-WordLineChart {
         [int[]] $Values,
         [Xceed.Words.NET.Series[]] $ChartSeries,
         [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
-        [bool] $ChartLegendOverlay = $false
+        [bool] $ChartLegendOverlay = $false,
+        [switch] $NoLegend
     )
 
     if ($ChartSeries -eq $null) {
@@ -42,7 +46,9 @@ function Add-WordLineChart {
     }
 
     [Xceed.Words.NET.LineChart] $chart = New-Object -TypeName Xceed.Words.NET.LineChart
-    $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
+    if (-not $NoLegend) {
+        $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
+    }
     foreach ($series in $ChartSeries) {
         $chart.AddSeries($Series)
     }
@@ -66,7 +72,8 @@ function Add-WordBarChart {
         [bool] $ChartLegendOverlay = $false,
         [BarGrouping] $BarGrouping = [BarGrouping]::Standard,
         [BarDirection] $BarDirection = [BarDirection]::Bar,
-        [int] $BarGapWidth = 200
+        [int] $BarGapWidth = 200,
+        [switch] $NoLegend
     )
 
     if ($ChartSeries -eq $null) {
@@ -77,7 +84,9 @@ function Add-WordBarChart {
     $chart.BarDirection = $BarDirection
     $chart.BarGrouping = $BarGrouping
     $chart.GapWidth = $BarGapWidth
-    $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
+    if (-not $NoLegend) {
+        $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
+    }
     foreach ($series in $ChartSeries) {
         $chart.AddSeries($Series)
     }

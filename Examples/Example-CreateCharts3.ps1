@@ -43,6 +43,17 @@ $Series6 = Add-WordChartSeries -ChartName 'Two'  -Names 'Today', 'Yesterday', 'T
 
 Add-WordBarChart -WordDocument $WordDocument -ChartName 'My finances'-ChartLegendPosition Bottom -ChartLegendOverlay $false -ChartSeries $Series5, $Series6 -BarDirection Column
 
+
+Add-WordText -WordDocument $WordDocument -Text 'Bar Chart Example #3 - No Legend' `
+    -FontSize 15 `
+    -Color Blue `
+    -Bold $true -HeadingType Heading1 -Supress $True
+
+$Series7 = Add-WordChartSeries -ChartName 'One'  -Names 'Today', 'Yesterday', 'Two days ago' -Values 1050.50, 2000, 20000
+$Series8 = Add-WordChartSeries -ChartName 'Two'  -Names 'Today', 'Yesterday', 'Two days ago' -Values 3000, 2000, 1000
+
+Add-WordBarChart -WordDocument $WordDocument -ChartName 'My finances'-ChartLegendPosition Bottom -ChartLegendOverlay $false -ChartSeries $Series7, $Series8 -BarDirection Column -NoLegend
+
 Save-WordDocument $WordDocument -Supress $True
 
 ### Start Word with file
