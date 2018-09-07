@@ -1,16 +1,17 @@
 $PSVersionTable.PSVersion
 
-$ModuleVersion = (Get-Content -Raw $PSScriptRoot\PSWriteWord.psd1)  | Invoke-Expression | ForEach-Object ModuleVersion
+$ModuleName = (Get-ChildItem $PSScriptRoot\*.psd1).BaseName
+$ModuleVersion = (Get-Content -Raw $PSScriptRoot\*.psd1)  | Invoke-Expression | ForEach-Object ModuleVersion
 
-#$dest = "Builds\PSWriteWord-{0}-{1}.zip" -f $ModuleVersion, (Get-Date).ToString("yyyyMMddHHmmss")
+#$Dest = "Builds\$ModuleName-{0}-{1}.zip" -f $ModuleVersion, (Get-Date).ToString("yyyyMMddHHmmss")
 #Compress-Archive -Path . -DestinationPath .\$dest
 
 if ((Get-Module -ListAvailable pester) -eq $null) {
-    Write-Warning 'PSWriteWordTests - Downloading Pester from PSGallery'
+    Write-Warning "$ModuleName - Downloading Pester from PSGallery"
     Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
 }
 if ((Get-Module -ListAvailable PSSharedGoods) -eq $null) {
-    Write-Warning 'PSWriteWordTests - Downloading PSSharedGoods from PSGallery'
+    Write-Warning "$ModuleName - Downloading PSSharedGoods from PSGallery"
     Install-Module -Name PSSharedGoods -Repository PSGallery -Force
 }
 
