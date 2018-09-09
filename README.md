@@ -12,6 +12,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+- 0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
 - 0.5.1 - Small cleanup
 - 0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
 - 0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
