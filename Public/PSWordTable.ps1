@@ -14,7 +14,7 @@ function Add-WordTable {
         [nullable[int]] $MaximumColumns,
         [string[]]$Titles = @('Name', 'Value'),
         [switch] $DoNotAddTitle,
-        [float[]] $ColummnWidth = @(),
+        [float[]] $ColumnWidth = @(),
         [nullable[float]] $TableWidth = $null,
         [bool] $Percentage,
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
@@ -238,7 +238,7 @@ function Add-WordTable {
     End {
         ### Apply formatting to table
 
-        $Table | Set-WordTableColumnWidth -Width $ColummnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
+        $Table | Set-WordTableColumnWidth -Width $ColumnWidth -TotalWidth $TableWidth -Percentage $Percentage -Supress $True
 
         $Table | Set-WordTable -Direction $Direction `
             -AutoFit $AutoFit `

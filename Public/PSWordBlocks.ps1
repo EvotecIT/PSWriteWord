@@ -35,6 +35,7 @@ function New-WordBlock {
         [nullable[Alignment]] $TableTitleAlignment = 'center',
         [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
+        [float[]] $TableColumnWidths,
 
         ### List Data
         [Object] $ListData,
@@ -83,7 +84,11 @@ function New-WordBlock {
     ### TABLE PROCESSING
     if ($TableData -and $TableDesign) {
         if ($TableMaximumColumns -eq $null) { $TableMaximumColumns = 5 }
-        $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
+        if ($TableColumnWidths) {
+            $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose -ColumnWidth $TableColumnWidths
+        } else {
+            $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
+        }
         if ($TableTitleMerge) {
             $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll  # -ColumnNrStart 0 -ColumnNrEnd 1
             if ($TableTitleText -ne $null) {
