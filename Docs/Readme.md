@@ -11,12 +11,6 @@ Locale: {{ Update Locale }}
 {{Manually Enter Description Here}}
 
 ## PSWriteWord Cmdlets
-### [Add-ToArray](Add-ToArray.md)
-{{Fill in the Synopsis}}
-
-### [Add-ToArrayAdvanced](Add-ToArrayAdvanced.md)
-{{Fill in the Synopsis}}
-
 ### [Add-WordBarChart](Add-WordBarChart.md)
 {{Fill in the Synopsis}}
 
@@ -113,37 +107,10 @@ Add a new TabStopPosition in the current paragraph.
 ### [Copy-WordTableRow](Copy-WordTableRow.md)
 {{Fill in the Synopsis}}
 
-### [Format-PSTable](Format-PSTable.md)
-{{Fill in the Synopsis}}
-
-### [Format-PSTableConvertType1](Format-PSTableConvertType1.md)
-{{Fill in the Synopsis}}
-
-### [Format-PSTableConvertType2](Format-PSTableConvertType2.md)
-{{Fill in the Synopsis}}
-
-### [Format-PSTableConvertType3](Format-PSTableConvertType3.md)
-{{Fill in the Synopsis}}
-
-### [Format-TransposeTable](Format-TransposeTable.md)
-{{Fill in the Synopsis}}
-
 ### [Format-WordListItem](Format-WordListItem.md)
 {{Fill in the Synopsis}}
 
 ### [Get-ColorFromARGB](Get-ColorFromARGB.md)
-{{Fill in the Synopsis}}
-
-### [Get-ObjectCount](Get-ObjectCount.md)
-{{Fill in the Synopsis}}
-
-### [Get-ObjectData](Get-ObjectData.md)
-{{Fill in the Synopsis}}
-
-### [Get-ObjectTitles](Get-ObjectTitles.md)
-{{Fill in the Synopsis}}
-
-### [Get-ObjectType](Get-ObjectType.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordCustomProperty](Get-WordCustomProperty.md)
@@ -182,9 +149,6 @@ Add a new TabStopPosition in the current paragraph.
 ### [Get-WordTableRow](Get-WordTableRow.md)
 {{Fill in the Synopsis}}
 
-### [New-ArrayList](New-ArrayList.md)
-{{Fill in the Synopsis}}
-
 ### [New-WordBlock](New-WordBlock.md)
 {{Fill in the Synopsis}}
 
@@ -210,9 +174,6 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [New-WordTableBorder](New-WordTableBorder.md)
-{{Fill in the Synopsis}}
-
-### [Remove-FromArray](Remove-FromArray.md)
 {{Fill in the Synopsis}}
 
 ### [Remove-WordParagraph](Remove-WordParagraph.md)
@@ -381,11 +342,5 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextUnderlineStyle](Set-WordTextUnderlineStyle.md)
-{{Fill in the Synopsis}}
-
-### [Show-Array](Show-Array.md)
-{{Fill in the Synopsis}}
-
-### [Show-TableVisualization](Show-TableVisualization.md)
 {{Fill in the Synopsis}}
 

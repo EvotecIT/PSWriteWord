@@ -20,11 +20,12 @@ New-WordBlock [-WordDocument] <Container> [[-TocGlobalDefinition] <Boolean>] [[-
  [[-PageBreaksBefore] <Int32>] [[-PageBreaksAfter] <Int32>] [[-Text] <String>] [[-TextNoData] <String>]
  [[-TextAlignment] <Nullable`1[]>] [[-TableData] <Object>] [[-TableDesign] <TableDesign>]
  [[-TableMaximumColumns] <Int32>] [[-TableTitleMerge] <Boolean>] [[-TableTitleText] <String>]
- [[-TableTitleAlignment] <Alignment>] [[-TableTitleColor] <Color>] [-TableTranspose] [[-ListData] <Object>]
- [[-ListType] <ListItemType>] [[-ListTextEmpty] <String>] [[-ListBuilderContent] <String[]>]
- [[-ListBuilderType] <ListItemType[]>] [[-ListBuilderLevel] <Int32[]>] [[-ChartEnable] <Boolean>]
- [[-ChartTitle] <String>] [[-ChartKeys] <Object>] [[-ChartValues] <Object>]
- [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>] [<CommonParameters>]
+ [[-TableTitleAlignment] <Alignment>] [[-TableTitleColor] <Color>] [-TableTranspose]
+ [[-TableColumnWidths] <Single[]>] [[-ListData] <Object>] [[-ListType] <ListItemType>]
+ [[-ListTextEmpty] <String>] [[-ListBuilderContent] <String[]>] [[-ListBuilderType] <ListItemType[]>]
+ [[-ListBuilderLevel] <Int32[]>] [[-ChartEnable] <Boolean>] [[-ChartTitle] <String>] [[-ChartKeys] <Object>]
+ [[-ChartValues] <Object>] [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,7 +51,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 30
+Position: 31
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -65,7 +66,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 32
+Position: 33
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -80,7 +81,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 35
+Position: 36
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -96,7 +97,7 @@ Aliases:
 Accepted values: Top, Bottom, Left, Right, TopRight
 
 Required: False
-Position: 34
+Position: 35
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -111,7 +112,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 31
+Position: 32
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -126,7 +127,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 33
+Position: 34
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -171,7 +172,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 27
+Position: 28
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -186,7 +187,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 29
+Position: 30
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -202,7 +203,7 @@ Aliases:
 Accepted values: Bulleted, Numbered
 
 Required: False
-Position: 28
+Position: 29
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -217,7 +218,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 24
+Position: 25
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -232,7 +233,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 26
+Position: 27
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -248,7 +249,7 @@ Aliases:
 Accepted values: Bulleted, Numbered
 
 Required: False
-Position: 25
+Position: 26
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -279,6 +280,21 @@ Aliases:
 
 Required: False
 Position: 12
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TableColumnWidths
+{{Fill TableColumnWidths Description}}
+
+```yaml
+Type: Single[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 24
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

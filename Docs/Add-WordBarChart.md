@@ -16,7 +16,8 @@ schema: 2.0.0
 Add-WordBarChart [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ChartName] <String>]
  [[-Names] <String[]>] [[-Values] <Int32[]>] [[-ChartSeries] <Series[]>]
  [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>]
- [[-BarGrouping] <BarGrouping>] [[-BarDirection] <BarDirection>] [[-BarGapWidth] <Int32>] [<CommonParameters>]
+ [[-BarGrouping] <BarGrouping>] [[-BarDirection] <BarDirection>] [[-BarGapWidth] <Int32>] [-NoLegend]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -156,6 +157,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -NoLegend
+{{Fill NoLegend Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Paragraph
 {{Fill Paragraph Description}}
 
@@ -207,12 +223,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Xceed.Words.NET.Container
-Xceed.Words.NET.InsertBeforeOrAfter
+
+### Xceed.Words.NET.InsertBeforeOrAfter
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

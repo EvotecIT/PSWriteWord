@@ -15,7 +15,8 @@ schema: 2.0.0
 ```
 Add-WordLineChart [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ChartName] <String>]
  [[-Names] <String[]>] [[-Values] <Int32[]>] [[-ChartSeries] <Series[]>]
- [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>] [<CommonParameters>]
+ [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>] [-NoLegend]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -103,6 +104,21 @@ Aliases:
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoLegend
+{{Fill NoLegend Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

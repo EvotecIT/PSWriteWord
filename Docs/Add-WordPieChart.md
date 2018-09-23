@@ -15,7 +15,7 @@ schema: 2.0.0
 ```
 Add-WordPieChart [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ChartName] <String>]
  [[-Names] <String[]>] [[-Values] <Int32[]>] [[-ChartLegendPosition] <ChartLegendPosition>]
- [[-ChartLegendOverlay] <Boolean>] [<CommonParameters>]
+ [[-ChartLegendOverlay] <Boolean>] [-NoLegend] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -88,6 +88,21 @@ Aliases:
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoLegend
+{{Fill NoLegend Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

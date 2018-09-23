@@ -16,7 +16,7 @@ schema: 2.0.0
 Add-WordTable [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
  [[-Table] <InsertBeforeOrAfter>] [[-DataTable] <Object>] [[-AutoFit] <AutoFit>] [[-Design] <TableDesign>]
  [[-Direction] <Direction>] [-BreakPageAfterTable] [-BreakPageBeforeTable] [[-BreakAcrossPages] <Boolean>]
- [[-MaximumColumns] <Int32>] [[-Titles] <String[]>] [-DoNotAddTitle] [[-ColummnWidth] <Single[]>]
+ [[-MaximumColumns] <Int32>] [[-Titles] <String[]>] [-DoNotAddTitle] [[-ColumnWidth] <Single[]>]
  [[-TableWidth] <Single>] [[-Percentage] <Boolean>] [[-Color] <Color[]>] [[-FontSize] <Double[]>]
  [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>] [[-Italic] <Nullable`1[]>]
  [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>] [[-SpacingAfter] <Double[]>]
@@ -167,13 +167,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ColummnWidth
-{{Fill ColummnWidth Description}}
+### -ColumnWidth
+{{Fill ColumnWidth Description}}
 
 ```yaml
 Type: Single[]
 Parameter Sets: (All)
-Aliases:
+Aliases: ColummnWidth
 
 Required: False
 Position: 10
