@@ -96,7 +96,12 @@ function Add-WordTableCellValue {
         [bool] $Supress = $false
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"
-    $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$ParagraphNumber].Append($Value)
+    try {
+        $Data = $Table.Rows[$Row].Cells[$Column].Paragraphs[$ParagraphNumber].Append("$Value")
+    } catch {
+        $ErrorMessage = $_.Exception.Message -replace "`n", " " -replace "`r", " "
+        Write-Warning "Add-WordTableCellValue - Failed adding value $Value with error: $ErrorMessage"
+    }
     <#
     $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Italic $Italic `
         -UnderlineStyle $UnderlineStyle -UnderlineColor $UnderlineColor -SpacingAfter $SpacingAfter -SpacingBefore $SpacingBefore -Spacing $Spacing `
