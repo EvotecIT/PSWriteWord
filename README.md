@@ -12,6 +12,10 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+- 0.5.7 - 19.10.2018
+    - Addition for Add-WordList to support singular (string,bool etc types)
+    - Added Add-WordList Tests
+- 0.5.6 - Bugfixes
 - 0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
 - 0.5.1 - Small cleanup
 - 0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
