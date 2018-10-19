@@ -13,10 +13,17 @@ function Add-WordList {
     $List = $null
     if ($ListData -eq $null) { return }
 
-    $Type = Get-ObjectType $ListData
-    if ($Type.ObjectTypeInsiderName -ne '') { $ObjectType = $Type.ObjectTypeInsiderName } else { $ObjectType = $Type.ObjectTypeName}
+    $Type = Get-ObjectType $ListData #-Verbose
+    if ($Type.ObjectTypeName -match 'bool|byte|char|datetime|decimal|double|ExcelHyperLink|float|int|long|sbyte|short|string|timespan|uint|ulong|URI|ushort') {
+        $ObjectType = $Type.ObjectTypeName
+    } elseif ($Type.ObjectTypeInsiderName -ne '') {
+        $ObjectType = $Type.ObjectTypeInsiderName
+    } else {
+        $ObjectType = $Type.ObjectTypeName
+    }
 
-    if ($ObjectType -ne 'string' -and $ObjectType -ne 'PSCustomObject' -and $ObjectType -ne 'Hashtable' -and $ObjectType -ne 'OrderedDictionary') {
+    if ($ObjectType -notmatch 'bool|byte|char|datetime|decimal|double|ExcelHyperLink|float|int|long|sbyte|short|string|timespan|uint|ulong|URI|ushort' -and
+        $ObjectType -ne 'PSCustomObject' -and $ObjectType -ne 'Hashtable' -and $ObjectType -ne 'OrderedDictionary') {
         $ListData = Convert-ObjectToProcess -DataTable $ListData
         $Type = Get-ObjectType $ListData
         if ($Type.ObjectTypeInsiderName -ne '') { $ObjectType = $Type.ObjectTypeInsiderName } else { $ObjectType = $Type.ObjectTypeName}
@@ -24,8 +31,8 @@ function Add-WordList {
         Write-Verbose "Add-WordList - Insider Object Name: $ObjectType"
     }
 
-    if ($ObjectType -eq 'string') {
-        Write-Verbose 'Add-WordList - Option 1 - Detected string type inside array'
+    if ($ObjectType -match 'bool|byte|char|datetime|decimal|double|ExcelHyperLink|float|int|long|sbyte|short|string|timespan|uint|ulong|URI|ushort') {
+        Write-Verbose 'Add-WordList - Option 1 - Detected singular type inside array'
         $Counter = 0;
         foreach ($Value in $ListData) {
             if ($ListLevels -eq $null) {
