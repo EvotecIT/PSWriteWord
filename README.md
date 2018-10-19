@@ -13,7 +13,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 ## Updates:
 
 - 0.5.8 - 19.10.2018
-    - Added small feature New-WordBlock for PSWinDocumentation use
+    - Added small feature New-WordBlock for PSWinDocumentation
 - 0.5.7 - 19.10.2018
     - Addition for Add-WordList to support singular (string,bool etc types)
     - Added Add-WordList Tests
