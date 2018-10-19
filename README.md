@@ -12,6 +12,8 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+- 0.5.8 - 19.10.2018
+    - Added small feature New-WordBlock for PSWinDocumentation use
 - 0.5.7 - 19.10.2018
     - Addition for Add-WordList to support singular (string,bool etc types)
     - Added Add-WordList Tests
@@ -30,10 +32,20 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 ## Requirements:
 
 - Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever).
+- Works only on PowerShell 5.1 (not tested on PowerShell 6.0 with Windows compatibility pack)
 
-## Tested on: (feel free to provide what you use it on)
+## Systems it should run on (marked those confirmed to run)
 
-- Windows 10 1803+
+### Windows Client Systems
+- [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+- [ ] Windows 8.1
+- [x] Windows 10 1809
+- [x] Windows 10 1803
+
+### Windows Server Systems
+- [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+- [x] Windows 2012 R2
+- [x] Windows 2016
 
 ## Credits
 
