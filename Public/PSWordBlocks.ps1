@@ -47,6 +47,10 @@ function New-WordBlock {
         [ListItemType[]] $ListBuilderType,
         [int[]] $ListBuilderLevel,
 
+        ### String Based Data - for functions that return String type data
+        [Object] $TextBasedData,
+        [nullable[Alignment][]] $TextBasedDataAlignment = [Alignment]::Both,
+
         ### Chart Data
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
@@ -115,6 +119,11 @@ function New-WordBlock {
             $ListDomainInformation = $ListDomainInformation | New-WordListItem -WordDocument $WordDocument -ListLevel $ListBuilderLevel[$a] -ListItemType $ListBuilderType[$a] -ListValue $ListBuilderContent[$a]
         }
         $Paragraph = Add-WordListItem -WordDocument $WordDocument -Paragraph $Paragraph -List $ListDomainInformation #-Supress $true
+    }
+
+    ### SIMPLE TEXT PROCESSING - if source is bunch of text this is the way to go
+    if ($TextBasedData) {
+        $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $TextBasedData -Alignment $TextBasedDataAlignment
     }
 
     ### CHART PROCESSING
