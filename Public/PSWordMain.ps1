@@ -15,8 +15,20 @@ function Get-WordDocument {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath
     )
     $Word = [Xceed.Words.NET.DocX]
-    $WordDocument = $Word::Load($FilePath)
-    $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
+    if ($FilePath -ne '') {
+        if (Test-Path -Path $FilePath) {
+            try {
+                $WordDocument = $Word::Load($FilePath)
+                $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
+            } catch {
+                $ErrorMessage = $_.Exception.Message
+                Write-Warning "Get-WordDocument - Document: $FilePath Error: $ErrorMessage"
+            }
+        } else {
+            Write-Warning "Get-WordDocument - Document doesn't exists in path $FilePath. Terminating."
+            return
+        }
+    }
     return $WordDocument
 }
 
