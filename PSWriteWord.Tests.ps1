@@ -15,7 +15,7 @@ if ((Get-Module -ListAvailable PSSharedGoods) -eq $null) {
     Install-Module -Name PSSharedGoods -Repository PSGallery -Force
 }
 
-$result = Invoke-Pester -Script $PSScriptRoot\Tests -Verbose -PassThru
+$result = Invoke-Pester -Script $PSScriptRoot\Tests -Verbose -EnableExit
 
 if ($result.FailedCount -gt 0) {
     throw "$($result.FailedCount) tests failed."
