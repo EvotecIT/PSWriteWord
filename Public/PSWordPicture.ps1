@@ -4,7 +4,7 @@ function Add-WordPicture {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.DocXElement] $Picture,
-        [string] $ImagePath,
+        [alias('FileImagePath')][string] $ImagePath,
         [int] $Rotation,
         [switch] $FlipHorizontal,
         [switch] $FlipVertical,
@@ -16,7 +16,7 @@ function Add-WordPicture {
     if ([string]::IsNullOrEmpty($Paragraph)) {
         $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $false
     }
-    $Image = $WordDocument.AddImage($FilePathImage )
+    $Image = $WordDocument.AddImage($ImagePath )
 
     if ($Picture -eq $null) {
         $Picture = $Image.CreatePicture()
