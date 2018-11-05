@@ -12,6 +12,8 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+- 0.5.9 - 5.11.2018
+    - Fix for Add-WordPicture
 - 0.5.8 - 19.10.2018
     - Added small feature New-WordBlock for PSWinDocumentation
 - 0.5.7 - 19.10.2018
