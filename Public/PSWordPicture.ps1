@@ -16,10 +16,14 @@ function Add-WordPicture {
     if ([string]::IsNullOrEmpty($Paragraph)) {
         $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $false
     }
-    $Image = $WordDocument.AddImage($ImagePath )
-
-    if ($Picture -eq $null) {
-        $Picture = $Image.CreatePicture()
+    if ($null -eq $Picture) {
+        if ($ImagePath -ne '' -and (Test-Path($ImagePath))) {
+            $Image = $WordDocument.AddImage($ImagePath)
+            $Picture = $Image.CreatePicture()
+        } else {
+            Write-Warning "Add-WordPicture - Path to ImagePath ($ImagePath) was incorrect. Aborting."
+            return
+        }
     }
     if ($Rotation -ne 0) { $Picture.Rotation = $Rotation }
     if ($FlipHorizontal -ne $false) { $Picture.FlipHorizontal = $FlipHorizontal }
