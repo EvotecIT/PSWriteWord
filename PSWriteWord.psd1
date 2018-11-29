@@ -12,7 +12,7 @@
     RootModule        = 'PSWriteWord.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.5.9.1'
+    ModuleVersion     = '0.5.10'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -58,7 +58,20 @@
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
     #ScriptsToProcess  = @('Enums\*.ps1')
-    ScriptsToProcess  = @( 'Enums\InsertWhere.ps1', 'Enums\Alignment.ps1' , 'Enums\AutoFit.ps1' , 'Enums\BarChart.ps1' , 'Enums\BasicShapes.ps1' , 'Enums\BlockArrowShapes.ps1' , 'Enums\BorderSize.ps1' , 'Enums\BorderStyle.ps1' , 'Enums\CalloutShapes.ps1' , 'Enums\CapsStyle.ps1' , 'Enums\Chart.ps1' , 'Enums\ContainerType.ps1' , 'Enums\CustomPropertyType.ps1' , 'Enums\Direction.ps1' , 'Enums\DocumentTypes.ps1' , 'Enums\EditRestrictions.ps1' , 'Enums\EditType.ps1' , 'Enums\EquationShapes.ps1' , 'Enums\FlowChartShapes.ps1' , 'Enums\HeadingType.ps1' , 'Enums\Highlight.ps1' , 'Enums\HorizontalBorderPosition.ps1' , 'Enums\LineChart.ps1' , 'Enums\LineSpacingType.ps1' , 'Enums\LineSpacingTypeAuto.ps1' , 'Enums\ListItemType.ps1' , 'Enums\MatchFormattingOptions.ps1' , 'Enums\Misc.ps1' , 'Enums\Orientation.ps1' , 'Enums\PageNumberFormat.ps1' , 'Enums\RectangleShapes.ps1' , 'Enums\RunTextType.ps1' , 'Enums\Script.ps1' , 'Enums\SectionBreakType.ps1' , 'Enums\ShadingType.ps1' , 'Enums\StarAndBannerShapes.ps1' , 'Enums\StrikeThrough.ps1' , 'Enums\TabelCellBorderType.ps1' , 'Enums\TableBorderTypes.ps1' , 'Enums\TableCellMarginType.ps1' , 'Enums\TableDesign.ps1' , 'Enums\TableOfContentsSwitches.ps1' , 'Enums\TabStopPositionLeader.ps1' , 'Enums\TextDirection.ps1' , 'Enums\UnderlineStyle.ps1' , 'Enums\VerticalAlignment.ps1' )
+    ScriptsToProcess  = @( 'Enums\InsertWhere.ps1', 'Enums\Alignment.ps1' ,
+     'Enums\AutoFit.ps1' , 'Enums\BarChart.ps1' , 'Enums\BasicShapes.ps1' ,
+     'Enums\BlockArrowShapes.ps1' , 'Enums\BorderSize.ps1' , 'Enums\BorderStyle.ps1' ,
+      'Enums\CalloutShapes.ps1' , 'Enums\CapsStyle.ps1' , 'Enums\Chart.ps1' , 'Enums\ContainerType.ps1' ,
+       'Enums\CustomPropertyType.ps1' , 'Enums\Direction.ps1' , 'Enums\DocumentTypes.ps1' ,
+       'Enums\EditRestrictions.ps1' , 'Enums\EditType.ps1' , 'Enums\EquationShapes.ps1' ,
+       'Enums\FlowChartShapes.ps1' , 'Enums\HeadingType.ps1' , 'Enums\Highlight.ps1' ,
+       'Enums\HorizontalBorderPosition.ps1' , 'Enums\LineChart.ps1' ,
+        'Enums\LineSpacingType.ps1' , 'Enums\LineSpacingTypeAuto.ps1' ,
+        'Enums\ListItemType.ps1' , 'Enums\MatchFormattingOptions.ps1' , 'Enums\Misc.ps1' ,
+         'Enums\Orientation.ps1' , 'Enums\PageNumberFormat.ps1' , 'Enums\RectangleShapes.ps1' ,
+          'Enums\RunTextType.ps1' , 'Enums\Script.ps1' , 'Enums\SectionBreakType.ps1' , 'Enums\ShadingType.ps1' , 'Enums\StarAndBannerShapes.ps1' ,
+           'Enums\StrikeThrough.ps1' , 'Enums\TabelCellBorderType.ps1' , 'Enums\TableBorderTypes.ps1' , 'Enums\TableCellMarginType.ps1' , 'Enums\TableDesign.ps1' ,
+           'Enums\TableOfContentsSwitches.ps1' , 'Enums\TabStopPositionLeader.ps1' , 'Enums\TextDirection.ps1' , 'Enums\UnderlineStyle.ps1' , 'Enums\VerticalAlignment.ps1' )
     #ScriptsToProcess  = @('Private\PSWriteWordEnum.ps1')
 
     # Type files (.ps1xml) to be loaded when importing this module
