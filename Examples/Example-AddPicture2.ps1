@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module PSWriteWord -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture2.docx"
 $FilePathImage1 = "$PSScriptRoot\Images\Logo-Evotec-Small.png"
@@ -22,7 +22,7 @@ Add-WordPicture -WordDocument $WordDocument -Picture $AllPictures[1] -Paragraph 
 
 Add-WordText -WordDocument $WordDocument -Text 'Here we copy 1st picture from WordDocument and add it again'  -Supress $true
 $Picture = Get-WordPicture -WordDocument $WordDocument -PictureID 0
-Add-WordPicture -WordDocument $WordDocument -Picture $Picture # add copy of picture
+Add-WordPicture -WordDocument $WordDocument -Picture $Picture -Alignment center # add copy of picture
 
 Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
 

@@ -14,8 +14,9 @@ schema: 2.0.0
 
 ```
 Add-WordPicture [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Picture] <DocXElement>]
- [[-ImagePath] <String>] [[-Rotation] <Int32>] [-FlipHorizontal] [-FlipVertical] [[-ImageWidth] <Int32>]
- [[-ImageHeight] <Int32>] [[-Description] <String>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-ImagePath] <String>] [[-Alignment] <Alignment>] [[-Rotation] <Int32>] [-FlipHorizontal] [-FlipVertical]
+ [[-ImageWidth] <Int32>] [[-ImageHeight] <Int32>] [[-Description] <String>] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,6 +33,22 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -Alignment
+{{Fill Alignment Description}}
+
+```yaml
+Type: Alignment
+Parameter Sets: (All)
+Aliases:
+Accepted values: left, center, right, both
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Description
 {{Fill Description Description}}
 
@@ -41,7 +58,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -86,7 +103,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -98,7 +115,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: FileImagePath
 
 Required: False
 Position: 3
@@ -116,7 +133,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -161,7 +178,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -176,7 +193,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 8
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

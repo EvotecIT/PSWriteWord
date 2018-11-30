@@ -5,6 +5,7 @@ function Add-WordPicture {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.DocXElement] $Picture,
         [alias('FileImagePath')][string] $ImagePath,
+        [Alignment] $Alignment,
         [int] $Rotation,
         [switch] $FlipHorizontal,
         [switch] $FlipVertical,
@@ -31,9 +32,11 @@ function Add-WordPicture {
     if (-not [string]::IsNullOrEmpty($Description)) { $Picture.Description = $Description }
     if ($ImageWidth -ne 0) { $Picture.Width = $ImageWidth }
     if ($ImageHeight -ne 0) { $Picture.Height = $ImageHeight }
-    $data = $Paragraph.AppendPicture($Picture)
-
-    if ($Supress) { return $data } else { return }
+    $Data = $Paragraph.AppendPicture($Picture)
+    if ($Alignment) {
+        $Data = Set-WordTextAlignment -Paragraph $Data -Alignment $Alignment
+    }
+    if ($Supress) { return $Data } else { return }
 }
 
 function Get-WordPicture {
