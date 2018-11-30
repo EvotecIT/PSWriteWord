@@ -12,6 +12,10 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+- 0.5.11 - 30.11.2018
+    - Added Alignment to Add-WordPicture
+- 0.5.10 - 29.11.2018
+    - Added Merge-WordDocument - which brings merging of Word Documents functionality
 - 0.5.9 - 5.11.2018
     - Fix for Add-WordPicture
 - 0.5.8 - 19.10.2018
