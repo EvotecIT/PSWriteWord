@@ -82,8 +82,25 @@ Describe 'Add-WordPicture' {
         $Pictures = Get-WordPicture -WordDocument $ReadWord -ListPictures
         $Pictures.Count | Should -Be 5
         $Pictures[3].Rotation | Should -Be 25
-
         Save-WordDocument $ReadWord -Language 'en-US' -Supress $true #-OpenDocument
+    }
+    It 'Given 3 pictures, set it align to center, right, both' {
+        $FilePath = [IO.Path]::Combine($TemporaryFolder, "2.docx")
+
+        $WordDocument = New-WordDocument $FilePath
+        Add-WordText -WordDocument $WordDocument -Text 'Adding a picture...' -Supress $true
+        Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage1 -Alignment center -Verbose
+
+        Add-WordText -WordDocument $WordDocument -Text 'Adding a picture...' -Supress $true
+        Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage1 -Alignment right -Verbose
+
+        Add-WordText -WordDocument $WordDocument -Text 'Adding a picture...' -Supress $true
+        Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage1 -Alignment both -Verbose
+
+        $AllPictures = Get-WordPicture -WordDocument $WordDocument -ListParagraphs
+        $AllPictures[0].Alignment | Should -Be Center
+        $AllPictures[1].Alignment | Should -Be right
+        $AllPictures[2].Alignment | Should -Be both
     }
 
 }
