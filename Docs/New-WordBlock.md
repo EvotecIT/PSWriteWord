@@ -23,9 +23,9 @@ New-WordBlock [-WordDocument] <Container> [[-TocGlobalDefinition] <Boolean>] [[-
  [[-TableTitleAlignment] <Alignment>] [[-TableTitleColor] <Color>] [-TableTranspose]
  [[-TableColumnWidths] <Single[]>] [[-ListData] <Object>] [[-ListType] <ListItemType>]
  [[-ListTextEmpty] <String>] [[-ListBuilderContent] <String[]>] [[-ListBuilderType] <ListItemType[]>]
- [[-ListBuilderLevel] <Int32[]>] [[-ChartEnable] <Boolean>] [[-ChartTitle] <String>] [[-ChartKeys] <Object>]
- [[-ChartValues] <Object>] [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>]
- [<CommonParameters>]
+ [[-ListBuilderLevel] <Int32[]>] [[-TextBasedData] <Object>] [[-TextBasedDataAlignment] <Nullable`1[]>]
+ [[-ChartEnable] <Boolean>] [[-ChartTitle] <String>] [[-ChartKeys] <Object>] [[-ChartValues] <Object>]
+ [[-ChartLegendPosition] <ChartLegendPosition>] [[-ChartLegendOverlay] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,7 +51,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 31
+Position: 33
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,7 +66,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 33
+Position: 35
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -81,7 +81,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 36
+Position: 38
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,7 +97,7 @@ Aliases:
 Accepted values: Top, Bottom, Left, Right, TopRight
 
 Required: False
-Position: 35
+Position: 37
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -112,7 +112,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 32
+Position: 34
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -127,7 +127,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 34
+Position: 36
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -447,6 +447,36 @@ Aliases:
 
 Required: False
 Position: 16
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TextBasedData
+{{Fill TextBasedData Description}}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 31
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TextBasedDataAlignment
+{{Fill TextBasedDataAlignment Description}}
+
+```yaml
+Type: Nullable`1[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 32
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

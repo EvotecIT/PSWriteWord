@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Save-WordDocument [-WordDocument] <Container> [[-FilePath] <String>] [[-Language] <String>] [-KillWord]
+Save-WordDocument [[-WordDocument] <Container>] [[-FilePath] <String>] [[-Language] <String>] [-KillWord]
  [-OpenDocument] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
@@ -114,7 +114,7 @@ Type: Container
 Parameter Sets: (All)
 Aliases: Document
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
