@@ -98,8 +98,13 @@ function Set-WordTableRowMergeCells {
             }
         } elseif ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
             $Table.Rows[$RowNr].MergeCells($ColumnNrStart, $ColumnNrEnd)
-            for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count; $paragraph++) {
-                $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[$paragraph].Remove($TrackChanges)
+            #Write-Verbose "Set-WordTableRowMergeCells - RowNR: $RowNR - ColumnNrStart: $ColumnNrStart - ColumnNrEnd: $ColumnNrEnd"
+            [int] $ParagraphCount = $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count
+            #Write-Verbose "Set-WordTableRowMergeCells - RowParagraphCount: $ParagraphCount"
+            if ($ParagraphCount -gt 1) {
+                for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count; $paragraph++) {
+                    $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[$paragraph].Remove($TrackChanges)
+                }
             }
         }
     }
