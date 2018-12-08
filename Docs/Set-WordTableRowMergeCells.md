@@ -14,7 +14,8 @@ schema: 2.0.0
 
 ```
 Set-WordTableRowMergeCells [[-Table] <InsertBeforeOrAfter>] [[-RowNr] <Int32>] [[-ColumnNrStart] <Int32>]
- [[-ColumnNrEnd] <Int32>] [-MergeAll] [-TrackChanges] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-ColumnNrEnd] <Int32>] [-MergeAll] [-TrackChanges] [-TextMerge] [[-Separator] <String>]
+ [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,6 +92,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Separator
+{{Fill Separator Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Supress
 {{Fill Supress Description}}
 
@@ -100,7 +116,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -116,6 +132,21 @@ Aliases:
 
 Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TextMerge
+{{Fill TextMerge Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

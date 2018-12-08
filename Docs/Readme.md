@@ -149,6 +149,9 @@ Add a new TabStopPosition in the current paragraph.
 ### [Get-WordTableRow](Get-WordTableRow.md)
 {{Fill in the Synopsis}}
 
+### [Merge-WordDocument](Merge-WordDocument.md)
+{{Fill in the Synopsis}}
+
 ### [New-WordBlock](New-WordBlock.md)
 {{Fill in the Synopsis}}
 
