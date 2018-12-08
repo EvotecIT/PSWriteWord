@@ -264,7 +264,9 @@ function Remove-WordText {
     if ($Paragraph -ne $null) {
         Write-Verbose "Remove-WordText - Current text $($Paragraph.Text) "
         Write-Verbose "Remove-WordText - Removing from $Index to $Count - Paragraph Text Count: $($Paragraph.Text.Length)"
-        $Paragraph.RemoveText($Index, $Count, $TrackChanges, $RemoveEmptyParagraph)
+        if ($Count -ne 0) {
+            $Paragraph.RemoveText($Index, $Count, $TrackChanges, $RemoveEmptyParagraph)
+        }
     }
     if ($Supress) { return } else { return $Paragraph }
 }

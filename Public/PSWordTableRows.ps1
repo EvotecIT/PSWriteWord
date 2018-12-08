@@ -87,6 +87,8 @@ function Set-WordTableRowMergeCells {
         [nullable[int]] $ColumnNrEnd,
         [switch] $MergeAll,
         [switch] $TrackChanges,
+        [switch] $TextMerge, # Merges Text, otherwise leaves only text from 1st column
+        [string] $Separator = ' ',
         [bool] $Supress = $false
     )
     if ($Table) {
@@ -98,13 +100,15 @@ function Set-WordTableRowMergeCells {
             }
         } elseif ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
             $Table.Rows[$RowNr].MergeCells($ColumnNrStart, $ColumnNrEnd)
-            #Write-Verbose "Set-WordTableRowMergeCells - RowNR: $RowNR - ColumnNrStart: $ColumnNrStart - ColumnNrEnd: $ColumnNrEnd"
-            [int] $ParagraphCount = $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count
-            #Write-Verbose "Set-WordTableRowMergeCells - RowParagraphCount: $ParagraphCount"
-            if ($ParagraphCount -gt 1) {
-                for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count; $paragraph++) {
-                    $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[$paragraph].Remove($TrackChanges)
-                }
+            if ($TextMerge) {
+                [string] $Texts = foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs) {
+                    $Paragraph.Text
+                } -join $Separator
+                Set-WordTextText -Paragraph $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[0] -Text $Texts -Supress $True
+            }
+            # Removes Paragraphs from merged columns - Leaves only 1st column Text
+            foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs | Select-Object -Skip 1) {
+                $Paragraph.Remove($TrackChanges)
             }
         }
     }
