@@ -15,6 +15,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
     - Fix Set-WordTableRowMergeCells
     - Added Set-WordTableRowMergeCells TextMerge with Separator allowing for merging text from merged columns
     - Fix for Remove-WordText
+    - Added tests for Set-WordTableRowMergeCells - does some additional testing to Tables just in case
 - 0.5.12 - 8.12.2018
     - Fix for Set-WordTableRowMergeCells
 - 0.5.11 - 30.11.2018
