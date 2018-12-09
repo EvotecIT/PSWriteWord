@@ -15,6 +15,11 @@ if ((Get-Module -ListAvailable PSSharedGoods) -eq $null) {
     Install-Module -Name PSSharedGoods -Repository PSGallery -Force
 }
 
+Import-Module $PSScriptRoot\PSWriteWord.psd1 -Force
+
+# Final testing
+#Import-Module PSWriteWord -Force
+
 $result = Invoke-Pester -Script $PSScriptRoot\Tests -Verbose -EnableExit
 
 if ($result.FailedCount -gt 0) {

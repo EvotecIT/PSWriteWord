@@ -1,6 +1,3 @@
-#Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1
-
 Describe 'Set-WordTableRowMergeCells - Should Merge 3 columns and keep text from 3 columns merged' {
     It 'Add 4 values in 3 top columns and merge them, keep text' {
         $WordDocument = New-WordDocument

@@ -1,6 +1,4 @@
-﻿#Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1
-### Preparing Data Start
+﻿### Preparing Data Start
 $myitems0 = @(
     [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover"},
     [pscustomobject]@{name = "Sue"; age = 29; info = "Dog lover"},

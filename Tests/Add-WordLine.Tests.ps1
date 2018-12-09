@@ -1,6 +1,3 @@
-#Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1
-
 Describe 'Add-WordLine' {
     It 'Given 4 new lines document should hold proper amount of paragraphs' {
         $WordDocument = New-WordDocument

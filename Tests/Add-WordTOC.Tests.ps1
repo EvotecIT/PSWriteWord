@@ -1,6 +1,3 @@
-#Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1
-
 Describe 'Add-WordTOC' {
 
     Context 'Testing Table Of Contents' {

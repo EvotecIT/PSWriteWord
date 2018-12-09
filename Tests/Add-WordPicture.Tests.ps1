@@ -1,6 +1,3 @@
-#Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1
-
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture2.docx"
 $FilePathImage1 = "$PSScriptRoot\..\Examples\Images\Logo-Evotec-Small.png"
 $FilePathImage2 = "$PSScriptRoot\..\Examples\Images\Logo-Evotec-Small.jpg"

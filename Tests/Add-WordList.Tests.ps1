@@ -1,6 +1,3 @@
-#Requires -Modules Pester
-Import-Module $PSScriptRoot\..\PSWriteWord.psd1
-
 $ListOfItems1 = @('Test1')
 $ListOfItems2 = @('Test1', 'Test2')
 $ListOfItems5 = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
