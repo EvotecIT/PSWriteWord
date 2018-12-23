@@ -44,7 +44,7 @@ function Merge-WordDocument {
     $WordDocument1 = Get-WordDocument -FilePath $FilePath1
     $WordDocument2 = Get-WordDocument -FilePath $FilePath2
 
-    $WordDocument1.InsertDocument($WordDocument2, $false)
+    $WordDocument1.InsertDocument($WordDocument2, $true)
 
     $FilePathOutput = Save-WordDocument -WordDocument $WordDocument1 -FilePath $FileOutput -OpenDocument:$OpenDocument
     if ($Supress) { return } else { return $FilePathOutput }
