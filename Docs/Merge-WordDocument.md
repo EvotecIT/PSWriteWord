@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Merge-WordDocument [[-FilePath1] <String>] [[-FilePath2] <String>] [[-FileOutput] <String>]
- [<CommonParameters>]
+Merge-WordDocument [[-FilePath1] <String>] [[-FilePath2] <String>] [[-FileOutput] <String>] [-OpenDocument]
+ [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -71,6 +71,36 @@ Aliases: Append
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OpenDocument
+{{Fill OpenDocument Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Supress
+{{Fill Supress Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
