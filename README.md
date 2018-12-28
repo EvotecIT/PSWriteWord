@@ -11,6 +11,10 @@
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
 ## Updates:
+- 0.5.14 - 28.12.2018
+    - Fix for Headers/Footers
+    - Expanded Add-WordText with -Headers/Footers
+    - Added some examples and tests
 - 0.5.13 - 8.12.2018
     - Fix Set-WordTableRowMergeCells
     - Added Set-WordTableRowMergeCells TextMerge with Separator allowing for merging text from merged columns

@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordHeader [[-WordDocument] <Container>] [[-Supress] <Boolean>] [<CommonParameters>]
+Add-WordHeader [[-WordDocument] <Container>] [[-DifferentFirstPage] <Boolean>]
+ [[-DifferentOddAndEvenPages] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +31,36 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -DifferentFirstPage
+{{Fill DifferentFirstPage Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DifferentOddAndEvenPages
+{{Fill DifferentOddAndEvenPages Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Supress
 {{Fill Supress Description}}
 
@@ -39,7 +70,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

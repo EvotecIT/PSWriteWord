@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WordFooter [[-WordDocument] <Container>] [[-Supress] <Boolean>] [<CommonParameters>]
+Get-WordFooter [[-WordDocument] <Container>] [[-Type] <String>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,6 +37,22 @@ PS C:\> {{ Add example code here }}
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Type
+{{Fill Type Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: All, First, Even, Odd
 
 Required: False
 Position: 1

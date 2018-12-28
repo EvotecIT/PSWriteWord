@@ -13,13 +13,14 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordText [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Text] <String[]>]
- [[-Color] <Color[]>] [[-FontSize] <Double[]>] [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>]
- [[-Italic] <Nullable`1[]>] [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>]
- [[-SpacingAfter] <Double[]>] [[-SpacingBefore] <Double[]>] [[-Spacing] <Double[]>]
- [[-Highlight] <Highlight[]>] [[-CapsStyle] <CapsStyle[]>] [[-StrikeThrough] <StrikeThrough[]>]
- [[-HeadingType] <HeadingType[]>] [[-PercentageScale] <Int32[]>] [[-Misc] <Misc[]>] [[-Language] <String[]>]
- [[-Kerning] <Int32[]>] [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>]
+Add-WordText [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Footer] <Footer>]
+ [[-Header] <Header>] [[-Text] <String[]>] [[-Color] <Color[]>] [[-FontSize] <Double[]>]
+ [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>] [[-Italic] <Nullable`1[]>]
+ [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>] [[-SpacingAfter] <Double[]>]
+ [[-SpacingBefore] <Double[]>] [[-Spacing] <Double[]>] [[-Highlight] <Highlight[]>]
+ [[-CapsStyle] <CapsStyle[]>] [[-StrikeThrough] <StrikeThrough[]>] [[-HeadingType] <HeadingType[]>]
+ [[-PercentageScale] <Int32[]>] [[-Misc] <Misc[]>] [[-Language] <String[]>] [[-Kerning] <Int32[]>]
+ [[-Hidden] <Nullable`1[]>] [[-Position] <Int32[]>] [[-NewLine] <Nullable`1[]>]
  [[-IndentationFirstLine] <Single[]>] [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>]
  [[-Direction] <Direction[]>] [[-ShadingType] <ShadingType[]>] [[-ShadingColor] <Color[]>]
  [[-Script] <Script[]>] [-ContinueFormatting] [-AppendToExistingParagraph] [[-Supress] <Boolean>]
@@ -50,7 +51,7 @@ Aliases:
 Accepted values: left, center, right, both
 
 Required: False
-Position: 26
+Position: 28
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -80,7 +81,7 @@ Parameter Sets: (All)
 Aliases: B
 
 Required: False
-Position: 6
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -96,7 +97,7 @@ Aliases: CA
 Accepted values: none, caps, smallCaps
 
 Required: False
-Position: 14
+Position: 16
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -111,7 +112,7 @@ Parameter Sets: (All)
 Aliases: C
 
 Required: False
-Position: 3
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -142,7 +143,7 @@ Aliases:
 Accepted values: LeftToRight, RightToLeft
 
 Required: False
-Position: 27
+Position: 29
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -157,7 +158,7 @@ Parameter Sets: (All)
 Aliases: FontName
 
 Required: False
-Position: 5
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -172,9 +173,39 @@ Parameter Sets: (All)
 Aliases: S
 
 Required: False
-Position: 4
+Position: 6
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Footer
+{{Fill Footer Description}}
+
+```yaml
+Type: Footer
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Header
+{{Fill Header Description}}
+
+```yaml
+Type: Header
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -188,7 +219,7 @@ Aliases: HT
 Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
 
 Required: False
-Position: 16
+Position: 18
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -203,7 +234,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 21
+Position: 23
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -219,7 +250,7 @@ Aliases: H
 Accepted values: yellow, green, cyan, magenta, blue, red, darkBlue, darkCyan, darkGreen, darkMagenta, darkRed, darkYellow, darkGray, lightGray, black, none
 
 Required: False
-Position: 13
+Position: 15
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -234,7 +265,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 24
+Position: 26
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -249,7 +280,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 25
+Position: 27
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -264,7 +295,7 @@ Parameter Sets: (All)
 Aliases: I
 
 Required: False
-Position: 7
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -279,7 +310,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 20
+Position: 22
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -294,7 +325,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 19
+Position: 21
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -310,7 +341,7 @@ Aliases:
 Accepted values: none, shadow, outline, outlineShadow, emboss, engrave
 
 Required: False
-Position: 18
+Position: 20
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -325,7 +356,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 23
+Position: 25
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -355,7 +386,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 17
+Position: 19
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -370,7 +401,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 22
+Position: 24
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -386,7 +417,7 @@ Aliases:
 Accepted values: superscript, subscript, none
 
 Required: False
-Position: 30
+Position: 32
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -401,7 +432,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 29
+Position: 31
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -417,7 +448,7 @@ Aliases:
 Accepted values: Text, Paragraph
 
 Required: False
-Position: 28
+Position: 30
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -432,7 +463,7 @@ Parameter Sets: (All)
 Aliases: SP
 
 Required: False
-Position: 12
+Position: 14
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -447,7 +478,7 @@ Parameter Sets: (All)
 Aliases: SA
 
 Required: False
-Position: 10
+Position: 12
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -462,7 +493,7 @@ Parameter Sets: (All)
 Aliases: SB
 
 Required: False
-Position: 11
+Position: 13
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -478,7 +509,7 @@ Aliases: ST
 Accepted values: none, strike, doubleStrike
 
 Required: False
-Position: 15
+Position: 17
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -493,7 +524,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 31
+Position: 33
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -508,7 +539,7 @@ Parameter Sets: (All)
 Aliases: T
 
 Required: False
-Position: 2
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -523,7 +554,7 @@ Parameter Sets: (All)
 Aliases: UC
 
 Required: False
-Position: 9
+Position: 11
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -539,7 +570,7 @@ Aliases: U
 Accepted values: none, singleLine, words, doubleLine, dotted, thick, dash, dotDash, dotDotDash, wave, dottedHeavy, dashedHeavy, dashDotHeavy, dashDotDotHeavy, dashLongHeavy, dashLong, wavyDouble, wavyHeavy
 
 Required: False
-Position: 8
+Position: 10
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
