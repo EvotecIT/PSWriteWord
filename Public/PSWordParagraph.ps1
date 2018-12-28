@@ -12,6 +12,8 @@ function Add-WordText {
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Footer] $Footer,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Header] $Header,
         [alias ("T")] [String[]]$Text,
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
@@ -50,16 +52,39 @@ function Add-WordText {
     if ($Alignment -eq $null) { $Alignment = @() }
     if ($Text.Count -eq 0) { return }
 
-    if ($Paragraph -ne $null) {
-        if (-not $AppendToExistingParagraph) {
-            $NewParagraph = $WordDocument.InsertParagraph()
-            $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
+    if ($Footer -or $Header) {
+        if ($Paragraph -ne $null) {
+            if (-not $AppendToExistingParagraph) {
+                if ($Header) {
+                    $NewParagraph = $Header.InsertParagraph()
+                } else {
+                    $NewParagraph = $Footer.InsertParagraph()
+                }
+                $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
+            }
+        } else {
+            if ($WordDocument -ne $null) {
+                if ($Header) {
+                    $Paragraph = $Header.InsertParagraph()
+                } else {
+                    $Paragraph = $Footer.InsertParagraph()
+                }
+            } else {
+                throw 'Both Paragraph and WordDocument are null'
+            }
         }
     } else {
-        if ($WordDocument -ne $null) {
-            $Paragraph = $WordDocument.InsertParagraph()
+        if ($Paragraph -ne $null) {
+            if (-not $AppendToExistingParagraph) {
+                $NewParagraph = $WordDocument.InsertParagraph()
+                $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
+            }
         } else {
-            throw 'Both Paragraph and WordDocument are null'
+            if ($WordDocument -ne $null) {
+                $Paragraph = $WordDocument.InsertParagraph()
+            } else {
+                throw 'Both Paragraph and WordDocument are null'
+            }
         }
     }
     for ($i = 0; $i -lt $Text.Length; $i++) {
