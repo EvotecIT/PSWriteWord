@@ -19,7 +19,7 @@ Foreach ($import in @($Assembly)) {
     }
 }
 
-Export-ModuleMember -Function '*'
+Export-ModuleMember -Function '*' -Alias '*'
 
 [string] $ManifestFile = '{0}.psd1' -f (Get-Item $PSCommandPath).BaseName;
 $ManifestPathAndFile = Join-Path -Path $PSScriptRoot -ChildPath $ManifestFile;

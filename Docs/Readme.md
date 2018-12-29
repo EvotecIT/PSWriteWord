@@ -53,6 +53,9 @@ Locale: {{ Update Locale }}
 ### [Add-WordPageBreak](Add-WordPageBreak.md)
 {{Fill in the Synopsis}}
 
+### [Add-WordPageCount](Add-WordPageCount.md)
+{{Fill in the Synopsis}}
+
 ### [Add-WordParagraph](Add-WordParagraph.md)
 {{Fill in the Synopsis}}
 
