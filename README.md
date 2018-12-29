@@ -11,6 +11,9 @@
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
 ## Updates:
+- 0.5.15 - 29.12.2018
+    - Added Add-WordPageCount with alias Add-WordPageNumber
+    - Added some examples and tests for above
 - 0.5.14 - 28.12.2018
     - Expanded support for Headers/Footers
     - Expanded Add-WordText with -Headers/Footers
