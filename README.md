@@ -1,48 +1,52 @@
 # PSWriteWord - PowerShell Module
 
 [![Build status](https://ci.appveyor.com/api/projects/status/5ib62bbpnj92wcd7?svg=true)](https://ci.appveyor.com/project/PrzemyslawKlys/pswriteword)
+
 <!--
 [![Build status](https://img.shields.io/powershellgallery/v/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
 [![Build status](https://img.shields.io/powershellgallery/dt/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
 -->
 
-*PSWriteWord* is PowerShell module to create Microsoft Word documents without Microsoft Word installed.
+_PSWriteWord_ is PowerShell module to create Microsoft Word documents without Microsoft Word installed.
 
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
 ## Updates:
-- 0.5.15 - 29.12.2018
-    - Added Add-WordPageCount with alias Add-WordPageNumber
-    - Added some examples and tests for above
-- 0.5.14 - 28.12.2018
-    - Expanded support for Headers/Footers
-    - Expanded Add-WordText with -Headers/Footers
-    - Added some examples and tests
-- 0.5.13 - 8.12.2018
-    - Fix Set-WordTableRowMergeCells
-    - Added Set-WordTableRowMergeCells TextMerge with Separator allowing for merging text from merged columns
-    - Fix for Remove-WordText
-    - Added tests for Set-WordTableRowMergeCells - does some additional testing to Tables just in case
-- 0.5.12 - 8.12.2018
-    - Fix for Set-WordTableRowMergeCells
-- 0.5.11 - 30.11.2018
-    - Added Alignment to Add-WordPicture
-- 0.5.10 - 29.11.2018
-    - Added Merge-WordDocument - which brings merging of Word Documents functionality
-- 0.5.9 - 5.11.2018
-    - Fix for Add-WordPicture
-- 0.5.8 - 19.10.2018
-    - Added small feature New-WordBlock for PSWinDocumentation
-- 0.5.7 - 19.10.2018
-    - Addition for Add-WordList to support singular (string,bool etc types)
-    - Added Add-WordList Tests
-- 0.5.6 - Bugfixes
-- 0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
-- 0.5.1 - Small cleanup
-- 0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
-- 0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
-- 0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
-- 0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
+
+-   0.5.16 - 9.01.2019
+    -   Fixed Get-WordDocument support for path with special characters
+-   0.5.15 - 29.12.2018
+    -   Added Add-WordPageCount with alias Add-WordPageNumber
+    -   Added some examples and tests for above
+-   0.5.14 - 28.12.2018
+    -   Expanded support for Headers/Footers
+    -   Expanded Add-WordText with -Headers/Footers
+    -   Added some examples and tests
+-   0.5.13 - 8.12.2018
+    -   Fix Set-WordTableRowMergeCells
+    -   Added Set-WordTableRowMergeCells TextMerge with Separator allowing for merging text from merged columns
+    -   Fix for Remove-WordText
+    -   Added tests for Set-WordTableRowMergeCells - does some additional testing to Tables just in case
+-   0.5.12 - 8.12.2018
+    -   Fix for Set-WordTableRowMergeCells
+-   0.5.11 - 30.11.2018
+    -   Added Alignment to Add-WordPicture
+-   0.5.10 - 29.11.2018
+    -   Added Merge-WordDocument - which brings merging of Word Documents functionality
+-   0.5.9 - 5.11.2018
+    -   Fix for Add-WordPicture
+-   0.5.8 - 19.10.2018
+    -   Added small feature New-WordBlock for PSWinDocumentation
+-   0.5.7 - 19.10.2018
+    -   Addition for Add-WordList to support singular (string,bool etc types)
+    -   Added Add-WordList Tests
+-   0.5.6 - Bugfixes
+-   0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
+-   0.5.1 - Small cleanup
+-   0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
+-   0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
+-   0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
+-   0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
 
 ## Example usage of Add-WordTable / Add-WordText in action
 
@@ -50,21 +54,23 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Requirements:
 
-- Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever).
-- Works only on PowerShell 5.1 (not tested on PowerShell 6.0 with Windows compatibility pack)
+-   Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever).
+-   Works only on PowerShell 5.1 (not tested on PowerShell 6.0 with Windows compatibility pack)
 
 ## Systems it should run on (marked those confirmed to run)
 
 ### Windows Client Systems
-- [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
-- [ ] Windows 8.1
-- [x] Windows 10 1809
-- [x] Windows 10 1803
+
+-   [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+-   [ ] Windows 8.1
+-   [x] Windows 10 1809
+-   [x] Windows 10 1803
 
 ### Windows Server Systems
-- [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
-- [x] Windows 2012 R2
-- [x] Windows 2016
+
+-   [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+-   [x] Windows 2012 R2
+-   [x] Windows 2016
 
 ## Credits
 
