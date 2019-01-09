@@ -16,7 +16,7 @@ function Get-WordDocument {
     )
     $Word = [Xceed.Words.NET.DocX]
     if ($FilePath -ne '') {
-        if (Test-Path -Path $FilePath) {
+        if (Test-Path -LiteralPath $FilePath) {
             try {
                 $WordDocument = $Word::Load($FilePath)
                 $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
@@ -106,7 +106,7 @@ function Save-WordDocument {
     ### Saving PART
 
     If ($OpenDocument) {
-        if (($FilePath -ne '') -and (Test-Path $FilePath)) {
+        if (($FilePath -ne '') -and (Test-Path -LiteralPath $FilePath)) {
             Invoke-Item -Path $FilePath
         } else {
             Write-Warning -Message "Couldn't open file as it doesn't exists - $FilePath"
