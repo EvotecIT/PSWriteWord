@@ -94,7 +94,8 @@ Describe 'Set-WordTableRowMergeCells - Should Merge 3 columns and keep text from
 
 
         $Table1.Rows[0].Cells[0].Paragraphs[0].Text | Should -Be 'test1'
-        $Table1.Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'test10 test101 test11'
+        $Table1.Rows[1].Cells[0].Paragraphs[0].Text | Should -Be 'test10'
+        $Table1.Rows[1].Cells[0].Paragraphs[1].Text | Should -Be 'test101 test11'
     }
 
 }
