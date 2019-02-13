@@ -13,7 +13,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
--   0.5.18 - 13.01.2019
+-   0.6.0 - 13.01.2019
     -   Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
     -   Published with merging all files into single PSM1 and optimized PSD1 file which speeds up greatly Import-Module process
         If you want to read more about why I did it: https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/ 
