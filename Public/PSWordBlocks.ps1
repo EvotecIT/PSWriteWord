@@ -77,7 +77,7 @@ function New-WordBlock {
 
     ### TEXT PROCESSING
     if ($Text) {
-        if ($TableData -or $ListData -or $ChartEnable -or $ListBuilderContent -or (-not $TextNoData)) {
+        if ($TableData -or $ListData -or  ($ChartEnable -and ($ChartKeys.Count -gt 0) -or ($ChartValues.Count -gt 0) ) -or $ListBuilderContent -or (-not $TextNoData)) {
             $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text -Alignment $TextAlignment
         } else {
             if ($TextNoData) {
@@ -129,7 +129,12 @@ function New-WordBlock {
     ### CHART PROCESSING
     if ($ChartEnable) {
         $WordDocument | New-WordBlockParagraph -EmptyParagraphs 1
-        Add-WordPieChart -WordDocument $WordDocument -ChartName $ChartTitle -Names $ChartKeys -Values $ChartValues -ChartLegendPosition $ChartLegendPosition -ChartLegendOverlay $ChartLegendOverlay
+        if (($ChartKeys.Count -eq 0) -or ($ChartValues.Count -eq 0)) {
+            # If chart had no values or keys it would create an empty chart and prevent saving of document in Word
+            # Handling this case with TextNoData above
+        } else {
+            Add-WordPieChart -WordDocument $WordDocument -ChartName $ChartTitle -Names $ChartKeys -Values $ChartValues -ChartLegendPosition $ChartLegendPosition -ChartLegendOverlay $ChartLegendOverlay
+        }
     }
     ### EMPTY PARAGRAPHS AFTER
     $WordDocument | New-WordBlockParagraph -EmptyParagraphs $EmptyParagraphsAfter
