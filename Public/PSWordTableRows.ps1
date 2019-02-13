@@ -99,7 +99,7 @@ function Set-WordTableRowMergeCells {
                 $Table.Rows[$RowNr].Paragraphs[$paragraph].Remove($TrackChanges)
             }
         } elseif ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
-            $CurrentParagraphCount = $Table1.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count
+            $CurrentParagraphCount = $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count
             $Table.Rows[$RowNr].MergeCells($ColumnNrStart, $ColumnNrEnd)
             if ($TextMerge) {
                 [string] $Texts = foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs | Select-Object -Skip ($CurrentParagraphCount - 1)) {
