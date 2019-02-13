@@ -1,4 +1,4 @@
-Import-Module pswriteword -Force
+Import-Module pswriteword #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\Example-Tables12-MergeCells-2.docx"
 
 $WordDocument = New-WordDocument $FilePath
@@ -14,5 +14,5 @@ Add-WordTableCellValue -Table $Table1 -Row 2 -Column 0 -Value "test20" -Supress 
 $Cell = Add-WordTableCellValue -Table $Table1 -Row 2 -Column 1 -Value "test21" 
 Add-WordText -WordDocument $WordDocument -Paragraph $Cell -Text "Test201" -Supress $true 
 Add-WordTableCellValue -Table $Table1 -Row 2 -Column 2 -Value "test22" -Supress $true
-Set-WordTableRowMergeCells -Table $Table1 -RowNr 1 -ColumnNrStart 0 -ColumnNrEnd 2 -Supress $True 
+Set-WordTableRowMergeCells -Table $Table1 -RowNr 1 -ColumnNrStart 0 -ColumnNrEnd 2 -Supress $True -TextMerge
 Save-WordDocument -WordDocument $WordDocument -OpenDocument -Supress $true

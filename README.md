@@ -13,6 +13,9 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+-   0.5.17 - 13.01.2019
+    -   Fixed an empty chart problem in Word Blocks. If values/keys were empty it would create an empty chart preventing Word saving feature to work.
+    -   Fixed merging of columns/cells in Table
 -   0.5.16 - 9.01.2019
     -   Fixed Get-WordDocument support for path with special characters
 -   0.5.15 - 29.12.2018

@@ -1,4 +1,4 @@
-Import-Module pswriteword -Force
+#Import-Module pswriteword #-Force
 $FilePath = "$Env:USERPROFILE\Desktop\Example-Tables12-MergeCells.docx"
 
 $WordDocument = New-WordDocument $FilePath
