@@ -104,11 +104,13 @@ function Set-WordTableRowMergeCells {
                 [string] $Texts = foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs) {
                     $Paragraph.Text
                 } -join $Separator
-                Set-WordTextText -Paragraph $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[0] -Text $Texts -Supress $True
             }
             # Removes Paragraphs from merged columns - Leaves only 1st column Text
             foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs | Select-Object -Skip 1) {
                 $Paragraph.Remove($TrackChanges)
+            }
+            if ($TextMerge) {
+                Set-WordTextText -Paragraph $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[0] -Text $Texts -Supress $True
             }
         }
     }
