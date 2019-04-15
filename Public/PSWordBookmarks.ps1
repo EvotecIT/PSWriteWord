@@ -1,5 +1,0 @@
-function Add-WordBookmark {
-    param (
-
-    )
-}

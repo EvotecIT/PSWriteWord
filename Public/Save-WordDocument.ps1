@@ -1,54 +1,8 @@
-function New-WordDocument {
-    [CmdletBinding()]
-    param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath = ''
-    )
-    $Word = [Xceed.Words.NET.DocX]
-    $WordDocument = $Word::Create($FilePath)
-    $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
-    return $WordDocument
-}
 
-function Get-WordDocument {
-    [CmdletBinding()]
-    param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath
-    )
-    $Word = [Xceed.Words.NET.DocX]
-    if ($FilePath -ne '') {
-        if (Test-Path -LiteralPath $FilePath) {
-            try {
-                $WordDocument = $Word::Load($FilePath)
-                $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
-            } catch {
-                $ErrorMessage = $_.Exception.Message
-                Write-Warning "Get-WordDocument - Document: $FilePath Error: $ErrorMessage"
-            }
-        } else {
-            Write-Warning "Get-WordDocument - Document doesn't exists in path $FilePath. Terminating loading word from file."
-            return
-        }
-    }
-    return $WordDocument
-}
 
-function Merge-WordDocument {
-    [CmdletBinding()]
-    param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath1,
-        [alias('Append')][string] $FilePath2,
-        [string] $FileOutput,
-        [switch] $OpenDocument,
-        [bool] $Supress = $false
-    )
-    $WordDocument1 = Get-WordDocument -FilePath $FilePath1
-    $WordDocument2 = Get-WordDocument -FilePath $FilePath2
 
-    $WordDocument1.InsertDocument($WordDocument2, $true)
 
-    $FilePathOutput = Save-WordDocument -WordDocument $WordDocument1 -FilePath $FileOutput -OpenDocument:$OpenDocument
-    if ($Supress) { return } else { return $FilePathOutput }
-}
+
 
 function Save-WordDocument {
     [CmdletBinding()]
