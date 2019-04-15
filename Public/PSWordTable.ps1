@@ -4,7 +4,7 @@ function Add-WordTable {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]$DataTable,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Array] $DataTable,
         [AutoFit] $AutoFit,
         [TableDesign] $Design,
         [Direction] $Direction,
@@ -62,13 +62,13 @@ function Add-WordTable {
     Process {
         if ($Run -eq 0) {
             if ($Transpose) { $DataTable = Format-TransposeTable -Object $DataTable }
-            $Data = Format-PSTable $DataTable -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+            $Data = Format-PSTable -Object $DataTable -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
             $WorksheetHeaders = $Data[0] # Saving Header information for later use
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
             ### Add Table or Add To TABLE
-            if ($Table -eq $null) {
+            if ($null -eq $Table) {
                 $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
             } else {
                 Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
@@ -76,12 +76,12 @@ function Add-WordTable {
             #Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
             $Run++
         } else {
-            $Data = Format-PSTable $DataTable -SkipTitle -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $WorksheetHeaders
+            $Data = Format-PSTable -Object $DataTable -SkipTitle -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $WorksheetHeaders
             $NumberRows = $Data.Count
             $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
             ### Add Table or Add To TABLE
-            if ($Table -eq $null) {
+            if ($null -eq $Table) {
                 $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
             } else {
 

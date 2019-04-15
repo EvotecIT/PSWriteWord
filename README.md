@@ -13,6 +13,22 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+-   0.7.0 - 
+    -   
+    - Includes new DocX DLL version 1.3 which added/fixed following:  
+        - In DocX, if the core properties part is missing in the document, it will now be created automatically instead of throwing an exception.
+        - In Container, the Paragraphs properties will no longer include the fallback elements.
+        - In Formatting, half point font sizes are now supported.
+        - In Paragraph, the LineSpacing property will now correctly update the spacing between lines of text.
+        - In Paragraph, calling the InsertText or RemoveText methods will now update the active runs.
+        - In Paragraph, when an Auto spacing is used, the LineSpacingAfter and/or LineSpacingBefore properties will now return 0.
+        - In Paragraph, a border can now be added to a simple text.
+        - In Paragraph, a default line spacing or indentation defined on the document will now be used when the paragraph doesn’t specify those values.
+        - In Paragraph, adding a bookmark with the same name as a previously deleted bookmark will no longer cause an exception.
+        - In Picture, its size will now be defined by using the default 96 pixels per inch.
+        - In Picture, the new HeightInches and WidthInches properties can now be used to get/set the image size in inches.
+        - In Table, Cell will now default to a Top vertical alignment.
+
 -   0.6.0 - 13.01.2019
     -   Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
     -   Published with merging all files into single PSM1 and optimized PSD1 file which speeds up greatly Import-Module process

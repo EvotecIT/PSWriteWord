@@ -1,9 +1,3 @@
-<#
-/// <summary>
-/// Table Cell Border styles
-/// source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellborders.aspx
-/// </summary>
-#>
 Add-Type -TypeDefinition @"
 public enum BorderStyle {
     Tcbs_none,

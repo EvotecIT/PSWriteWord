@@ -1,8 +1,3 @@
-<#
-/// <summary>
-/// Custom property types.
-/// </summary>
-#>
 Add-Type -TypeDefinition @"
 public enum CustomPropertyType {
     Text,
