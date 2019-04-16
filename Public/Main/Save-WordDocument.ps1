@@ -1,9 +1,3 @@
-
-
-
-
-
-
 function Save-WordDocument {
     [CmdletBinding()]
     param (

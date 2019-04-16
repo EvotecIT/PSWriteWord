@@ -1,18 +1,3 @@
-function Add-WordFooter {
-    [CmdletBinding()]
-    param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [nullable[bool]] $DifferentFirstPage,
-        [nullable[bool]] $DifferentOddAndEvenPages,
-        [bool] $Supress = $false
-    )
-    $WordDocument.AddFooters()
-    if ($DifferentOddAndEvenPages -ne $null ) { $WordDocument.DifferentFirstPage = $DifferentFirstPage }
-    if ($DifferentOddAndEvenPages -ne $null ) { $WordDocument.DifferentOddAndEvenPages = $DifferentOddAndEvenPages }
-
-    if ($Supress) { return } else { return $WordDocument.Footers }
-}
-
 function Add-WordHeader {
     [CmdletBinding()]
     param (
@@ -27,33 +12,9 @@ function Add-WordHeader {
     if ($Supress) { return } else { return $WordDocument.Headers }
 }
 
-function Get-WordHeader {
-    [CmdletBinding()]
-    param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [ValidateSet('All', 'First', 'Even', 'Odd')][string] $Type = 'All',
-        [bool] $Supress = $false
-    )
-    if ($Type -eq 'All') {
-        $WordDocument.Headers
-    } else {
-        $WordDocument.Headers.$Type
-    }
-}
 
-function Get-WordFooter {
-    [CmdletBinding()]
-    param (
-        [Xceed.Words.NET.Container]$WordDocument,
-        [ValidateSet('All', 'First', 'Even', 'Odd')][string] $Type = 'All',
-        [bool] $Supress = $false
-    )
-    if ($Type -eq 'All') {
-        $WordDocument.Footers
-    } else {
-        $WordDocument.Footers.$Type
-    }
-}
+
+
 
 <#
     /// <summary>

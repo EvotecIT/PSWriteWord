@@ -1,7 +1,7 @@
 ﻿function Convert-ObjectToProcess {
     [CmdletBinding()]
     param (
-        $DataTable
+        [Array] $DataTable
     )
     $ObjectType = $DataTable.GetType().Name
     Write-Verbose "Convert-ObjectToProcess - GetType Before Conversion: $ObjectType"
@@ -16,7 +16,7 @@
     }
 
     $ObjectType = $DataTable.GetType().Name
-    Write-Verbose "Convert-ObjectToProcess - Table row count: $(Get-ObjectCount $DataTable)"
+    Write-Verbose "Convert-ObjectToProcess - Table row count: $($DataTable.Count)"
     Write-Verbose "Convert-ObjectToProcess - Object Type: $ObjectType"
     Write-Verbose "Convert-ObjectToProcess - BaseType.Name: $($DataTable.GetType().BaseType.Name)"
     Write-Verbose "Convert-ObjectToProcess - GetType Before Final Conversion: $ObjectType"
@@ -29,7 +29,7 @@
         #} else {
 
 
-        if ($ObjectType -eq 'Collection`1' -and $(Get-ObjectCount $DataTable) -eq 1) {
+        if ($ObjectType -eq 'Collection`1' -and $($DataTable.Count) -eq 1) {
             Write-Verbose 'Convert-ObjectToProcess - Selecting all objects, returning array'
             $DataTable = [array] ($DataTable | Select-Object *)
         } else {
