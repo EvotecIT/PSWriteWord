@@ -5,13 +5,11 @@ function Add-WordChartSeries {
         [int[]] $Values
     )
 
-    $rNames = New-Object "System.Collections.Generic.List[string]"
-    $rValues = New-Object "System.Collections.Generic.List[int]"
-    foreach ($name in $names) {
-        $rNames.Add($name)
+    [Array] $rNames = foreach ($Name in $Names) {
+        $Name
     }
-    foreach ($value in $values) {
-        $rValues.Add($value)
+    [Array] $rValues = foreach ($value in $Values) {
+        $value
 
     }
     [Xceed.Words.NET.Series] $series = New-Object -TypeName Xceed.Words.NET.Series -ArgumentList $ChartName

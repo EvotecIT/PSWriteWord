@@ -13,9 +13,9 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
--   0.7.0 - 
-    -   
-    - Includes new DocX DLL version 1.3 which added/fixed following:  
+-   0.7.0 - 17.04.2019
+    - Some performance improvements
+    - Includes new DocX DLL version 1.3 which added/fixed following:
         - In DocX, if the core properties part is missing in the document, it will now be created automatically instead of throwing an exception.
         - In Container, the Paragraphs properties will no longer include the fallback elements.
         - In Formatting, half point font sizes are now supported.
@@ -32,7 +32,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 -   0.6.0 - 13.01.2019
     -   Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
     -   Published with merging all files into single PSM1 and optimized PSD1 file which speeds up greatly Import-Module process
-        If you want to read more about why I did it: https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/ 
+        If you want to read more about why I did it: https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/
 
 -   0.5.17 - 13.01.2019
     -   Fixed an empty chart problem in Word Blocks. If values/keys were empty it would create an empty chart preventing Word saving feature to work.
@@ -215,32 +215,4 @@ Function        Set-WordTextStrikeThrough                          0.5.0      PS
 Function        Set-WordTextText                                   0.5.0      PSWriteWord
 Function        Set-WordTextUnderlineColor                         0.5.0      PSWriteWord
 Function        Set-WordTextUnderlineStyle                         0.5.0      PSWriteWord
-```
-
-### Support functions - shouldn't be used but are there for support purposes.
-
-```powershell
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Function        Add-ToArray                                        0.5.0      PSWriteWord
-Function        Add-ToArrayAdvanced                                0.5.0      PSWriteWord
-Function        Convert-ListToHeadings                             0.5.0      PSWriteWord
-Function        Convert-ObjectToProcess                            0.5.0      PSWriteWord
-Function        ConvertTo-HashtableFromPsCustomObject              0.5.0      PSWriteWord
-Function        ConvertTo-PsCustomObjectFromHashtable              0.5.0      PSWriteWord
-Function        Format-PSTable                                     0.5.0      PSWriteWord
-Function        Format-PSTableConvertType1                         0.5.0      PSWriteWord
-Function        Format-PSTableConvertType2                         0.5.0      PSWriteWord
-Function        Format-PSTableConvertType3                         0.5.0      PSWriteWord
-Function        Format-TransposeTable                              0.5.0      PSWriteWord
-Function        Get-ColorFromARGB                                  0.5.0      PSWriteWord
-Function        Get-ObjectCount                                    0.5.0      PSWriteWord
-Function        Get-ObjectData                                     0.5.0      PSWriteWord
-Function        Get-ObjectTitles                                   0.5.0      PSWriteWord
-Function        Get-ObjectType                                     0.5.0      PSWriteWord
-Function        New-ArrayList                                      0.5.0      PSWriteWord
-Function        Remove-FromArray                                   0.5.0      PSWriteWord
-Function        Show-Array                                         0.5.0      PSWriteWord
-Function        Show-TableVisualization                            0.5.0      PSWriteWord
-
 ```
