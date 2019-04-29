@@ -33,7 +33,7 @@ function Save-WordDocument {
         } catch {
             $ErrorMessage = $_.Exception.Message
             if ($ErrorMessage -like "*The process cannot access the file*because it is being used by another process.*") {
-                $FilePath = "$($([System.IO.Path]::GetTempFileName()).Split('.')[0]).docx"
+                $FilePath = Get-FileName -Temporary -Extension 'docx'
                 Write-Warning -Message "Couldn't save file as it was in use. Trying different name $FilePath"
                 $Data = $WordDocument.SaveAs($FilePath)
             }
@@ -45,7 +45,7 @@ function Save-WordDocument {
         } catch {
             $ErrorMessage = $_.Exception.Message
             if ($ErrorMessage -like "*The process cannot access the file*because it is being used by another process.*") {
-                $FilePath = "$($([System.IO.Path]::GetTempFileName()).Split('.')[0]).docx"
+                $FilePath = Get-FileName -Temporary -Extension 'docx'
                 Write-Warning -Message "Couldn't save file as it was in use. Trying different name $FilePath"
                 $Data = $WordDocument.SaveAs($FilePath)
             }

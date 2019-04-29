@@ -13,6 +13,8 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+-   0.7.1 - 29.04.2019
+    - Fixed Saving issue when file was in use and path was having dots in temporary path
 -   0.7.0 - 17.04.2019
     - Some performance improvements
     - Includes new DocX DLL version 1.3 which added/fixed following:

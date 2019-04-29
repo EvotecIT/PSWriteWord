@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+﻿Import-Module PSWriteWord -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord1.docx"
 
