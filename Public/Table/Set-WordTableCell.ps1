@@ -1,5 +1,4 @@
-﻿
-function Set-WordTableCell {
+﻿function Set-WordTableCell {
     [CmdletBinding()]
     param (
         [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
