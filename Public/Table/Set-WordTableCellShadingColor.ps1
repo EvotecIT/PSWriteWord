@@ -1,78 +1,3 @@
-
-
-
-
-function Set-WordTableRowMergeCells {
-    [CmdletBinding()]
-    param(
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[int]] $RowNr,
-        [nullable[int]] $ColumnNrStart,
-        [nullable[int]] $ColumnNrEnd,
-        [switch] $MergeAll,
-        [switch] $TrackChanges,
-        [switch] $TextMerge, # Merges Text, otherwise leaves only text from 1st column
-        [string] $Separator = ' ',
-        [bool] $Supress = $false
-    )
-    if ($Table) {
-        if ($MergeAll -and $RowNr -ne $null) {
-            $CellsCount = $Table.Rows[$RowNr].Cells.Count
-            $Table.Rows[$RowNr].MergeCells(0, $CellsCount)
-            for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Paragraphs.Count; $paragraph++) {
-                $Table.Rows[$RowNr].Paragraphs[$paragraph].Remove($TrackChanges)
-            }
-        } elseif ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
-            $CurrentParagraphCount = $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count
-            $Table.Rows[$RowNr].MergeCells($ColumnNrStart, $ColumnNrEnd)
-            if ($TextMerge) {
-                [string] $Texts = foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs | Select-Object -Skip ($CurrentParagraphCount - 1)) {
-                    $Paragraph.Text
-                } -join $Separator
-            }
-            # Removes Paragraphs from merged columns - Leaves only 1st column Text
-            foreach ($Paragraph in $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs | Select-Object -Skip $CurrentParagraphCount) {
-                $Paragraph.Remove($TrackChanges)
-            }
-            if ($TextMerge) {
-                Set-WordTextText -Paragraph $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs[$CurrentParagraphCount - 1] -Text $Texts -Supress $True
-            }
-        }
-    }
-    if ($Supress) { return } else { return $Table }
-}
-
-function Set-WordTableCell {
-    [CmdletBinding()]
-    param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[int]] $RowNr,
-        [nullable[int]] $ColumnNr,
-        [System.Drawing.Color] $FillColor,
-        [System.Drawing.Color] $ShadingColor,
-        [bool] $Supress = $false
-    )
-    $Table = Set-WordTableCellFillColor -Table $Table -RowNr $RowNr -ColumnNr $ColumnNr -FillColor $FillColor -Supress $false
-    $Table = Set-WordTableCellShadingColor  -Table $Table -RowNr $RowNr -ColumnNr $ColumnNr -ShadingColor $ShadingColor -Supress $false
-    if ($Supress) { return } else { return $Table }
-}
-
-function Set-WordTableCellFillColor {
-    [CmdletBinding()]
-    param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[int]] $RowNr,
-        [nullable[int]] $ColumnNr,
-        [nullable[System.Drawing.Color]] $FillColor,
-        [bool] $Supress = $false
-    )
-
-    if ($Table -ne $null -and $RowNr -ne $null -and $ColumnNr -ne $null -and $FillColor -ne $null) {
-        $Cell = $Table.Rows[$RowNr].Cells[$ColumnNr]
-        $Cell.FillColor = $FillColor
-    }
-    if ($Supress) { return } else { return $Table }
-}
 function Set-WordTableCellShadingColor {
     [CmdletBinding()]
     param (
@@ -89,15 +14,7 @@ function Set-WordTableCellShadingColor {
     if ($Supress) { return } else { return $Table }
 }
 
-function Get-ColorFromARGB {
-    param(
-        [int] $A,
-        [int] $R,
-        [int] $G,
-        [int] $B
-    )
-    return [system.drawing.color]::FromArgb($A, $R, $G, $B)
-}
+
 
 <#
  $Section3Table.Rows[0].Cells[0]

@@ -1,5 +1,3 @@
-
-
 function Set-WordTableColumnWidthByIndex {
     [CmdletBinding()]
     param (
@@ -11,4 +9,3 @@ function Set-WordTableColumnWidthByIndex {
         $Table.SetColumnWidth($Index, $Width)
     }
 }
-

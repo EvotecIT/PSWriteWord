@@ -19,10 +19,9 @@
     }
     $chart.AddSeries($Series)
 
-    if ($Paragraph -eq $null) {
+    if ($null -eq $Paragraph) {
         $WordDocument.InsertChart($chart)
     } else {
         $WordDocument.InsertChartAfterParagraph($chart, $paragraph)
     }
-
 }

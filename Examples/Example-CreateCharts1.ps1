@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module .\PSWriteWord.psd1 -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateCharts1.docx"
 
@@ -7,6 +7,7 @@ Add-WordText -WordDocument $WordDocument -Text 'Pie Chart Example #1' `
     -FontSize 15 `
     -Color Blue `
     -Bold $true -HeadingType Heading1 -Supress $True
+
 
 Add-WordPieChart -WordDocument $WordDocument -ChartName 'My finances' -Names 'Today', 'Yesterday', 'Two days ago' -Values 1050.50, 2000, 20000 -ChartLegendPosition Bottom -ChartLegendOverlay $false
 
