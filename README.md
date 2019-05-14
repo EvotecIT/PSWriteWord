@@ -1,6 +1,18 @@
 # PSWriteWord - PowerShell Module
 
+<center>
+
+[![PowerShellGallery Version](https://img.shields.io/powershellgallery/v/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
 [![Build status](https://ci.appveyor.com/api/projects/status/5ib62bbpnj92wcd7?svg=true)](https://ci.appveyor.com/project/PrzemyslawKlys/pswriteword)
+
+[![PowerShellGallery Platform](https://img.shields.io/powershellgallery/p/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
+[![PowerShellGallery Preview Version](https://img.shields.io/powershellgallery/vpre/PSWriteWord.svg?label=powershell%20gallery%20preview&colorB=yellow)](https://www.powershellgallery.com/packages/PSWriteWord)
+
+![Top Language](https://img.shields.io/github/languages/top/evotecit/PSWriteWord.svg)
+![Code](https://img.shields.io/github/languages/code-size/evotecit/PSWriteWord.svg)
+[![PowerShellGallery Downloads](https://img.shields.io/powershellgallery/dt/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
+
+</center>
 
 <!--
 [![Build status](https://img.shields.io/powershellgallery/v/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
