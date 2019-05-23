@@ -8,7 +8,7 @@
         [nullable[single]] $MarginBottom,
         [nullable[single]] $PageWidth,
         [nullable[single]] $PageHeight,
-        [alias ("PageLayout")][nullable[Orientation]] $Orientation
+        [alias ("PageLayout")][nullable[Xceed.Words.NET.Orientation]] $Orientation
     )
 
     Set-WordMargins -WordDocument $WordDocument -MarginLeft $MarginLeft -MarginRight $MarginRight -MarginTop $MarginTop -MarginBottom $Mar

@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module .\PSWriteWord.psd1 -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-ListItems1.docx"
 $ListOfItems = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
@@ -26,5 +26,4 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be
 $List = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $false
 Set-WordList -List $List -FontSize 8 -FontFamily 'Tahoma' -Color Orange -Supress $True
 
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $true -OpenDocument

@@ -5,9 +5,6 @@ $ListOfItemsNotArray1 = 'Test1'
 $ListOfItemsNotArray2 = $false
 $ListOfItemsNotArray3 = $false, $true
 
-$OverrideLevels = @(0, 1, 2, 1, 3)
-$OverrideLevelsPartially = @(0, 3)
-
 $WordDocument = New-WordDocument $FilePath
 
 Add-WordText -WordDocument $WordDocument -Text 'This is text after which will be bulleted list' -FontSize 15 -UnderlineStyle singleLine -HeadingType Heading2 -Supress $True

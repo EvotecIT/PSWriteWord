@@ -3,7 +3,7 @@
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Paragraph', 'Table', 'List')][Xceed.Words.NET.InsertBeforeOrAfter] $WordObject,
-        [alias('Insert')][InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
+        [alias('Insert')][Xceed.Words.NET.InsertBeforeOrAfter] $InsertWhere = [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf,
         [bool] $Supress = $false
     )
     $RemovalRequired = $false
@@ -12,7 +12,7 @@
         $RemovalRequired = $True
         $WordObject = $WordDocument.InsertParagraph()
     }
-    if ($InsertWhere -eq [InsertWhere]::AfterSelf) {
+    if ($InsertWhere -eq [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf) {
         $WordObject.InsertPageBreakAfterSelf()
     } else {
         $WordObject.InsertPageBreakBeforeSelf()

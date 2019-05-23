@@ -2,8 +2,8 @@
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [Alignment] $Alignment,
-        [Direction] $Direction,
+        [Xceed.Words.NET.Alignment] $Alignment,
+        [Xceed.Words.NET.Direction] $Direction,
         [string] $Language,
         [bool] $Supress = $false
     )

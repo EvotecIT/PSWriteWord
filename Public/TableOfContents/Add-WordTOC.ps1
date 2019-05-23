@@ -4,8 +4,8 @@ function Add-WordTOC {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [alias ('BeforeParagraph')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $Title = 'Table of contents',
-        [TableOfContentsSwitches[]] $Switches = @(),
-        [alias ('Heading', 'HeadingType')][HeadingType] $HeaderStyle = [HeadingType]::Heading1,
+        [Xceed.Words.NET.TableOfContentsSwitches[]] $Switches = @(),
+        [alias ('Heading', 'HeadingType')][Xceed.Words.NET.HeadingType] $HeaderStyle = [Xceed.Words.NET.HeadingType]::Heading1,
         [int] $MaxIncludeLevel = 3,
         [int] $RightTabPos = $null,
         [bool] $Supress = $false
@@ -18,7 +18,7 @@ function Add-WordTOC {
         foreach ($S in $switches) {
             $TableOfContentSwitch += $s -As [Int]
         }
-        Write-Verbose $TableOfContentSwitch
+        #Write-Verbose $TableOfContentSwitch
 
 
         #if ($Title -eq $null -or $Title -eq '') {

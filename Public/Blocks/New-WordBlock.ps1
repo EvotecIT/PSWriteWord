@@ -6,14 +6,14 @@ function New-WordBlock {
         [nullable[bool]] $TocGlobalDefinition,
         [string] $TocGlobalTitle,
         [int] $TocGlobalRightTabPos,
-        [TableOfContentsSwitches[]] $TocGlobalSwitches,
+        [Xceed.Words.NET.TableOfContentsSwitches[]] $TocGlobalSwitches,
 
         ### TOC
         [nullable[bool]] $TocEnable,
         [string] $TocText,
         [int] $TocListLevel,
-        [nullable[ListItemType]] $TocListItemType,
-        [nullable[HeadingType]] $TocHeadingType,
+        [nullable[Xceed.Words.NET.ListItemType]] $TocListItemType,
+        [nullable[Xceed.Words.NET.HeadingType]] $TocHeadingType,
 
         ### Paragraphs/PageBreaks
         [int] $EmptyParagraphsBefore,
@@ -24,39 +24,39 @@ function New-WordBlock {
         ### Text Data
         [string] $Text,
         [string] $TextNoData,
-        [nullable[Alignment][]] $TextAlignment = [Alignment]::Both,
+        [nullable[Xceed.Words.NET.Alignment][]] $TextAlignment = [Xceed.Words.NET.Alignment]::Both,
 
         ### Table Data
         [Object] $TableData,
-        [nullable[TableDesign]] $TableDesign = [TableDesign]::None,
+        [nullable[Xceed.Words.NET.TableDesign]] $TableDesign = [Xceed.Words.NET.TableDesign]::None,
         [nullable[int]] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
-        [nullable[Alignment]] $TableTitleAlignment = 'center',
+        [nullable[Xceed.Words.NET.Alignment]] $TableTitleAlignment = 'center',
         [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
         [float[]] $TableColumnWidths,
 
         ### List Data
         [Object] $ListData,
-        [nullable[ListItemType]] $ListType,
+        [nullable[Xceed.Words.NET.ListItemType]] $ListType,
         [string] $ListTextEmpty,
 
         ### List Builder
         [string[]] $ListBuilderContent,
-        [ListItemType[]] $ListBuilderType,
+        [Xceed.Words.NET.ListItemType[]] $ListBuilderType,
         [int[]] $ListBuilderLevel,
 
         ### String Based Data - for functions that return String type data
         [Object] $TextBasedData,
-        [nullable[Alignment][]] $TextBasedDataAlignment = [Alignment]::Both,
+        [nullable[Xceed.Words.NET.Alignment][]] $TextBasedDataAlignment = [Xceed.Words.NET.Alignment]::Both,
 
         ### Chart Data
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
         $ChartKeys,
         $ChartValues,
-        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
+        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Bottom,
         [bool] $ChartLegendOverlay
     )
     ### PAGE BREAKS BEFORE
@@ -77,7 +77,7 @@ function New-WordBlock {
 
     ### TEXT PROCESSING
     if ($Text) {
-        if ($TableData -or $ListData -or  ($ChartEnable -and ($ChartKeys.Count -gt 0) -or ($ChartValues.Count -gt 0) ) -or $ListBuilderContent -or (-not $TextNoData)) {
+        if ($TableData -or $ListData -or ($ChartEnable -and ($ChartKeys.Count -gt 0) -or ($ChartValues.Count -gt 0) ) -or $ListBuilderContent -or (-not $TextNoData)) {
             $Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text $Text -Alignment $TextAlignment
         } else {
             if ($TextNoData) {
@@ -113,12 +113,26 @@ function New-WordBlock {
     }
 
     ### LIST BUILDER PROCESSING
+    <#
     if ($ListBuilderContent) {
         $ListDomainInformation = $null
         for ($a = 0; $a -lt $ListBuilderContent.Count; $a++) {
             $ListDomainInformation = $ListDomainInformation | New-WordListItem -WordDocument $WordDocument -ListLevel $ListBuilderLevel[$a] -ListItemType $ListBuilderType[$a] -ListValue $ListBuilderContent[$a]
         }
         $Paragraph = Add-WordListItem -WordDocument $WordDocument -Paragraph $Paragraph -List $ListDomainInformation #-Supress $true
+    }
+    #>
+
+    if ($ListBuilderContent) {
+        $Paragraph = New-WordList -WordDocument $WordDocument -Type $ListBuilderType[0] {
+            #$ListDomainInformation = $null
+            for ($a = 0; $a -lt $ListBuilderContent.Count; $a++) {
+                #$ListDomainInformation = $ListDomainInformation | New-WordListItem -WordDocument $WordDocument -ListLevel $ListBuilderLevel[$a] -ListItemType $ListBuilderType[$a] -ListValue $ListBuilderContent[$a]
+
+                New-WordListItem -ListLevel $ListBuilderLevel[$a] -ListValue $ListBuilderContent[$a]
+            }
+            # $Paragraph = Add-WordListItem -WordDocument $WordDocument -Paragraph $Paragraph -List $ListDomainInformation #-Supress $true
+        } -Supress $False
     }
 
     ### SIMPLE TEXT PROCESSING - if source is bunch of text this is the way to go

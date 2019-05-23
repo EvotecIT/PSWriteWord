@@ -2,7 +2,7 @@ function Add-WordProtection {
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
-        [EditRestrictions] $EditRestrictions,
+        [Xceed.Words.NET.EditRestrictions] $EditRestrictions,
         [string] $Password
     )
     if ($Password -eq $null) {

@@ -5,7 +5,7 @@
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [Xceed.Words.NET.DocXElement] $Picture,
         [alias('FileImagePath')][string] $ImagePath,
-        [Alignment] $Alignment,
+        [Xceed.Words.NET.Alignment] $Alignment,
         [int] $Rotation,
         [switch] $FlipHorizontal,
         [switch] $FlipVertical,

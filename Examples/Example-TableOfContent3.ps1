@@ -10,6 +10,5 @@ Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
 Add-WordText -WordDocument $WordDocument -Text 'This is my second title' -HeadingType Heading1 -Color Red -CapsStyle caps -Supress $True
 Add-WordSection -WordDocument $WordDocument -PageBreak -Supress $True
 Add-WordText  -WordDocument $WordDocument -Text 'This is my third title' -HeadingType Heading2 -Italic $true -Bold $true -Supress $True
-Save-WordDocument $WordDocument -Supress $True
+Save-WordDocument $WordDocument -Supress $True -OpenDocument
 ### Start Word with file
-Invoke-Item $FilePath

@@ -1,6 +1,6 @@
 # PSWriteWord - PowerShell Module
 
-<center>
+<p align="center">
 
 [![PowerShellGallery Version](https://img.shields.io/powershellgallery/v/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
 [![Build status](https://ci.appveyor.com/api/projects/status/5ib62bbpnj92wcd7?svg=true)](https://ci.appveyor.com/project/PrzemyslawKlys/pswriteword)
@@ -12,7 +12,7 @@
 ![Code](https://img.shields.io/github/languages/code-size/evotecit/PSWriteWord.svg)
 [![PowerShellGallery Downloads](https://img.shields.io/powershellgallery/dt/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
 
-</center>
+</p>
 
 <!--
 [![Build status](https://img.shields.io/powershellgallery/v/PSWriteWord.svg)](https://www.powershellgallery.com/packages/PSWriteWord)
@@ -24,6 +24,11 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
 ## Updates:
+
+-   0.8.0 (Breaking Changes)- Unreleased/InProgress
+    -   Removed custom enums, using Xceed ones instead
+    -   Changed how Add-WordList works
+    -   Changed how New-WordList / New-WordListItem works - be sure to review new, easier way
 
 -   0.7.1 - 29.04.2019
     - Fixed Saving issue when file was in use and path was having dots in temporary path

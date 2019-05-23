@@ -2,7 +2,7 @@
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[TableBorderType]] $TableBorderType,
+        [nullable[Xceed.Words.NET.TableBorderType]] $TableBorderType,
         $Border,
         [bool] $Supress
     )

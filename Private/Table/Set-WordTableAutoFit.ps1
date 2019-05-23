@@ -2,7 +2,7 @@
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[AutoFit]] $AutoFit
+        [nullable[Xceed.Words.NET.AutoFit]] $AutoFit
     )
     if ($Table -ne $null -and $AutoFit -ne $null) {
         Write-Verbose "Set-WordTabelAutofit - Setting Table Autofit to: $AutoFit"

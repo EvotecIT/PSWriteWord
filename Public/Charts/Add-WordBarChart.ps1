@@ -7,15 +7,15 @@
         [string[]] $Names,
         [int[]] $Values,
         [Xceed.Words.NET.Series[]] $ChartSeries,
-        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
+        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Left,
         [bool] $ChartLegendOverlay = $false,
-        [BarGrouping] $BarGrouping = [BarGrouping]::Standard,
-        [BarDirection] $BarDirection = [BarDirection]::Bar,
+        [Xceed.Words.NET.BarGrouping] $BarGrouping = [Xceed.Words.NET.BarGrouping]::Standard,
+        [Xceed.Words.NET.BarDirection] $BarDirection = [Xceed.Words.NET.BarDirection]::Bar,
         [int] $BarGapWidth = 200,
         [switch] $NoLegend
     )
 
-    if ($ChartSeries -eq $null) {
+    if ($null -eq $ChartSeries) {
         $ChartSeries = Add-WordChartSeries -ChartName $ChartName -Names $Names -Values $Values
     }
 

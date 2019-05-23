@@ -8,10 +8,8 @@ Add-WordParagraph -WordDocument $WordDocument
 $List = Add-WordList -WordDocument $WordDocument -ListType Numbered -ListData $ListOfItems -Supress $false
 Set-WordList -List $List -FontSize 6 -FontFamily 'Tahoma' -Color Orange -Supress $True
 
-$WordDocument.Paragraphs
-$WordDocument.Lists
-$WordDocument.ParagraphsDeepSearch
+#$WordDocument.Paragraphs
+#$WordDocument.Lists
+#$WordDocument.ParagraphsDeepSearch
 
-
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $true -OpenDocument

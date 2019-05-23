@@ -1,11 +1,11 @@
 function Add-WordPageCount {
     [alias('Add-WordPageNumber')]
     param(
-        [PageNumberFormat] $PageNumberFormat = [PageNumberFormat]::normal,
+        [Xceed.Words.NET.PageNumberFormat] $PageNumberFormat = [Xceed.Words.NET.PageNumberFormat]::normal,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Footers] $Footer,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Headers] $Header,
-        [Alignment] $Alignment,
+        [Xceed.Words.NET.Alignment] $Alignment,
         [ValidateSet('All', 'First', 'Even', 'Odd')][string] $Type = 'All',
         [ValidateSet('Both', 'PageCountOnly', 'PageNumberOnly')][string] $Option = 'Both',
         [string] $TextBefore,

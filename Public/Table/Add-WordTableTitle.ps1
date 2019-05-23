@@ -9,27 +9,27 @@ function Add-WordTableTitle {
         [alias ("FontName")] [string] $FontFamily,
         [alias ("B")] [nullable[bool]] $Bold,
         [alias ("I")] [nullable[bool]] $Italic,
-        [alias ("U")] [nullable[UnderlineStyle]] $UnderlineStyle,
+        [alias ("U")] [nullable[Xceed.Words.NET.UnderlineStyle]] $UnderlineStyle,
         [alias ('UC')] [nullable[System.Drawing.Color]]$UnderlineColor,
         [alias ("SA")] [nullable[double]] $SpacingAfter,
         [alias ("SB")] [nullable[double]] $SpacingBefore ,
         [alias ("SP")] [nullable[double]] $Spacing ,
-        [alias ("H")] [nullable[highlight]] $Highlight ,
-        [alias ("CA")] [nullable[CapsStyle]] $CapsStyle ,
-        [alias ("ST")] [nullable[StrikeThrough]] $StrikeThrough ,
-        [alias ("HT")] [nullable[HeadingType]] $HeadingType ,
+        [alias ("H")] [nullable[Xceed.Words.NET.highlight]] $Highlight ,
+        [alias ("CA")] [nullable[Xceed.Words.NET.CapsStyle]] $CapsStyle ,
+        [alias ("ST")] [nullable[Xceed.Words.NET.StrikeThrough]] $StrikeThrough ,
+        [alias ("HT")] [nullable[Xceed.Words.NET.HeadingType]] $HeadingType ,
         [nullable[int]] $PercentageScale , # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        [nullable[Misc]] $Misc ,
+        [nullable[Xceed.Words.NET.Misc]] $Misc ,
         [string] $Language ,
         [nullable[int]]$Kerning , # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool]]$Hidden ,
         [nullable[int]]$Position , #  "Value must be in the range -1585 - 1585"
         [nullable[single]] $IndentationFirstLine ,
         [nullable[single]] $IndentationHanging ,
-        [nullable[Alignment]] $Alignment ,
-        [nullable[Direction]] $DirectionFormatting ,
-        [nullable[ShadingType]] $ShadingType ,
-        [nullable[Script]] $Script ,
+        [nullable[Xceed.Words.NET.Alignment]] $Alignment ,
+        [nullable[Xceed.Words.NET.Direction]] $DirectionFormatting ,
+        [nullable[Xceed.Words.NET.ShadingType]] $ShadingType ,
+        [nullable[Xceed.Words.NET.Script]] $Script ,
         [bool] $Supress = $false
     )
     Write-Verbose "Add-WordTableTitle - Title Count $($Titles.Count) Supress $Supress"

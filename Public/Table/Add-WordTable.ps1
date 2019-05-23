@@ -5,15 +5,17 @@ function Add-WordTable {
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Array] $DataTable,
-        [AutoFit] $AutoFit,
-        [TableDesign] $Design,
-        [Direction] $Direction,
+        [Xceed.Words.NET.AutoFit] $AutoFit,
+        [Xceed.Words.NET.TableDesign] $Design,
+        [Xceed.Words.NET.Direction] $Direction,
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
         [nullable[bool]] $BreakAcrossPages,
         [nullable[int]] $MaximumColumns,
-        [string[]]$Titles = @('Name', 'Value'),
+        #[string[]]$Titles = @('Name', 'Value'),
+        [string] $OverwriteTitle,
         [switch] $DoNotAddTitle,
+        [Xceed.Words.NET.Alignment] $TitleAlignment = [Xceed.Words.NET.Alignment]::center,
         [alias ("ColummnWidth")][float[]] $ColumnWidth = @(),
         [nullable[float]] $TableWidth = $null,
         [bool] $Percentage,
@@ -22,27 +24,27 @@ function Add-WordTable {
         [alias ("FontName")] [string[]] $FontFamily = @(),
         [alias ("B")] [nullable[bool][]] $Bold = @(),
         [alias ("I")] [nullable[bool][]] $Italic = @(),
-        [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ("U")] [Xceed.Words.NET.UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
         [alias ("SB")] [double[]] $SpacingBefore = @(),
         [alias ("SP")] [double[]] $Spacing = @(),
-        [alias ("H")] [highlight[]] $Highlight = @(),
-        [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
-        [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
-        [alias ("HT")] [HeadingType[]] $HeadingType = @(),
+        [alias ("H")] [Xceed.Words.NET.Highlight[]] $Highlight = @(),
+        [alias ("CA")] [Xceed.Words.NET.CapsStyle[]] $CapsStyle = @(),
+        [alias ("ST")] [Xceed.Words.NET.StrikeThrough[]] $StrikeThrough = @(),
+        [alias ("HT")] [Xceed.Words.NET.HeadingType[]] $HeadingType = @(),
         [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        [Misc[]] $Misc = @(),
+        [Xceed.Words.NET.Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool][]]$Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [Alignment[]] $Alignment = @(),
-        [Direction[]] $DirectionFormatting = @(),
-        [ShadingType[]] $ShadingType = @(),
-        [Script[]] $Script = @(),
+        [Xceed.Words.NET.Alignment[]] $Alignment = @(),
+        [Xceed.Words.NET.Direction[]] $DirectionFormatting = @(),
+        [Xceed.Words.NET.ShadingType[]] $ShadingType = @(),
+        [Xceed.Words.NET.Script[]] $Script = @(),
         [nullable[bool][]] $NewLine = @(),
         [switch] $KeepLinesTogether,
         [switch] $KeepWithNextParagraph,
@@ -51,8 +53,8 @@ function Add-WordTable {
         [string[]] $ExcludeProperty,
         [switch] $NoAliasOrScriptProperties,
         [switch] $DisplayPropertySet,
-        [bool] $Supress = $false,
-        [switch] $VerboseColor
+
+        [bool] $Supress = $false
     )
     Begin {
         [int] $Run = 0
@@ -63,7 +65,7 @@ function Add-WordTable {
         if ($DataTable.Count -gt 0) {
             if ($Run -eq 0) {
                 if ($Transpose) { $DataTable = Format-TransposeTable -Object $DataTable }
-                $Data = Format-PSTable -Object $DataTable -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet
+                $Data = Format-PSTable -Object $DataTable -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -SkipTitle:$DoNotAddTitle
                 $WorksheetHeaders = $Data[0] # Saving Header information for later use
                 $NumberRows = $Data.Count
                 $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
@@ -100,40 +102,40 @@ function Add-WordTable {
         $NumberRows = $DataTable.Count
         Write-Verbose 'Add-WordTable - Option 4'
         Write-Verbose "Add-WordTable - Column Count $($NumberColumns) Rows Count $NumberRows "
-
-    if (-not $DoNotAddTitle) {
-        Add-WordTableTitle -Title $Titles `
-            -Table $Table `
-            -MaximumColumns $MaximumColumns `
-            -Color $Color[0] `
-            -FontSize $FontSize[0] `
-            -FontFamily $FontFamily[0] `
-            -Bold $Bold[0] `
-            -Italic $Italic[0] `
-            -UnderlineStyle $UnderlineStyle[0] `
-            -UnderlineColor $UnderlineColor[0] `
-            -SpacingAfter $SpacingAfter[0] `
-            -SpacingBefore $SpacingBefore[0] `
-            -Spacing $Spacing[0] `
-            -Highlight $Highlight[0] `
-            -CapsStyle $CapsStyle[0] `
-            -StrikeThrough $StrikeThrough[0] `
-            -HeadingType $HeadingType[0] `
-            -PercentageScale $PercentageScale[0] `
-            -Misc $Misc[0] `
-            -Language $Language[0] `
-            -Kerning $Kerning[0] `
-            -Hidden $Hidden[0] `
-            -Position $Position[0] `
-            -IndentationFirstLine $IndentationFirstLine[0] `
-            -IndentationHanging $IndentationHanging[0] `
-            -Alignment $Alignment[0] `
-            -DirectionFormatting $DirectionFormatting[0] `
-            -ShadingType $ShadingType[0] `
-            -Script $Script[0] -Supress $True
-    }
-    #>
-
+#>
+            <#
+            if (-not $DoNotAddTitle) {
+                Add-WordTableTitle -Title $Titles `
+                    -Table $Table `
+                    -MaximumColumns $MaximumColumns `
+                    -Color $Color[0] `
+                    -FontSize $FontSize[0] `
+                    -FontFamily $FontFamily[0] `
+                    -Bold $Bold[0] `
+                    -Italic $Italic[0] `
+                    -UnderlineStyle $UnderlineStyle[0] `
+                    -UnderlineColor $UnderlineColor[0] `
+                    -SpacingAfter $SpacingAfter[0] `
+                    -SpacingBefore $SpacingBefore[0] `
+                    -Spacing $Spacing[0] `
+                    -Highlight $Highlight[0] `
+                    -CapsStyle $CapsStyle[0] `
+                    -StrikeThrough $StrikeThrough[0] `
+                    -HeadingType $HeadingType[0] `
+                    -PercentageScale $PercentageScale[0] `
+                    -Misc $Misc[0] `
+                    -Language $Language[0] `
+                    -Kerning $Kerning[0] `
+                    -Hidden $Hidden[0] `
+                    -Position $Position[0] `
+                    -IndentationFirstLine $IndentationFirstLine[0] `
+                    -IndentationHanging $IndentationHanging[0] `
+                    -Alignment $Alignment[0] `
+                    -DirectionFormatting $DirectionFormatting[0] `
+                    -ShadingType $ShadingType[0] `
+                    -Script $Script[0] -Supress $True
+            }
+#>
             ### Continue formatting
             if ($ContinueFormatting -eq $true) {
                 $Formatting = Set-WordContinueFormatting -Count $NumberRows `
@@ -195,13 +197,16 @@ function Add-WordTable {
 
             # $RowNr = 0
             #Write-Color "[i] Presenting table after conversion" -Color Yellow
+            # if ($DoNotAddTitle) {
+            #     if ($RowNr -eq 0) {
+            #         $Data = $Data | Select-Object -Skip 1
+            #      }
+            # }
             foreach ($Row in $Data) {
                 $ColumnNr = 0
                 foreach ($Column in $Row) {
-                    if ($VerboseColor) {
-                        Write-Color 'Row: ', $RowNr, ' Column: ', $ColumnNr, " Data: ", $Column -Color White, Yellow, White, Green
-                    }
-                    Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
+                    # Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
+
                     $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Column `
                         -Color $Color[$RowNr] `
                         -FontSize $FontSize[$RowNr] `
@@ -249,6 +254,12 @@ function Add-WordTable {
                 -BreakPageAfterTable:$BreakPageAfterTable `
                 -BreakPageBeforeTable:$BreakPageBeforeTable `
                 -BreakAcrossPages $BreakAcrossPages -Supress $True
+
+            if ($OverwriteTitle) {
+                $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll
+                $TableParagraph = Get-WordTableRow -Table $Table -RowNr 0 -ColumnNr 0
+                $TableParagraph = Set-WordText -Paragraph $TableParagraph -Text $OverwriteTitle -Alignment $TitleAlignment
+            }
 
             ### return data
             if ($Supress) { return } else { return $Table }

@@ -18,8 +18,6 @@ $ADSnapshot.ForestInformation = $(
 $ADSnapshot.DomainInformation = $(Get-ADDomain)
 # Get basic Ad information end
 
-Clear-Host
-
 $WordDocument = New-WordDocument $FilePath
 
 Add-WordText -WordDocument $WordDocument -Text "Active Directory Root DSE" -FontSize 15 -CapsStyle smallCaps -Alignment both -Supress $True
@@ -34,7 +32,4 @@ Add-WordText -WordDocument $WordDocument -Text "Active Directory Domain Informat
 Add-WordParagraph -WordDocument $WordDocument -Supress $True
 Add-WordList -WordDocument $WordDocument -DataTable $ADSnapshot.DomainInformation -Supress $true -Verbose
 
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
-
-### Start Word with file
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True -OpenDocument

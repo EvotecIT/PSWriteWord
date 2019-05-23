@@ -6,27 +6,27 @@
         [alias ("FontName")] [string[]] $FontFamily = @(),
         [alias ("B")] [nullable[bool][]] $Bold = @(),
         [alias ("I")] [nullable[bool][]] $Italic = @(),
-        [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ("U")] [Xceed.Words.NET.UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
         [alias ("SB")] [double[]] $SpacingBefore = @(),
         [alias ("SP")] [double[]] $Spacing = @(),
-        [alias ("H")] [highlight[]] $Highlight = @(),
-        [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
-        [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
-        [alias ("HT")] [HeadingType[]] $HeadingType = @(),
+        [alias ("H")] [Xceed.Words.NET.highlight[]] $Highlight = @(),
+        [alias ("CA")] [Xceed.Words.NET.CapsStyle[]] $CapsStyle = @(),
+        [alias ("ST")] [Xceed.Words.NET.StrikeThrough[]] $StrikeThrough = @(),
+        [alias ("HT")] [Xceed.Words.NET.HeadingType[]] $HeadingType = @(),
         [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        [Misc[]] $Misc = @(),
+        [Xceed.Words.NET.Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool][]]$Hidden = @(),
         [int[]]$Position = @(), #  "Value must be in the range -1585 - 1585"
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [Alignment[]] $Alignment = @(),
-        [Direction[]] $DirectionFormatting = @(),
-        [ShadingType[]] $ShadingType = @(),
-        [Script[]] $Script = @()
+        [Xceed.Words.NET.Alignment[]] $Alignment = @(),
+        [Xceed.Words.NET.Direction[]] $DirectionFormatting = @(),
+        [Xceed.Words.NET.ShadingType[]] $ShadingType = @(),
+        [Xceed.Words.NET.Script[]] $Script = @()
     )
     for ($RowNr = 0; $RowNr -lt $Count; $RowNr++) {
         Write-Verbose "Set-WordContinueFormatting - RowNr: $RowNr / $Count"

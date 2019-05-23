@@ -67,7 +67,7 @@ function Set-WordTextUnderlineStyle {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[UnderlineStyle]] $UnderlineStyle,
+        [nullable[Xceed.Words.NET.UnderlineStyle]] $UnderlineStyle,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $UnderlineStyle -ne $null) {
@@ -133,7 +133,7 @@ function Set-WordTextHighlight {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[Highlight]] $Highlight,
+        [nullable[Xceed.Words.NET.Highlight]] $Highlight,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $Highlight -ne $null) {
@@ -146,7 +146,7 @@ function Set-WordTextCapsStyle {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[CapsStyle]] $CapsStyle,
+        [nullable[Xceed.Words.NET.CapsStyle]] $CapsStyle,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $CapsStyle -ne $null) {
@@ -159,7 +159,7 @@ function Set-WordTextStrikeThrough {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[StrikeThrough]] $StrikeThrough,
+        [nullable[Xceed.Words.NET.StrikeThrough]] $StrikeThrough,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $StrikeThrough -ne $null) {
@@ -171,7 +171,7 @@ function Set-WordTextShadingType {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[ShadingType]] $ShadingType,
+        [nullable[Xceed.Words.NET.ShadingType]] $ShadingType,
         [nullable[System.Drawing.Color]] $ShadingColor,
         [bool] $Supress = $false
     )
@@ -225,7 +225,7 @@ function Set-WordTextMisc {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[Misc]] $Misc,
+        [nullable[Xceed.Words.NET.Misc]] $Misc,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $Misc -ne $null) {
@@ -265,7 +265,7 @@ function Set-WordTextHeadingType {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[HeadingType]] $HeadingType,
+        [nullable[Xceed.Words.NET.HeadingType]] $HeadingType,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $HeadingType -ne $null) {
@@ -291,7 +291,7 @@ function Set-WordTextAlignment {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[Alignment]] $Alignment,
+        [nullable[Xceed.Words.NET.Alignment]] $Alignment,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $Alignment -ne $null) {
@@ -316,7 +316,7 @@ function Set-WordTextDirection {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[Direction]] $Direction,
+        [nullable[Xceed.Words.NET.Direction]] $Direction,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $Direction -ne $null) {
@@ -328,7 +328,7 @@ function Set-WordTextScript {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[Script]] $Script,
+        [nullable[Xceed.Words.NET.Script]] $Script,
         [bool] $Supress = $false
     )
     if ($Paragraph -ne $null -and $Script -ne $null) {

@@ -3,13 +3,79 @@
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [ListItemType]$ListType = [ListItemType]::Bulleted,
-        [alias('DataTable')][object] $ListData = $null,
-        [InsertWhere] $InsertWhere = [InsertWhere]::AfterSelf,
-        $BehaviourOption = 0,
-        $ListLevels = @(),
+        [alias('ListType')][Xceed.Words.NET.ListItemType] $Type = [Xceed.Words.NET.ListItemType]::Bulleted,
+        [alias('DataTable')][Array] $ListData,
+        [Xceed.Words.NET.InsertBeforeOrAfter] $InsertWhere = [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf,
+        [int] $BehaviourOption = 0,
+        [Array] $ListLevels,
         [bool] $Supress = $false
     )
+    if ($ListData.Count -gt 0) {
+
+        if ($ListData[0].GetType() -match 'bool|byte|char|datetime|decimal|double|float|int|long|sbyte|short|string|timespan|uint|ulong|URI|ushort') {
+            $Counter = 0;
+            $Data = New-WordList -WordDocument $WordDocument -Type $Type {
+                foreach ($Item in $ListData) {
+                    if ($ListLevels) {
+                        New-WordListItem -Level $ListLevels[$Counter] -Text $Item
+                    } else {
+                        New-WordListItem -Level 0 -Text $Item
+                    }
+                    $Counter++
+                }
+
+            } -Supress $Supress
+
+        } elseif ($ListData[0] -is [System.Collections.IDictionary]) {
+            $Data = New-WordList -WordDocument $WordDocument -Type $Type {
+                foreach ($Object in $ListData) {
+                    foreach ($O in $Object.GetEnumerator()) {
+                        $TextMain = $($O.Name)
+                        $TextSub = $($O.Value)
+
+                        if ($BehaviourOption -eq 0) {
+                            New-WordListItem -ListLevel 0 -ListValue $TextMain
+                            foreach ($TextValue in $TextSub) {
+                                New-WordListItem -ListLevel 1 -ListValue $TextValue
+                            }
+                        } elseif ($BehaviourOption -eq 1) {
+                            $TextSub = $TextSub -Join ", "
+                            $Value = "$TextMain - $TextSub"
+                            New-WordListItem  -ListLevel 0  -ListValue $Value
+                        }
+
+                    }
+                }
+            } -Supress $supress
+        } else {
+            $Data = New-WordList -WordDocument $WordDocument -Type $Type {
+                foreach ($Object in $ListData) {
+                    $Titles = $Object.PSObject.Properties.Name
+                    foreach ($Text in $Titles) {
+                        $TextMain = $Text
+                        $TextSub = $($Object.$Text)
+                        if ($BehaviourOption -eq 0) {
+                            New-WordListItem  -ListLevel 0 -ListValue $TextMain
+                            foreach ($TextValue in $TextSub) {
+                                New-WordListItem  -ListLevel 1 -ListValue $TextValue
+                            }
+                        } elseif ($BehaviourOption -eq 1) {
+                            $TextSub = $TextSub -Join ", "
+                            $Value = "$TextMain - $TextSub"
+                            New-WordListItem -ListLevel 0  -ListValue $Value
+                        }
+                    }
+                }
+            } -Supress $Supress
+        }
+        if ($supress -eq $false) {
+            return $Data
+        } else {
+            return
+        }
+    }
+
+    <#
     $List = $null
     if ($ListData -eq $null) { return }
 
@@ -36,10 +102,10 @@
         $Counter = 0;
         foreach ($Value in $ListData) {
             if ($ListLevels -eq $null) {
-                $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel 0
+                $List = New-WordListItemInternal -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel 0
                 Write-Verbose "AddList - ListItemType Name: $($List.GetType().Name) - BaseType: $($List.GetType().BaseType)"
             } else {
-                $List = New-WordListItem -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel $ListLevels[$Counter]
+                $List = New-WordListItemInternal -WordDocument $WordDocument -List $List -ListType $ListType -ListValue $Value -ListLevel $ListLevels[$Counter]
                 $Counter++
             }
         }
@@ -73,4 +139,5 @@
     } else {
         return
     }
+    #>
 }

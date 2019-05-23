@@ -7,7 +7,7 @@
         [string[]] $Names,
         [int[]] $Values,
         [Xceed.Words.NET.Series[]] $ChartSeries,
-        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
+        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Left,
         [bool] $ChartLegendOverlay = $false,
         [switch] $NoLegend
     )

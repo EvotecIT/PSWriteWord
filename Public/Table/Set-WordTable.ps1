@@ -2,11 +2,11 @@
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[TableBorderType]] $TableBorderType,
+        [nullable[Xceed.Words.NET.TableBorderType]] $TableBorderType,
         $Border,
-        [nullable[AutoFit]] $AutoFit,
-        [nullable[TableDesign]] $Design,
-        [nullable[Direction]] $Direction,
+        [nullable[Xceed.Words.NET.AutoFit]] $AutoFit,
+        [nullable[Xceed.Words.NET.TableDesign]] $Design,
+        [nullable[Xceed.Words.NET.Direction]] $Direction,
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
         [nullable[bool]] $BreakAcrossPages,

@@ -1,17 +1,26 @@
 ﻿function Get-WordDocument {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath,
+        [string] $LicenseKey
     )
-    $Word = [Xceed.Words.NET.DocX]
     if ($FilePath -ne '') {
         if (Test-Path -LiteralPath $FilePath) {
             try {
-                $WordDocument = $Word::Load($FilePath)
-                $WordDocument | Add-Member -MemberType NoteProperty -Name FilePath -Value $FilePath
+                if ($LicenseKey) {
+                    $null = [Xceed.Words.NET.Licenser]::LicenseKey($LicenseKey)
+                }
+                $WordDocument = [Xceed.Words.NET.DocX]::Load($FilePath)
+                Add-Member -InputObject $WordDocument -MemberType NoteProperty -Name FilePath -Value $FilePath
             } catch {
                 $ErrorMessage = $_.Exception.Message
-                Write-Warning "Get-WordDocument - Document: $FilePath Error: $ErrorMessage"
+                if ($ErrorMessage -like '*Xceed.Document.NET.Licenser.LicenseKey property must be set to a valid license key in the code of your application before using this product.*') {
+                    Write-Warning "Get-WordDocument - PSWriteWord on .NET CORE works only with pay version. Please provide license key."
+                    Exit
+                } else {
+                    Write-Warning "Get-WordDocument - Document: $FilePath Error: $ErrorMessage"
+                    Exit
+                }
             }
         } else {
             Write-Warning "Get-WordDocument - Document doesn't exists in path $FilePath. Terminating loading word from file."

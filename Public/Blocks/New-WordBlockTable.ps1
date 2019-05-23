@@ -16,18 +16,18 @@
         [string] $Text,
 
         [Object] $TableData,
-        [nullable[TableDesign]] $TableDesign,
+        [nullable[Xceed.Words.NET.TableDesign]] $TableDesign,
         [int] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
-        [nullable[Alignment]] $TableTitleAlignment = 'center',
+        [nullable[Xceed.Words.NET.Alignment]] $TableTitleAlignment = 'center',
         [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
         $ChartKeys,
         $ChartValues,
-        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
+        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Bottom,
         [bool] $ChartLegendOverlay
         # [bool] $Supress
 
