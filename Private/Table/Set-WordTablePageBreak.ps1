@@ -6,7 +6,7 @@
         [switch] $BeforeTable,
         [nullable[bool]] $BreakAcrossPages
     )
-    if ($null -ne $Table) {
+    if ($Table) {
         if ($BeforeTable) {
             $Table.InsertPageBreakBeforeSelf()
         }
