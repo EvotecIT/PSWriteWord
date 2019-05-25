@@ -1,4 +1,4 @@
-Import-Module PSWriteWord -Force
+Import-Module PSWriteWord.psd1 -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddCustomProperty.docx"
 
@@ -9,7 +9,7 @@ Add-WordText -WordDocument $WordDocument -Text 'Custom Properties Example' -Head
 Add-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyName'  -Value 'Evotec' -Supress $true
 Add-WordCustomProperty -WordDocument $WordDocument -Name 'CustomEntry'  -Value 'Important Value' -Supress $true
 
-$PropertyValue = Get-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyName'
+#$PropertyValue = Get-WordCustomProperty -WordDocument $WordDocument -Name 'CompanyName'
 
 $AllCustomProperties = Get-WordCustomProperty -WordDocument $WordDocument
 

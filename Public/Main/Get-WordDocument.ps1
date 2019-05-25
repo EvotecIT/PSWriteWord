@@ -1,7 +1,4 @@
-﻿using namespace Xceed.Words.NET
-using namespace Xceed.Document.NET
-
-function Get-WordDocument {
+﻿function Get-WordDocument {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath,

@@ -24,7 +24,4 @@ Add-WordText -WordDocument $WordDocument -Text 'Here we copy 1st picture from Wo
 $Picture = Get-WordPicture -WordDocument $WordDocument -PictureID 0
 Add-WordPicture -WordDocument $WordDocument -Picture $Picture -Alignment center # add copy of picture
 
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
-
-### Start Word with file
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $true -OpenDocument

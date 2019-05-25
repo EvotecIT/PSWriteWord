@@ -21,7 +21,4 @@ Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... flip horizon
 
 Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage -FlipVertical -FlipHorizontal
 
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $true
-
-### Start Word with file
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $true -OpenDocument
