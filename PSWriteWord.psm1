@@ -10,19 +10,20 @@ if ($PSEdition -eq 'Core') {
     $Assembly = @( Get-ChildItem -Path $PSScriptRoot\Lib\Default\*.dll -ErrorAction SilentlyContinue )
 }
 
+Foreach ($import in @($Assembly)) {
+    Try {
+        Add-Type -Path $import.fullname
+    } Catch {
+        Write-Error -Message "Failed to import DLL $($import.fullname): $_"
+    }
+}
+
 #Dot source the files
 Foreach ($import in @($Public + $Private)) {
     Try {
         . $import.fullname
     } Catch {
         Write-Error -Message "Failed to import function $($import.fullname): $_"
-    }
-}
-Foreach ($import in @($Assembly)) {
-    Try {
-        Add-Type -Path $import.fullname
-    } Catch {
-        Write-Error -Message "Failed to import DLL $($import.fullname): $_"
     }
 }
 
