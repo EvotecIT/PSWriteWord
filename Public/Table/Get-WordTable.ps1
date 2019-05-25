@@ -1,7 +1,7 @@
 ﻿function Get-WordTable {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
         [switch] $ListTables,
         [switch] $LastTable,
         [nullable[int]] $TableID

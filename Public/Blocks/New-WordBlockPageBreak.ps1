@@ -1,7 +1,7 @@
 ﻿function New-WordBlockPageBreak {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
         [int] $PageBreaks,
         [bool] $Supress
     )

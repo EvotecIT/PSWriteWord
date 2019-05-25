@@ -1,7 +1,7 @@
 ﻿function Set-WordTextText {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
         [alias ("S")][AllowNull()] $Text,
         [switch]$Append,
         [bool] $Supress = $false

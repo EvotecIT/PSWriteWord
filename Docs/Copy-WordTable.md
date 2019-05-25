@@ -81,8 +81,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Xceed.Words.NET.Container
-Xceed.Words.NET.InsertBeforeOrAfter
+### Container
+InsertBeforeOrAfter
 
 ## OUTPUTS
 

@@ -1,16 +1,16 @@
 ﻿function Add-WordListItem {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $InsertWhere = [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $List,
+        [InsertBeforeOrAfter] $Paragraph,
+        [InsertBeforeOrAfter] $InsertWhere = [InsertBeforeOrAfter]::AfterSelf,
         [bool] $Supress
     )
     if ($Paragraph -ne $null) {
-        if ($InsertWhere -eq [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf) {
+        if ($InsertWhere -eq [InsertBeforeOrAfter]::AfterSelf) {
             $data = $Paragraph.InsertListAfterSelf($List)
-        } elseif ($InsertWhere -eq [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf) {
+        } elseif ($InsertWhere -eq [InsertBeforeOrAfter]::AfterSelf) {
             $data = $Paragraph.InsertListBeforeSelf($List)
         }
     } else {

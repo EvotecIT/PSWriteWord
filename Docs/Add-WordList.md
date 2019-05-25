@@ -13,9 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordList [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ListType] <ListItemType>]
- [[-ListData] <Object>] [[-InsertWhere] <InsertWhere>] [[-BehaviourOption] <Object>] [[-ListLevels] <Object>]
- [[-Supress] <Boolean>] [<CommonParameters>]
+Add-WordList [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Type] <ListItemType>]
+ [[-ListData] <Array>] [[-BehaviourOption] <Int32>] [[-ListLevels] <Array>] [[-Supress] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,25 +36,9 @@ PS C:\> {{ Add example code here }}
 {{Fill BehaviourOption Description}}
 
 ```yaml
-Type: Object
+Type: Int32
 Parameter Sets: (All)
 Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InsertWhere
-{{Fill InsertWhere Description}}
-
-```yaml
-Type: InsertWhere
-Parameter Sets: (All)
-Aliases:
-Accepted values: AfterSelf, BeforeSelf
 
 Required: False
 Position: 4
@@ -67,7 +51,7 @@ Accept wildcard characters: False
 {{Fill ListData Description}}
 
 ```yaml
-Type: Object
+Type: Array
 Parameter Sets: (All)
 Aliases: DataTable
 
@@ -82,28 +66,12 @@ Accept wildcard characters: False
 {{Fill ListLevels Description}}
 
 ```yaml
-Type: Object
+Type: Array
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ListType
-{{Fill ListType Description}}
-
-```yaml
-Type: ListItemType
-Parameter Sets: (All)
-Aliases:
-Accepted values: Bulleted, Numbered
-
-Required: False
-Position: 2
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -133,7 +101,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Type
+{{ Fill Type Description }}
+
+```yaml
+Type: ListItemType
+Parameter Sets: (All)
+Aliases: ListType
+Accepted values: Bulleted, Numbered
+
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -155,12 +139,12 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Xceed.Words.NET.Container
-Xceed.Words.NET.InsertBeforeOrAfter
+### Container
+InsertBeforeOrAfter
 
 ## OUTPUTS
 

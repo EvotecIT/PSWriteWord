@@ -2,11 +2,10 @@
     [CmdletBinding()]
     param(
         [ScriptBlock] $ListItems,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $InsertWhere = [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
         [int] $BehaviourOption = 0,
-        [alias('ListType')][Xceed.Words.NET.ListItemType] $Type = [Xceed.Words.NET.ListItemType]::Bulleted,
+        [alias('ListType')][ListItemType] $Type = [ListItemType]::Bulleted,
         [bool] $Supress = $true
     )
 

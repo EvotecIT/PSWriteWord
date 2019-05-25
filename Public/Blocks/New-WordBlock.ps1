@@ -1,19 +1,19 @@
 function New-WordBlock {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
         ### TOC GLOBAL
         [nullable[bool]] $TocGlobalDefinition,
         [string] $TocGlobalTitle,
         [int] $TocGlobalRightTabPos,
-        [Xceed.Words.NET.TableOfContentsSwitches[]] $TocGlobalSwitches,
+        [TableOfContentsSwitches[]] $TocGlobalSwitches,
 
         ### TOC
         [nullable[bool]] $TocEnable,
         [string] $TocText,
         [int] $TocListLevel,
-        [nullable[Xceed.Words.NET.ListItemType]] $TocListItemType,
-        [nullable[Xceed.Words.NET.HeadingType]] $TocHeadingType,
+        [nullable[ListItemType]] $TocListItemType,
+        [nullable[HeadingType]] $TocHeadingType,
 
         ### Paragraphs/PageBreaks
         [int] $EmptyParagraphsBefore,
@@ -24,39 +24,39 @@ function New-WordBlock {
         ### Text Data
         [string] $Text,
         [string] $TextNoData,
-        [nullable[Xceed.Words.NET.Alignment][]] $TextAlignment = [Xceed.Words.NET.Alignment]::Both,
+        [nullable[Alignment][]] $TextAlignment = [Alignment]::Both,
 
         ### Table Data
         [Object] $TableData,
-        [nullable[Xceed.Words.NET.TableDesign]] $TableDesign = [Xceed.Words.NET.TableDesign]::None,
+        [nullable[TableDesign]] $TableDesign = [TableDesign]::None,
         [nullable[int]] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
-        [nullable[Xceed.Words.NET.Alignment]] $TableTitleAlignment = 'center',
+        [nullable[Alignment]] $TableTitleAlignment = 'center',
         [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
         [float[]] $TableColumnWidths,
 
         ### List Data
         [Object] $ListData,
-        [nullable[Xceed.Words.NET.ListItemType]] $ListType,
+        [nullable[ListItemType]] $ListType,
         [string] $ListTextEmpty,
 
         ### List Builder
         [string[]] $ListBuilderContent,
-        [Xceed.Words.NET.ListItemType[]] $ListBuilderType,
+        [ListItemType[]] $ListBuilderType,
         [int[]] $ListBuilderLevel,
 
         ### String Based Data - for functions that return String type data
         [Object] $TextBasedData,
-        [nullable[Xceed.Words.NET.Alignment][]] $TextBasedDataAlignment = [Xceed.Words.NET.Alignment]::Both,
+        [nullable[Alignment][]] $TextBasedDataAlignment = [Alignment]::Both,
 
         ### Chart Data
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
         $ChartKeys,
         $ChartValues,
-        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Bottom,
+        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
         [bool] $ChartLegendOverlay
     )
     ### PAGE BREAKS BEFORE

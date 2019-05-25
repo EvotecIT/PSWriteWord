@@ -1,7 +1,7 @@
 ﻿function New-WordBlockList {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
         [bool] $TocEnable,
         [string] $TocText,
         [int] $TocListLevel,

@@ -1,8 +1,8 @@
 ﻿function Remove-WordPicture {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
         [int] $PictureID,
         [bool] $Supress
     )

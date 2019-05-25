@@ -5,21 +5,21 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-WordPieChart
+# New-WordListItemInternal
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Add-WordPieChart [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-ChartName] <String>]
- [[-Names] <String[]>] [[-Values] <Int32[]>] [[-ChartLegendPosition] <ChartLegendPosition>]
- [[-ChartLegendOverlay] <Boolean>] [-NoLegend] [<CommonParameters>]
+New-WordListItemInternal [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>] [[-ListLevel] <Int32>]
+ [[-ListItemType] <ListItemType>] [[-Text] <Object>] [[-StartNumber] <Int32>] [[-TrackChanges] <Boolean>]
+ [[-ContinueNumbering] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -32,8 +32,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ChartLegendOverlay
-{{Fill ChartLegendOverlay Description}}
+### -ContinueNumbering
+{{ Fill ContinueNumbering Description }}
 
 ```yaml
 Type: Boolean
@@ -41,75 +41,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ChartLegendPosition
-{{Fill ChartLegendPosition Description}}
-
-```yaml
-Type: ChartLegendPosition
-Parameter Sets: (All)
-Aliases:
-Accepted values: Top, Bottom, Left, Right, TopRight
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ChartName
-{{Fill ChartName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Names
-{{Fill Names Description}}
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NoLegend
-{{Fill NoLegend Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Paragraph
-{{Fill Paragraph Description}}
+### -List
+{{ Fill List Description }}
 
 ```yaml
 Type: InsertBeforeOrAfter
@@ -123,13 +62,74 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -Values
-{{Fill Values Description}}
+### -ListItemType
+{{ Fill ListItemType Description }}
 
 ```yaml
-Type: Int32[]
+Type: ListItemType
+Parameter Sets: (All)
+Aliases: ListType
+Accepted values: Bulleted, Numbered
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ListLevel
+{{ Fill ListLevel Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: Level
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -StartNumber
+{{ Fill StartNumber Description }}
+
+```yaml
+Type: Int32
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Supress
+{{ Fill Supress Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Text
+{{ Fill Text Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases: Value, ListValue
 
 Required: False
 Position: 4
@@ -138,8 +138,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -TrackChanges
+{{ Fill TrackChanges Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WordDocument
-{{Fill WordDocument Description}}
+{{ Fill WordDocument Description }}
 
 ```yaml
 Type: Container
@@ -158,13 +173,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Container
-InsertBeforeOrAfter
+### Xceed.Words.NET.Container
+
+### Xceed.Words.NET.InsertBeforeOrAfter
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

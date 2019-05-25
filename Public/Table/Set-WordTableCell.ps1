@@ -1,7 +1,7 @@
 ﻿function Set-WordTableCell {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [InsertBeforeOrAfter] $Table,
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNr,
         [System.Drawing.Color] $FillColor,

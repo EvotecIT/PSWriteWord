@@ -1,11 +1,11 @@
 function Add-WordTabStopPosition {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
         [single] $HorizontalPosition,
-        [Xceed.Words.NET.TabStopPositionLeader] $TabStopPositionLeader,
-        [Xceed.Words.NET.Alignment] $Alignment,
+        [TabStopPositionLeader] $TabStopPositionLeader,
+        [Alignment] $Alignment,
         [bool] $Supress = $false
     )
     if ($Paragraph -eq $null) {

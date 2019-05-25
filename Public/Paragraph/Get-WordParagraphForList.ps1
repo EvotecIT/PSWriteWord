@@ -1,7 +1,7 @@
 ﻿function Get-WordParagraphForList {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
         [int] $ListID
     )
     $IDs = @()

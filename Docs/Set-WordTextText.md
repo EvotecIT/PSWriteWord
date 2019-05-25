@@ -96,7 +96,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Xceed.Words.NET.InsertBeforeOrAfter
+### InsertBeforeOrAfter
 
 ## OUTPUTS
 

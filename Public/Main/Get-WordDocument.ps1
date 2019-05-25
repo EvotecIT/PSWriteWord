@@ -1,4 +1,7 @@
-﻿function Get-WordDocument {
+﻿using namespace Xceed.Words.NET
+using namespace Xceed.Document.NET
+
+function Get-WordDocument {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath,
@@ -8,9 +11,9 @@
         if (Test-Path -LiteralPath $FilePath) {
             try {
                 if ($LicenseKey) {
-                    $null = [Xceed.Words.NET.Licenser]::LicenseKey($LicenseKey)
+                    $null = [Licenser]::LicenseKey($LicenseKey)
                 }
-                $WordDocument = [Xceed.Words.NET.DocX]::Load($FilePath)
+                $WordDocument = [DocX]::Load($FilePath)
                 Add-Member -InputObject $WordDocument -MemberType NoteProperty -Name FilePath -Value $FilePath
             } catch {
                 $ErrorMessage = $_.Exception.Message

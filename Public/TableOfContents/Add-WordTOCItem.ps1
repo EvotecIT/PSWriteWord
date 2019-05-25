@@ -1,11 +1,11 @@
 ﻿function Add-WordTocItem {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
         [alias('Level')] [ValidateRange(0, 8)] [int] $ListLevel,
-        [alias('ListType')][Xceed.Words.NET.ListItemType] $ListItemType = [Xceed.Words.NET.ListItemType]::Bulleted,
+        [alias('ListType')][ListItemType] $ListItemType = [ListItemType]::Bulleted,
         [alias('Value', 'ListValue')]$Text,
-        [alias ("HT")] [Xceed.Words.NET.HeadingType] $HeadingType = [Xceed.Words.NET.HeadingType]::Heading1,
+        [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1,
         [nullable[int]] $StartNumber,
         [bool]$TrackChanges = $false,
         [bool]$ContinueNumbering = $true,

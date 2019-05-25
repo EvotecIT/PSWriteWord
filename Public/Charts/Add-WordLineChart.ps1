@@ -1,13 +1,13 @@
 ﻿function Add-WordLineChart {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
-        [Xceed.Words.NET.Series[]] $ChartSeries,
-        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Left,
+        [Series[]] $ChartSeries,
+        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
         [bool] $ChartLegendOverlay = $false,
         [switch] $NoLegend
     )
@@ -16,7 +16,7 @@
         $ChartSeries = Add-WordChartSeries -ChartName $ChartName -Names $Names -Values $Values
     }
 
-    [Xceed.Words.NET.LineChart] $chart = New-Object -TypeName Xceed.Words.NET.LineChart
+    [LineChart] $chart = New-Object -TypeName LineChart
     if (-not $NoLegend) {
         $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
     }

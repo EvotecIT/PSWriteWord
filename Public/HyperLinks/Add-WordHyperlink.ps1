@@ -1,7 +1,7 @@
 ﻿function Add-WordHyperLink {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
         [string] $UrlText,
         [string] $UrlLink,
         [bool] $Supress = $false

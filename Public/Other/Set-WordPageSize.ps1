@@ -13,7 +13,7 @@ Free version (currently at 1.1 of Xceed) doesn't yet. Therefore orientation, pag
 function Set-WordPageSize {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
         [nullable[single]] $PageWidth,
         [nullable[single]] $PageHeight
     )

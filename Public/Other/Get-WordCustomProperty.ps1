@@ -1,7 +1,7 @@
 ﻿function Get-WordCustomProperty {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
+        [Container]$WordDocument,
         [string] $Name
     )
     if ($Property -eq $null) {

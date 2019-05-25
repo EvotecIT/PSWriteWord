@@ -1,7 +1,7 @@
 function Get-WordSection {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument
     )
     return $WordDocument.Sections
 }

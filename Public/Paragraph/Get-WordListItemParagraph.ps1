@@ -1,7 +1,7 @@
 ﻿function Get-WordListItemParagraph {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $List,
         [nullable[int]] $Item,
         [switch] $LastItem
     )

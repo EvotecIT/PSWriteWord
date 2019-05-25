@@ -1,27 +1,27 @@
 ﻿function Add-WordText {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.DocX]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Footer] $Footer,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Header] $Header,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Footer] $Footer,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Header] $Header,
         [alias ("T")] [String[]]$Text,
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
         [alias ("B")] [nullable[bool][]] $Bold = @(),
         [alias ("I")] [nullable[bool][]] $Italic = @(),
-        [alias ("U")] [Xceed.Words.NET.UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
         [alias ("SB")] [double[]] $SpacingBefore = @(),
         [alias ("SP")] [double[]] $Spacing = @(),
-        [alias ("H")] [Xceed.Words.NET.Highlight[]] $Highlight = @(),
-        [alias ("CA")] [Xceed.Words.NET.CapsStyle[]] $CapsStyle = @(),
-        [alias ("ST")] [Xceed.Words.NET.StrikeThrough[]] $StrikeThrough = @(),
-        [alias ("HT")] [Xceed.Words.NET.HeadingType[]] $HeadingType = @(),
+        [alias ("H")] [Highlight[]] $Highlight = @(),
+        [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
+        [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
+        [alias ("HT")] [HeadingType[]] $HeadingType = @(),
         [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        [Xceed.Words.NET.Misc[]] $Misc = @(),
+        [Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool][]]$Hidden = @(),
@@ -31,20 +31,20 @@
         # [switch] $KeepWithNextParagraph, # not done
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [Xceed.Words.NET.Alignment[]] $Alignment = @(),
-        [Xceed.Words.NET.Direction[]] $Direction = @(),
-        [Xceed.Words.NET.ShadingType[]] $ShadingType = @(),
+        [Alignment[]] $Alignment = @(),
+        [Direction[]] $Direction = @(),
+        [ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
-        [Xceed.Words.NET.Script[]] $Script = @(),
+        [Script[]] $Script = @(),
         [Switch] $ContinueFormatting,
         [alias ("Append")][Switch] $AppendToExistingParagraph,
         [bool] $Supress = $false
     )
-    if ($Alignment -eq $null) { $Alignment = @() }
+    if ($null -eq $Alignment) { $Alignment = @() }
     if ($Text.Count -eq 0) { return }
 
     if ($Footer -or $Header) {
-        if ($Paragraph -ne $null) {
+        if ($null -ne $Paragraph) {
             if (-not $AppendToExistingParagraph) {
                 if ($Header) {
                     $NewParagraph = $Header.InsertParagraph()
@@ -54,7 +54,7 @@
                 $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
             }
         } else {
-            if ($WordDocument -ne $null) {
+            if ($null -ne $WordDocument) {
                 if ($Header) {
                     $Paragraph = $Header.InsertParagraph()
                 } else {
@@ -65,13 +65,13 @@
             }
         }
     } else {
-        if ($Paragraph -ne $null) {
+        if ($null -ne $Paragraph) {
             if (-not $AppendToExistingParagraph) {
                 $NewParagraph = $WordDocument.InsertParagraph()
                 $Paragraph = $Paragraph.InsertParagraphAfterSelf($NewParagraph)
             }
         } else {
-            if ($WordDocument -ne $null) {
+            if ($null -ne $WordDocument) {
                 $Paragraph = $WordDocument.InsertParagraph()
             } else {
                 throw 'Both Paragraph and WordDocument are null'
@@ -79,9 +79,9 @@
         }
     }
     for ($i = 0; $i -lt $Text.Length; $i++) {
-        if ($NewLine[$i] -ne $null -and $NewLine[$i] -eq $true) {
+        if ($null -ne $NewLine[$i] -and $NewLine[$i] -eq $true) {
             if ($i -gt 0) {
-                if ($Paragraph -ne $null) {
+                if ($null -ne $Paragraph) {
                     $Paragraph = $Paragraph.InsertParagraphAfterSelf($Paragraph)
                 } else {
                     $Paragraph = $WordDocument.InsertParagraph()

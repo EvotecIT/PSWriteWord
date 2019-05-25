@@ -1,7 +1,7 @@
 ﻿function Add-WordTableRow {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.InsertBeforeOrAfter] $Table,
+        [InsertBeforeOrAfter] $Table,
         [int] $Count = 1,
         [nullable[int]] $Index,
         [bool] $Supress = $false

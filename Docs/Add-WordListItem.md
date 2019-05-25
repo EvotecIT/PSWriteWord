@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Add-WordListItem [[-WordDocument] <Container>] [[-List] <InsertBeforeOrAfter>]
- [[-Paragraph] <InsertBeforeOrAfter>] [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>]
+ [[-Paragraph] <InsertBeforeOrAfter>] [[-InsertWhere] <InsertBeforeOrAfter>] [[-Supress] <Boolean>]
  [<CommonParameters>]
 ```
 
@@ -36,10 +36,9 @@ PS C:\> {{ Add example code here }}
 {{Fill InsertWhere Description}}
 
 ```yaml
-Type: InsertWhere
+Type: InsertBeforeOrAfter
 Parameter Sets: (All)
 Aliases:
-Accepted values: AfterSelf, BeforeSelf
 
 Required: False
 Position: 3
@@ -109,12 +108,12 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Xceed.Words.NET.Container
-Xceed.Words.NET.InsertBeforeOrAfter
+### Container
+InsertBeforeOrAfter
 
 ## OUTPUTS
 

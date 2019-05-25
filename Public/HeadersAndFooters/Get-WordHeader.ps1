@@ -1,7 +1,7 @@
 ﻿function Get-WordHeader {
     [CmdletBinding()]
     param (
-        [Xceed.Words.NET.Container]$WordDocument,
+        [Container]$WordDocument,
         [ValidateSet('All', 'First', 'Even', 'Odd')][string] $Type = 'All',
         [bool] $Supress = $false
     )

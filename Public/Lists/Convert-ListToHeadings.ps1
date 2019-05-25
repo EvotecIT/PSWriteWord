@@ -1,9 +1,9 @@
 function Convert-ListToHeadings {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
-        [alias ("HT")] [Xceed.Words.NET.HeadingType] $HeadingType = [Xceed.Words.NET.HeadingType]::Heading1,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $List,
+        [alias ("HT")] [HeadingType] $HeadingType = [HeadingType]::Heading1,
         [bool] $Supress
     )
     Write-Verbose "Convert-ListToHeadings - NumID: $($List.NumID)"

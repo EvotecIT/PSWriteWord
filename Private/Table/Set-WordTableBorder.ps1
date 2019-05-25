@@ -1,8 +1,8 @@
 ﻿function Set-WordTableBorder {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Table,
-        [nullable[Xceed.Words.NET.TableBorderType]] $TableBorderType,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
+        [nullable[TableBorderType]] $TableBorderType,
         $Border,
         [bool] $Supress
     )

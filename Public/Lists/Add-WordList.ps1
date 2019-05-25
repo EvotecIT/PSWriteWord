@@ -1,11 +1,11 @@
 ﻿function Add-WordList {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
-        [alias('ListType')][Xceed.Words.NET.ListItemType] $Type = [Xceed.Words.NET.ListItemType]::Bulleted,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [alias('ListType')][ListItemType] $Type = [ListItemType]::Bulleted,
         [alias('DataTable')][Array] $ListData,
-        [Xceed.Words.NET.InsertBeforeOrAfter] $InsertWhere = [Xceed.Words.NET.InsertBeforeOrAfter]::AfterSelf,
+        #[alias('Insert')][validateset('BeforeSelf', 'AfterSelf')][string] $InsertWhere = 'AfterSelf',
         [int] $BehaviourOption = 0,
         [Array] $ListLevels,
         [bool] $Supress = $false

@@ -1,19 +1,19 @@
 ﻿function Add-WordPieChart {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
-        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Left,
+        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
         [bool] $ChartLegendOverlay = $false,
         [switch] $NoLegend
     )
 
     $Series = Add-WordChartSeries -ChartName $ChartName -Names $Names -Values $Values
 
-    [Xceed.Words.NET.PieChart] $chart = New-Object -TypeName Xceed.Words.NET.PieChart
+    [PieChart] $chart = New-Object -TypeName PieChart
     if (-not $NoLegend) {
         $chart.AddLegend($ChartLegendPosition, $ChartLegendOverlay)
     }

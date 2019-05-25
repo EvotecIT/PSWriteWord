@@ -14,9 +14,6 @@ Locale: {{ Update Locale }}
 ### [Add-WordBarChart](Add-WordBarChart.md)
 {{Fill in the Synopsis}}
 
-### [Add-WordBookmark](Add-WordBookmark.md)
-{{Fill in the Synopsis}}
-
 ### [Add-WordChartSeries](Add-WordChartSeries.md)
 {{Fill in the Synopsis}}
 
@@ -33,9 +30,6 @@ Locale: {{ Update Locale }}
 {{Fill in the Synopsis}}
 
 ### [Add-WordHyperLink](Add-WordHyperLink.md)
-{{Fill in the Synopsis}}
-
-### [Add-WordImage](Add-WordImage.md)
 {{Fill in the Synopsis}}
 
 ### [Add-WordLine](Add-WordLine.md)
@@ -101,19 +95,7 @@ Add a new TabStopPosition in the current paragraph.
 ### [Convert-ListToHeadings](Convert-ListToHeadings.md)
 {{Fill in the Synopsis}}
 
-### [Convert-ObjectToProcess](Convert-ObjectToProcess.md)
-{{Fill in the Synopsis}}
-
-### [Copy-WordTable](Copy-WordTable.md)
-{{Fill in the Synopsis}}
-
 ### [Copy-WordTableRow](Copy-WordTableRow.md)
-{{Fill in the Synopsis}}
-
-### [Format-WordListItem](Format-WordListItem.md)
-{{Fill in the Synopsis}}
-
-### [Get-ColorFromARGB](Get-ColorFromARGB.md)
 {{Fill in the Synopsis}}
 
 ### [Get-WordCustomProperty](Get-WordCustomProperty.md)
@@ -203,9 +185,6 @@ Add a new TabStopPosition in the current paragraph.
 ### [Save-WordDocument](Save-WordDocument.md)
 {{Fill in the Synopsis}}
 
-### [Set-WordContinueFormatting](Set-WordContinueFormatting.md)
-{{Fill in the Synopsis}}
-
 ### [Set-WordHyperLink](Set-WordHyperLink.md)
 {{Fill in the Synopsis}}
 
@@ -233,12 +212,6 @@ Add a new TabStopPosition in the current paragraph.
 ### [Set-WordTable](Set-WordTable.md)
 {{Fill in the Synopsis}}
 
-### [Set-WordTableAutoFit](Set-WordTableAutoFit.md)
-{{Fill in the Synopsis}}
-
-### [Set-WordTableBorder](Set-WordTableBorder.md)
-{{Fill in the Synopsis}}
-
 ### [Set-WordTableCell](Set-WordTableCell.md)
 {{Fill in the Synopsis}}
 
@@ -252,15 +225,6 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTableColumnWidthByIndex](Set-WordTableColumnWidthByIndex.md)
-{{Fill in the Synopsis}}
-
-### [Set-WordTableDesign](Set-WordTableDesign.md)
-{{Fill in the Synopsis}}
-
-### [Set-WordTableDirection](Set-WordTableDirection.md)
-{{Fill in the Synopsis}}
-
-### [Set-WordTablePageBreak](Set-WordTablePageBreak.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordTableRowMergeCells](Set-WordTableRowMergeCells.md)
@@ -339,9 +303,6 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextStrikeThrough](Set-WordTextStrikeThrough.md)
-{{Fill in the Synopsis}}
-
-### [Set-WordTextText](Set-WordTextText.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordTextUnderlineColor](Set-WordTextUnderlineColor.md)

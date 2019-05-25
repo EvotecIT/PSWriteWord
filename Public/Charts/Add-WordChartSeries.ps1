@@ -12,7 +12,7 @@ function Add-WordChartSeries {
     [Array] $rValues = foreach ($value in $Values) {
         $value
     }
-    [Xceed.Words.NET.Series] $series = New-Object -TypeName Xceed.Words.NET.Series -ArgumentList $ChartName
+    [Series] $series = New-Object -TypeName Series -ArgumentList $ChartName
     $Series.Bind($rNames, $rValues)
     return $Series
 }

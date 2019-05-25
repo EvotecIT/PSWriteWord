@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordPageBreak [[-WordDocument] <Container>] [[-WordObject] <InsertBeforeOrAfter>]
- [[-InsertWhere] <InsertWhere>] [[-Supress] <Boolean>] [<CommonParameters>]
+Add-WordPageBreak [[-WordDocument] <Container>] [[-WordObject] <InsertBeforeOrAfter>] [[-InsertWhere] <String>]
+ [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,10 +35,10 @@ PS C:\> {{ Add example code here }}
 {{Fill InsertWhere Description}}
 
 ```yaml
-Type: InsertWhere
+Type: String
 Parameter Sets: (All)
 Aliases: Insert
-Accepted values: AfterSelf, BeforeSelf
+Accepted values: BeforeSelf, AfterSelf
 
 Required: False
 Position: 2
@@ -93,12 +93,12 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Xceed.Words.NET.Container
-Xceed.Words.NET.InsertBeforeOrAfter
+### Container
+InsertBeforeOrAfter
 
 ## OUTPUTS
 

@@ -1,5 +1,5 @@
-using namespace Xceed.Words.NET;
-using namespace Xceed.Document.NET;
+using namespace Xceed.Words.NET
+using namespace Xceed.Document.NET
 
 #Get public and private function definition files.
 $Public = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue -Recurse )

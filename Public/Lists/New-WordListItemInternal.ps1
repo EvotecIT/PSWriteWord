@@ -1,9 +1,9 @@
 ﻿function New-WordListItemInternal {
     [CmdletBinding()]
-    param ([parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.Container] $WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Words.NET.InsertBeforeOrAfter] $List,
+    param ([parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $List,
         [alias('Level')] [ValidateRange(0, 8)] [int] $ListLevel,
-        [alias('ListType')][Xceed.Words.NET.ListItemType] $ListItemType = [Xceed.Words.NET.ListItemType]::Bulleted,
+        [alias('ListType')][ListItemType] $ListItemType = [ListItemType]::Bulleted,
         [alias('Value', 'ListValue')]$Text,
         [nullable[int]] $StartNumber,
         [bool]$TrackChanges = $false,

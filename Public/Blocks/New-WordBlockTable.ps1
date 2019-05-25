@@ -1,7 +1,7 @@
 ﻿function New-WordBlockTable {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Words.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
         # [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]$Paragraph,
         [bool] $TocEnable,
         [string] $TocText,
@@ -16,18 +16,18 @@
         [string] $Text,
 
         [Object] $TableData,
-        [nullable[Xceed.Words.NET.TableDesign]] $TableDesign,
+        [nullable[TableDesign]] $TableDesign,
         [int] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
-        [nullable[Xceed.Words.NET.Alignment]] $TableTitleAlignment = 'center',
+        [nullable[Alignment]] $TableTitleAlignment = 'center',
         [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
         $ChartKeys,
         $ChartValues,
-        [Xceed.Words.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Words.NET.ChartLegendPosition]::Bottom,
+        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
         [bool] $ChartLegendOverlay
         # [bool] $Supress
 

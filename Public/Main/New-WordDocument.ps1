@@ -1,4 +1,7 @@
-﻿function New-WordDocument {
+﻿using namespace Xceed.Words.NET
+using namespace Xceed.Document.NET
+
+function New-WordDocument {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath = '',
@@ -6,7 +9,7 @@
     )
     try {
         if ($LicenseKey) {
-            $null = [Xceed.Words.NET.Licenser]::LicenseKey = $LicenseKey
+            $null = [Licenser]::LicenseKey = $LicenseKey
         }
         $WordDocument = [Xceed.Words.NET.DocX]::Create($FilePath)
         Add-Member -InputObject $WordDocument -MemberType NoteProperty -Name FilePath -Value $FilePath
