@@ -8,7 +8,7 @@
         [bool] $Supress = $false
     )
 
-    if ($Table -ne $null -and $RowNr -ne $null -and $ColumnNr -ne $null -and $FillColor -ne $null) {
+    if ($Table -and $RowNr -and $ColumnNr -and $FillColor) {
         $Cell = $Table.Rows[$RowNr].Cells[$ColumnNr]
         $Cell.FillColor = $FillColor
     }

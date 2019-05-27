@@ -55,5 +55,4 @@ Add-WordParagraph -WordDocument $WordDocument -Supress $True
 
 Add-WordTable -WordDocument $WordDocument -DataTable $myArray -Design ColorfulList  -Supress $True
 
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True -OpenDocument

@@ -121,6 +121,9 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 This module is based on **DocX** from **Xceed Software** (<https://github.com/xceedsoftware/DocX>). DocX is the free, open source version of **Xceed Words for .NET**. Originally written by Cathal Coffey, and maintained by Przemyslaw Klys (me), it is now maintained by **Xceed**. This also means any bugs / issues with C# version of it will be available in **PSWriteWord**. On the other hand since Xceed releases new versions of DocX (just a few versions behind the pay version) it means eventually **PSWriteWord** will get even more features. This also means that if something is not yet available in commands that are listed below or are incomplete you can take the .net approach and simply use it that way.
 
+### License
+**MIT License** applies only to PowerShell code/code within this repo. DLL is property of Xceed and as such is licensed under **Microsoft Public License (Ms-PL)**.
+
 ## Commands
 
 ### Dedicated word functions

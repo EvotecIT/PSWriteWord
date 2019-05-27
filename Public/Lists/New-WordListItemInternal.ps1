@@ -9,7 +9,7 @@
         [bool]$TrackChanges = $false,
         [bool]$ContinueNumbering = $false,
         [bool]$Supress = $false)
-    if ($List -eq $null) {
+    if ($null -eq $List) {
         $List = $WordDocument.AddList($Text, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)
     } else {
         $List = $WordDocument.AddListItem($List, $Text, $ListLevel, $ListItemType, $StartNumber, $TrackChanges, $ContinueNumbering)

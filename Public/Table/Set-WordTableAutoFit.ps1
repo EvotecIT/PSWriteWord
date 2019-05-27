@@ -4,7 +4,7 @@
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
         [nullable[AutoFit]] $AutoFit
     )
-    if ($Table -ne $null -and $AutoFit -ne $null) {
+    if (($null -ne $Table) -and ($null -ne $AutoFit)) {
         Write-Verbose "Set-WordTabelAutofit - Setting Table Autofit to: $AutoFit"
         $Table.AutoFit = $AutoFit
     }

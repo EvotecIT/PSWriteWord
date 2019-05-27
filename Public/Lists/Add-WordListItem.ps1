@@ -7,7 +7,7 @@
         [InsertBeforeOrAfter] $InsertWhere = [InsertBeforeOrAfter]::AfterSelf,
         [bool] $Supress
     )
-    if ($Paragraph -ne $null) {
+    if ($null -ne $Paragraph) {
         if ($InsertWhere -eq [InsertBeforeOrAfter]::AfterSelf) {
             $data = $Paragraph.InsertListAfterSelf($List)
         } elseif ($InsertWhere -eq [InsertBeforeOrAfter]::AfterSelf) {

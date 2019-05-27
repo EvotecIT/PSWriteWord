@@ -21,6 +21,4 @@ Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientZipCode'  -Value
 Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientPhone'  -Value '+48 400 400 400' -Supress $True
 Add-WordCustomProperty -WordDocument $WordDocument -Name 'ClientMail'  -Value 'fake-email@fake-company.com' -Supress $True
 
-Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $True
-### Start Word with file
-Invoke-Item $FilePathInvoice
+Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $True -OpenDocument

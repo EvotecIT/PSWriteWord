@@ -34,6 +34,4 @@ $ParagraphThatHasPicture = $ParagraphsWithPictures[0]
 ### Or you can do it as one command, keep in mind you can skip imagewidth/imageheight but I wanted to resize logo a bit
 Set-WordPicture -WordDocument $WordDocument -Paragraph $ParagraphThatHasPicture -ImagePath $FilePathImage -ImageWidth 100 -ImageHeight 40
 
-Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $True
-### Start Word with file
-Invoke-Item $FilePathInvoice
+Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $True -OpenDocument

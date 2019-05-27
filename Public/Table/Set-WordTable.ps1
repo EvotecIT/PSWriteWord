@@ -12,7 +12,7 @@
         [nullable[bool]] $BreakAcrossPages,
         [bool] $Supress
     )
-    if ($Table -ne $null) {
+    if ($Table) {
         $Table = $table | Set-WordTableDesign -Design $Design
         $Table = $table | Set-WordTableDirection -Direction $Direction
         $Table = $table | Set-WordTableBorder -TableBorderType $TableBorderType -Border $Border

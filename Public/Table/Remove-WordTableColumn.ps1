@@ -5,8 +5,8 @@
         [int] $Count = 1,
         [nullable[int]] $Index
     )
-    if ($Table -ne $null) {
-        if ($Index -ne $null) {
+    if ($Table) {
+        if ($Index) {
             for ($i = 0; $i -lt $Count; $i++) {
                 $Table.RemoveColumn($Index + $i)
             }

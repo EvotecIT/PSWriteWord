@@ -6,8 +6,8 @@
         [nullable[int]] $Index,
         [bool] $Supress
     )
-    if ($Table -ne $null) {
-        if ($Index -ne $null) {
+    if ($Table) {
+        if ($Index) {
             for ($i = 0; $i -lt $Count; $i++) {
                 $Table.RemoveRow($Index + $i)
             }

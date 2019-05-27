@@ -21,7 +21,7 @@ Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData -Design LightS
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with just 1 entry" -FontSize 15 -Alignment center -Supress $true
 Add-WordParagraph -WordDocument $WordDocument -Supress $true
-Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -Supress $true -Transpose#-Verbose
+Add-WordTable -WordDocument $WordDocument -DataTable $InvoiceData1 -Design LightShading -Supress $true -Transpose #-Verbose
 
 Add-WordText -WordDocument $WordDocument -Text "Invoice Data with 2 entries - autofit to contents" -FontSize 15 -Alignment center -Supress $true
 Add-WordParagraph -WordDocument $WordDocument -Supress $true

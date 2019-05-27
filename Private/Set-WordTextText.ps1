@@ -6,8 +6,8 @@
         [switch]$Append,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null) {
-        if ($Text -ne $null) {
+    if ($Paragraph) {
+        if ($Text) {
             if ($Text -isnot [String]) { throw 'Invalid argument for parameter -Text.' }
             if ($Append -ne $true) { $Paragraph = Remove-WordText -Paragraph $Paragraph }
             Write-Verbose "Set-WordTextText - Appending Value $Text"

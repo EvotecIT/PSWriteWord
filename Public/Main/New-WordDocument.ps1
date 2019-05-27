@@ -1,4 +1,7 @@
-﻿function New-WordDocument {
+﻿using namespace Xceed.Words.NET
+using namespace Xceed.Document.NET
+
+function New-WordDocument {
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][alias('Path')][string] $FilePath = '',

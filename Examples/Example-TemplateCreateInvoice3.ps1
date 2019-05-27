@@ -45,18 +45,23 @@ $InvoiceEntry5 = @{}
 $InvoiceEntry5.Description = 'IT Services 5'
 $InvoiceEntry5.Amount = '$299'
 
-$InvoiceData = @()
-$InvoiceData += $InvoiceEntry1
-$InvoiceData += $InvoiceEntry2
-$InvoiceData += $InvoiceEntry3
-$InvoiceData += $InvoiceEntry4
-$InvoiceData += $InvoiceEntry5
+$InvoiceData = @(
+    $InvoiceEntry1
+    $InvoiceEntry2
+    $InvoiceEntry3
+    $InvoiceEntry4
+    $InvoiceEntry5
+)
 
+# Edit table, first find it
 $LastTable = Get-WordTable -WordDocument $WordDocument -LastTable
+
+# Remove last row
 $RowsToRemove = $LastTable.Rows.Count - 1
 Remove-WordTableRow -Table $LastTable -Count $RowsToRemove -Supress $true
-Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Supress $true #-Verbose
 
-Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $true
-### Start Word with file
-Invoke-Item $FilePathInvoice
+# add new table
+Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Supress $true
+
+
+Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $true -OpenDocument
