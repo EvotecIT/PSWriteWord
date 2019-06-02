@@ -197,11 +197,12 @@ function Add-WordTable {
 
             # $RowNr = 0
             #Write-Color "[i] Presenting table after conversion" -Color Yellow
-            # if ($DoNotAddTitle) {
-            #     if ($RowNr -eq 0) {
-            #         $Data = $Data | Select-Object -Skip 1
-            #      }
-            # }
+            if ($DoNotAddTitle) {
+                #     if ($RowNr -eq 0) {
+                #         $Data = $Data | Select-Object -Skip 1
+                #      }
+                $RowNr = 1
+            }
             foreach ($Row in $Data) {
                 $ColumnNr = 0
                 foreach ($Column in $Row) {
