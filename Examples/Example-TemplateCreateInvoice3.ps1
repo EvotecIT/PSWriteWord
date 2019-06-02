@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module .\PSWriteWord.psd1 #-Force
 
 ### Before running this script make sure to run Example-CreateWord first
 $FilePathTemplate = "$PSScriptRoot\Templates\WordTemplate-InvoiceWithLogo.docx"
@@ -61,7 +61,6 @@ $RowsToRemove = $LastTable.Rows.Count - 1
 Remove-WordTableRow -Table $LastTable -Count $RowsToRemove -Supress $true
 
 # add new table
-Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Supress $true
-
+Add-WordTable -Table $LastTable -DataTable $InvoiceData -DoNotAddTitle -Supress $true -Transpose
 
 Save-WordDocument -WordDocument $WordDocument -FilePath $FilePathInvoice -Supress $true -OpenDocument

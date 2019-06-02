@@ -7,7 +7,7 @@ $FilePathImage2 = "$PSScriptRoot\Images\Logo-Evotec-Small.jpg"
 $WordDocument = New-WordDocument $FilePath
 
 Add-WordText -WordDocument $WordDocument -Text 'Adding a picture...' -Supress $true
-Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage1 -Verbose
+Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage1 -Verbose -ImageWidth 300 -ImageHeight 100
 Add-WordText -WordDocument $WordDocument -Text 'Adding a picture... with rotation' -Supress $true
 Add-WordPicture -WordDocument $WordDocument -ImagePath $FilePathImage2 -Rotation 25
 

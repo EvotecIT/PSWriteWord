@@ -6,7 +6,7 @@
             Tags = 'word', 'docx', 'write', 'PSWord', 'office', 'windows', 'doc'
             ProjectUri = 'https://github.com/EvotecIT/PSWriteWord'
             IconUri = 'https://evotec.xyz/wp-content/uploads/2018/10/PSWriteWord.png'
-            Prerelease = 'Preview5'
+            Prerelease = 'Preview6'
         }
     }
     Description = 'Simple project to create Microsoft Word in PowerShell without having Office installed.'

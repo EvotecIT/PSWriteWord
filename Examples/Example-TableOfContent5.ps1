@@ -13,5 +13,4 @@ Add-WordText  -WordDocument $WordDocument -Text 'This is my third title' -Headin
 
 Add-WordToc -WordDocument $WordDocument -BeforeParagraph $Paragraph -Title 'Test' -Switches C, A -RightTabPos 15 -HeaderStyle Heading3 -MaxIncludeLevel 3 -Supress $True
 
-Save-WordDocument $WordDocument -Supress $True
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Supress $True -OpenDocument

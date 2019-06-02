@@ -17,7 +17,4 @@ Add-WordText -WordDocument $WordDocument -Text 'This is a text font size 15' -Fo
 ### get page settings
 Get-WordPageSettings -WordDocument $WordDocument
 ### Save document
-Save-WordDocument -WordDocument $WordDocument -Supress $True
-
-### Start Word with file
-Invoke-Item $FilePath
+Save-WordDocument -WordDocument $WordDocument -Supress $True -OpenDocument

@@ -8,4 +8,4 @@ Add-WordText -WordDocument $WordDocument -Text 'This is a text font size 21' -Fo
 Add-WordText -WordDocument $WordDocument -Text 'This is a text font size 15' -FontSize 15 -Supress $True
 
 Set-WordPageSettings -WordDocument $WordDocument -MarginRight 85 -PageWidth 350
-Save-WordDocument $WordDocument -Supress $True
+Save-WordDocument $WordDocument -Supress $True -OpenDocument

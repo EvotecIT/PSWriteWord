@@ -27,5 +27,4 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
     -FontSize 15, 10 `
     -Color Blue, Red `
     -NewLine $true, $true -Supress $True
-Save-WordDocument $WordDocument -Language 'en-US' -Supress $True
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Language 'en-US' -Supress $True -OpenDocument

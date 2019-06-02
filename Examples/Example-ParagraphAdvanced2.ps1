@@ -37,4 +37,4 @@ Add-WordText -WordDocument $WordDocument -Text 'To jest polska wersja tekstu.' `
     -NewLine $true, $true -Language 'pl-PL' -Supress $True
 
 
-Save-WordDocument -WordDocument $WordDocument -Supress $True
+Save-WordDocument -WordDocument $WordDocument -Supress $True -OpenDocument
