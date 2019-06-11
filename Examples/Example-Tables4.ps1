@@ -41,7 +41,4 @@ Set-WordTableBorder -Table $Table -TableBorderType InsideV -Border $BorderTypeIn
 #Add-WordParagraph -WordDocument $WordDocument
 
 
-Save-WordDocument $WordDocument -Supress $True
-
-### Start Word with file
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Supress $True -OpenDocument
