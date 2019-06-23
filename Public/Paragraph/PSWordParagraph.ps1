@@ -5,7 +5,7 @@ function Set-WordTextFontSize {
         [alias ("S")] [nullable[double]] $FontSize,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $FontSize -ne $null) {
+    if ($null -ne $Paragraph -and $FontSize -ne $null) {
         $Paragraph = $Paragraph.FontSize($FontSize)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -18,7 +18,7 @@ function Set-WordTextColor {
         [alias ("C")] [nullable[System.Drawing.Color]] $Color,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Color -ne $null) {
+    if ($null -ne $Paragraph -and $Color -ne $null) {
         $Paragraph = $Paragraph.Color($Color)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -31,7 +31,7 @@ function Set-WordTextBold {
         [nullable[bool]] $Bold,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Bold -ne $null -and $Bold -eq $true) {
+    if ($null -ne $Paragraph -and $Bold -ne $null -and $Bold -eq $true) {
         $Paragraph = $Paragraph.Bold()
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -44,7 +44,7 @@ function Set-WordTextItalic {
         [nullable[bool]] $Italic,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Italic -ne $null -and $Italic -eq $true) {
+    if ($null -ne $Paragraph -and $Italic -ne $null -and $Italic -eq $true) {
         $Paragraph = $Paragraph.Italic()
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -57,7 +57,7 @@ function Set-WordTextFontFamily {
         [string] $FontFamily,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $FontFamily -ne $null -and $FontFamily -ne '') {
+    if ($null -ne $Paragraph -and $FontFamily -ne $null -and $FontFamily -ne '') {
         $Paragraph = $Paragraph.Font($FontFamily)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -70,7 +70,7 @@ function Set-WordTextUnderlineStyle {
         [nullable[UnderlineStyle]] $UnderlineStyle,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $UnderlineStyle -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $UnderlineStyle) {
         $Paragraph = $Paragraph.UnderlineStyle($UnderlineStyle)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -83,7 +83,7 @@ function Set-WordTextUnderlineColor {
         [nullable[System.Drawing.Color]] $UnderlineColor,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $UnderlineColor -ne $null) {
+    if ($null -ne $Paragraph -and $UnderlineColor -ne $null) {
         $Paragraph = $Paragraph.UnderlineColor($UnderlineColor)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -96,7 +96,7 @@ function Set-WordTextSpacingAfter {
         [nullable[double]] $SpacingAfter,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $SpacingAfter -ne $null) {
+    if ($null -ne $Paragraph -and $SpacingAfter -ne $null) {
         $Paragraph = $Paragraph.SpacingAfter($SpacingAfter)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -109,7 +109,7 @@ function Set-WordTextSpacingBefore {
         [nullable[double]] $SpacingBefore,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $SpacingBefore -ne $null) {
+    if ($null -ne $Paragraph -and $SpacingBefore -ne $null) {
         $Paragraph = $Paragraph.SpacingBefore($SpacingBefore)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -122,7 +122,7 @@ function Set-WordTextSpacing {
         [nullable[double]] $Spacing,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Spacing -ne $null) {
+    if ($null -ne $Paragraph -and $Spacing -ne $null) {
         $Paragraph = $Paragraph.Spacing($Spacing)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -136,7 +136,7 @@ function Set-WordTextHighlight {
         [nullable[Highlight]] $Highlight,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Highlight -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $Highlight) {
         $Paragraph = $Paragraph.Highlight($Highlight)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -149,7 +149,7 @@ function Set-WordTextCapsStyle {
         [nullable[CapsStyle]] $CapsStyle,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $CapsStyle -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $CapsStyle) {
         $Paragraph = $Paragraph.CapsStyle($CapsStyle)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -162,7 +162,7 @@ function Set-WordTextStrikeThrough {
         [nullable[StrikeThrough]] $StrikeThrough,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $StrikeThrough -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $StrikeThrough) {
         $Paragraph = $Paragraph.StrikeThrough($StrikeThrough)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -175,7 +175,7 @@ function Set-WordTextShadingType {
         [nullable[System.Drawing.Color]] $ShadingColor,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $ShadingType -ne $null -and $ShadingColor -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $ShadingType -and $ShadingColor -ne $null) {
         $Paragraph = $Paragraph.Shading($ShadingColor, $ShadingType)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -188,7 +188,7 @@ function Set-WordTextPercentageScale {
         [nullable[int]]$PercentageScale,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $PercentageScale -ne $null) {
+    if ($null -ne $Paragraph -and $PercentageScale -ne $null) {
         $Paragraph = $Paragraph.PercentageScale($PercentageScale)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -201,7 +201,7 @@ function Set-WordTextLanguage {
         [string]$Language,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Language -ne $null -and $Language -ne '') {
+    if ($null -ne $Paragraph -and $Language -ne $null -and $Language -ne '') {
         $Culture = [System.Globalization.CultureInfo]::GetCultureInfo($Language)
         $Paragraph = $Paragraph.Culture($Culture)
     }
@@ -215,7 +215,7 @@ function Set-WordTextKerning {
         [nullable[int]] $Kerning,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Kerning -ne $null) {
+    if ($null -ne $Paragraph -and $Kerning -ne $null) {
         $Paragraph = $Paragraph.Kerning($Kerning)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -228,7 +228,7 @@ function Set-WordTextMisc {
         [nullable[Misc]] $Misc,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Misc -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $Misc) {
         $Paragraph = $Paragraph.Misc($Misc)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -242,7 +242,7 @@ function Set-WordTextPosition {
         [nullable[int]]$Position,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Position -ne $null) {
+    if ($null -ne $Paragraph -and $Position -ne $null) {
         $Paragraph = $Paragraph.Position($Position)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -255,7 +255,7 @@ function Set-WordTextHidden {
         [nullable[bool]] $Hidden,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Hidden -ne $null) {
+    if ($null -ne $Paragraph -and $Hidden -ne $null) {
         $Paragraph = $Paragraph.Hidden($Hidden)
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -268,7 +268,7 @@ function Set-WordTextHeadingType {
         [nullable[HeadingType]] $HeadingType,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $HeadingType -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $HeadingType) {
         #$StyleName = [string] "$HeadingType"
         Write-Verbose "Set-WordTextHeadingType - Setting StyleName to $StyleName"
         $Paragraph.StyleName = $HeadingType
@@ -282,7 +282,7 @@ function Set-WordTextIndentationFirstLine {
         [nullable[single]] $IndentationFirstLine,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $IndentationFirstLine -ne $null) {
+    if ($null -ne $Paragraph -and $IndentationFirstLine -ne $null) {
         $Paragraph.IndentationFirstLine = $IndentationFirstLine
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -294,7 +294,7 @@ function Set-WordTextAlignment {
         [nullable[Alignment]] $Alignment,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Alignment -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $Alignment) {
         $Paragraph.Alignment = $Alignment
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -306,7 +306,7 @@ function Set-WordTextIndentationHanging {
         [nullable[single]] $IndentationHanging,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $IndentationHanging -ne $null) {
+    if ($null -ne $Paragraph -and $IndentationHanging -ne $null) {
         $Paragraph.IndentationHanging = $IndentationHanging
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -319,7 +319,7 @@ function Set-WordTextDirection {
         [nullable[Direction]] $Direction,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Direction -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $Direction) {
         $Paragraph.Direction = $Direction
     }
     if ($Supress) { return } else { return $Paragraph }
@@ -331,7 +331,7 @@ function Set-WordTextScript {
         [nullable[Script]] $Script,
         [bool] $Supress = $false
     )
-    if ($Paragraph -ne $null -and $Script -ne $null) {
+    if ($null -ne $Paragraph -and $null -ne $Script) {
         $Paragraph = $Paragraph.Script($Script)
     }
     if ($Supress) { return } else { return $Paragraph }
