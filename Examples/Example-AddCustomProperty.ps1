@@ -1,4 +1,4 @@
-Import-Module PSWriteWord.psd1 -Force
+#Import-Module .\PSWriteWord.psd1 -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddCustomProperty.docx"
 
@@ -19,7 +19,4 @@ foreach ($custom in $AllCustomProperties) {
     Add-WordText -WordDocument $WordDocument -Text 'Custom property: ', $Custom.Name, ' with value: ', $Custom.Value -Bold $false, $true, $false, $true -Supress $true
 }
 
-Save-WordDocument $WordDocument -Supress $true
-
-### Start Word with file
-Invoke-Item $FilePath
+Save-WordDocument $WordDocument -Supress $true -OpenDocument:$true
