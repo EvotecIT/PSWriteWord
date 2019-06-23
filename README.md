@@ -27,11 +27,11 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
--   0.8.0 (**Breaking Changes**) - Unreleased/InProgress
+-   1.0.0 (**Breaking Changes**) - 23.06.2019
     -   Removed custom enums, using Xceed ones instead
     -   Changed how Add-WordList works
     -   Changed how New-WordList / New-WordListItem works - be sure to review new, easier way
-
+    -   Rewrote/fixed couple of functions
 -   0.7.1 - 29.04.2019
     - Fixed Saving issue when file was in use and path was having dots in temporary path
 -   0.7.0 - 17.04.2019
