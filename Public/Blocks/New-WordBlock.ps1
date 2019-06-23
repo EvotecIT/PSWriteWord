@@ -87,19 +87,24 @@ function New-WordBlock {
     }
     ### TABLE PROCESSING
     if ($TableData -and $TableDesign) {
-        if ($TableMaximumColumns -eq $null) { $TableMaximumColumns = 5 }
-        if ($TableColumnWidths) {
-            $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose -ColumnWidth $TableColumnWidths
-        } else {
-            $Table = Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose
-        }
+
         if ($TableTitleMerge) {
-            $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll  # -ColumnNrStart 0 -ColumnNrEnd 1
-            if ($TableTitleText -ne $null) {
-                $TableParagraph = Get-WordTableRow -Table $Table -RowNr 0 -ColumnNr 0
-                $TableParagraph = Set-WordText -Paragraph $TableParagraph -Text $TableTitleText -Alignment $TableTitleAlignment -Color $TableTitleColor
-            }
+            $OverwriteTitle = $TableTitleText
         }
+
+        #if ($TableMaximumColumns -eq $null) { $TableMaximumColumns = 5 }
+        if ($TableColumnWidths) {
+            Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose -ColumnWidth $TableColumnWidths -OverwriteTitle $OverwriteTitle -Supress $True
+        } else {
+            Add-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -DataTable $TableData -AutoFit Window -Design $TableDesign -DoNotAddTitle:$TableTitleMerge -MaximumColumns $TableMaximumColumns -Transpose:$TableTranspose -OverwriteTitle $OverwriteTitle -Supress $True
+        }
+        #if ($TableTitleMerge) {
+        #    $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll  # -ColumnNrStart 0 -ColumnNrEnd 1
+        #    if ($TableTitleText -ne $null) {
+        #        $TableParagraph = Get-WordTableRow -Table $Table -RowNr 0 -ColumnNr 0
+        #        $TableParagraph = Set-WordText -Paragraph $TableParagraph -Text $TableTitleText -Alignment $TableTitleAlignment -Color $TableTitleColor
+        #    }
+        #}
     }
     ### LIST PROCESSING
     if ($ListData) {

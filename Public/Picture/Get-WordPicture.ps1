@@ -11,11 +11,10 @@
         throw 'Only one option is possible at time (-ListParagraphs or -ListPictures)'
     }
     if ($ListParagraphs) {
-        $List = New-ArrayList
         $Paragraphs = $WordDocument.Paragraphs
-        foreach ($p in $Paragraphs) {
+        $List = foreach ($p in $Paragraphs) {
             if ($p.Pictures -ne $null) {
-                Add-ToArray -List $List -Element $p
+                $p
             }
         }
         return $List

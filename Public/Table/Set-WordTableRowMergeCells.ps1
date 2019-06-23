@@ -12,13 +12,17 @@
         [bool] $Supress = $false
     )
     if ($Table) {
-        if ($MergeAll -and $RowNr -ne $null) {
+        if ($MergeAll -and $null -ne $RowNr) {
             $CellsCount = $Table.Rows[$RowNr].Cells.Count
             $Table.Rows[$RowNr].MergeCells(0, $CellsCount)
-            for ($paragraph = 1; $paragraph -le $Table.Rows[$RowNr].Paragraphs.Count; $paragraph++) {
-                $Table.Rows[$RowNr].Paragraphs[$paragraph].Remove($TrackChanges)
+            for ($paragraph = 0; $paragraph -lt $Table.Rows[$RowNr].Paragraphs.Count; $paragraph++) {
+                try {
+                    $Table.Rows[$RowNr].Paragraphs[$paragraph].Remove($TrackChanges)
+                } catch {
+                    Write-Warning -Message "Set-WordTableRowMergeCells - Failed to remove - Paragraph ($paragraph), Row ($RowNr), TrackChanges ($TrackChanges)"
+                }
             }
-        } elseif ($RowNr -ne $null -and $ColumnNrStart -ne $null -and $ColumnNrEnd -ne $null) {
+        } elseif ($null -ne $RowNr -and $null -ne $ColumnNrStart -and $null -ne $ColumnNrEnd) {
             $CurrentParagraphCount = $Table.Rows[$RowNr].Cells[$ColumnNrStart].Paragraphs.Count
             $Table.Rows[$RowNr].MergeCells($ColumnNrStart, $ColumnNrEnd)
             if ($TextMerge) {

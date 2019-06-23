@@ -7,9 +7,8 @@
         [int] $NrColumns,
         [bool] $Supress = $false
     )
-    Write-Verbose "New-WordTable - Paragraph $Paragraph"
-    Write-Verbose "New-WordTable - NrRows $NrRows NrColumns $NrColumns Supress $supress"
-    if ($Paragraph -eq $null) {
+    Write-Verbose "New-WordTable - NrRows $NrRows NrColumns $NrColumns Supress $supress Paragraph $Paragraph"
+    if ($null -eq $Paragraph) {
         $WordTable = $WordDocument.InsertTable($NrRows, $NrColumns)
     } else {
         $TableDefinition = $WordDocument.AddTable($NrRows, $NrColumns)

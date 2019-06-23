@@ -6,7 +6,7 @@
         [int] $PictureID,
         [bool] $Supress
     )
-    if ($Paragraph.Pictures[$PictureID] -ne $null) {
+    if ($null -ne $Paragraph.Pictures[$PictureID]) {
         $Paragraph.Pictures[$PictureID].Remove()
     }
     if ($supress) { return } else { return $Paragraph}

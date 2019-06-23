@@ -51,10 +51,8 @@ function Add-WordTable {
         [switch] $ContinueFormatting,
         [alias('Rotate', 'RotateData', 'TransposeColumnsRows', 'TransposeData')][switch] $Transpose,
         [string[]] $ExcludeProperty,
-        [switch] $NoAliasOrScriptProperties,
-        [switch] $DisplayPropertySet,
-
-        [bool] $Supress = $false
+        [bool] $Supress = $false,
+        [string] $Splitter = ';'
     )
     Begin {
         [int] $Run = 0
@@ -64,22 +62,32 @@ function Add-WordTable {
     Process {
         if ($DataTable.Count -gt 0) {
             if ($Run -eq 0) {
-                if ($Transpose) { $DataTable = Format-TransposeTable -Object $DataTable }
-                $Data = Format-PSTable -Object $DataTable -ExcludeProperty $ExcludeProperty -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -SkipTitle:$DoNotAddTitle
+                if ($Transpose) {
+                    $DataTable = Format-TransposeTable -Object $DataTable
+                }
+                $Data = Format-PSTable -Object $DataTable -ExcludeProperty $ExcludeProperty -SkipTitle:$DoNotAddTitle -Splitter $Splitter
                 $WorksheetHeaders = $Data[0] # Saving Header information for later use
                 $NumberRows = $Data.Count
                 $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
-                ### Add Table or Add To TABLE
-                if ($null -eq $Table) {
-                    $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+                if ($DoNotAddTitle) {
+                    ### Add Table or Add To TABLE
+                    if ($null -eq $Table) {
+                        $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows ($NumberRows + 1) -NrColumns $NumberColumns -Supress $false
+                    } else {
+                        Add-WordTableRow -Table $Table -Count ($NumberRows + 1) -Supress $True
+                    }
                 } else {
-                    Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
+                    ### Add Table or Add To TABLE
+                    if ($null -eq $Table) {
+                        $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
+                    } else {
+                        Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
+                    }
                 }
                 #Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
-                $Run++
             } else {
-                $Data = Format-PSTable -Object $DataTable -SkipTitle -NoAliasOrScriptProperties:$NoAliasOrScriptProperties -DisplayPropertySet:$DisplayPropertySet -OverwriteHeaders $WorksheetHeaders
+                $Data = Format-PSTable -Object $DataTable -SkipTitle -OverwriteHeaders $WorksheetHeaders -Splitter $Splitter
                 $NumberRows = $Data.Count
                 $NumberColumns = if ($Data[0].Count -ge $MaximumColumns) { $MaximumColumns } else { $Data[0].Count }
 
@@ -87,11 +95,9 @@ function Add-WordTable {
                 if ($null -eq $Table) {
                     $Table = New-WordTable -WordDocument $WordDocument -Paragraph $Paragraph -NrRows $NumberRows -NrColumns $NumberColumns -Supress $false
                 } else {
-
                     Add-WordTableRow -Table $Table -Count $NumberRows -Supress $True
                 }
                 #Write-Verbose "Add-WordTable - Run: $Run NumberRows: $NumberRows NumberColumns: $NumberColumns"
-                $Run++
             }
             ### Add titles
             <#
@@ -197,9 +203,9 @@ function Add-WordTable {
 
             # $RowNr = 0
             #Write-Color "[i] Presenting table after conversion" -Color Yellow
-            if ($DoNotAddTitle) {
+            if ($Run -eq 0 -and $DoNotAddTitle) {
                 #     if ($RowNr -eq 0) {
-                #         $Data = $Data | Select-Object -Skip 1
+                #$Data = $Data | Select-Object -Skip 1
                 #      }
                 $RowNr = 1
             }
@@ -208,7 +214,7 @@ function Add-WordTable {
                 foreach ($Column in $Row) {
                     # Write-Verbose "Row: $RowNr Column: $ColumnNr Data: $Column"
 
-                    $Data = Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Column `
+                    Add-WordTableCellValue -Table $Table -Row $RowNr -Column $ColumnNr -Value $Column `
                         -Color $Color[$RowNr] `
                         -FontSize $FontSize[$RowNr] `
                         -FontFamily $FontFamily[$RowNr] `
@@ -234,13 +240,18 @@ function Add-WordTable {
                         -Alignment $Alignment[$RowNr]`
                         -DirectionFormatting $DirectionFormatting[$RowNr] `
                         -ShadingType $ShadingType[$RowNr]`
-                        -Script $Script[$RowNr]
-                    if ($ColumnNr -eq $($MaximumColumns - 1)) { break; } # prevents display of more columns then there is space, choose carefully
+                        -Script $Script[$RowNr] -Supress $True
+                    if ($ColumnNr -eq $($MaximumColumns - 1)) {
+                        # prevents display of more columns then there is space, choose carefully
+                        break;
+                    }
                     $ColumnNr++
 
                 }
+                #if ($DataTable.Count -eq $RowNr) {
                 $RowNr++
             }
+            $Run++
         }
     }
     End {

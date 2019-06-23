@@ -7,7 +7,7 @@
         [bool] $Percentage,
         [bool] $Supress
     )
-    if ($Table -ne $null -and $Width -ne $null) {
+    if ($null -ne $Table -and $null -ne $Width) {
         if ($Percentage) {
             Write-Verbose "Set-WordTableColumnWidth - Option A - Width: $([string] $Width) - Percentage: $Percentage - TotalWidth: $TotalWidth "
             $Table.SetWidthsPercentage($Width, $TotalWidth)

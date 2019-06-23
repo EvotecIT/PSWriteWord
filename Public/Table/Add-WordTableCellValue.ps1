@@ -41,6 +41,7 @@
     } catch {
         $ErrorMessage = $_.Exception.Message -replace "`n", " " -replace "`r", " "
         Write-Warning "Add-WordTableCellValue - Failed adding value $Value with error: $ErrorMessage"
+        return
     }
     <#
     $Data = Set-WordText -Paragraph $Data -Color $Color -FontSize $FontSize -FontFamily $FontFamily -Italic $Italic `
