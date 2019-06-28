@@ -27,6 +27,8 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates:
 
+-   1.0.1 - 28.06.2019
+    -   Fix for Supress in Add-WordPicture
 -   1.0.0 (**Breaking Changes**) - 23.06.2019
     -   Removed custom enums, using Xceed ones instead
     -   Changed how Add-WordList works
