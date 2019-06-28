@@ -36,5 +36,5 @@
     if ($Alignment) {
         $Data = Set-WordTextAlignment -Paragraph $Data -Alignment $Alignment
     }
-    if ($Supress) { return $Data } else { return }
+    if ($Supress) { return } else { return $Data }
 }
