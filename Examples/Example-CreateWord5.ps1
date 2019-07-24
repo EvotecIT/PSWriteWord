@@ -12,7 +12,7 @@ $WordDocument | Add-WordText -Text 'This is a text font size 15' -FontSize 15 -S
 $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $false
 $Paragraph = Add-WordTabStopPosition -Paragraph $Paragraph -TabStopPositionLeader dot -HorizontalPosition 216 -Alignment center -Supress $false
 $Paragraph = Add-WordTabStopPosition -Paragraph $Paragraph -TabStopPositionLeader dot -HorizontalPosition 432 -Alignment right -Supress $false
-$Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text "Tab stop position on Left`t Middle `t and Right" -FontSize 15 -Supress $false
+$Paragraph = Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Text "Tab stop position on Left`t Middle `t and Right`t" -FontSize 15 -Supress $false -AppendToExistingParagraph
 
 ### adds green color to paragraph above
 Set-WordText -Paragraph $Paragraph -Color Green -FontSize 30 -Supress $True
@@ -24,7 +24,4 @@ $Paragraph = Add-WordParagraph -WordDocument $WordDocument -Supress $false
 Add-WordText -WordDocument $WordDocument -Paragraph $Paragraph -Color Green -FontSize 30 -bold $null, $null, $true -Text 'Font size 30', ' not font size 30', ' not font size 30 but bold'  -Supress $True
 
 ### Save document
-$WordDocument | Save-WordDocument -Language 'en-US' -Supress $True
-
-### Start Word with file
-Invoke-Item $FilePath
+$WordDocument | Save-WordDocument -Language 'en-US' -Supress $True -OpenDocument
