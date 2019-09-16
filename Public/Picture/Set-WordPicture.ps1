@@ -14,7 +14,7 @@
         [int] $PictureID,
         [bool] $Supress = $false
     )
-    $Paragraph = Remove-WordPicture -WordDocument $WordDocument -Paragraph $Paragraph -PictureID $PictureID -Supress $Supress
+    $Paragraph = Remove-WordPicture -WordDocument $WordDocument -Paragraph $Paragraph -PictureID $PictureID -Supress $false
     $data = Add-WordPicture -WordDocument $WordDocument -Paragraph $Paragraph `
         -Picture $Picture `
         -ImagePath $ImagePath -ImageWidth $ImageWidth -ImageHeight $ImageHeight `
