@@ -19,8 +19,13 @@
     }
     if ($null -eq $Picture) {
         if ($ImagePath -ne '' -and (Test-Path($ImagePath))) {
-            $Image = $WordDocument.AddImage($ImagePath)
-            $Picture = $Image.CreatePicture()
+            try {
+                $Image = $WordDocument.AddImage($ImagePath)
+                $Picture = $Image.CreatePicture()
+            } catch {
+                Write-Warning "Add-WordPicture - Failed adding image. Please check with different file format/type. Aborting."
+                return
+            }
         } else {
             Write-Warning "Add-WordPicture - Path to ImagePath ($ImagePath) was incorrect. Aborting."
             return
