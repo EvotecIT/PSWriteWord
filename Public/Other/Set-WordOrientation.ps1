@@ -1,8 +1,8 @@
 ﻿function Set-WordOrientation {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
-        [alias ("PageLayout")][nullable[Orientation]] $Orientation
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
+        [alias ("PageLayout")][nullable[Xceed.Document.NET.Orientation]] $Orientation
     )
     if ($Orientation -ne $null) { $WordDocument.PageLayout.Orientation = $Orientation }
 }

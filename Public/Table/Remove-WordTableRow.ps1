@@ -1,7 +1,7 @@
 ﻿function Remove-WordTableRow {
     [CmdletBinding()]
     param (
-        [InsertBeforeOrAfter] $Table,
+        [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [int] $Count = 1,
         [nullable[int]] $Index,
         [bool] $Supress

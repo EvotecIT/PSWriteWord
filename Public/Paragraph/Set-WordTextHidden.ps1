@@ -1,7 +1,7 @@
 ﻿function Set-WordTextHidden {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[bool]] $Hidden,
         [bool] $Supress = $false
     )

@@ -1,7 +1,7 @@
 ﻿function Remove-WordText {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [int] $Index = 0,
         [int] $Count = $($Paragraph.Text.Length),
         [bool] $TrackChanges,

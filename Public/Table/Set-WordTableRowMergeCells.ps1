@@ -1,7 +1,7 @@
 ﻿function Set-WordTableRowMergeCells {
     [CmdletBinding()]
     param(
-        [InsertBeforeOrAfter] $Table,
+        [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNrStart,
         [nullable[int]] $ColumnNrEnd,

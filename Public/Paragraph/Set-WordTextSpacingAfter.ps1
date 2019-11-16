@@ -1,7 +1,7 @@
 ﻿function Set-WordTextSpacingAfter {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[double]] $SpacingAfter,
         [bool] $Supress = $false
     )

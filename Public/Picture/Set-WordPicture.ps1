@@ -1,9 +1,9 @@
 ﻿function Set-WordPicture {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
-        [DocXElement] $Picture,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [Xceed.Document.NET.Picture] $Picture,
         [string] $ImagePath,
         [int] $Rotation,
         [switch] $FlipHorizontal,

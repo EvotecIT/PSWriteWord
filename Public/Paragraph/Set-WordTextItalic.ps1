@@ -1,7 +1,7 @@
 ﻿function Set-WordTextItalic {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[bool]] $Italic,
         [bool] $Supress = $false
     )

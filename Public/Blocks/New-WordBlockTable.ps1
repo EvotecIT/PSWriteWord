@@ -1,13 +1,13 @@
 ﻿function New-WordBlockTable {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Document.NET.Container]$WordDocument,
         # [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]$Paragraph,
         [bool] $TocEnable,
         [string] $TocText,
         [int] $TocListLevel,
-        [ListItemType] $TocListItemType,
-        [HeadingType] $TocHeadingType,
+        [Xceed.Document.NET.ListItemType] $TocListItemType,
+        [Xceed.Document.NET.HeadingType] $TocHeadingType,
 
         [int] $EmptyParagraphsBefore,
         [int] $EmptyParagraphsAfter,
@@ -16,18 +16,18 @@
         [string] $Text,
 
         [Object] $TableData,
-        [nullable[TableDesign]] $TableDesign,
+        [nullable[Xceed.Document.NET.TableDesign]] $TableDesign,
         [int] $TableMaximumColumns = 5,
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
-        [nullable[Alignment]] $TableTitleAlignment = 'center',
+        [nullable[Xceed.Document.NET.Alignment]] $TableTitleAlignment = 'center',
         [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,
         $ChartKeys,
         $ChartValues,
-        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Bottom,
+        [Xceed.Document.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Document.NET.ChartLegendPosition]::Bottom,
         [bool] $ChartLegendOverlay
         # [bool] $Supress
 

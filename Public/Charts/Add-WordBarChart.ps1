@@ -1,16 +1,16 @@
 ﻿function Add-WordBarChart {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $ChartName,
         [string[]] $Names,
         [int[]] $Values,
-        [Series[]] $ChartSeries,
-        [ChartLegendPosition] $ChartLegendPosition = [ChartLegendPosition]::Left,
+        [Xceed.Document.NET.Series[]] $ChartSeries,
+        [Xceed.Document.NET.ChartLegendPosition] $ChartLegendPosition = [Xceed.Document.NET.ChartLegendPosition]::Left,
         [bool] $ChartLegendOverlay = $false,
-        [BarGrouping] $BarGrouping = [BarGrouping]::Standard,
-        [BarDirection] $BarDirection = [BarDirection]::Bar,
+        [Xceed.Document.NET.BarGrouping] $BarGrouping = [Xceed.Document.NET.BarGrouping]::Standard,
+        [Xceed.Document.NET.BarDirection] $BarDirection = [Xceed.Document.NET.BarDirection]::Bar,
         [int] $BarGapWidth = 200,
         [switch] $NoLegend
     )
@@ -19,7 +19,7 @@
         $ChartSeries = Add-WordChartSeries -ChartName $ChartName -Names $Names -Values $Values
     }
 
-    [BarChart] $chart = New-Object -TypeName BarChart
+    [Xceed.Document.NET.BarChart] $chart = [Xceed.Document.NET.BarChart]::new()
     $chart.BarDirection = $BarDirection
     $chart.BarGrouping = $BarGrouping
     $chart.GapWidth = $BarGapWidth

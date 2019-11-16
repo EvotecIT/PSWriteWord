@@ -1,7 +1,7 @@
 ﻿function Set-WordTextIndentationFirstLine {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[single]] $IndentationFirstLine,
         [bool] $Supress = $false
     )

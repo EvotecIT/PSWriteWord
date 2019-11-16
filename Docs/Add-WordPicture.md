@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-WordPicture [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Picture] <DocXElement>]
+Add-WordPicture [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Picture] <Picture>]
  [[-ImagePath] <String>] [[-Alignment] <Alignment>] [[-Rotation] <Int32>] [-FlipHorizontal] [-FlipVertical]
  [[-ImageWidth] <Int32>] [[-ImageHeight] <Int32>] [[-Description] <String>] [[-Supress] <Boolean>]
  [<CommonParameters>]
@@ -158,7 +158,7 @@ Accept wildcard characters: False
 {{Fill Picture Description}}
 
 ```yaml
-Type: DocXElement
+Type: Picture
 Parameter Sets: (All)
 Aliases:
 

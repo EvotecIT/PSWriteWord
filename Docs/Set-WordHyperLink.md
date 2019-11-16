@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WordHyperLink [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Value] <DocXElement>]
+Set-WordHyperLink [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>] [[-Value] <Hyperlink>]
  [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
@@ -65,7 +65,7 @@ Accept wildcard characters: False
 {{Fill Value Description}}
 
 ```yaml
-Type: DocXElement
+Type: Hyperlink
 Parameter Sets: (All)
 Aliases:
 

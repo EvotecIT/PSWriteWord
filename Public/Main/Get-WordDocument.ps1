@@ -1,5 +1,5 @@
-﻿using namespace Xceed.Words.NET
-using namespace Xceed.Document.NET
+﻿#using namespace Xceed.Words.NET
+#using namespace Xceed.Document.NET
 
 function Get-WordDocument {
     [CmdletBinding()]
@@ -13,7 +13,7 @@ function Get-WordDocument {
                 if ($LicenseKey) {
                     $null = [Licenser]::LicenseKey($LicenseKey)
                 }
-                $WordDocument = [DocX]::Load($FilePath)
+                $WordDocument = [Xceed.Words.NET.DocX]::Load($FilePath)
                 Add-Member -InputObject $WordDocument -MemberType NoteProperty -Name FilePath -Value $FilePath
             } catch {
                 $ErrorMessage = $_.Exception.Message

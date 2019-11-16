@@ -1,7 +1,7 @@
 ﻿function Add-WordFooter {
     [CmdletBinding()]
     param (
-        [Container]$WordDocument,
+        [Xceed.Document.NET.Container]$WordDocument,
         [nullable[bool]] $DifferentFirstPage,
         [nullable[bool]] $DifferentOddAndEvenPages,
         [bool] $Supress = $false

@@ -1,7 +1,7 @@
 ﻿function Get-WordTableRow {
     [CmdletBinding()]
     param (
-        [InsertBeforeOrAfter] $Table,
+        [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [int] $RowNr,
         [int] $ColumnNr,
         [int] $ParagraphNr,

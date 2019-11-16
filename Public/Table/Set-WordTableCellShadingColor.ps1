@@ -1,7 +1,7 @@
 function Set-WordTableCellShadingColor {
     [CmdletBinding()]
     param (
-        [InsertBeforeOrAfter] $Table,
+        [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNr,
         [nullable[System.Drawing.Color]] $ShadingColor,

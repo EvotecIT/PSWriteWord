@@ -1,7 +1,7 @@
 ﻿function Get-WordFooter {
     [CmdletBinding()]
     param (
-        [Container]$WordDocument,
+        [Xceed.Document.NET.Container]$WordDocument,
         [ValidateSet('All', 'First', 'Even', 'Odd')][string] $Type = 'All',
         [bool] $Supress = $false
     )

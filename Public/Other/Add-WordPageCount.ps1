@@ -1,11 +1,11 @@
 function Add-WordPageCount {
     [alias('Add-WordPageNumber')]
     param(
-        [PageNumberFormat] $PageNumberFormat = [PageNumberFormat]::normal,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Footers] $Footer,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Headers] $Header,
-        [Alignment] $Alignment,
+        [Xceed.Document.NET.PageNumberFormat] $PageNumberFormat = [Xceed.Document.NET.PageNumberFormat]::normal,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Footers] $Footer,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Headers] $Header,
+        [Xceed.Document.NET.Alignment] $Alignment,
         [ValidateSet('All', 'First', 'Even', 'Odd')][string] $Type = 'All',
         [ValidateSet('Both', 'PageCountOnly', 'PageNumberOnly')][string] $Option = 'Both',
         [string] $TextBefore,
@@ -13,7 +13,7 @@ function Add-WordPageCount {
         [string] $TextAfter,
         [bool] $Supress
     )
-    $Paragraphs = New-GenericList
+    $Paragraphs = [System.Collections.Generic.List[Object]]::new()
     if ($Footer -or $Header -or $Paragraph) {
         if ($null -eq $Paragraph) {
 
@@ -52,7 +52,7 @@ function Add-WordPageCount {
 
             #$CurrentParagraph = Set-WordTextAlignment -Paragraph $CurrentParagraph
         }
-        if ($Supress) { return } else {return $Paragraphs }
+        if ($Supress) { return } else { return $Paragraphs }
     } else {
         Write-Warning -Message 'Add-WordPageCount - Footer or Header or Paragraph is required.'
     }

@@ -1,11 +1,11 @@
 function Add-WordTOC {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument,
-        [alias ('BeforeParagraph')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container] $WordDocument,
+        [alias ('BeforeParagraph')][parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $Title = 'Table of contents',
-        [TableOfContentsSwitches[]] $Switches = @(),
-        [alias ('Heading', 'HeadingType')][HeadingType] $HeaderStyle = [HeadingType]::Heading1,
+        [Xceed.Document.NET.TableOfContentsSwitches[]] $Switches = @(),
+        [alias ('Heading', 'HeadingType')][Xceed.Document.NET.HeadingType] $HeaderStyle = [Xceed.Document.NET.HeadingType]::Heading1,
         [int] $MaxIncludeLevel = 3,
         [int] $RightTabPos = $null,
         [bool] $Supress = $false

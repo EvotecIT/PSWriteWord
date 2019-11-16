@@ -1,7 +1,7 @@
 ﻿function Set-WordTablePageBreak {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [switch] $AfterTable,
         [switch] $BeforeTable,
         [nullable[bool]] $BreakAcrossPages

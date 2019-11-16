@@ -1,24 +1,24 @@
 ﻿function Set-WordText {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter[]] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter[]] $Paragraph,
         [AllowNull()][string[]] $Text = @(),
         [alias ("C")] [System.Drawing.Color[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
         [alias ("B")] [nullable[bool][]] $Bold = @(),
         [alias ("I")] [nullable[bool][]] $Italic = @(),
-        [alias ("U")] [UnderlineStyle[]] $UnderlineStyle = @(),
+        [alias ("U")] [Xceed.Document.NET.UnderlineStyle[]] $UnderlineStyle = @(),
         [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
         [alias ("SB")] [double[]] $SpacingBefore = @(),
         [alias ("SP")] [double[]] $Spacing = @(),
-        [alias ("H")] [highlight[]] $Highlight = @(),
-        [alias ("CA")] [CapsStyle[]] $CapsStyle = @(),
-        [alias ("ST")] [StrikeThrough[]] $StrikeThrough = @(),
-        [alias ("HT")] [HeadingType[]] $HeadingType = @(),
+        [alias ("H")] [Xceed.Document.NET.Highlight[]] $Highlight = @(),
+        [alias ("CA")] [Xceed.Document.NET.CapsStyle[]] $CapsStyle = @(),
+        [alias ("ST")] [Xceed.Document.NET.StrikeThrough[]] $StrikeThrough = @(),
+        [alias ("HT")] [Xceed.Document.NET.HeadingType[]] $HeadingType = @(),
         [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        [Misc[]] $Misc = @(),
+        [Xceed.Document.NET.Misc[]] $Misc = @(),
         [string[]] $Language = @(),
         [int[]]$Kerning = @(), # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool][]] $Hidden = @(),
@@ -28,15 +28,15 @@
         [switch] $KeepWithNextParagraph,
         [single[]] $IndentationFirstLine = @(),
         [single[]] $IndentationHanging = @(),
-        [nullable[Alignment][]] $Alignment = @(),
-        [Direction[]] $Direction = @(),
-        [ShadingType[]] $ShadingType = @(),
+        [nullable[Xceed.Document.NET.Alignment][]] $Alignment = @(),
+        [Xceed.Document.NET.Direction[]] $Direction = @(),
+        [Xceed.Document.NET.ShadingType[]] $ShadingType = @(),
         [System.Drawing.Color[]]$ShadingColor = @(),
-        [Script[]] $Script = @(),
+        [Xceed.Document.NET.Script[]] $Script = @(),
         [alias ("AppendText")][Switch] $Append,
         [bool] $Supress = $false
     )
-    if ($Alignment -eq $null) { $Alignment = @() }
+    if ($null -eq $Alignment) { $Alignment = @() }
 
 
     Write-Verbose "Set-WordText - Paragraph Count: $($Paragraph.Count)"

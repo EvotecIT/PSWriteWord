@@ -1,7 +1,7 @@
 ﻿function Set-WordTextColor {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [alias ("C")] [nullable[System.Drawing.Color]] $Color,
         [bool] $Supress = $false
     )

@@ -49,9 +49,9 @@
 function Set-WordHyperLink {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [InsertBeforeOrAfter] $Paragraph,
-        [DocXElement] $Value,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Document.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)] [Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [Xceed.Document.NET.Hyperlink] $Value,
         [bool] $Supress = $false
     )
     $Data = $Paragraph.InsertHyperlink($Value)

@@ -155,8 +155,14 @@ Add a new TabStopPosition in the current paragraph.
 ### [New-WordDocument](New-WordDocument.md)
 {{Fill in the Synopsis}}
 
+### [New-WordList](New-WordList.md)
+{{ Fill in the Synopsis }}
+
 ### [New-WordListItem](New-WordListItem.md)
 {{Fill in the Synopsis}}
+
+### [New-WordListItemInternal](New-WordListItemInternal.md)
+{{ Fill in the Synopsis }}
 
 ### [New-WordTable](New-WordTable.md)
 {{Fill in the Synopsis}}
@@ -212,6 +218,12 @@ Add a new TabStopPosition in the current paragraph.
 ### [Set-WordTable](Set-WordTable.md)
 {{Fill in the Synopsis}}
 
+### [Set-WordTableAutoFit](Set-WordTableAutoFit.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableBorder](Set-WordTableBorder.md)
+{{Fill in the Synopsis}}
+
 ### [Set-WordTableCell](Set-WordTableCell.md)
 {{Fill in the Synopsis}}
 
@@ -225,6 +237,15 @@ Add a new TabStopPosition in the current paragraph.
 {{Fill in the Synopsis}}
 
 ### [Set-WordTableColumnWidthByIndex](Set-WordTableColumnWidthByIndex.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableDesign](Set-WordTableDesign.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTableDirection](Set-WordTableDirection.md)
+{{Fill in the Synopsis}}
+
+### [Set-WordTablePageBreak](Set-WordTablePageBreak.md)
 {{Fill in the Synopsis}}
 
 ### [Set-WordTableRowMergeCells](Set-WordTableRowMergeCells.md)

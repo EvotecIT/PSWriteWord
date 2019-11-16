@@ -1,7 +1,7 @@
 ﻿function Set-WordTextIndentationHanging {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[single]] $IndentationHanging,
         [bool] $Supress = $false
     )

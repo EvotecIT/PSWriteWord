@@ -1,7 +1,7 @@
 function Add-WordCustomProperty {
     [CmdletBinding()]
     param (
-        [Container]$WordDocument,
+        [Xceed.Document.NET.Container]$WordDocument,
         [string] $Name,
         [string] $Value,
         [bool] $Supress

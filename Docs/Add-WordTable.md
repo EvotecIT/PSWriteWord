@@ -27,7 +27,7 @@ Add-WordTable [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
  [[-IndentationHanging] <Single[]>] [[-Alignment] <Alignment[]>] [[-DirectionFormatting] <Direction[]>]
  [[-ShadingType] <ShadingType[]>] [[-Script] <Script[]>] [[-NewLine] <Nullable`1[]>] [-KeepLinesTogether]
  [-KeepWithNextParagraph] [-ContinueFormatting] [-Transpose] [[-ExcludeProperty] <String[]>]
- [-NoAliasOrScriptProperties] [-DisplayPropertySet] [[-Supress] <Boolean>] [<CommonParameters>]
+ [[-Supress] <Boolean>] [[-Splitter] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -255,21 +255,6 @@ Accepted values: LeftToRight, RightToLeft
 
 Required: False
 Position: 37
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DisplayPropertySet
-{{Fill DisplayPropertySet Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -533,21 +518,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -NoAliasOrScriptProperties
-{{Fill NoAliasOrScriptProperties Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -OverwriteTitle
 {{ Fill OverwriteTitle Description }}
 
@@ -695,6 +665,21 @@ Aliases: SB
 
 Required: False
 Position: 22
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Splitter
+{{ Fill Splitter Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 43
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

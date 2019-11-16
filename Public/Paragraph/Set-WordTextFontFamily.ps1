@@ -1,7 +1,7 @@
 ﻿function Set-WordTextFontFamily {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $FontFamily,
         [bool] $Supress = $false
     )

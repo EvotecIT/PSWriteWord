@@ -1,7 +1,7 @@
 ﻿function New-WordBlockParagraph {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Document.NET.Container]$WordDocument,
         [int] $EmptyParagraphs
         # [bool] $Supress
     )

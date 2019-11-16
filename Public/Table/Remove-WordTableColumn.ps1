@@ -1,7 +1,7 @@
 ﻿function Remove-WordTableColumn {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [int] $Count = 1,
         [nullable[int]] $Index
     )

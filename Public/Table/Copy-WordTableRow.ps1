@@ -1,7 +1,7 @@
 ﻿function Copy-WordTableRow {
     [CmdletBinding()]
     param (
-        [InsertBeforeOrAfter] $Table,
+        [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         $Row,
         [nullable[int]] $Index
     )

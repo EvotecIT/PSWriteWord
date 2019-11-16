@@ -1,8 +1,8 @@
 ﻿Function Add-WordParagraph {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
-        [alias('Paragraph', 'Table', 'List')][InsertBeforeOrAfter] $WordObject,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
+        [alias('Paragraph', 'Table', 'List')][Xceed.Document.NET.InsertBeforeOrAfter] $WordObject,
         [alias('Insert')][validateset('BeforeSelf', 'AfterSelf')][string] $InsertWhere = 'AfterSelf',
         #[bool] $TrackChanges,
         [bool] $Supress = $false

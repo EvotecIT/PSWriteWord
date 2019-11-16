@@ -1,7 +1,7 @@
 function Add-WordEquation {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
         [string] $Equation,
         [bool] $Supress = $false
     )

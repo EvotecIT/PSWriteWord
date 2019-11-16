@@ -1,7 +1,7 @@
 ﻿function Set-WordMargins {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
         [nullable[single]] $MarginLeft,
         [nullable[single]] $MarginRight,
         [nullable[single]] $MarginTop,

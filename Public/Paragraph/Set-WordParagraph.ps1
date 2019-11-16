@@ -1,9 +1,9 @@
 ﻿Function Set-WordParagraph {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
-        [Alignment] $Alignment,
-        [Direction] $Direction,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [Xceed.Document.NET.Alignment] $Alignment,
+        [Xceed.Document.NET.Direction] $Direction,
         [string] $Language,
         [bool] $Supress = $false
     )

@@ -27,7 +27,7 @@ Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-m
 
 ## Updates
 
-- 1.0.3 - Unrelased
+- 1.1 - Unrelased
   - Includes new DocX DLL version 1.4.1 which added/fixed following:
     - [x] In Document, the new PageBackground property can now be set to customize the background color of all the document’s pages.
     - [x] In Document, the new PageBorders property can now be set to display up to 4 different borders in a document page.

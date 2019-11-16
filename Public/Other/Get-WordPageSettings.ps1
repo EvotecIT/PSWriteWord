@@ -1,7 +1,7 @@
 ﻿function Get-WordPageSettings {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument
     )
 
     $Object = [ordered]@{

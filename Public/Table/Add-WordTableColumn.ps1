@@ -1,7 +1,7 @@
 ﻿function Add-WordTableColumn {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [int] $Count = 1,
         [int] $Index,
         [ValidateSet('Left', 'Right')] $Direction = 'Left'

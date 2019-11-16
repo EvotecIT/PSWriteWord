@@ -36,7 +36,7 @@ Describe 'Add-WordPageCount/Add-WordPageNumber' {
         # this will be overwrtitten by next one
         $Footer.Odd.Paragraphs[2].Alignment | Should -Be 'left'
 
-        $ParagraphArray.Count | Should -Be 3
+        $ParagraphArray.Count | Should -Be 6
 
         # this basically takes only 1 paragraph on the first footer (odd, even footers have their own paragraphs)
         # and adds page count only to first footer along with text
@@ -46,6 +46,6 @@ Describe 'Add-WordPageCount/Add-WordPageNumber' {
         $Footer.First.Paragraphs[2].Alignment | Should -Be 'right'
         # with last command we just added "/ 1", and "Page Number 1" was already there so we expect 'Page Number 1 / 1'
         $Footer.First.Paragraphs[2].Text | Should -Be 'Page Number 1 / 1'
-
+        #Save-WordDocument -WordDocument $WordDocument -FilePath $PSScriptRoot\Test.docx
     }
 }

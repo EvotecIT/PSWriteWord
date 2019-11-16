@@ -1,7 +1,7 @@
 ﻿function Add-WordTableCellValue {
     [CmdletBinding()]
     param(
-        [InsertBeforeOrAfter] $Table,
+        [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [int] $Row,
         [int] $Column,
         [Object] $Value,
@@ -11,28 +11,28 @@
         [alias ("FontName")] [string] $FontFamily,
         [alias ("B")] [nullable[bool]] $Bold,
         [alias ("I")] [nullable[bool]] $Italic,
-        [alias ("U")] [nullable[UnderlineStyle]] $UnderlineStyle,
+        [alias ("U")] [nullable[Xceed.Document.NET.UnderlineStyle]] $UnderlineStyle,
         [alias ('UC')] [nullable[System.Drawing.Color]]$UnderlineColor,
         [alias ("SA")] [nullable[double]] $SpacingAfter,
         [alias ("SB")] [nullable[double]] $SpacingBefore,
         [alias ("SP")] [nullable[double]] $Spacing,
-        [alias ("H")] [nullable[highlight]] $Highlight,
-        [alias ("CA")] [nullable[CapsStyle]] $CapsStyle,
-        [alias ("ST")] [nullable[StrikeThrough]] $StrikeThrough,
-        [alias ("HT")] [nullable[HeadingType]] $HeadingType,
+        [alias ("H")] [nullable[Xceed.Document.NET.Highlight]] $Highlight,
+        [alias ("CA")] [nullable[Xceed.Document.NET.CapsStyle]] $CapsStyle,
+        [alias ("ST")] [nullable[Xceed.Document.NET.StrikeThrough]] $StrikeThrough,
+        [alias ("HT")] [nullable[Xceed.Document.NET.HeadingType]] $HeadingType,
         [nullable[int]] $PercentageScale , # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
-        [nullable[Misc]] $Misc ,
+        [nullable[Xceed.Document.NET.Misc]] $Misc ,
         [string] $Language ,
         [nullable[int]]$Kerning , # "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72"
         [nullable[bool]]$Hidden ,
         [nullable[int]]$Position , #  "Value must be in the range -1585 - 1585"
         [nullable[single]] $IndentationFirstLine ,
         [nullable[single]] $IndentationHanging ,
-        [nullable[Alignment]] $Alignment ,
-        [nullable[Direction]] $DirectionFormatting,
-        [nullable[ShadingType]] $ShadingType,
+        [nullable[Xceed.Document.NET.Alignment]] $Alignment ,
+        [nullable[Xceed.Document.NET.Direction]] $DirectionFormatting,
+        [nullable[Xceed.Document.NET.ShadingType]] $ShadingType,
         [nullable[System.Drawing.Color]]$ShadingColor,
-        [nullable[Script]] $Script,
+        [nullable[Xceed.Document.NET.Script]] $Script,
         [bool] $Supress = $false
     )
     Write-Verbose "Add-WordTableCellValue - Row: $Row Column $Column Value $Value Supress: $Supress"

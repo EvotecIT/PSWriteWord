@@ -1,8 +1,8 @@
 ﻿function Set-WordTextHeadingType {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
-        [nullable[HeadingType]] $HeadingType,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[Xceed.Document.NET.HeadingType]] $HeadingType,
         [bool] $Supress = $false
     )
     if ($null -ne $Paragraph -and $null -ne $HeadingType) {

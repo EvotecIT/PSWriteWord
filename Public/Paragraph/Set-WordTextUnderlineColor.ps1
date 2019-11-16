@@ -1,7 +1,7 @@
 ﻿function Set-WordTextUnderlineColor {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [nullable[System.Drawing.Color]] $UnderlineColor,
         [bool] $Supress = $false
     )

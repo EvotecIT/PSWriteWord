@@ -1,7 +1,7 @@
 ﻿function Set-WordTableColumnWidth {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [float[]] $Width = @(),
         [nullable[float]] $TotalWidth = $null,
         [bool] $Percentage,

@@ -1,7 +1,7 @@
 function Get-WordParagraphs {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container] $WordDocument
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container] $WordDocument
     )
     $Paragraphs = @()
     foreach ($p in $WordDocument.Paragraphs) {

@@ -1,7 +1,7 @@
 function Set-WordTableColumnWidthByIndex {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [nullable[int]] $Index,
         [nullable[double]] $Width
     )

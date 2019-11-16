@@ -1,9 +1,9 @@
 function Add-WordLine {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Container]$WordDocument,
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
-        [HorizontalBorderPosition] $HorizontalBorderPosition = [HorizontalBorderPosition]::Bottom,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [Xceed.Document.NET.HorizontalBorderPosition] $HorizontalBorderPosition = [Xceed.Document.NET.HorizontalBorderPosition]::Bottom,
         [ValidateSet('single', 'double', 'triple')] $LineType = 'single',
         [nullable[int]] $LineSize = 6,
         [nullable[int]] $LineSpace = 1,

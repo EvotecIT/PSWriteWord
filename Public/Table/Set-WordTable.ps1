@@ -1,12 +1,12 @@
 ﻿function Set-WordTable {
     [CmdletBinding()]
     param (
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Table,
-        [nullable[TableBorderType]] $TableBorderType,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
+        [nullable[Xceed.Document.NET.TableBorderType]] $TableBorderType,
         $Border,
-        [nullable[AutoFit]] $AutoFit,
-        [nullable[TableDesign]] $Design,
-        [nullable[Direction]] $Direction,
+        [nullable[Xceed.Document.NET.AutoFit]] $AutoFit,
+        [nullable[Xceed.Document.NET.TableDesign]] $Design,
+        [nullable[Xceed.Document.NET.Direction]] $Direction,
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
         [nullable[bool]] $BreakAcrossPages,

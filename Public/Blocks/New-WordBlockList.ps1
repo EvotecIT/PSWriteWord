@@ -1,19 +1,19 @@
 ﻿function New-WordBlockList {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Container]$WordDocument,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory = $true)][Xceed.Document.NET.Container]$WordDocument,
         [bool] $TocEnable,
         [string] $TocText,
         [int] $TocListLevel,
-        [ListItemType] $TocListItemType,
-        [HeadingType] $TocHeadingType,
+        [Xceed.Document.NET.ListItemType] $TocListItemType,
+        [Xceed.Document.NET.HeadingType] $TocHeadingType,
         [int] $EmptyParagraphsBefore,
         [int] $EmptyParagraphsAfter,
         [string] $Text,
         [string] $TextListEmpty,
 
         [Object] $ListData,
-        [ListItemType] $ListType
+        [Xceed.Document.NET.ListItemType] $ListType
     )
     if ($TocEnable) {
         $TOC = $WordDocument | Add-WordTocItem -Text $TocText -ListLevel $TocListLevel -ListItemType $TocListItemType -HeadingType $TocHeadingType

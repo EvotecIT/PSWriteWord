@@ -1,8 +1,8 @@
 ﻿function Set-WordTextAlignment {
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][InsertBeforeOrAfter] $Paragraph,
-        [nullable[Alignment]] $Alignment,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [nullable[Xceed.Document.NET.Alignment]] $Alignment,
         [bool] $Supress = $false
     )
     if ($null -ne $Paragraph -and $null -ne $Alignment) {

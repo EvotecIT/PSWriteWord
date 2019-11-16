@@ -1,8 +1,8 @@
 function New-WordTableBorder {
     [CmdletBinding()]
     param (
-        [BorderStyle] $BorderStyle,
-        [BorderSize] $BorderSize,
+        [Xceed.Document.NET.BorderStyle] $BorderStyle,
+        [Xceed.Document.NET.BorderSize] $BorderSize,
         [int] $BorderSpace,
         [System.Drawing.Color] $BorderColor
     )
