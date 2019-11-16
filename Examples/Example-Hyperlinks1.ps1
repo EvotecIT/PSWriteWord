@@ -9,6 +9,10 @@ $URL = Add-WordHyperLink -WordDocument $WordDocument -UrlText 'This is my url' -
 $Paragraph = Add-WordParagraph -WordDocument $WordDocument
 Set-WordHyperLink -WordDocument $WordDocument -Paragraph $Paragraph -Value $URL -Supress $True
 
+$URL = Add-WordHyperLink -WordDocument $WordDocument -UrlText 'This is my url1' -UrlLink 'https://evotec.xyz1'
+$Paragraph = Add-WordParagraph -WordDocument $WordDocument
+Set-WordHyperLink -WordDocument $WordDocument -Paragraph $Paragraph -Value $URL -Supress $True
+
 Save-WordDocument $WordDocument -Supress $True
 
 Invoke-Item $FilePath

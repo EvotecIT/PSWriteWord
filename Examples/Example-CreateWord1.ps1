@@ -1,4 +1,4 @@
-﻿Import-Module PSWriteWord -Force
+﻿Import-Module PSWriteWord -Force -Verbose
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord1.docx"
 
@@ -12,4 +12,4 @@ $Paragraph = Add-WordText -WordDocument $WordDocument -Text 'This is a text font
 $Paragraph | Add-WordPageBreak -InsertWhere BeforeSelf -Supress $True -Verbose
 
 ### Save document
-Save-WordDocument $WordDocument -Supress $true -Language 'en-US' -Verbose -OpenDocument
+Save-WordDocument $WordDocument -Supress $true -Language 'en-US' -Verbose #-OpenDocument
