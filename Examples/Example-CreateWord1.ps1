@@ -1,5 +1,5 @@
-﻿Import-Module PSWriteWord -Force -Verbose
-
+﻿#Import-Module .\PSWriteWord.psd1 -Force -Verbose
+Import-Module PSWriteWord -Force
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-CreateWord1.docx"
 
 ### define new document

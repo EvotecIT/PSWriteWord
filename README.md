@@ -25,36 +25,49 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 Overview of this module: https://evotec.xyz/hub/scripts/pswriteword-powershell-module/
 
-## Updates:
+## Updates
 
-
--   1.0.2 - 16.09.2019
-    - Fix for Add-WordPicture (try/catch missing)
-    - Fix for Add-WordPicture - supress would supress paragraph
--   1.0.1 - 28.06.2019
-    -   Fix for Supress in Add-WordPicture
--   1.0.0 (**Breaking Changes**) - 23.06.2019
-    -   Removed custom enums, using Xceed ones instead
-    -   Changed how Add-WordList works
-    -   Changed how New-WordList / New-WordListItem works - be sure to review new, easier way
-    -   Rewrote/fixed couple of functions
--   0.7.1 - 29.04.2019
-    - Fixed Saving issue when file was in use and path was having dots in temporary path
--   0.7.0 - 17.04.2019
-    - Some performance improvements
-    - Includes new DocX DLL version 1.3 which added/fixed following:
-        - In DocX, if the core properties part is missing in the document, it will now be created automatically instead of throwing an exception.
-        - In Container, the Paragraphs properties will no longer include the fallback elements.
-        - In Formatting, half point font sizes are now supported.
-        - In Paragraph, the LineSpacing property will now correctly update the spacing between lines of text.
-        - In Paragraph, calling the InsertText or RemoveText methods will now update the active runs.
-        - In Paragraph, when an Auto spacing is used, the LineSpacingAfter and/or LineSpacingBefore properties will now return 0.
-        - In Paragraph, a border can now be added to a simple text.
-        - In Paragraph, a default line spacing or indentation defined on the document will now be used when the paragraph doesn’t specify those values.
-        - In Paragraph, adding a bookmark with the same name as a previously deleted bookmark will no longer cause an exception.
-        - In Picture, its size will now be defined by using the default 96 pixels per inch.
-        - In Picture, the new HeightInches and WidthInches properties can now be used to get/set the image size in inches.
-        - In Table, Cell will now default to a Top vertical alignment.
+- 1.0.3 - Unrelased
+  - Includes new DocX DLL version 1.4.1 which added/fixed following:
+    - [x] In Document, the new PageBackground property can now be set to customize the background color of all the document’s pages.
+    - [x] In Document, the new PageBorders property can now be set to display up to 4 different borders in a document page.
+    - [x] In Document, inserting a chart by setting its width and height is now supported.
+    - [x] In Document, adding an image from a stream will no longer throw an exception when the stream is not positioned at the beginning.
+    - [x] In Document, accessing Bookmarks multiple times no longer decreases the application’s performance.
+    - [x] In Paragraph, the MagicText property will no longer read the Xml at each call. Instead, the saved data will be used to improve the performance.
+    - [x] In Paragraph, setting an alignment and then calling InsertPicture() with no index will no longer reset the alignment to left.
+    - [x] In Paragraph, the LineSpacingBefore will no longer be added to the preceding paragraph’s LineSpacingAfter, when those values are identical.
+    - [x] In Paragraph, the AppendPageNumber and AppendPageCount methods will now return the paragraph, in order to let users continue adding actions on the paragraph.
+    - [x] In Paragraph, replacing a text without specifying a formatting will now replace all occurrences of that text.
+    - [x] In Table, using CustomTableDesignName now correctly adjusts the table’s custom style.
+    - [x] In Table, modifying the TableLook, or any property of TableLook, will now correctly update the table.
+- 1.0.2 - 16.09.2019
+  - Fix for Add-WordPicture (try/catch missing)
+  - Fix for Add-WordPicture - supress would supress paragraph
+- 1.0.1 - 28.06.2019
+  - Fix for Supress in Add-WordPicture
+- 1.0.0 (**Breaking Changes**) - 23.06.2019
+  - Removed custom enums, using Xceed ones instead
+  - Changed how Add-WordList works
+  - Changed how New-WordList / New-WordListItem works - be sure to review new, easier way
+  - Rewrote/fixed couple of functions
+- 0.7.1 - 29.04.2019
+  - Fixed Saving issue when file was in use and path was having dots in temporary path
+- 0.7.0 - 17.04.2019
+  - Some performance improvements
+  - Includes new DocX DLL version 1.3 which added/fixed following:
+    - In DocX, if the core properties part is missing in the document, it will now be created automatically instead of throwing an exception.
+    - In Container, the Paragraphs properties will no longer include the fallback elements.
+    - In Formatting, half point font sizes are now supported.
+    - In Paragraph, the LineSpacing property will now correctly update the spacing between lines of text.
+    - In Paragraph, calling the InsertText or RemoveText methods will now update the active runs.
+    - In Paragraph, when an Auto spacing is used, the LineSpacingAfter and/or LineSpacingBefore properties will now return 0.
+    - In Paragraph, a border can now be added to a simple text.
+    - In Paragraph, a default line spacing or indentation defined on the document will now be used when the paragraph doesn’t specify those values.
+    - In Paragraph, adding a bookmark with the same name as a previously deleted bookmark will no longer cause an exception.
+    - In Picture, its size will now be defined by using the default 96 pixels per inch.
+    - In Picture, the new HeightInches and WidthInches properties can now be used to get/set the image size in inches.
+    - In Table, Cell will now default to a Top vertical alignment.
 
 -   0.6.0 - 13.01.2019
     -   Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
