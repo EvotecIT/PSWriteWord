@@ -28,7 +28,7 @@
         [ShadingType[]] $ShadingType = @(),
         [Script[]] $Script = @()
     )
-    for ($RowNr = 0; $RowNr -lt $Count; $RowNr++) {
+    for ($RowNr = 0; $RowNr -le $Count; $RowNr++) {
         Write-Verbose "Set-WordContinueFormatting - RowNr: $RowNr / $Count"
         if ($null -eq $Color[$RowNr] -and $null -ne $Color[$RowNr - 1]) { $Color += $Color[$RowNr - 1] }
         if ($null -eq $FontSize[$RowNr] -and $null -ne $FontSize[$RowNr - 1]) {  $FontSize += $FontSize[$RowNr - 1]  }
