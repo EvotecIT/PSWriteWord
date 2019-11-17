@@ -54,8 +54,6 @@ function Set-WordHyperLink {
         [Xceed.Document.NET.Hyperlink] $Value,
         [bool] $Supress = $false
     )
-    $Data = $Paragraph.InsertHyperlink($Value)
-
+    $Data = $Paragraph.AppendHyperlink($Value)
     if ($Supress -eq $false) { return $Data } else { return }
-
 }
