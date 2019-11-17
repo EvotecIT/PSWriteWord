@@ -163,7 +163,6 @@
         $Paragraph = $Paragraph | Set-WordTextCapsStyle -CapsStyle $CapsStyle[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextStrikeThrough -StrikeThrough $StrikeThrough[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextPercentageScale -PercentageScale $PercentageScale[$i] -Supress $false
-        $Paragraph = $Paragraph | Set-WordTextSpacing -Spacing $Spacing[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextLanguage -Language $Language[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextKerning -Kerning $Kerning[$i] -Supress $false
         $Paragraph = $Paragraph | Set-WordTextMisc -Misc $Misc[$i] -Supress $false
