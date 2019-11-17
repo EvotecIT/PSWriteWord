@@ -24,7 +24,13 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Updates
 
-- 1.1 - 17.11.2019
+- 1.1.1 - 17.11.2019
+  - Fixes colors adding ability to choose them from a list (change from System.Drawing.Colors to System.Drawing.KnownColors)
+  - Removes Set-WordHyperlink as it was a bit too complicated to use
+  - Expanded Add-WordHyperLink with a lot of options
+  - Fixed adding more than 1 hyperlink (#32)
+
+- 1.1.0 - 17.11.2019
   - Removes using namespaces because of wonky way it worked
     - In case you want to keep using shortnames you would need to use both commands right after Import-Module PSWriteWord
       - using namespace Xceed.Words.NET
