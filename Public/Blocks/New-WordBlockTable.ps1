@@ -21,7 +21,7 @@
         [nullable[bool]] $TableTitleMerge,
         [string] $TableTitleText,
         [nullable[Xceed.Document.NET.Alignment]] $TableTitleAlignment = 'center',
-        [nullable[System.Drawing.Color]] $TableTitleColor = 'Black',
+        [nullable[System.Drawing.KnownColor]] $TableTitleColor = 'Black',
         [switch] $TableTranspose,
         [nullable[bool]] $ChartEnable,
         [string] $ChartTitle,

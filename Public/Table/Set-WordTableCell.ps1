@@ -4,8 +4,8 @@
         [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNr,
-        [System.Drawing.Color] $FillColor,
-        [System.Drawing.Color] $ShadingColor,
+        [System.Drawing.KnownColor] $FillColor,
+        [System.Drawing.KnownColor] $ShadingColor,
         [bool] $Supress = $false
     )
     $Table = Set-WordTableCellFillColor -Table $Table -RowNr $RowNr -ColumnNr $ColumnNr -FillColor $FillColor -Supress $false

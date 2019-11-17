@@ -2,11 +2,12 @@
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
-        [nullable[System.Drawing.Color]] $UnderlineColor,
+        [nullable[System.Drawing.KnownColor]] $UnderlineColor,
         [bool] $Supress = $false
     )
     if ($null -ne $Paragraph -and $UnderlineColor -ne $null) {
-        $Paragraph = $Paragraph.UnderlineColor($UnderlineColor)
+        $ConvertedColor = [System.Drawing.Color]::FromKnownColor($UnderlineColor)
+        $Paragraph = $Paragraph.UnderlineColor($ConvertedColor)
     }
     if ($Supress) { return } else { return $Paragraph }
 }

@@ -4,9 +4,9 @@ function New-WordTableBorder {
         [Xceed.Document.NET.BorderStyle] $BorderStyle,
         [Xceed.Document.NET.BorderSize] $BorderSize,
         [int] $BorderSpace,
-        [System.Drawing.Color] $BorderColor
+        [System.Drawing.KnownColor] $BorderColor
     )
-
-    $Border = New-Object -TypeName Border -ArgumentList $BorderStyle, $BorderSize, $BorderSpace, $BorderColor
+    $ConvertedColor = [System.Drawing.Color]::FromKnownColor($BorderColor)
+    $Border = [Xceed.Document.NET.Border]::new($BorderStyle, $BorderSize, $BorderSpace, $ConvertedColor)
     return $Border
 }

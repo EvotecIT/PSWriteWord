@@ -1,13 +1,13 @@
 ﻿function Set-WordContinueFormatting {
     param(
         [int] $Count,
-        [alias ("C")] [System.Drawing.Color[]]$Color = @(),
+        [alias ("C")] [System.Drawing.KnownColor[]]$Color = @(),
         [alias ("S")] [double[]] $FontSize = @(),
         [alias ("FontName")] [string[]] $FontFamily = @(),
         [alias ("B")] [nullable[bool][]] $Bold = @(),
         [alias ("I")] [nullable[bool][]] $Italic = @(),
         [alias ("U")] [Xceed.Document.NET.UnderlineStyle[]] $UnderlineStyle = @(),
-        [alias ('UC')] [System.Drawing.Color[]]$UnderlineColor = @(),
+        [alias ('UC')] [System.Drawing.KnownColor[]]$UnderlineColor = @(),
         [alias ("SA")] [double[]] $SpacingAfter = @(),
         [alias ("SB")] [double[]] $SpacingBefore = @(),
         [alias ("SP")] [double[]] $Spacing = @(),

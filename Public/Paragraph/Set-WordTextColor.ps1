@@ -2,11 +2,12 @@
     [CmdletBinding()]
     param(
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
-        [alias ("C")] [nullable[System.Drawing.Color]] $Color,
+        [alias ("C")] [nullable[System.Drawing.KnownColor]] $Color,
         [bool] $Supress = $false
     )
     if ($null -ne $Paragraph -and $Color -ne $null) {
-        $Paragraph = $Paragraph.Color($Color)
+        $ConvertedColor = [System.Drawing.Color]::FromKnownColor($Color)
+        $Paragraph = $Paragraph.Color($ConvertedColor)
     }
     if ($Supress) { return } else { return $Paragraph }
 }

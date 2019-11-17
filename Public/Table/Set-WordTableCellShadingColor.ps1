@@ -4,12 +4,13 @@ function Set-WordTableCellShadingColor {
         [Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [nullable[int]] $RowNr,
         [nullable[int]] $ColumnNr,
-        [nullable[System.Drawing.Color]] $ShadingColor,
+        [nullable[System.Drawing.KnownColor]] $ShadingColor,
         [bool] $Supress = $false
     )
     if ($Table -ne $null -and $RowNr -ne $null -and $ColumnNr -ne $null -and $ShadingColor -ne $null) {
+        $ConvertedColor = [System.Drawing.Color]::FromKnownColor($ShadingColor)
         $Cell = $Table.Rows[$RowNr].Cells[$ColumnNr]
-        $Cell.Shading = $ShadingColor
+        $Cell.Shading = $ConvertedColor
     }
     if ($Supress) { return } else { return $Table }
 }
