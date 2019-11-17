@@ -12,7 +12,7 @@
     RootModule        = 'PSWriteWord.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.1'
+    ModuleVersion     = '1.1.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    RequiredModules   = @(@{ModuleName = 'PSSharedGoods'; GUID = 'ee272aa8-baaa-4edf-9f45-b6d6f7d844fe'; ModuleVersion = '0.0.106'; })
+    RequiredModules   = @(@{ModuleName = 'PSSharedGoods'; GUID = 'ee272aa8-baaa-4edf-9f45-b6d6f7d844fe'; ModuleVersion = '0.0.107'; })
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()
@@ -73,17 +73,17 @@
     'New-WordBlockParagraph', 'New-WordBlockTable', 'Add-WordBarChart', 
     'Add-WordChartSeries', 'Add-WordLineChart', 'Add-WordPieChart', 
     'Add-WordFooter', 'Add-WordHeader', 'Get-WordFooter', 'Get-WordHeader', 
-    'Add-WordHyperLink', 'Set-WordHyperLink', 'Add-WordList', 
-    'Add-WordListItem', 'Convert-ListToHeadings', 'New-WordList', 
-    'New-WordListItem', 'New-WordListItemInternal', 'Set-WordList', 
-    'Get-WordDocument', 'Merge-WordDocument', 'New-WordDocument', 
-    'Save-WordDocument', 'Add-WordCustomProperty', 'Add-WordEquation', 
-    'Add-WordLine', 'Add-WordPageCount', 'Add-WordProtection', 
-    'Add-WordSection', 'Add-WordTabStopPosition', 
-    'Get-WordCustomProperty', 'Get-WordPageSettings', 'Get-WordSection', 
-    'Set-WordMargins', 'Set-WordOrientation', 'Set-WordPageSettings', 
-    'Set-WordPageSize', 'Add-WordPageBreak', 'Add-WordParagraph', 
-    'Add-WordText', 'Get-WordListItemParagraph', 'Get-WordParagraphs', 
+    'Add-WordHyperLink', 'Add-WordList', 'Add-WordListItem', 
+    'Convert-ListToHeadings', 'New-WordList', 'New-WordListItem', 
+    'New-WordListItemInternal', 'Set-WordList', 'Get-WordDocument', 
+    'Merge-WordDocument', 'New-WordDocument', 'Save-WordDocument', 
+    'Add-WordCustomProperty', 'Add-WordEquation', 'Add-WordLine', 
+    'Add-WordPageCount', 'Add-WordProtection', 'Add-WordSection', 
+    'Add-WordTabStopPosition', 'Get-WordCustomProperty', 
+    'Get-WordPageSettings', 'Get-WordSection', 'Set-WordMargins', 
+    'Set-WordOrientation', 'Set-WordPageSettings', 'Set-WordPageSize', 
+    'Add-WordPageBreak', 'Add-WordParagraph', 'Add-WordText', 
+    'Get-WordListItemParagraph', 'Get-WordParagraphs', 
     'Get-WordParagraphForList', 'Remove-WordParagraph', 'Remove-WordText', 
     'Set-WordParagraph', 'Set-WordText', 'Set-WordTextAlignment', 
     'Set-WordTextBold', 'Set-WordTextCapsStyle', 'Set-WordTextColor', 
