@@ -1,4 +1,4 @@
-﻿jobs:
+jobs:
   - job: Build_PS_Win2016
     pool:
       vmImage: vs2017-win2016
