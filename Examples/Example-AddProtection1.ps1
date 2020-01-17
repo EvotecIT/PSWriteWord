@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module .\PSWriteWord.psd1 -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddProtection1.docx"
 
@@ -12,6 +12,3 @@ Add-WordText -WordDocument $WordDocument -Text 'This is text that has font size 
 Add-WordProtection -WordDocument $WordDocument -EditRestrictions readOnly
 
 Save-WordDocument $WordDocument -Supress $True
-
-### Start Word with file
-Invoke-Item $FilePath

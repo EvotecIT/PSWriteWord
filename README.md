@@ -11,7 +11,7 @@
   <a href="https://www.powershellgallery.com/packages/PSWriteHTML"><img src="https://img.shields.io/powershellgallery/p/PSWriteWord.svg"></a>
   <a href="https://github.com/EvotecIT/PSWriteWord"><img src="https://img.shields.io/github/languages/top/evotecit/PSWriteWord.svg"></a>
   <a href="https://github.com/EvotecIT/PSWriteWord"><img src="https://img.shields.io/github/languages/code-size/evotecit/PSWriteWord.svg"></a>
-  <a href="https://github.com/EvotecIT/PSWriteWord"><img src="https://img.shields.io/powershellgallery/dt/PSWriteWord.svg"></a>
+  <a href="https://www.powershellgallery.com/packages/PSWriteWord"><img src="https://img.shields.io/powershellgallery/dt/PSWriteWord.svg"></a>
 </p>
 
 <p align="center">
