@@ -25,6 +25,9 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Updates
 
+- 1.1.3 - 18.01.2020
+  - Fixes for Colors for Documentimo
+
 - 1.1.2 - 18.01.2020
   - Migrated Documentimo to PSWriteWord. You can use syntax of Documentimo now.
 
@@ -52,11 +55,14 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
     - [x] In Paragraph, replacing a text without specifying a formatting will now replace all occurrences of that text.
     - [x] In Table, using CustomTableDesignName now correctly adjusts the table’s custom style.
     - [x] In Table, modifying the TableLook, or any property of TableLook, will now correctly update the table.
+
 - 1.0.2 - 16.09.2019
   - Fix for Add-WordPicture (try/catch missing)
   - Fix for Add-WordPicture - supress would supress paragraph
+
 - 1.0.1 - 28.06.2019
   - Fix for Supress in Add-WordPicture
+
 - 1.0.0 (**Breaking Changes**) - 23.06.2019
   - Removed custom enums, using Xceed ones instead
   - Changed how Add-WordList works
@@ -79,49 +85,47 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
     - In Picture, its size will now be defined by using the default 96 pixels per inch.
     - In Picture, the new HeightInches and WidthInches properties can now be used to get/set the image size in inches.
     - In Table, Cell will now default to a Top vertical alignment.
-
--   0.6.0 - 13.01.2019
-    -   Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
-    -   Published with merging all files into single PSM1 and optimized PSD1 file which speeds up greatly Import-Module process
-        If you want to read more about why I did it: https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/
-
--   0.5.17 - 13.01.2019
-    -   Fixed an empty chart problem in Word Blocks. If values/keys were empty it would create an empty chart preventing Word saving feature to work.
-    -   Fixed merging of columns/cells in Table
--   0.5.16 - 9.01.2019
-    -   Fixed Get-WordDocument support for path with special characters
--   0.5.15 - 29.12.2018
-    -   Added Add-WordPageCount with alias Add-WordPageNumber
-    -   Added some examples and tests for above
--   0.5.14 - 28.12.2018
-    -   Expanded support for Headers/Footers
-    -   Expanded Add-WordText with -Headers/Footers
-    -   Added some examples and tests
--   0.5.13 - 8.12.2018
-    -   Fix Set-WordTableRowMergeCells
-    -   Added Set-WordTableRowMergeCells TextMerge with Separator allowing for merging text from merged columns
-    -   Fix for Remove-WordText
-    -   Added tests for Set-WordTableRowMergeCells - does some additional testing to Tables just in case
--   0.5.12 - 8.12.2018
-    -   Fix for Set-WordTableRowMergeCells
--   0.5.11 - 30.11.2018
-    -   Added Alignment to Add-WordPicture
--   0.5.10 - 29.11.2018
-    -   Added Merge-WordDocument - which brings merging of Word Documents functionality
--   0.5.9 - 5.11.2018
-    -   Fix for Add-WordPicture
--   0.5.8 - 19.10.2018
-    -   Added small feature New-WordBlock for PSWinDocumentation
--   0.5.7 - 19.10.2018
-    -   Addition for Add-WordList to support singular (string,bool etc types)
-    -   Added Add-WordList Tests
--   0.5.6 - Bugfixes
--   0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
--   0.5.1 - Small cleanup
--   0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
--   0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
--   0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
--   0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
+- 0.6.0 - 13.01.2019
+  - Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
+  - Published with merging all files into single PSM1 and optimized PSD1 file which speeds up greatly Import-Module process
+    If you want to read more about why I did it: https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/
+- 0.5.17 - 13.01.2019
+  - Fixed an empty chart problem in Word Blocks. If values/keys were empty it would create an empty chart preventing Word saving feature to work.
+  - Fixed merging of columns/cells in Table
+- 0.5.16 - 9.01.2019
+  - Fixed Get-WordDocument support for path with special characters
+- 0.5.15 - 29.12.2018
+  - Added Add-WordPageCount with alias Add-WordPageNumber
+  - Added some examples and tests for above
+- 0.5.14 - 28.12.2018
+  - Expanded support for Headers/Footers
+  - Expanded Add-WordText with -Headers/Footers
+  - Added some examples and tests
+- 0.5.13 - 8.12.2018
+  - Fix Set-WordTableRowMergeCells
+  - Added Set-WordTableRowMergeCells TextMerge with Separator allowing for merging text from merged columns
+  - Fix for Remove-WordText
+  - Added tests for Set-WordTableRowMergeCells - does some additional testing to Tables just in case
+- 0.5.12 - 8.12.2018
+  - Fix for Set-WordTableRowMergeCells
+- 0.5.11 - 30.11.2018
+  - Added Alignment to Add-WordPicture
+- 0.5.10 - 29.11.2018
+  - Added Merge-WordDocument - which brings merging of Word Documents functionality
+- 0.5.9 - 5.11.2018
+  - Fix for Add-WordPicture
+- 0.5.8 - 19.10.2018
+  - Added small feature New-WordBlock for PSWinDocumentation
+- 0.5.7 - 19.10.2018
+  - Addition for Add-WordList to support singular (string,bool etc types)
+  - Added Add-WordList Tests
+- 0.5.6 - Bugfixes
+- 0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
+- 0.5.1 - Small cleanup
+- 0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
+- 0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
+- 0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
+- 0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
 
 ## Example usage of Add-WordTable / Add-WordText in action
 
@@ -129,23 +133,26 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Requirements
 
--   Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever).
--   Works only on PowerShell 5.1 (not tested on PowerShell 6.0 with Windows compatibility pack)
+- Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever).
+- Works only on PowerShell 5.1 (not tested on PowerShell 6.0 with Windows compatibility pack)
 
 ## Systems it should run on (marked those confirmed to run)
 
 ### Windows Client Systems
 
--   [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
--   [ ] Windows 8.1
--   [x] Windows 10 1809
--   [x] Windows 10 1803
+- [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+- [ ] Windows 8.1
+- [x] Windows 10 1809
+- [x] Windows 10 1803
+- [x] Windows 10 1809
+- [x] Windows 10 1903
+- [x] Windows 10 1909
 
 ### Windows Server Systems
 
--   [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
--   [x] Windows 2012 R2
--   [x] Windows 2016
+- [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+- [x] Windows 2012 R2
+- [x] Windows 2016
 
 ## Credits
 

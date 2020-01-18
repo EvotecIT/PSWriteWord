@@ -1,4 +1,4 @@
-﻿Import-Module .\Documentimo.psd1 -Force
+﻿Import-Module .\PSWriteWord.psd1 -Force
 
 $TableDesigns = [Xceed.Document.NET.TableDesign].GetEnumNames()
 

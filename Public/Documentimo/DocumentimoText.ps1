@@ -4,7 +4,7 @@ function DocText {
     param(
         [Parameter(Mandatory = $false, Position = 0)][ScriptBlock] $TextBlock,
         [String[]]$Text,
-        [System.Drawing.Color[]]$Color = @(),
+        [System.Drawing.KnownColor[]]$Color = @(),
         [switch] $LineBreak
     )
     if ($TextBlock) {

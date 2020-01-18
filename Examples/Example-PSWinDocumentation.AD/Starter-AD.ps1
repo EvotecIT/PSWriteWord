@@ -1,5 +1,5 @@
 ﻿Import-Module PSWinDocumentation.AD -Force
-Import-Module Documentimo.psd1 -Force
+Import-Module .\PSWriteWord.psd1 -Force
 
 if ($null -eq $ADForest) {
     $ADForest = Get-WinADForestInformation -Verbose -PasswordQuality -DontRemoveEmpty
