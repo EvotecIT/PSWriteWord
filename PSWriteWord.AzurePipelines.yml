@@ -7,35 +7,3 @@
         Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
         .\PSWriteWord.Tests.ps1 -Verbose
         displayName: "Run Pester Tests - PowerShell 5"
-
-  - job: Build_PSCore_Ubuntu1604
-
-    pool:
-      vmImage: ubuntu-16.04
-
-    steps:
-    - script: |
-        curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-        curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
-        sudo apt-get update
-        sudo apt-get install -y powershell
-      displayName: 'Install PowerShell Core'
-
-    - script: |
-        pwsh -c '.\PSWriteWord.Tests.ps1'
-      displayName: 'Run Pester Tests'
-
-  - job: Build_PSCore_MacOS1013
-    pool:
-      vmImage: xcode9-macos10.13
-    steps:
-    - script: |
-        brew update
-        brew tap caskroom/cask
-        brew install mono-libgdiplus
-        brew cask install powershell
-      displayName: 'Install PowerShell Core'
-
-    - script: |
-        pwsh -c '.\PSWriteWord.Tests.ps1'
-      displayName: 'Run Pester Tests'
