@@ -10,7 +10,7 @@
     )
 
     if ($ListItems) {
-        $Parameters = Invoke-Command -ScriptBlock $ListItems
+        [Array] $Parameters = Invoke-Command -ScriptBlock $ListItems
         if ($Parameters.Count -gt 0) {
             $List = $null
             foreach ($Item in $Parameters) {
