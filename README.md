@@ -25,6 +25,9 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Updates
 
+- 1.1.4 - Unreleased
+  - Fixes for New-WordList
+
 - 1.1.3 - 18.01.2020
   - Fixes for Colors for Documentimo
 
@@ -88,7 +91,7 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 - 0.6.0 - 13.01.2019
   - Fixed merging of columns/cells in Table in circumstances with multiple paragraphs in a cell
   - Published with merging all files into single PSM1 and optimized PSD1 file which speeds up greatly Import-Module process
-    If you want to read more about why I did it: https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/
+    If you want to read more about why I did it: <https://evotec.xyz/powershell-single-psm1-file-versus-multi-file-modules/>
 - 0.5.17 - 13.01.2019
   - Fixed an empty chart problem in Word Blocks. If values/keys were empty it would create an empty chart preventing Word saving feature to work.
   - Fixed merging of columns/cells in Table
@@ -122,10 +125,10 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 - 0.5.6 - Bugfixes
 - 0.5.4 - Added **NoLegend** switch to Charts (Add-WordPieChart, Add-WordLineChart, Add-WordBarChart)
 - 0.5.1 - Small cleanup
-- 0.5.0 - https://evotec.xyz/pswriteword-version-0-5-1/
+- 0.5.0 - <https://evotec.xyz/pswriteword-version-0-5-1/>
 - 0.4.7 - Added -ContinueFormatting to Add-WordText - same implementation as for Add-WordTable
-- 0.4.6 - https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/
-- 0.4.1 - https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/
+- 0.4.6 - <https://evotec.xyz/pswriteword-add-wordtable-add-wordtext-expanded/>
+- 0.4.1 - <https://evotec.xyz/pswriteword-updated-to-0-4-1-breaking-change-included/>
 
 ## Example usage of Add-WordTable / Add-WordText in action
 
@@ -140,7 +143,7 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ### Windows Client Systems
 
-- [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+- [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
 - [ ] Windows 8.1
 - [x] Windows 10 1809
 - [x] Windows 10 1803
@@ -150,7 +153,7 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ### Windows Server Systems
 
-- [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 https://www.microsoft.com/en-us/download/details.aspx?id=54616
+- [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
 - [x] Windows 2012 R2
 - [x] Windows 2016
 

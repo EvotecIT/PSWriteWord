@@ -7,14 +7,16 @@
         [Xceed.Document.NET.InsertBeforeOrAfter] $InsertWhere = [Xceed.Document.NET.InsertBeforeOrAfter]::AfterSelf,
         [bool] $Supress
     )
-    if ($null -ne $Paragraph) {
-        if ($InsertWhere -eq [Xceed.Document.NET.InsertBeforeOrAfter]::AfterSelf) {
-            $data = $Paragraph.InsertListAfterSelf($List)
-        } elseif ($InsertWhere -eq [Xceed.Document.NET.InsertBeforeOrAfter]::AfterSelf) {
-            $data = $Paragraph.InsertListBeforeSelf($List)
+    if ($null -ne $List) {
+        if ($null -ne $Paragraph) {
+            if ($InsertWhere -eq [Xceed.Document.NET.InsertBeforeOrAfter]::AfterSelf) {
+                $data = $Paragraph.InsertListAfterSelf($List)
+            } elseif ($InsertWhere -eq [Xceed.Document.NET.InsertBeforeOrAfter]::AfterSelf) {
+                $data = $Paragraph.InsertListBeforeSelf($List)
+            }
+        } else {
+            $data = $WordDocument.InsertList($List)
         }
-    } else {
-        $data = $WordDocument.InsertList($List)
     }
     #Write-Verbose "Add-WordListItem - Return Type Name: $($Data.GetType().Name) - BaseType: $($Data.GetType().BaseType)"
     if ($Supress) { return } else { $data }

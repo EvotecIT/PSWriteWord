@@ -11,20 +11,23 @@
 
     if ($ListItems) {
         $Parameters = Invoke-Command -ScriptBlock $ListItems
-
-        $List = $null
-        foreach ($Item in $Parameters) {
-            if ($null -eq $List) {
-                $List = $WordDocument.AddList($Item.Text, $Item.Level, $Type, $Item.StartNumber, $Item.TrackChanges, $Item.ContinueNumbering)
-                $Paragraph = $List.Items[$List.Items.Count - 1]
-            } else {
-                $List = $WordDocument.AddListItem($List, $Item.Text, $Item.Level, $Type, $Item.StartNumber, $Item.TrackChanges, $Item.ContinueNumbering)
-                $Paragraph = $List.Items[$List.Items.Count - 1]
+        if ($Parameters.Count -gt 0) {
+            $List = $null
+            foreach ($Item in $Parameters) {
+                if ($null -eq $List) {
+                    $List = $WordDocument.AddList($Item.Text, $Item.Level, $Type, $Item.StartNumber, $Item.TrackChanges, $Item.ContinueNumbering)
+                    $Paragraph = $List.Items[$List.Items.Count - 1]
+                } else {
+                    $List = $WordDocument.AddListItem($List, $Item.Text, $Item.Level, $Type, $Item.StartNumber, $Item.TrackChanges, $Item.ContinueNumbering)
+                    $Paragraph = $List.Items[$List.Items.Count - 1]
+                }
             }
-        }
-        Add-WordListItem -WordDocument $WordDocument -List $List -Supress $true
-        if (-not $Supress) {
-            $List
+            Add-WordListItem -WordDocument $WordDocument -List $List -Supress $true
+            if (-not $Supress) {
+                $List
+            }
+        } else {
+            Write-Warning 'New-WordList - Empty list provided. Skipping.'
         }
     }
 }
