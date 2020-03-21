@@ -9,7 +9,7 @@ $TableForCharts = @(
     [PSCustomObject] @{ Name = 'Test 3'; SomeValue = 6 }
 )
 
-Documentimo -FilePath $PSScriptRoot\Test.docx {
+Documentimo -FilePath $PSScriptRoot\Documentimo-BasicList.docx {
     DocTOC -Title 'Table of content'
 
     DocNumbering -Text 'My document' -Level 0 -Type Numbered -Heading Heading1 {
@@ -27,6 +27,11 @@ Documentimo -FilePath $PSScriptRoot\Test.docx {
     $Table1 = Get-Process | Select-Object -First 5
 
     DocTable -DataTable $Table -Design ColorfulGrid
+    DocList {
+        DocListItem -Text 'Test' -Level 0
+        DocListItem -Text 'Test1' -Level 2
+    }
+
     DocList {
         DocListItem -Text 'Test' -Level 0
         DocListItem -Text 'Test1' -Level 2

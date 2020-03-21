@@ -1,5 +1,5 @@
 ﻿
-Import-Module .\PSWriteWord.psd1 -Force
+Import-Module $PSScriptRoot\..\PSWriteWord.psd1 -Force
 
 $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-ListItems8.docx"
 
