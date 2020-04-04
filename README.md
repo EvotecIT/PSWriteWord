@@ -25,6 +25,10 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Updates
 
+- 1.1.6 - Unreleased
+  - Fixed problems with Documentimo Colors
+  - Added `Transpose` to `DocumentimoTable`
+
 - 1.1.5 - 21.03.2020
   - Added Get-WordBookmark
   - Added Set-WordBookmark

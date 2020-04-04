@@ -9,7 +9,8 @@ function DocTable {
         [int] $MaximumColumns = 5,
         [string] $OverwriteTitle,
         [Xceed.Document.NET.Alignment] $OverwriteTitleAlignment = [Xceed.Document.NET.Alignment]::center,
-        [System.Drawing.Color] $OverwriteTitleColor = [System.Drawing.Color]::Black
+        [nullable[System.Drawing.KnownColor]] $OverwriteTitleColor = [System.Drawing.KnownColor]::Black,
+        [switch] $Transpose
     )
     [PSCustomObject] @{
         ObjectType              = 'Table'
@@ -21,5 +22,6 @@ function DocTable {
         OverwriteTitle          = $OverwriteTitle
         OverwriteTitleAlignment = $OverwriteTitleAlignment
         OverwriteTitleColor     = $OverwriteTitleColor
+        Transpose               = $Transpose
     }
 }
