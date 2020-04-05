@@ -22,6 +22,6 @@ function DocTable {
         OverwriteTitle          = $OverwriteTitle
         OverwriteTitleAlignment = $OverwriteTitleAlignment
         OverwriteTitleColor     = $OverwriteTitleColor
-        Transpose               = $Transpose
+        Transpose               = $Transpose.IsPresent
     }
 }
