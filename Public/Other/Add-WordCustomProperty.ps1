@@ -6,7 +6,7 @@ function Add-WordCustomProperty {
         [string] $Value,
         [bool] $Supress
     )
-    $CustomProperty = New-Object -TypeName CustomProperty -ArgumentList $Name, $Value
+    $CustomProperty = [Xceed.Document.NET.CustomProperty]::new($Name,$Value)
     $Data = $WordDocument.AddCustomProperty($CustomProperty)
     if ($Supress) { return } else { return $Data }
 }

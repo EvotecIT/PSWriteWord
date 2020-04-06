@@ -1,4 +1,4 @@
-Import-Module PSWriteWord #-Force
+Import-Module $PSScriptRoot\..\PSWriteWord.psd1 -Force
 
 ### Before running this script make sure to run Example-CreateWord first
 $FilePathTemplate = "$PSScriptRoot\Templates\WordTemplate-Invoice.docx"
