@@ -4,7 +4,7 @@
         [Xceed.Document.NET.Container]$WordDocument,
         [string] $Name
     )
-    if ($Property -eq $null) {
+    if ($null -eq $Property) {
         $Data = $WordDocument.CustomProperties.Values
     } else {
         $Data = $WordDocument.CustomProperties.$Name.Value
