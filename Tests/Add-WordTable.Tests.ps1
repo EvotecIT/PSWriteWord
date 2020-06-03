@@ -1,12 +1,12 @@
 ﻿### Preparing Data Start
 $myitems0 = @(
-    [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover"},
-    [pscustomobject]@{name = "Sue"; age = 29; info = "Dog lover"},
-    [pscustomobject]@{name = "Jason"; age = 42; info = "Food lover"}
+    [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover" },
+    [pscustomobject]@{name = "Sue"; age = 29; info = "Dog lover" },
+    [pscustomobject]@{name = "Jason"; age = 42; info = "Food lover" }
 )
 
 $myitems1 = @(
-    [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover"}
+    [pscustomobject]@{name = "Joe"; age = 32; info = "Cat lover" }
 )
 $myitems2 = [PSCustomObject]@{
     name = "Joe"; age = 32; info = "Cat lover"
@@ -39,37 +39,37 @@ $InvoiceData1 += $InvoiceEntry3
 $InvoiceData1 += $InvoiceEntry4
 $InvoiceData1 += $InvoiceEntry5
 
-$InvoiceData2 = $InvoiceData1.ForEach( {[PSCustomObject]$_})
+$InvoiceData2 = $InvoiceData1.ForEach( { [PSCustomObject]$_ })
 
 $InvoiceData3 = @()
 $InvoiceData3 += $InvoiceEntry1
 
-$InvoiceData4 = $InvoiceData3.ForEach( {[PSCustomObject]$_})
+$InvoiceData4 = $InvoiceData3.ForEach( { [PSCustomObject]$_ })
 ### Preparing Data End
 
 $Object1 = Get-Process | Select-Object ProcessName, Handle, StartTime -First 5
-$Object2 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*' }
-$Object3 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*'} | Select-Object * -First 2
-$Object4 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*'} | Select-Object * -First 1
+$Object2 = Get-PSDrive | Where-Object { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*' }
+$Object3 = Get-PSDrive | Where-Object { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*' } | Select-Object * -First 2
+$Object4 = Get-PSDrive | Where-Object { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' -or $_.Provider -like '*FileSystem*' } | Select-Object * -First 1
 
 
 $obj = New-Object System.Object
-$obj | Add-Member -type NoteProperty -name Name -Value "Ryan_PC"
-$obj | Add-Member -type NoteProperty -name Manufacturer -Value "Dell"
-$obj | Add-Member -type NoteProperty -name ProcessorSpeed -Value "3 Ghz"
-$obj | Add-Member -type NoteProperty -name Memory -Value "6 GB"
+$obj | Add-Member -type NoteProperty -Name Name -Value "Ryan_PC"
+$obj | Add-Member -type NoteProperty -Name Manufacturer -Value "Dell"
+$obj | Add-Member -type NoteProperty -Name ProcessorSpeed -Value "3 Ghz"
+$obj | Add-Member -type NoteProperty -Name Memory -Value "6 GB"
 
 $myObject2 = New-Object System.Object
-$myObject2 | Add-Member -type NoteProperty -name Name -Value "Doug_PC"
-$myObject2 | Add-Member -type NoteProperty -name Manufacturer -Value "HP"
-$myObject2 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.6 Ghz"
-$myObject2 | Add-Member -type NoteProperty -name Memory -Value "4 GB"
+$myObject2 | Add-Member -type NoteProperty -Name Name -Value "Doug_PC"
+$myObject2 | Add-Member -type NoteProperty -Name Manufacturer -Value "HP"
+$myObject2 | Add-Member -type NoteProperty -Name ProcessorSpeed -Value "2.6 Ghz"
+$myObject2 | Add-Member -type NoteProperty -Name Memory -Value "4 GB"
 
 $myObject3 = New-Object System.Object
-$myObject3 | Add-Member -type NoteProperty -name Name -Value "Julie_PC"
-$myObject3 | Add-Member -type NoteProperty -name Manufacturer -Value "Compaq"
-$myObject3 | Add-Member -type NoteProperty -name ProcessorSpeed -Value "2.0 Ghz"
-$myObject3 | Add-Member -type NoteProperty -name Memory -Value "2.5 GB"
+$myObject3 | Add-Member -type NoteProperty -Name Name -Value "Julie_PC"
+$myObject3 | Add-Member -type NoteProperty -Name Manufacturer -Value "Compaq"
+$myObject3 | Add-Member -type NoteProperty -Name ProcessorSpeed -Value "2.0 Ghz"
+$myObject3 | Add-Member -type NoteProperty -Name Memory -Value "2.5 GB"
 
 $myArray1 = @($obj, $myobject2, $myObject3)
 $myArray2 = @($obj)
@@ -524,7 +524,7 @@ Describe 'Add-WordTable - Should have proper settings' {
         $WordDocument = New-WordDocument
         $Object1 = Get-Process | Select-Object ProcessName, Handle, StartTime -First 5
         Add-WordTable -WordDocument $WordDocument -DataTable $Object1 -Design 'ColorfulList' -Supress $true #-Verbose
-        $Object2 = Get-PSDrive | Where { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' } | Select-Object * -First 2
+        $Object2 = Get-PSDrive | Where-Object { $_.Provider -like '*Registry*' -or $_.Provider -like '*Environment*' } | Select-Object * -First 2
         Add-WordTable -WordDocument $WordDocument -DataTable $Object2 -Design "LightShading" -MaximumColumns 7 -Supress $true #-Verbose
 
         $WordDocument.Tables[0].RowCount | Should -Be 6
@@ -534,5 +534,104 @@ Describe 'Add-WordTable - Should have proper settings' {
         $WordDocument.Tables[1].ColumnCount | Should -Be 7
         $WordDocument.Tables[1].Design | Should -Be 'LightShading'
         $WordDocument.Tables.Count | Should -Be 2
+    }
+}
+
+Describe 'Add-WordTable - Should properly transpose' {
+    It 'Given PSCustomObject it should properly transpose it to Ordered Dictionary and keep sorting' {
+        #$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables9.docx"
+        $T1 = [PSCustomObject] @{
+            Test   = 1
+            Test2  = 7
+            Ole    = 'bole'
+            Trolle = 'A'
+            Alle   = 'sd'
+        }
+        $WordDocument = New-WordDocument #$FilePath
+
+        Add-WordText -WordDocument $WordDocument -Text "Before" -Supress $true
+        Add-WordTable -WordDocument $WordDocument -DataTable $T1 -Design ColorfulGrid -Supress $true
+        Add-WordText -WordDocument $WordDocument -Text "After" -Supress $true
+        Add-WordTable -WordDocument $WordDocument -DataTable $T1 -Transpose -Design ColorfulGrid -Supress $true
+
+        #Save-WordDocument $WordDocument -Language 'en-US' -Supress $True -OpenDocument
+
+        $WordDocument.Tables[0].RowCount | Should -Be 2
+        $WordDocument.Tables[0].ColumnCount | Should -Be 5 # normally 6, but we didn't specify max columns
+        $WordDocument.Tables[0].Design | Should -Be 'ColorfulGrid'
+        $WordDocument.Tables[1].RowCount | Should -Be 6
+        $WordDocument.Tables[1].ColumnCount | Should -Be 2
+        $WordDocument.Tables[1].Design | Should -Be 'ColorfulGrid'
+        $WordDocument.Tables.Count | Should -Be 2
+
+        $WordDocument.Tables[0].Rows[0].Cells[0].Paragraphs.Text | Should -Be 'Test'
+        $WordDocument.Tables[0].Rows[0].Cells[1].Paragraphs.Text | Should -Be 'Test2'
+        $WordDocument.Tables[0].Rows[0].Cells[2].Paragraphs.Text | Should -Be 'Ole'
+        $WordDocument.Tables[0].Rows[0].Cells[3].Paragraphs.Text | Should -Be 'Trolle'
+
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs.Text | Should -Be '1'
+        $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs.Text | Should -Be '7'
+        $WordDocument.Tables[0].Rows[1].Cells[2].Paragraphs.Text | Should -Be 'bole'
+        $WordDocument.Tables[0].Rows[1].Cells[3].Paragraphs.Text | Should -Be 'A'
+
+
+        $WordDocument.Tables[1].Rows[1].Cells[0].Paragraphs.Text | Should -Be 'Test'
+        $WordDocument.Tables[1].Rows[2].Cells[0].Paragraphs.Text | Should -Be 'Test2'
+        $WordDocument.Tables[1].Rows[3].Cells[0].Paragraphs.Text | Should -Be 'Ole'
+        $WordDocument.Tables[1].Rows[4].Cells[0].Paragraphs.Text | Should -Be 'Trolle'
+
+        $WordDocument.Tables[1].Rows[1].Cells[1].Paragraphs.Text | Should -Be '1'
+        $WordDocument.Tables[1].Rows[2].Cells[1].Paragraphs.Text | Should -Be '7'
+        $WordDocument.Tables[1].Rows[3].Cells[1].Paragraphs.Text | Should -Be 'bole'
+        $WordDocument.Tables[1].Rows[4].Cells[1].Paragraphs.Text | Should -Be 'A'
+    }
+    It 'Given OrderedDictionary it should properly transpose it to PSCustomObject and keep sorting' {
+        #$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-Tables9.docx"
+        $T2 = [ordered] @{
+            Test   = 1
+            Test2  = 7
+            Ole    = 'bole'
+            Trolle = 'A'
+            Alle   = 'sd'
+        }
+        $WordDocument = New-WordDocument #$FilePath
+
+        Add-WordText -WordDocument $WordDocument -Text "Before T2" -Supress $true
+        Add-WordTable -WordDocument $WordDocument -DataTable $T2 -Design ColorfulGrid -Supress $true
+        Add-WordText -WordDocument $WordDocument -Text "After T2" -Supress $true
+        Add-WordTable -WordDocument $WordDocument -DataTable $T2 -Transpose -Design ColorfulGrid -Supress $true
+
+
+
+        $WordDocument.Tables[0].RowCount | Should -Be 6
+        $WordDocument.Tables[0].ColumnCount | Should -Be 2
+        $WordDocument.Tables[0].Design | Should -Be 'ColorfulGrid'
+
+        $WordDocument.Tables[1].RowCount | Should -Be 2
+        $WordDocument.Tables[1].ColumnCount | Should -Be 5 # normally 6, but we didn't specify max columns
+        $WordDocument.Tables[1].Design | Should -Be 'ColorfulGrid'
+
+        $WordDocument.Tables.Count | Should -Be 2
+
+        $WordDocument.Tables[1].Rows[0].Cells[0].Paragraphs.Text | Should -Be 'Test'
+        $WordDocument.Tables[1].Rows[0].Cells[1].Paragraphs.Text | Should -Be 'Test2'
+        $WordDocument.Tables[1].Rows[0].Cells[2].Paragraphs.Text | Should -Be 'Ole'
+        $WordDocument.Tables[1].Rows[0].Cells[3].Paragraphs.Text | Should -Be 'Trolle'
+
+        $WordDocument.Tables[1].Rows[1].Cells[0].Paragraphs.Text | Should -Be '1'
+        $WordDocument.Tables[1].Rows[1].Cells[1].Paragraphs.Text | Should -Be '7'
+        $WordDocument.Tables[1].Rows[1].Cells[2].Paragraphs.Text | Should -Be 'bole'
+        $WordDocument.Tables[1].Rows[1].Cells[3].Paragraphs.Text | Should -Be 'A'
+
+
+        $WordDocument.Tables[0].Rows[1].Cells[0].Paragraphs.Text | Should -Be 'Test'
+        $WordDocument.Tables[0].Rows[2].Cells[0].Paragraphs.Text | Should -Be 'Test2'
+        $WordDocument.Tables[0].Rows[3].Cells[0].Paragraphs.Text | Should -Be 'Ole'
+        $WordDocument.Tables[0].Rows[4].Cells[0].Paragraphs.Text | Should -Be 'Trolle'
+
+        $WordDocument.Tables[0].Rows[1].Cells[1].Paragraphs.Text | Should -Be '1'
+        $WordDocument.Tables[0].Rows[2].Cells[1].Paragraphs.Text | Should -Be '7'
+        $WordDocument.Tables[0].Rows[3].Cells[1].Paragraphs.Text | Should -Be 'bole'
+        $WordDocument.Tables[0].Rows[4].Cells[1].Paragraphs.Text | Should -Be 'A'
     }
 }
