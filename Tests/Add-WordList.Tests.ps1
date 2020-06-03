@@ -1,12 +1,22 @@
-$ListOfItems1 = @('Test1')
-$ListOfItems2 = @('Test1', 'Test2')
-$ListOfItems5 = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
-
-$ListOfItemsNotArray1 = 'Test1'
-$ListOfItemsNotArray2 = $false
-$ListOfItemsNotArray3 = $false, $true
-
 Describe 'Add-WordList' {
+    $ListOfItems1 = @('Test1')
+    $ListOfItems2 = @('Test1', 'Test2')
+    $ListOfItems5 = @('Test1', 'Test2', 'Test3', 'Test4', 'Test5')
+
+    $ListOfItemsNotArray1 = 'Test1'
+    $ListOfItemsNotArray2 = $false
+    $ListOfItemsNotArray3 = $false, $true
+
+    $PSDefaultParameterValues = @{
+        "It:TestCases" = @{
+            ListOfItems1         = $ListOfItems1
+            ListOfItems2         = $ListOfItems2
+            ListOfItems5         = $ListOfItems5
+            ListOfItemsNotArray1 = $ListOfItemsNotArray1
+            ListOfItemsNotArray2 = $ListOfItemsNotArray2
+            ListOfItemsNotArray3 = $ListOfItemsNotArray3
+        }
+    }
     It 'Given single string to Add-WordList should properly create a list' {
         $WordDocument = New-WordDocument
         Add-WordList -WordDocument $WordDocument -ListType Bulleted -ListData $ListOfItemsNotArray1 -Supress $True #-Verbose

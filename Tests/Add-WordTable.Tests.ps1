@@ -114,6 +114,37 @@ $Array += Get-ObjectType -Object $InvoiceDataOrdered2 -ObjectName '$InvoiceDataO
 $Array | Format-Table -AutoSize
 #>
 
+
+$PSDefaultParameterValues = @{
+    "It:TestCases" = @{
+        InvoiceDataOrdered2 = $InvoiceDataOrdered2
+        InvoiceDataOrdered1 = $InvoiceDataOrdered1
+        InvoiceEntry8       = $InvoiceEntry8
+        InvoiceEntry7       = $InvoiceEntry7
+        myArray1            = $myArray1
+        myArray2            = $myArray2
+        myObject3           = $myObject3
+        myObject2           = $myObject2
+        Object1             = $Object1
+        Object2             = $Object2
+        Object3             = $Object3
+        Object4             = $Object4
+        InvoiceData4        = $InvoiceData4
+        InvoiceData3        = $InvoiceData3
+        InvoiceData2        = $InvoiceData2
+        InvoiceData1        = $InvoiceData1
+        InvoiceEntry1       = $InvoiceEntry1
+        InvoiceEntry2       = $InvoiceEntry2
+        InvoiceEntry3       = $InvoiceEntry3
+        InvoiceEntry4       = $InvoiceEntry4
+        InvoiceEntry5       = $InvoiceEntry5
+        myitems0            = $myitems0
+        myitems1            = $myitems1
+        myitems2            = $myitems2
+        obj                 = $obj
+    }
+}
+
 Describe 'Add-WordTable - Should deliver same results as Format-Table -Autosize' {
     It 'Given (MyItems0) should have 3 columns, 4 rows, 3rd row 3rd column should be Food lover' {
 

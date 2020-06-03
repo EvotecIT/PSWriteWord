@@ -1,10 +1,18 @@
-$FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture2.docx"
-$FilePathImage1 = "$PSScriptRoot\..\Examples\Images\Logo-Evotec-Small.png"
-$FilePathImage2 = "$PSScriptRoot\..\Examples\Images\Logo-Evotec-Small.jpg"
-
-$TemporaryFolder = [IO.Path]::GetTempPath()
-
 Describe 'Add-WordPicture' {
+    $FilePath = "$Env:USERPROFILE\Desktop\PSWriteWord-Example-AddPicture2.docx"
+    $FilePathImage1 = "$PSScriptRoot\..\Examples\Images\Logo-Evotec-Small.png"
+    $FilePathImage2 = "$PSScriptRoot\..\Examples\Images\Logo-Evotec-Small.jpg"
+
+    $TemporaryFolder = [IO.Path]::GetTempPath()
+
+    $PSDefaultParameterValues = @{
+        "It:TestCases" = @{
+            FilePath = $FilePath
+            FilePathImage1 = $FilePathImage1
+            FilePathImage2 = $FilePathImage2
+            TemporaryFolder = $TemporaryFolder
+        }
+    }
     It 'Given 2 pictures, one with rotation - Adding them in memory should work properly' {
         $FilePath = [IO.Path]::Combine($TemporaryFolder, "1.docx")
 
