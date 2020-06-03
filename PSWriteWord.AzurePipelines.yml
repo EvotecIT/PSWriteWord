@@ -3,7 +3,7 @@ jobs:
     pool:
       vmImage: vs2017-win2016
     steps:
-    - powershell: |
-        Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
-        .\PSWriteWord.Tests.ps1 -Verbose
+      - powershell: |
+          Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
+          .\PSWriteWord.Tests.ps1 -Verbose
         displayName: "Run Pester Tests - PowerShell 5"
