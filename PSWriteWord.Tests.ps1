@@ -13,6 +13,10 @@ if ($null -eq (Get-Module -ListAvailable PSSharedGoods)) {
 
 Import-Module PSSharedGoods -Force
 Import-Module $PSScriptRoot\PSWriteWord.psd1 -Force
+Import-Module Pester
+
+Get-Module Pester
+Get-Module -ListAvailable Pester
 
 $result = Invoke-Pester -Script $PSScriptRoot\Tests -Verbose -EnableExit
 
