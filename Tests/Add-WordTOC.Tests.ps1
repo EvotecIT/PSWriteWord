@@ -19,23 +19,23 @@ Describe 'Add-WordTOC' {
         }
 
 
-        It 'Creating New-WordDocument should not throw errors' {
+        It 'Creating New-WordDocument should not throw errors' -TestCases @{ HasElements = $HasElements } {
             $HasElements | Should -Be $True
         }
-        It 'Lists count on empty document should be 1' {
+        It 'Lists count on empty document should be 1' -TestCases @{ ListsCount = $ListsCount } {
             $ListsCount | Should -Be 1
         }
-        It 'Lists items count on empty document should be 0' {
+        It 'Lists items count on empty document should be 0' -TestCases @{ CountItems = $CountItems } {
             $CountItems | Should -Be 0
         }
-        It 'Word Document Table of Content Value should contain TOC entry' {
+        It 'Word Document Table of Content Value should contain TOC entry' -TestCases @{ Toc = $Toc } {
             $Toc.Xml.Value.Trim() | Should -BeLike '*TOC*'
         }
-        It 'Word Document should contain 6 lists' {
+        It 'Word Document should contain 6 lists' -TestCases @{ WordDocument = $WordDocument } {
             $WordDocument.Lists.Count | Should -Be 6
         }
         for ($i = 0; $i -le $WordDocument.Lists.Count; $i++) {
-            It "List #$i should contain just 1 element" {
+            It "List #$i should contain just 1 element" -TestCases @{ WordDocument = $WordDocument } {
                 $WordDocument.Lists[0].Items.Count | Should -Be 1
             }
         }
