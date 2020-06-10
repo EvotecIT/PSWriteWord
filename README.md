@@ -1,7 +1,7 @@
 # PSWriteWord - PowerShell Module
 
 <p align="center">
-  <a href="https://dev.azure.com/evotecpl/PSWriteWord/_build/latest?definitionId=3"><img src="https://dev.azure.com/evotecpl/PSWriteWord/_apis/build/status/EvotecIT.PSWriteWord"></a>
+  <a href="https://dev.azure.com/evotecpl/PSWriteWord/_build/results?buildId=latest"><img src="https://dev.azure.com/evotecpl/PSWriteWord/_apis/build/status/EvotecIT.PSWriteWord"></a>
 <a href="https://ci.appveyor.com/project/PrzemyslawKlys/pswriteword"><img src="https://ci.appveyor.com/api/projects/status/5ib62bbpnj92wcd7?svg=true">
   <a href="https://www.powershellgallery.com/packages/PSWriteWord"><img src="https://img.shields.io/powershellgallery/v/PSWriteWord.svg"></a>
   <a href="https://www.powershellgallery.com/packages/PSWriteWord"><img src="https://img.shields.io/powershellgallery/vpre/PSWriteWord.svg?label=powershell%20gallery%20preview&colorB=yellow"></a>
