@@ -28,6 +28,8 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 - 1.1.9 - 2020.09.21
   - [x] Fixes `Set-WordTextReplace` that would not work at all
   - [x] Updates PSD1
+  - [x] Removed dependency on PSSharedGoods when used from powershellgallery
+  - [x] Module is now signed
 - 1.1.8 - 3.06.2020
   - Fixes `Transpose` parameter for `Add-WordTable` giving wrong order [#44](https://github.com/EvotecIT/PSWriteWord/issues/44)
 
