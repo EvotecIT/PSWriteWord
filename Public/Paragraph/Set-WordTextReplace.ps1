@@ -50,20 +50,21 @@
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $SearchValue,
         [string] $ReplaceValue,
-        [bool] $TrackChanges,
+        [switch] $TrackChanges,
         [System.Text.RegularExpressions.RegexOptions] $RegexOptions,
         [Xceed.Document.NET.Formatting] $NewFormatting,
         [Xceed.Document.NET.Formatting] $MatchFormatting,
         [Xceed.Document.NET.MatchFormattingOptions] $MatchFormattingOptions,
-        [bool] $escapeRegEx = $true,
-        [bool] $useRegExSubstitutions = $false,
-        [bool] $removeEmptyParagraph = $true
+        [switch] $EscapeRegEx,
+        [switch] $UseRegExSubstitutions,
+        [switch] $RemoveEmptyParagraph,
+        [alias('Supress')][bool] $Suppress = $false
     )
     #void ReplaceText(string searchValue, string newValue, bool trackChanges, System.Text.RegularExpressions.RegexOptions options, Xceed.Document.NET.Formatting newFormatting, Xceed.Document.NET.Formatting matchFormatting, Xceed.Document.NET.MatchFormattingOptions fo, bool escapeRegEx, bool useRegExSubstitutions, bool removeEmptyParagraph)
     #void ReplaceText(string findPattern, System.Func[string,string] regexMatchHandler, bool trackChanges, System.Text.RegularExpressions.RegexOptions options, Xceed.Document.NET.Formatting newFormatting, Xceed.Document.NET.Formatting matchFormatting, Xceed.Document.NET.MatchFormattingOptions fo, bool removeEmptyParagraph)
-
-    $Paragraph.ReplaceText
+    if ($Paragraph) {
+        $Paragraph = $Paragraph.ReplaceText($SearchValue, $ReplaceValue, $TrackChanges.IsPresent, $RegexOptions, $NewFormatting, $matchFormatting, $MatchFormattingOptions, $EscapeRegEx.IsPresent, $UseRegExSubstitutions.IsPresent, $RemoveEmptyParagraph.IsPresent)
+        if ($Supress) { return } else { return $Paragraph }
+    }
     #$Paragraph.ReplaceText($SearchValue, $ReplaceValue, $TrackChanges, $RegexOptions, $NewFormatting, $MatchFormatting, $MatchFormattingOptions, $escapeRegEx, $useRegExSubstitutions, $removeEmptyParagraph)
 }
-
-#Set-WordTextReplace
