@@ -19,10 +19,10 @@ function Get-WordDocument {
                 $ErrorMessage = $_.Exception.Message
                 if ($ErrorMessage -like '*Xceed.Document.NET.Licenser.LicenseKey property must be set to a valid license key in the code of your application before using this product.*') {
                     Write-Warning "Get-WordDocument - PSWriteWord on .NET CORE works only with pay version. Please provide license key."
-                    Exit
+                    return
                 } else {
                     Write-Warning "Get-WordDocument - Document: $FilePath Error: $ErrorMessage"
-                    Exit
+                    return
                 }
             }
         } else {
