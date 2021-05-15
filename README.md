@@ -25,58 +25,52 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Updates
 
+- 1.1.10 - 2021.05.15
+  - 🐛Replaced `Exit` with `Return` in `Get-WordDocument`, and few other cmdlets to prevent PowerShell Exit
 - 1.1.9 - 2020.09.21
-  - [x] Fixes `Set-WordTextReplace` that would not work at all
-  - [x] Updates PSD1
-  - [x] Removed dependency on PSSharedGoods when used from powershellgallery
-  - [x] Module is now signed
+  - ☑ Fixes `Set-WordTextReplace` that would not work at all
+  - ☑ Updates PSD1
+  - ☑ Removed dependency on PSSharedGoods when used from powershellgallery
+  - ☑ Module is now signed
 - 1.1.8 - 3.06.2020
   - Fixes `Transpose` parameter for `Add-WordTable` giving wrong order [#44](https://github.com/EvotecIT/PSWriteWord/issues/44)
-
 - 1.1.7 - 6.04.2020
   - Fixes for `Add-WordCustomProperty` [#39](https://github.com/EvotecIT/PSWriteWord/issues/39)
-
 - 1.1.6 - 5.04.2020
   - Fixed problems with Documentimo Colors
   - Added `Transpose` to `DocumentimoTable`
-
 - 1.1.5 - 21.03.2020
   - Added Get-WordBookmark
   - Added Set-WordBookmark
-
 - 1.1.4 - 8.02.2020
   - Fixes for New-WordList
-
 - 1.1.3 - 18.01.2020
   - Fixes for Colors for Documentimo
-
 - 1.1.2 - 18.01.2020
   - Migrated Documentimo to PSWriteWord. You can use syntax of Documentimo now.
-
 - 1.1.1 - 17.11.2019
   - Fixes colors adding ability to choose them from a list (change from System.Drawing.Colors to System.Drawing.KnownColors)
   - Removes Set-WordHyperlink as it was a bit too complicated to use
   - Expanded Add-WordHyperLink with a lot of options
   - Fixed adding more than 1 hyperlink (#32)
-
 - 1.1.0 - 17.11.2019
   - Removes using namespaces because of wonky way it worked
     - In case you want to keep using shortnames you would need to use both commands right after Import-Module PSWriteWord
       - using namespace Xceed.Words.NET
       - using namespace Xceed.Document.NET
   - Includes new DocX DLL version 1.4.1 which added/fixed following:
-    - [x] In Document, the new PageBackground property can now be set to customize the background color of all the document’s pages.
-    - [x] In Document, the new PageBorders property can now be set to display up to 4 different borders in a document page.
-    - [x] In Document, inserting a chart by setting its width and height is now supported.
-    - [x] In Document, adding an image from a stream will no longer throw an exception when the stream is not positioned at the beginning.
-    - [x] In Document, accessing Bookmarks multiple times no longer decreases the application’s performance.
-    - [x] In Paragraph, the MagicText property will no longer read the Xml at each call. Instead, the saved data will be used to improve the performance.
-    - [x] In Paragraph, setting an alignment and then calling InsertPicture() with no index will no longer reset the alignment to left.
-    - [x] In Paragraph, the LineSpacingBefore will no longer be added to the preceding paragraph’s LineSpacingAfter, when those values are identical.
-    - [x] In Paragraph, the AppendPageNumber and AppendPageCount methods will now return the paragraph, in order to let users continue adding actions on the paragraph.
-    - [x] In Paragraph, replacing a text without specifying a formatting will now replace all occurrences of that text.
-    - [x] In Table, using CustomTableDesignName now correctly adjusts the table’s custom style.
-    - [x] In Table, modifying the TableLook, or any property of TableLook, will now correctly update the table.
+    - ☑ In Document, the new PageBackground property can now be set to customize the background color of all the document’s pages.
+    - ☑ In Document, the new PageBorders property can now be set to display up to 4 different borders in a document page.
+    - ☑ In Document, inserting a chart by setting its width and height is now supported.
+    - ☑ In Document, adding an image from a stream will no longer throw an exception when the stream is not positioned at the beginning.
+    - ☑ In Document, accessing Bookmarks multiple times no longer decreases the application’s performance.
+    - ☑ In Paragraph, the MagicText property will no longer read the Xml at each call. Instead, the saved data will be used to improve the performance.
+    - ☑ In Paragraph, setting an alignment and then calling InsertPicture() with no index will no longer reset the alignment to left.
+    - ☑ In Paragraph, the LineSpacingBefore will no longer be added to the preceding paragraph’s LineSpacingAfter, when those values are identical.
+    - ☑ In Paragraph, the AppendPageNumber and AppendPageCount methods will now return the paragraph, in order to let users continue adding actions on the paragraph.
+    - ☑ In Paragraph, replacing a text without specifying a formatting will now replace all occurrences of that text.
+    - ☑ In Table, using CustomTableDesignName now correctly adjusts the table’s custom style.
+    - ☑ In Table, modifying the TableLook, or any property of TableLook, will now correctly update the table.
 
 - 1.0.2 - 16.09.2019
   - Fix for Add-WordPicture (try/catch missing)
@@ -156,25 +150,25 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 ## Requirements
 
 - Works only on Windows (as NET CORE is not supported by DLL) - until Xceed ads that to their version. Which will take a while for the free version to have (if ever).
-- Works only on PowerShell 5.1 (not tested on PowerShell 6.0 with Windows compatibility pack)
+- Works only on PowerShell 5.1
 
 ## Systems it should run on (marked those confirmed to run)
 
 ### Windows Client Systems
 
-- [ ] Windows 7 with Service Pack 1 - requires WMF 5.1 <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
-- [ ] Windows 8.1
-- [x] Windows 10 1809
-- [x] Windows 10 1803
-- [x] Windows 10 1809
-- [x] Windows 10 1903
-- [x] Windows 10 1909
+- ☑ Windows 7 with Service Pack 1 - requires WMF 5.1 <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
+- not Windows 8.1
+- ☑ Windows 10 1809
+- ☑ Windows 10 1803
+- ☑ Windows 10 1809
+- ☑ Windows 10 1903
+- ☑ Windows 10 1909
 
 ### Windows Server Systems
 
-- [ ] Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
-- [x] Windows 2012 R2
-- [x] Windows 2016
+- ☑ Windows 2008 R2 with Service Pack 1 - requires WMF 5.1 <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
+- ☑ Windows 2012 R2
+- ☑ Windows 2016
 
 ## Credits
 
