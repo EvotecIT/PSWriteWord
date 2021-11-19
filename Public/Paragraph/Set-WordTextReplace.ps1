@@ -1,25 +1,25 @@
 ﻿function Set-WordTextReplace {
     <#
     .SYNOPSIS
-    Short description
+    Provides ability to search and replace certain words, phrases, or regular expressions in a word file.
 
     .DESCRIPTION
-    Long description
+    Provides ability to search and replace certain words, phrases, or regular expressions in a word file.
 
     .PARAMETER Paragraph
-    Parameter description
+    Provide paragraph to search for text
 
     .PARAMETER SearchValue
-    Parameter description
+    Value to search for
 
     .PARAMETER ReplaceValue
-    Parameter description
+    Value to replace with
 
     .PARAMETER TrackChanges
-    Track changes
+    Track changes, default is off
 
     .PARAMETER RegexOptions
-    Parameter description
+    The regex options to use when searching for the search value. Default is none.
 
     .PARAMETER NewFormatting
     The formatting to apply to the text being inserted.
@@ -28,7 +28,7 @@
     The formatting that the text must match in order to be replaced.
 
     .PARAMETER MatchFormattingOptions
-    How should formatting be matched?
+    How should formatting be matched? ExactMatch (default) or SubsetMatch
 
     .PARAMETER escapeRegEx
     True if the oldValue needs to be escaped, otherwise false. If it represents a valid RegEx pattern this should be false.
@@ -40,21 +40,30 @@
     Remove empty paragraph
 
     .EXAMPLE
-    An example
+    $FilePath = "C:\Users\przemyslaw.klys\OneDrive - Evotec\Desktop\Word.docx"
+    $FilePath1 = "C:\Users\przemyslaw.klys\OneDrive - Evotec\Desktop\Word1.docx"
+    $doc = Get-WordDocument -FilePath $FilePath
+    $word = "Sample"
+    $formatObj = New-Object Xceed.Document.NET.Formatting
+    $formatObj.FontColor = "Red"
+    foreach ($p in $doc.Paragraphs) {
+        Set-WordTextReplace -Paragraph $p -SearchValue $word -ReplaceValue $word -NewFormatting $formatObj -Supress $false
+    }
+    Save-WordDocument -Document $doc -FilePath $FilePath1
 
     .NOTES
     General notes
     #>
     [CmdletBinding()]
     param(
-        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
+        [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline, Mandatory)][Xceed.Document.NET.InsertBeforeOrAfter] $Paragraph,
         [string] $SearchValue,
-        [string] $ReplaceValue,
+        [alias('NewValue')][string] $ReplaceValue,
         [switch] $TrackChanges,
-        [System.Text.RegularExpressions.RegexOptions] $RegexOptions,
-        [Xceed.Document.NET.Formatting] $NewFormatting,
-        [Xceed.Document.NET.Formatting] $MatchFormatting,
-        [Xceed.Document.NET.MatchFormattingOptions] $MatchFormattingOptions,
+        [System.Text.RegularExpressions.RegexOptions] $RegexOptions = [System.Text.RegularExpressions.RegexOptions]::None,
+        [Xceed.Document.NET.Formatting] $NewFormatting = [Xceed.Document.NET.Formatting]::new(),
+        [Xceed.Document.NET.Formatting] $MatchFormatting = [Xceed.Document.NET.Formatting]::new(),
+        [Xceed.Document.NET.MatchFormattingOptions] $MatchFormattingOptions = [Xceed.Document.NET.MatchFormattingOptions]::ExactMatch,
         [switch] $EscapeRegEx,
         [switch] $UseRegExSubstitutions,
         [switch] $RemoveEmptyParagraph,
@@ -64,7 +73,6 @@
     #void ReplaceText(string findPattern, System.Func[string,string] regexMatchHandler, bool trackChanges, System.Text.RegularExpressions.RegexOptions options, Xceed.Document.NET.Formatting newFormatting, Xceed.Document.NET.Formatting matchFormatting, Xceed.Document.NET.MatchFormattingOptions fo, bool removeEmptyParagraph)
     if ($Paragraph) {
         $Paragraph = $Paragraph.ReplaceText($SearchValue, $ReplaceValue, $TrackChanges.IsPresent, $RegexOptions, $NewFormatting, $matchFormatting, $MatchFormattingOptions, $EscapeRegEx.IsPresent, $UseRegExSubstitutions.IsPresent, $RemoveEmptyParagraph.IsPresent)
-        if ($Supress) { return } else { return $Paragraph }
+        if ($Suppress) { return } else { return $Paragraph }
     }
-    #$Paragraph.ReplaceText($SearchValue, $ReplaceValue, $TrackChanges, $RegexOptions, $NewFormatting, $MatchFormatting, $MatchFormattingOptions, $escapeRegEx, $useRegExSubstitutions, $removeEmptyParagraph)
 }
