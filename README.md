@@ -25,6 +25,8 @@ _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Mi
 
 ## Updates
 
+- 1.1.12 - 2021.11.20
+  - 🐛 Fixed Cannot find an overload for "ReplaceText" on `Set-WordTextReplace` cmdlet [#69](https://github.com/EvotecIT/PSWriteWord/issues/69)
 - 1.1.11 - 2021.05.16
   - 🐛 Fixed `Get-WordDocument` when working with relative paths [#53](https://github.com/EvotecIT/PSWriteWord/issues/53)
 - 1.1.10 - 2021.05.15
