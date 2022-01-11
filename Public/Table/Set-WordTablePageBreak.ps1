@@ -3,8 +3,7 @@
     param (
         [parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)][Xceed.Document.NET.InsertBeforeOrAfter] $Table,
         [switch] $AfterTable,
-        [switch] $BeforeTable,
-        [nullable[bool]] $BreakAcrossPages
+        [switch] $BeforeTable
     )
     if ($Table) {
         if ($BeforeTable) {
@@ -12,9 +11,6 @@
         }
         if ($AfterTable) {
             $Table.InsertPageBreakAfterSelf()
-        }
-        if ($BreakAcrossPages -ne $null) {
-            $Table.BreakAcrossPages = $BreakAcrossPages
         }
     }
     return $Table

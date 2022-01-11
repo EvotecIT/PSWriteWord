@@ -10,7 +10,6 @@ function Add-WordTable {
         [Xceed.Document.NET.Direction] $Direction,
         [switch] $BreakPageAfterTable,
         [switch] $BreakPageBeforeTable,
-        [nullable[bool]] $BreakAcrossPages,
         [nullable[int]] $MaximumColumns,
         #[string[]]$Titles = @('Name', 'Value'),
         [string] $OverwriteTitle,
@@ -264,8 +263,7 @@ function Add-WordTable {
                 -AutoFit $AutoFit `
                 -Design $Design `
                 -BreakPageAfterTable:$BreakPageAfterTable `
-                -BreakPageBeforeTable:$BreakPageBeforeTable `
-                -BreakAcrossPages $BreakAcrossPages -Supress $True
+                -BreakPageBeforeTable:$BreakPageBeforeTable -Supress $True
 
             if ($OverwriteTitle) {
                 $Table = Set-WordTableRowMergeCells -Table $Table -RowNr 0 -MergeAll

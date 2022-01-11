@@ -1,5 +1,7 @@
 ﻿### PSWriteWord Release History
 
+#### - 1.1.14 - 2022.01.11
+  - Removed `BreakAcrossPages` in `Add-WordTable`, `Set-WordTable`, `Set-WordTablePageBreak` as it doesn't work anymore
 #### - 1.1.13 - 2021.11.28
   - Fixed bug with publishing (republished)
 #### - 1.1.12 - 2021.11.20
