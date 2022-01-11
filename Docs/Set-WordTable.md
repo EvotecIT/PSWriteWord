@@ -15,7 +15,7 @@ schema: 2.0.0
 ```
 Set-WordTable [[-Table] <InsertBeforeOrAfter>] [[-TableBorderType] <TableBorderType>] [[-Border] <Object>]
  [[-AutoFit] <AutoFit>] [[-Design] <TableDesign>] [[-Direction] <Direction>] [-BreakPageAfterTable]
- [-BreakPageBeforeTable] [[-BreakAcrossPages] <Boolean>] [[-Supress] <Boolean>] [<CommonParameters>]
+ [-BreakPageBeforeTable] [[-Supress] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,21 +58,6 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BreakAcrossPages
-{{Fill BreakAcrossPages Description}}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -149,7 +134,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

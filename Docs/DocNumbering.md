@@ -5,19 +5,20 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTablePageBreak
+# DocNumbering
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Set-WordTablePageBreak [[-Table] <InsertBeforeOrAfter>] [-AfterTable] [-BeforeTable] [<CommonParameters>]
+DocNumbering [[-Content] <ScriptBlock>] [-Text <String>] [-Level <Int32>] [-Type <ListItemType>]
+ [-Heading <HeadingType>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -30,48 +31,80 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -AfterTable
-{{Fill AfterTable Description}}
+### -Content
+{{ Fill Content Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BeforeTable
-{{Fill BeforeTable Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Table
-{{Fill Table Description}}
-
-```yaml
-Type: InsertBeforeOrAfter
+Type: ScriptBlock
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Heading
+{{ Fill Heading Description }}
+
+```yaml
+Type: HeadingType
+Parameter Sets: (All)
+Aliases:
+Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Level
+{{ Fill Level Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Text
+{{ Fill Text Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Type
+{{ Fill Type Description }}
+
+```yaml
+Type: ListItemType
+Parameter Sets: (All)
+Aliases:
+Accepted values: Bulleted, Numbered
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -80,12 +113,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### InsertBeforeOrAfter
+### None
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

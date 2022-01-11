@@ -5,19 +5,20 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTablePageBreak
+# DocToc
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Set-WordTablePageBreak [[-Table] <InsertBeforeOrAfter>] [-AfterTable] [-BeforeTable] [<CommonParameters>]
+DocToc [[-Title] <String>] [[-RightTabPos] <Int32>] [[-Switches] <TableOfContentsSwitches>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -30,48 +31,49 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -AfterTable
-{{Fill AfterTable Description}}
+### -RightTabPos
+{{ Fill RightTabPos Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BeforeTable
-{{Fill BeforeTable Description}}
+### -Switches
+{{ Fill Switches Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: TableOfContentsSwitches
 Parameter Sets: (All)
 Aliases:
+Accepted values: None, A, B, C, D, F, H, L, N, O, P, S, T, U, W, X, Z
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Table
-{{Fill Table Description}}
+### -Title
+{{ Fill Title Description }}
 
 ```yaml
-Type: InsertBeforeOrAfter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -80,12 +82,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### InsertBeforeOrAfter
+### None
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

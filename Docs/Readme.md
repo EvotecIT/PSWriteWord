@@ -191,9 +191,6 @@ Add a new TabStopPosition in the current paragraph.
 ### [Save-WordDocument](Save-WordDocument.md)
 {{Fill in the Synopsis}}
 
-### [Set-WordHyperLink](Set-WordHyperLink.md)
-{{Fill in the Synopsis}}
-
 ### [Set-WordList](Set-WordList.md)
 {{Fill in the Synopsis}}
 

@@ -5,19 +5,19 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTablePageBreak
+# DocList
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Set-WordTablePageBreak [[-Table] <InsertBeforeOrAfter>] [-AfterTable] [-BeforeTable] [<CommonParameters>]
+DocList [[-ListItems] <ScriptBlock>] [[-Type] <ListItemType>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -30,48 +30,34 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -AfterTable
-{{Fill AfterTable Description}}
+### -ListItems
+{{ Fill ListItems Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BeforeTable
-{{Fill BeforeTable Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Table
-{{Fill Table Description}}
-
-```yaml
-Type: InsertBeforeOrAfter
+Type: ScriptBlock
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Type
+{{ Fill Type Description }}
+
+```yaml
+Type: ListItemType
+Parameter Sets: (All)
+Aliases: ListType
+Accepted values: Bulleted, Numbered
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -80,12 +66,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### InsertBeforeOrAfter
+### None
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

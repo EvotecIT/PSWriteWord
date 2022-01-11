@@ -5,19 +5,19 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-WordTablePageBreak
+# Set-WordBookmark
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Set-WordTablePageBreak [[-Table] <InsertBeforeOrAfter>] [-AfterTable] [-BeforeTable] [<CommonParameters>]
+Set-WordBookmark [[-BookmarkName] <String>] [[-BookmarkText] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -30,48 +30,33 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -AfterTable
-{{Fill AfterTable Description}}
+### -BookmarkName
+{{ Fill BookmarkName Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BeforeTable
-{{Fill BeforeTable Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Table
-{{Fill Table Description}}
-
-```yaml
-Type: InsertBeforeOrAfter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BookmarkText
+{{ Fill BookmarkText Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -80,12 +65,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### InsertBeforeOrAfter
+### None
 
 ## OUTPUTS
 
 ### System.Object
-
 ## NOTES
 
 ## RELATED LINKS

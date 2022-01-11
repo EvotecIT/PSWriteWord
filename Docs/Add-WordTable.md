@@ -15,11 +15,11 @@ schema: 2.0.0
 ```
 Add-WordTable [[-WordDocument] <Container>] [[-Paragraph] <InsertBeforeOrAfter>]
  [[-Table] <InsertBeforeOrAfter>] [[-DataTable] <Array>] [[-AutoFit] <AutoFit>] [[-Design] <TableDesign>]
- [[-Direction] <Direction>] [-BreakPageAfterTable] [-BreakPageBeforeTable] [[-BreakAcrossPages] <Boolean>]
- [[-MaximumColumns] <Int32>] [[-OverwriteTitle] <String>] [-DoNotAddTitle] [[-TitleAlignment] <Alignment>]
- [[-ColumnWidth] <Single[]>] [[-TableWidth] <Single>] [[-Percentage] <Boolean>] [[-Color] <Color[]>]
- [[-FontSize] <Double[]>] [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>] [[-Italic] <Nullable`1[]>]
- [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <Color[]>] [[-SpacingAfter] <Double[]>]
+ [[-Direction] <Direction>] [-BreakPageAfterTable] [-BreakPageBeforeTable] [[-MaximumColumns] <Int32>]
+ [[-OverwriteTitle] <String>] [-DoNotAddTitle] [[-TitleAlignment] <Alignment>] [[-ColumnWidth] <Single[]>]
+ [[-TableWidth] <Single>] [[-Percentage] <Boolean>] [[-Color] <KnownColor[]>] [[-FontSize] <Double[]>]
+ [[-FontFamily] <String[]>] [[-Bold] <Nullable`1[]>] [[-Italic] <Nullable`1[]>]
+ [[-UnderlineStyle] <UnderlineStyle[]>] [[-UnderlineColor] <KnownColor[]>] [[-SpacingAfter] <Double[]>]
  [[-SpacingBefore] <Double[]>] [[-Spacing] <Double[]>] [[-Highlight] <Highlight[]>]
  [[-CapsStyle] <CapsStyle[]>] [[-StrikeThrough] <StrikeThrough[]>] [[-HeadingType] <HeadingType[]>]
  [[-PercentageScale] <Int32[]>] [[-Misc] <Misc[]>] [[-Language] <String[]>] [[-Kerning] <Int32[]>]
@@ -54,7 +54,7 @@ Aliases:
 Accepted values: left, center, right, both
 
 Required: False
-Position: 36
+Position: 35
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -85,22 +85,7 @@ Parameter Sets: (All)
 Aliases: B
 
 Required: False
-Position: 17
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BreakAcrossPages
-{{Fill BreakAcrossPages Description}}
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
+Position: 16
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -146,7 +131,7 @@ Aliases: CA
 Accepted values: none, caps, smallCaps
 
 Required: False
-Position: 25
+Position: 24
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -156,12 +141,13 @@ Accept wildcard characters: False
 {{Fill Color Description}}
 
 ```yaml
-Type: Color[]
+Type: KnownColor[]
 Parameter Sets: (All)
 Aliases: C
+Accepted values: ActiveBorder, ActiveCaption, ActiveCaptionText, AppWorkspace, Control, ControlDark, ControlDarkDark, ControlLight, ControlLightLight, ControlText, Desktop, GrayText, Highlight, HighlightText, HotTrack, InactiveBorder, InactiveCaption, InactiveCaptionText, Info, InfoText, Menu, MenuText, ScrollBar, Window, WindowFrame, WindowText, Transparent, AliceBlue, AntiqueWhite, Aqua, Aquamarine, Azure, Beige, Bisque, Black, BlanchedAlmond, Blue, BlueViolet, Brown, BurlyWood, CadetBlue, Chartreuse, Chocolate, Coral, CornflowerBlue, Cornsilk, Crimson, Cyan, DarkBlue, DarkCyan, DarkGoldenrod, DarkGray, DarkGreen, DarkKhaki, DarkMagenta, DarkOliveGreen, DarkOrange, DarkOrchid, DarkRed, DarkSalmon, DarkSeaGreen, DarkSlateBlue, DarkSlateGray, DarkTurquoise, DarkViolet, DeepPink, DeepSkyBlue, DimGray, DodgerBlue, Firebrick, FloralWhite, ForestGreen, Fuchsia, Gainsboro, GhostWhite, Gold, Goldenrod, Gray, Green, GreenYellow, Honeydew, HotPink, IndianRed, Indigo, Ivory, Khaki, Lavender, LavenderBlush, LawnGreen, LemonChiffon, LightBlue, LightCoral, LightCyan, LightGoldenrodYellow, LightGray, LightGreen, LightPink, LightSalmon, LightSeaGreen, LightSkyBlue, LightSlateGray, LightSteelBlue, LightYellow, Lime, LimeGreen, Linen, Magenta, Maroon, MediumAquamarine, MediumBlue, MediumOrchid, MediumPurple, MediumSeaGreen, MediumSlateBlue, MediumSpringGreen, MediumTurquoise, MediumVioletRed, MidnightBlue, MintCream, MistyRose, Moccasin, NavajoWhite, Navy, OldLace, Olive, OliveDrab, Orange, OrangeRed, Orchid, PaleGoldenrod, PaleGreen, PaleTurquoise, PaleVioletRed, PapayaWhip, PeachPuff, Peru, Pink, Plum, PowderBlue, Purple, Red, RosyBrown, RoyalBlue, SaddleBrown, Salmon, SandyBrown, SeaGreen, SeaShell, Sienna, Silver, SkyBlue, SlateBlue, SlateGray, Snow, SpringGreen, SteelBlue, Tan, Teal, Thistle, Tomato, Turquoise, Violet, Wheat, White, WhiteSmoke, Yellow, YellowGreen, ButtonFace, ButtonHighlight, ButtonShadow, GradientActiveCaption, GradientInactiveCaption, MenuBar, MenuHighlight
 
 Required: False
-Position: 14
+Position: 13
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -176,7 +162,7 @@ Parameter Sets: (All)
 Aliases: ColummnWidth
 
 Required: False
-Position: 11
+Position: 10
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -254,7 +240,7 @@ Aliases:
 Accepted values: LeftToRight, RightToLeft
 
 Required: False
-Position: 37
+Position: 36
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -284,7 +270,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 41
+Position: 40
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -299,7 +285,7 @@ Parameter Sets: (All)
 Aliases: FontName
 
 Required: False
-Position: 16
+Position: 15
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -314,7 +300,7 @@ Parameter Sets: (All)
 Aliases: S
 
 Required: False
-Position: 15
+Position: 14
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -330,7 +316,7 @@ Aliases: HT
 Accepted values: Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Heading7, Heading8, Heading9
 
 Required: False
-Position: 27
+Position: 26
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -345,7 +331,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 32
+Position: 31
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -361,7 +347,7 @@ Aliases: H
 Accepted values: yellow, green, cyan, magenta, blue, red, darkBlue, darkCyan, darkGreen, darkMagenta, darkRed, darkYellow, darkGray, lightGray, black, none
 
 Required: False
-Position: 24
+Position: 23
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -376,7 +362,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 34
+Position: 33
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -391,7 +377,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 35
+Position: 34
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -406,7 +392,7 @@ Parameter Sets: (All)
 Aliases: I
 
 Required: False
-Position: 18
+Position: 17
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -451,7 +437,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 31
+Position: 30
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -466,7 +452,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 30
+Position: 29
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -481,7 +467,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 8
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -497,7 +483,7 @@ Aliases:
 Accepted values: none, shadow, outline, outlineShadow, emboss, engrave
 
 Required: False
-Position: 29
+Position: 28
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -512,7 +498,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 40
+Position: 39
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -527,7 +513,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 9
+Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -557,7 +543,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 13
+Position: 12
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -572,7 +558,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 28
+Position: 27
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -587,7 +573,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 33
+Position: 32
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -603,7 +589,7 @@ Aliases:
 Accepted values: superscript, subscript, none
 
 Required: False
-Position: 39
+Position: 38
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -619,7 +605,7 @@ Aliases:
 Accepted values: Text, Paragraph
 
 Required: False
-Position: 38
+Position: 37
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -634,7 +620,7 @@ Parameter Sets: (All)
 Aliases: SP
 
 Required: False
-Position: 23
+Position: 22
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -649,7 +635,7 @@ Parameter Sets: (All)
 Aliases: SA
 
 Required: False
-Position: 21
+Position: 20
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -664,7 +650,7 @@ Parameter Sets: (All)
 Aliases: SB
 
 Required: False
-Position: 22
+Position: 21
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -679,7 +665,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 43
+Position: 42
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -695,7 +681,7 @@ Aliases: ST
 Accepted values: none, strike, doubleStrike
 
 Required: False
-Position: 26
+Position: 25
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -710,7 +696,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 42
+Position: 41
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -740,7 +726,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 12
+Position: 11
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -756,7 +742,7 @@ Aliases:
 Accepted values: left, center, right, both
 
 Required: False
-Position: 10
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -781,12 +767,13 @@ Accept wildcard characters: False
 {{Fill UnderlineColor Description}}
 
 ```yaml
-Type: Color[]
+Type: KnownColor[]
 Parameter Sets: (All)
 Aliases: UC
+Accepted values: ActiveBorder, ActiveCaption, ActiveCaptionText, AppWorkspace, Control, ControlDark, ControlDarkDark, ControlLight, ControlLightLight, ControlText, Desktop, GrayText, Highlight, HighlightText, HotTrack, InactiveBorder, InactiveCaption, InactiveCaptionText, Info, InfoText, Menu, MenuText, ScrollBar, Window, WindowFrame, WindowText, Transparent, AliceBlue, AntiqueWhite, Aqua, Aquamarine, Azure, Beige, Bisque, Black, BlanchedAlmond, Blue, BlueViolet, Brown, BurlyWood, CadetBlue, Chartreuse, Chocolate, Coral, CornflowerBlue, Cornsilk, Crimson, Cyan, DarkBlue, DarkCyan, DarkGoldenrod, DarkGray, DarkGreen, DarkKhaki, DarkMagenta, DarkOliveGreen, DarkOrange, DarkOrchid, DarkRed, DarkSalmon, DarkSeaGreen, DarkSlateBlue, DarkSlateGray, DarkTurquoise, DarkViolet, DeepPink, DeepSkyBlue, DimGray, DodgerBlue, Firebrick, FloralWhite, ForestGreen, Fuchsia, Gainsboro, GhostWhite, Gold, Goldenrod, Gray, Green, GreenYellow, Honeydew, HotPink, IndianRed, Indigo, Ivory, Khaki, Lavender, LavenderBlush, LawnGreen, LemonChiffon, LightBlue, LightCoral, LightCyan, LightGoldenrodYellow, LightGray, LightGreen, LightPink, LightSalmon, LightSeaGreen, LightSkyBlue, LightSlateGray, LightSteelBlue, LightYellow, Lime, LimeGreen, Linen, Magenta, Maroon, MediumAquamarine, MediumBlue, MediumOrchid, MediumPurple, MediumSeaGreen, MediumSlateBlue, MediumSpringGreen, MediumTurquoise, MediumVioletRed, MidnightBlue, MintCream, MistyRose, Moccasin, NavajoWhite, Navy, OldLace, Olive, OliveDrab, Orange, OrangeRed, Orchid, PaleGoldenrod, PaleGreen, PaleTurquoise, PaleVioletRed, PapayaWhip, PeachPuff, Peru, Pink, Plum, PowderBlue, Purple, Red, RosyBrown, RoyalBlue, SaddleBrown, Salmon, SandyBrown, SeaGreen, SeaShell, Sienna, Silver, SkyBlue, SlateBlue, SlateGray, Snow, SpringGreen, SteelBlue, Tan, Teal, Thistle, Tomato, Turquoise, Violet, Wheat, White, WhiteSmoke, Yellow, YellowGreen, ButtonFace, ButtonHighlight, ButtonShadow, GradientActiveCaption, GradientInactiveCaption, MenuBar, MenuHighlight
 
 Required: False
-Position: 20
+Position: 19
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -802,7 +789,7 @@ Aliases: U
 Accepted values: none, singleLine, words, doubleLine, dotted, thick, dash, dotDash, dotDotDash, wave, dottedHeavy, dashedHeavy, dashDotHeavy, dashDotDotHeavy, dashLongHeavy, dashLong, wavyDouble, wavyHeavy
 
 Required: False
-Position: 19
+Position: 18
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
