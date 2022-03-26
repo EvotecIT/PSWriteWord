@@ -17,6 +17,7 @@
         [alias ("CA")] [Xceed.Document.NET.CapsStyle[]] $CapsStyle = @(),
         [alias ("ST")] [Xceed.Document.NET.StrikeThrough[]] $StrikeThrough = @(),
         [alias ("HT")] [Xceed.Document.NET.HeadingType[]] $HeadingType = @(),
+        [string[]] $Style = @(),
         [int[]] $PercentageScale = @(), # "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33"
         [Xceed.Document.NET.Misc[]] $Misc = @(),
         [string[]] $Language = @(),
@@ -82,5 +83,6 @@
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextIndentationHanging -IndentationHanging $IndentationHanging[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextAlignment -Alignment $Alignment[$i] -Supress $false
         $Paragraph[$i] = $Paragraph[$i] | Set-WordTextDirection -Direction $Direction[$i] -Supress $false
+        $Paragraph[$i] = $Paragraph[$i] | Set-WordTextStyle -StyleName $Style[$i] -Supress $false
     }
 }
