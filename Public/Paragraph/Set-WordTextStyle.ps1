@@ -5,7 +5,7 @@
         [string] $StyleName,
         [bool] $Supress = $false
     )
-    if ($null -ne $Paragraph -and $null -ne $StyleName) {
+    if ($null -ne $Paragraph -and $StyleName -ne $null -and $StyleName -ne '') {
         Write-Verbose "Set-WordTextStyle - Setting StyleName to $StyleName"
         $Paragraph.StyleName = $StyleName
     }
