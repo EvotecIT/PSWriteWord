@@ -1,5 +1,10 @@
 ﻿### PSWriteWord Release History
 
+#### - 1.1.15
+  - Added `Set-WordTextStyle` - [#73](https://github.com/EvotecIT/PSWriteWord/pull/73) - tnx ylepine
+  - Added `Style` parameter for `Add-WordText` to be able to apply a existing Style other than Heading 1-9 - [#73](https://github.com/EvotecIT/PSWriteWord/pull/73) - tnx ylepine
+  - Added `Style` parameter for `Set-WordText` to be able to apply a existing Style other than Heading 1-9 - [#73](https://github.com/EvotecIT/PSWriteWord/pull/73) - tnx ylepine
+
 #### - 1.1.14 - 2022.01.11
   - Removed `BreakAcrossPages` in `Add-WordTable`, `Set-WordTable`, `Set-WordTablePageBreak` as it doesn't work anymore
 #### - 1.1.13 - 2021.11.28
