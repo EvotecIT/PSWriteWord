@@ -21,11 +21,16 @@
   <a href="https://www.linkedin.com/in/pklys"><img src="https://img.shields.io/badge/LinkedIn-pklys-0077B5.svg?logo=LinkedIn"></a>
 </p>
 
+**New version of this module will be developed under [PSWriteOffice](https://github.com/EvotecIT/PSWriteOffice) project.**
+***This module will no longer be developed!*** It has been replaced by [PSWriteOffice](https://github.com/EvotecIT/PSWriteOffice) project which will be combination of Word, Excel and in future PowerPoint features. No new features, fixes will be added, but it will continue to work. Due to license changes to DLL it's not possible to support this project. **PSWriteOffice** is complete rewrite and cross-platform.
+
+***
+
 _PSWriteWord_ is PowerShell module to create Microsoft Word documents without Microsoft Word installed. You can read some more information on my [website](https://evotec.xyz/hub/scripts/pswriteword-powershell-module/).
 
 ## Example usage of Add-WordTable / Add-WordText in action
 
-![image](https://evotec.xyz/wp-content/uploads/2018/07/PSWriteWord-MoreAction.gif.pagespeed.ce.ULhhEhkC5h.gif)
+![image](https://evotec.xyz/wp-content/uploads/2018/07/PSWriteWord-MoreAction.gif)
 
 ## Requirements
 

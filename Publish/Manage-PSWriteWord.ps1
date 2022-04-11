@@ -160,14 +160,15 @@ $Configuration = @{
             DeleteBefore        = $true
             Merge               = $true
             MergeMissing        = $true
-            LibrarySeparateFile = $true
+            LibrarySeparateFile = $false
+            LibraryDotSource    = $true
             SignMerged          = $true
             CreateFileCatalog   = $false # not working
             Releases            = $true
             ReleasesUnpacked    = $false
             RefreshPSD1Only     = $false
         }
-        BuildDocumentation = $false
+        BuildDocumentation = $true
         ImportModules      = @{
             Self            = $true
             RequiredModules = $false
